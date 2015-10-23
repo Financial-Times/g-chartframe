@@ -83,23 +83,14 @@ blockquote {
 }
 
 figure {
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
-	-webkit-margin-start: 0;
-	-webkit-margin-end: 0;
-	margin: 0 0 3em 0;
+
 }
 
 figcaption {
-	margin-top: 0;
-	margin-bottom: 0;
 	font-style: italic;
 	font-size: 1rem;
 	line-height: 1.6;
-	text-align: center;
+
 }
 
 .function{
@@ -110,4 +101,11 @@ figcaption {
 .function-description{
 	font-size: 1;
 	line-height: 1.2;
+}
+
+svg.example{
+	background-color: #FFF;
+	-webkit-box-shadow: 2px 0px 77px -16px rgba(0,0,0,0.75);
+	-moz-box-shadow: 2px 0px 77px -16px rgba(0,0,0,0.75);
+	box-shadow: 2px 0px 77px -16px rgba(0,0,0,0.75);
 }
