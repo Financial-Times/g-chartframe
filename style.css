@@ -82,8 +82,24 @@ blockquote {
     font-style: italic;
 }
 
-figure {
 
+.option p:first-of-type{
+	text-indent: 1rem;
+}
+
+hr{
+	border: none;
+	border-top: 1px solid;
+}
+
+.inline-code{
+	font-family: monospace;
+	background-color: #EFF;
+}
+
+pre.code{
+	font-family: monospace;
+	background-color: #EFF;
 }
 
 figcaption {
@@ -93,9 +109,10 @@ figcaption {
 
 }
 
-.function{
+h3{
 	font-size: 1.4rem; 
 	line-height: 2rem;
+	margin-top: 0;
 }
 
 .function-description{
@@ -104,8 +121,5 @@ figcaption {
 }
 
 svg.example{
-	background-color: #FFF;
-	-webkit-box-shadow: 2px 0px 77px -16px rgba(0,0,0,0.75);
-	-moz-box-shadow: 2px 0px 77px -16px rgba(0,0,0,0.75);
-	box-shadow: 2px 0px 77px -16px rgba(0,0,0,0.75);
+	background-color: #EFF;
 }

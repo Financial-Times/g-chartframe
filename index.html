@@ -21,7 +21,7 @@
 	<section>
 		<h2>Here's how you might use it.</h2>
 		<p>First make and configure the chart frame (there are some sensible defaults which you'll almost certainly want to change) &#8230;</p>
-		<pre>
+		<pre class="code">
 var frame = chartFrame()
   .margin({
     left:0
@@ -31,67 +31,92 @@ var frame = chartFrame()
   .source('Ministry of statistics');
 		</pre>
 		<p>Then select an SVG element and call &lsquo;frame&rsquo; on it &#8230;</p>
-		<pre>
+		<pre class="code">
 d3.select('svg')
   .call(frame);
 		</pre>
 		<p>This will result in your SVG having a title and all that stuff and also a &lsquo;g.plot&lsquo; element from where you can get down to the business of making the visualisation bit of the chart. In the case above &#8230;</p>
-		<pre>
+		<pre class="code">
 d3.select('g.chart-plot')
   .append('use')
 
   	[etc]
 		</pre>
 	</section>
-	<section>
+	<section class="options">
 		<h2>Options</h2>
 
-
-		<div class="function">frame.<b>margin</b>(<i>{ D3 margin convention }</i>)</div>
-		<p>
-			Uses the <a href="http://bl.ocks.org/mbostock/3019563">D3 margin convention</a> to position the plot area, i.e. the bit inside the frame.
-		</p>
-		<pre>
+		<section class="option">
+			<h3>frame.<b>margin</b>(<i>{ D3 margin convention }</i>)</h3>
+			<p>
+				Uses the <a href="http://bl.ocks.org/mbostock/3019563">D3 margin convention</a> to position the plot area, i.e. the bit inside the frame.
+			</p>
+			<pre class="code">
 frame.margin({
   top:20,
   left:20,
   right:20,
   bottom:20
-});
-		</pre>
-		<p>
-			You can just <i>top</i>, or just <i>left</i> or whatever. The rest will be defaults. If you don't provide any arguments the function returns the currently set margins.
-		</p>
-
-		<div class="function">frame.<b>title</b>( <i>string</i> )</div>
-		<p></p>
-
-		<div class="function">frame.<b>subtitle</b>( <i>string</i> )</div>
-		<p></p>
-		
-		<div class="function">frame.<b>source</b>( <i>string</i> )</div>
-		<p></p>
-
-		<div class="function">frame.<b>titleY</b>( <i>position</i> )</div>
-		<p></p>
-
-		<div class="function">frame.<b>subtitleY</b>( <i>position</i> )</div>
-		<p></p>
-
-		<div class="function">frame.<b>width</b>( <i>size</i> )</div>
-		<p></p>
-
-		<div class="function">frame.<b>height</b>( <i>size</i> )</div>
-		<p></p>
-
-		<div class="function">frame.<b>watermark</b>( <i>href</i> )</div>
-		<p>This adds a little icon to the bottom right of the chart for attribution purposes, not really  awatermark I suppose. Typically I'd use an external svg file
-			<pre>
-frame.watermark('external.svg#element-id');
-			</pre></p>
-
-		<div class="function">frame.<b>watermarkDim</b>( <i>size</i> )</div>
-		<p></p>
+});</pre>
+			<p>
+				You can just <span class="inline-code">top</span>, or just <span class="inline-code">left</span> or whatever. The rest will be defaults. If you don't provide any arguments the function returns the currently set margins.
+			</p>
+		</section>
+		<section class="option">
+			<h3>frame.<b>title</b>( <i>string</i> )</h3>
+			<p>Set the HTML of the chart's title (if no string is specified returns the current value).</p>
+		</section>
+		<section class="option">
+			<h3>frame.<b>subtitle</b>( <i>string</i> )</h3>
+			<p>Set the HTML of the chart's subtitle (if no string is specified returns the current value).</p>
+		</section>
+		<section class="option">			
+			<h3>frame.<b>source</b>( <i>string</i> )</h3>
+			<p>Set the HTML of the chart's source (if no string is specified returns the current value).</p>
+		</section>
+		<section class="option">
+			<h3>frame.<b>dimension</b>()</h3>
+			<p>Get the size of the available area i.e. size of the SVG without the margins. Returns an object:</p>
+			<pre class="code">
+{
+	width:500,
+	height:500
+}</pre>
+		</section>
+		<section class="option">
+			<h3>frame.<b>titleY</b>( <i>position</i> )</h3>
+			<p>Set the Y position of the title (if no position is provided returns the current value).</p>
+		</section>
+		<section class="option">
+			<h3>frame.<b>subtitleY</b>( <i>position</i> )</h3>
+			<p>Set the Y position of the subtitle (if no position is provided returns the current value).</p>
+		</section>
+		<section class="option">
+			<h3>frame.<b>sourceYOffset</b>( <i>position</i> )</h3>
+			<p>How much the source is offset from the bottom of the SVG. (if no position is provided returns the current value).</p>
+		</section>
+		<section class="option">
+			<h3>frame.<b>width</b>( <i>size</i> )</h3>
+			<p>Set (or if no argument is specified, retrieve) the width of the available space for the chart frame.</p>
+		</section>
+			<section class="option">
+			<h3>frame.<b>height</b>( <i>size</i> )</h3>
+			<p>Set (or if no argument is specified, retrieve) the height of the available space for the chart frame.</p>
+		</section>
+		<section class="option">
+			<h3>frame.<b>watermark</b>( <i>href</i> )</h3>
+			<p>This adds a little icon to the bottom right of the chart for attribution purposes, not really  awatermark I suppose. Typically I'd use an external svg file:
+				<pre class="code">frame.watermark('external.svg#element-id');</pre>
+			</p>
+		</section>
+		<section class="option">
+			<h3>frame.<b>watermarkSize</b>( <i>size</i> )</h3>
+			<p>The size of the icon mentioned above, in pixels.</p>
+		</section>
+	</section>
+	<hr>
+	<section>
+	<p>The code, as it stands, is setup to be used with browserify or another tool that supports the <span class="inline-code">require('./chartframe.js')</span> type syntax (NodeJS etc). The only hard dependency is D3.
 	</section>
 </article>
 

@@ -12,14 +12,14 @@ function chartFrame(){
 		},
 		titleY = 20,
 		subtitleY = 50,
+		sourceYOffset = -5,
 		title = 'Title: A description of the charts purpose',
 		subtitle = 'some supporting information, units perhaps',
 		source = 'Source: research',
 		width = 500, 
 		height = 500,
 		watermark = 'icons.svg#flower_playing_cards',
-		watermarkDim = 20;
-
+		watermarkSize = 20;
 
 	function frame(p){
 		if (p.node().nodeName.toLowerCase() == 'svg') {
@@ -46,7 +46,7 @@ function chartFrame(){
 		p.append('text')
 			.attr({
 				'class':'chart-source',
-				'dy':height
+				'dy':height + sourceYOffset
 			})
 			.html(source);
 
@@ -54,7 +54,7 @@ function chartFrame(){
 			.attr({
 				'xlink:href':watermark,
 				'class':'chart-watermark',
-				'transform':'translate('+(width-watermarkDim)+','+(height-watermarkDim)+') scale('+watermarkDim/100+') '
+				'transform':'translate('+(width-watermarkSize)+','+(height-watermarkSize)+') scale('+watermarkSize/100+') '
 			});
 
 		var plot = p
@@ -70,6 +70,19 @@ function chartFrame(){
 			width:width-(margin.left+margin.right),
 			height:height-(margin.top+margin.bottom)
 		};
+	}
+
+	frame.watermarkSize = function(n){
+		if(!n) return watermarkSize;
+		watermarkSize = n;
+		return frame;
+	}
+
+
+	frame.watermark = function(location){
+		if(!n) return watermark;
+		watermark = location;
+		return frame;
 	}
 
 	frame.titleY = function(n){
@@ -121,6 +134,12 @@ function chartFrame(){
 		source = s;
 		return frame;
 	};
+
+	frame.sourceYOffset = function(n){
+		if(!n) return sourceYOffset;
+		sourceYOffset = n;
+		return frame;
+	}
 
 	return frame;
 }

@@ -4,9 +4,8 @@
 
 .chart-source{
 	font-style: italic;
-	fill-opacity: 0.6;
 }
 
 .chart-watermark{
-	fill-opacity:0.2;
+	fill-opacity:1;
 }
