@@ -1,12 +1,24 @@
 {
-  "name": "tgp-starter-kit",
+  "name": "chart-frame-d3",
   "version": "1.0.0",
-  "description": "A quick start for developing client side stuff using ES6 with polyfills etc.",
-  "main": "index.js",
+  "description": "Draw the title, subtitle etc. for a D3 graphic without much boiler plate code",
+  "main": "source/chartframe.js",
+  "browserify": "source/chartframe.js",
+  "keywords": [
+    "dom",
+    "visualization",
+    "svg",
+    "d3"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tomgp/chart-frame.git"
+  },
   "scripts": {
     "watch": "watchify ./source/main.js -o ./bundle.js | node ./node_modules/srvlr/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "homepage": "http://www.toffeemilkshake.co.uk/chart-frame/",
   "author": "tom.g.pearson@gmail.com",
   "license": "ISC",
   "devDependencies": {
