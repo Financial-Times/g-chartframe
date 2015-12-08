@@ -3,25 +3,26 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Chart frame</title>
+	<title>Chart frame for D3</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<link rel="stylesheet" type="text/css" href="chart-frame.css">
 	<script type="text/javascript" src="bundle.js" defer></script>
 </head>
 <body>
 <article>
-	<h1>Chart frame</h1>
-	<section><p>Titles, subtitle, sources, footnotes and so on are really important for charts but really boring to make in D3 &mdash; espescially if you're sticking to some kind of house style and these elements are going and behave ina a similar way each time.</p><p>The idea here is to make that boiler-plate code as painless as possible.</p>
-	<p>Source code is all <a href="https://github.com/tomgp/chart-frame">here on GitHub</a></p></section>
-	<figure>
-		<figcaption><p>An example (<a href="https://github.com/tomgp/chart-frame/blob/master/source/main.js">source</a>):</p></figcaption>
-		<svg class="example" width="550" height="500"></svg>
-		
-	</figure>
-	<section>
-		<h2>Here's how you might use it.</h2>
-		<p>First make and configure the chart frame (there are some sensible defaults which you'll almost certainly want to change) &#8230;</p>
-		<pre>
+	<h1>Chart Frame for D3</h1>
+	Skip to <a href="#example">an example</a> or <a href="options">a list of configuration options</a>
+	<section><p>Titles, subtitle, sources, footnotes and so on are <a href="http://www.storybench.org/understanding-what-makes-a-visualization-memorable">really important</a> for charts but can be tiresome to make in D3 &mdash; espescially if you're sticking to some kind of house style and these elements are likely to behave in a similar way accross many charts.</p>
+	<p>My goals are (1) to make that boiler-plate code as painless as possible (2) to make the source code for the library very easy to change to whatever defaults are sensible i.e. no clever code (3) try to be idiomaticlly D3ish.</p>
+	<p>Source code is all <a href="https://github.com/tomgp/chart-frame">here on GitHub</a>. As it stands, it's setup to be used with <i>Browserify</i> or another tool that supports the <span class="inline-code">require('./chartframe.js')</span> type syntax (<i>NodeJS</i> etc). The only hard dependency is <i>D3</i>. But, as per goal 2, it should be trivial to change that if you want.</p></section>
+	<section id="example">
+		<h2>An example</h2>
+		<figure>
+			<svg class="example" width="550" height="500"></svg>
+			<figcaption>(<a href="https://github.com/tomgp/chart-frame/blob/master/source/main.js">source code</a>)</figcaption>
+		</figure>
+		<p>First make and configure the chart frame (there are some  'sensible' defaults which you'll almost certainly want to change) &#8230;</p>
+		<pre class="code">
 var frame = chartFrame()
   .margin({
     left:0
@@ -31,67 +32,95 @@ var frame = chartFrame()
   .source('Ministry of statistics');
 		</pre>
 		<p>Then select an SVG element and call &lsquo;frame&rsquo; on it &#8230;</p>
-		<pre>
+		<pre class="code">
 d3.select('svg')
   .call(frame);
 		</pre>
 		<p>This will result in your SVG having a title and all that stuff and also a &lsquo;g.plot&lsquo; element from where you can get down to the business of making the visualisation bit of the chart. In the case above &#8230;</p>
-		<pre>
+		<pre class="code">
 d3.select('g.chart-plot')
   .append('use')
 
   	[etc]
 		</pre>
 	</section>
-	<section>
+	<section id="options">
 		<h2>Options</h2>
 
-
-		<div class="function">frame.<b>margin</b>(<i>{ D3 margin convention }</i>)</div>
-		<p>
-			Uses the <a href="http://bl.ocks.org/mbostock/3019563">D3 margin convention</a> to position the plot area, i.e. the bit inside the frame.
-		</p>
-		<pre>
+		<section class="option">
+			<h3>frame.<b>margin</b>(<i>{ D3 margin convention }</i>)</h3>
+			<p>
+				Uses the <a href="http://bl.ocks.org/mbostock/3019563">D3 margin convention</a> to position the plot area, i.e. the bit inside the frame.
+			</p>
+			<pre class="code">
 frame.margin({
   top:20,
   left:20,
   right:20,
   bottom:20
-});
-		</pre>
-		<p>
-			You can just <i>top</i>, or just <i>left</i> or whatever. The rest will be defaults. If you don't provide any arguments the function returns the currently set margins.
-		</p>
-
-		<div class="function">frame.<b>title</b>( <i>string</i> )</div>
-		<p></p>
-
-		<div class="function">frame.<b>subtitle</b>( <i>string</i> )</div>
-		<p></p>
-		
-		<div class="function">frame.<b>source</b>( <i>string</i> )</div>
-		<p></p>
-
-		<div class="function">frame.<b>titleY</b>( <i>position</i> )</div>
-		<p></p>
-
-		<div class="function">frame.<b>subtitleY</b>( <i>position</i> )</div>
-		<p></p>
-
-		<div class="function">frame.<b>width</b>( <i>size</i> )</div>
-		<p></p>
-
-		<div class="function">frame.<b>height</b>( <i>size</i> )</div>
-		<p></p>
-
-		<div class="function">frame.<b>watermark</b>( <i>href</i> )</div>
-		<p>This adds a little icon to the bottom right of the chart for attribution purposes, not really  awatermark I suppose. Typically I'd use an external svg file
-			<pre>
-frame.watermark('external.svg#element-id');
-			</pre></p>
-
-		<div class="function">frame.<b>watermarkDim</b>( <i>size</i> )</div>
-		<p></p>
+});</pre>
+			<p>
+				You can just <span class="inline-code">top</span>, or just <span class="inline-code">left</span> or whatever. The rest will be defaults. If you don't provide any arguments the function returns the currently set margins.
+			</p>
+		</section>
+		<section class="option">
+			<h3>frame.<b>title</b>( <i>string</i> )</h3>
+			<p>Set the HTML of the chart's title (if no string is specified returns the current value). *</p>
+		</section>
+		<section class="option">
+			<h3>frame.<b>subtitle</b>( <i>string</i> )</h3>
+			<p>Set the HTML of the chart's subtitle (if no string is specified returns the current value).</p>
+		</section>
+		<section class="option">			
+			<h3>frame.<b>source</b>( <i>string</i> )</h3>
+			<p>Set the HTML of the chart's source (if no string is specified returns the current value).</p>
+		</section>
+		<section class="option">
+			<h3>frame.<b>dimension</b>()</h3>
+			<p>Get the size of the available area i.e. size of the SVG without the margins. Returns an object:</p>
+			<pre class="code">
+{
+	width:500,
+	height:500
+}</pre>
+		</section>
+		<section class="option">
+			<h3>frame.<b>titleY</b>( <i>position</i> )</h3>
+			<p>Set the Y position of the title (if no position is provided returns the current value).</p>
+		</section>
+		<section class="option">
+			<h3>frame.<b>subtitleY</b>( <i>position</i> )</h3>
+			<p>Set the Y position of the subtitle (if no position is provided returns the current value).</p>
+		</section>
+		<section class="option">
+			<h3>frame.<b>sourceYOffset</b>( <i>position</i> )</h3>
+			<p>How much the source is offset from the bottom of the SVG. (if no position is provided returns the current value).</p>
+		</section>
+		<section class="option">
+			<h3>frame.<b>width</b>( <i>size</i> )</h3>
+			<p>Set (or if no argument is specified, retrieve) the width of the available space for the chart frame. *</p>
+		</section>
+			<section class="option">
+			<h3>frame.<b>height</b>( <i>size</i> )</h3>
+			<p>Set (or if no argument is specified, retrieve) the height of the available space for the chart frame. *</p>
+		</section>
+		<section class="option">
+			<h3>frame.<b>watermark</b>( <i>href</i> )</h3>
+			<p>This adds a little icon to the bottom right of the chart for attribution purposes, not really  awatermark I suppose. Typically I'd use an external svg file:
+				<pre class="code">frame.watermark('external.svg#element-id');</pre>
+			</p>
+		</section>
+		<section class="option">
+			<h3>frame.<b>watermarkSize</b>( <i>size</i> )</h3>
+			<p>The size of the icon mentioned above, in pixels.</p>
+		</section>
+		<section>
+			<p><b>* Note:</b> If the chart frame is being called on an SVG element the <i>width</i>, <i>height</i> and <i>title</i> functions will re-write those properties of the parent SVG. If you don't want this to happen you can avoid it by calling the function on a <i><a href="https://developer.mozilla.org/en/docs/Web/SVG/Element/g">group</a></i> element instead.</p>
+		</section>
+	</section>
+	<hr>
+	<section>
+		Tom Pearson &ndash; December 2015
 	</section>
 </article>
 

@@ -12,21 +12,21 @@ function chartFrame(){
 		},
 		titleY = 20,
 		subtitleY = 50,
+		sourceYOffset = -5,
 		title = 'Title: A description of the charts purpose',
 		subtitle = 'some supporting information, units perhaps',
 		source = 'Source: research',
 		width = 500, 
 		height = 500,
 		watermark = 'icons.svg#flower_playing_cards',
-		watermarkDim = 50;
-
+		watermarkSize = 20;
 
 	function frame(p){
 		if (p.node().nodeName.toLowerCase() == 'svg') {
-			width = Number(p.attr('width'));
-			height = Number(p.attr('height'));
+			p.attr('width', width);
+			p.attr('height', height);
 			p.append('title')
-				.text(title).text(title);
+				.text(title).html(title);
 		}
 
 		p.append('text')
@@ -34,27 +34,27 @@ function chartFrame(){
 				'class':'chart-title',
 				'dy':titleY
 			})
-			.text(title);
+			.html(title);
 
 		p.append('text')
 			.attr({
 				'class':'chart-subtitle',
 				'dy':subtitleY
 			})
-			.text(subtitle);
+			.html(subtitle);
 
 		p.append('text')
 			.attr({
 				'class':'chart-source',
-				'dy':height
+				'dy':height + sourceYOffset
 			})
-			.text(source);
+			.html(source);
 
 		p.append('use')
 			.attr({
 				'xlink:href':watermark,
 				'class':'chart-watermark',
-				'transform':'translate('+(width-watermarkDim)+','+(height-watermarkDim)+') scale('+watermarkDim/100+') '
+				'transform':'translate('+(width-watermarkSize)+','+(height-watermarkSize)+') scale('+watermarkSize/100+') '
 			});
 
 		var plot = p
@@ -70,6 +70,19 @@ function chartFrame(){
 			width:width-(margin.left+margin.right),
 			height:height-(margin.top+margin.bottom)
 		};
+	}
+
+	frame.watermarkSize = function(n){
+		if(!n) return watermarkSize;
+		watermarkSize = n;
+		return frame;
+	}
+
+
+	frame.watermark = function(location){
+		if(!n) return watermark;
+		watermark = location;
+		return frame;
 	}
 
 	frame.titleY = function(n){
@@ -121,6 +134,12 @@ function chartFrame(){
 		source = s;
 		return frame;
 	};
+
+	frame.sourceYOffset = function(n){
+		if(!n) return sourceYOffset;
+		sourceYOffset = n;
+		return frame;
+	}
 
 	return frame;
 }
