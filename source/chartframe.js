@@ -18,7 +18,7 @@ function chartFrame(){
 		source = 'Source: research',
 		width = 500, 
 		height = 500,
-		watermark = 'icons.svg#flower_playing_cards',
+		watermark = 'icons.svg#ft-logo',
 		watermarkSize = 20;
 
 	function frame(p){

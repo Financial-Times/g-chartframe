@@ -1,5 +1,5 @@
 {
-  "name": "chart-frame-d3",
+  "name": "FT-chart-frame",
   "version": "1.0.0",
   "description": "Draw the title, subtitle etc. for a D3 graphic without much boiler plate code",
   "main": "source/chartframe.js",
@@ -12,7 +12,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/tomgp/chart-frame.git"
+    "url": "https://github.com/ft-interactive/FT-chart-frame.git"
   },
   "scripts": {
     "watch": "watchify ./source/main.js -o ./bundle.js | node ./node_modules/srvlr/index.js",
