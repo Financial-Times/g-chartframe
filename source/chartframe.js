@@ -18,15 +18,15 @@ function chartFrame(){
 		width = 500, 
 		height = 500,
 		watermark = 'icons.svg#flower_playing_cards',
-		watermarkDim = 50;
+		watermarkDim = 20;
 
 
 	function frame(p){
 		if (p.node().nodeName.toLowerCase() == 'svg') {
-			width = Number(p.attr('width'));
-			height = Number(p.attr('height'));
+			p.attr('width', width);
+			p.attr('height', height);
 			p.append('title')
-				.text(title).text(title);
+				.text(title).html(title);
 		}
 
 		p.append('text')
@@ -34,21 +34,21 @@ function chartFrame(){
 				'class':'chart-title',
 				'dy':titleY
 			})
-			.text(title);
+			.html(title);
 
 		p.append('text')
 			.attr({
 				'class':'chart-subtitle',
 				'dy':subtitleY
 			})
-			.text(subtitle);
+			.html(subtitle);
 
 		p.append('text')
 			.attr({
 				'class':'chart-source',
 				'dy':height
 			})
-			.text(source);
+			.html(source);
 
 		p.append('use')
 			.attr({
