@@ -1,7 +1,19 @@
-##What it is
-It's for making the boring but necessary stuff on D3 charts in as painless a fashion as possible.
+# d3-chart-frame
+
+What is it? It's for making the boring but necessary stuff on D3 charts in as painless a fashion as possible.
 
 check the documentation here from more information:  http://www.toffeemilkshake.co.uk/chart-frame/
+
+## Installing
+
+If you use NPM, `npm install d3-chart-frame`. Otherwise, download the [latest release](https://github.com/d3/d3-foo/releases/latest).
+
+## API Reference
+
+YOUR API DOCUMENTATION HERE. Use bold for symbols (such as constructor and method names) and italics for instances. See the other D3 modules for examples.
+
+<a href="#foo" name="foo">#</a> <b>foo</b>()
+
 
 --
 

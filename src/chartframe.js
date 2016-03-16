@@ -1,6 +1,4 @@
-'use strict';
-
-var d3 = require('d3');
+import * as d3 from 'd3-selection';
 
 function chartFrame(){
 
@@ -30,39 +28,29 @@ function chartFrame(){
 		}
 
 		p.append('text')
-			.attr({
-				'class':'chart-title',
-				'dy':titleY
-			})
+			.attr('class', 'chart-title')
+			.attr('dy', titleY)
 			.html(title);
 
 		p.append('text')
-			.attr({
-				'class':'chart-subtitle',
-				'dy':subtitleY
-			})
+			.attr('class','chart-subtitle')
+			.attr('dy',subtitleY)
 			.html(subtitle);
 
 		p.append('text')
-			.attr({
-				'class':'chart-source',
-				'dy':height + sourceYOffset
-			})
+			.attr('class','chart-source')
+			.attr('dy',height + sourceYOffset)
 			.html(source);
 
 		p.append('use')
-			.attr({
-				'xlink:href':watermark,
-				'class':'chart-watermark',
-				'transform':'translate('+(width-watermarkSize)+','+(height-watermarkSize)+') scale('+watermarkSize/100+') '
-			});
+			.attr('xlink:href',watermark)
+			.attr('class','chart-watermark')
+			.attr('transform','translate('+(width-watermarkSize)+','+(height-watermarkSize)+') scale('+watermarkSize/100+') ');
 
 		var plot = p
 			.append('g')
-				.attr({
-					'class':'chart-plot',
-					'transform':'translate(' + margin.left + ',' + margin.top + ')'
-				});
+				.attr('class','chart-plot')
+				.attr('transform','translate(' + margin.left + ',' + margin.top + ')');
 	}
 
 	frame.dimension = function(){
@@ -80,7 +68,7 @@ function chartFrame(){
 
 
 	frame.watermark = function(location){
-		if(!n) return watermark;
+		if(!location) return watermark;
 		watermark = location;
 		return frame;
 	}
@@ -144,4 +132,4 @@ function chartFrame(){
 	return frame;
 }
 
-if(module) module.exports = chartFrame;
+export default chartFrame;
