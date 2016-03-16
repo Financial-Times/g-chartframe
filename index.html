@@ -6,7 +6,8 @@
 	<title>Chart frame for D3</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<link rel="stylesheet" type="text/css" href="chart-frame.css">
-	<script type="text/javascript" src="bundle.js" defer></script>
+	<script src="//d3js.org/d3.v4.0.0-alpha.24.min.js" charset="utf-8"></script>
+	<script type="text/javascript" src="build/d3-chartframe.js"  charset="utf-8"></script>
 </head>
 <body>
 <article>
@@ -125,4 +126,20 @@ frame.margin({
 </article>
 
 </body>
+<script type="text/javascript">
+console.log('d3_chartframe ' + d3_chartframe.version);
+var frame = d3_chartframe.frame()
+	.margin({
+		left:0
+	})
+	.watermark('icons.svg#kiss')
+	.watermarkSize(50);
+
+d3.select('svg')
+	.call(frame);
+
+// the g.chart-plot element has been created in the correct place by calling 'frame'
+
+
+</script>
 </html>

@@ -1,0 +1,4 @@
+build/*.zip
+test/
+index.html
+style.css
