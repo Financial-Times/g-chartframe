@@ -52,26 +52,32 @@ Get the size of the available area i.e. size of the SVG without the margins. Ret
 
 
 <a href="#titleY" name="titleY">#</a> frame.<b>titleY</b>( position )
+
 Set the Y position of the title (if no position is provided returns the current value).
 
 
 <a href="#subtitleY" name="subtitleY">#</a> frame.<b>subtitleY</b>( position )
+
 Set the Y position of the subtitle (if no position is provided returns the current value).
 
 
 <a href="#sourceYOffset" name="sourceYOffset">#</a> frame.<b>sourceYOffset</b>( position )
+
 How much the source is offset from the bottom of the SVG. (if no position is provided returns the current value).
 
 
 <a href="#width" name="width">#</a> frame.<b>width</b>( size )
+
 Set (or if no argument is specified, retrieve) the width of the available space for the chart frame. *
 
 
 <a href="#height" name="height">#</a> frame.<b>height</b>( size )
+
 Set (or if no argument is specified, retrieve) the height of the available space for the chart frame. *
 
 
 <a href="#watermark" name="watermark">#</a>  frame.<b>watermark</b>( href )
+
 This adds a little icon to the bottom right of the chart for attribution purposes, not really awatermark I suppose. Typically I'd use an external svg file:
 
 ```
@@ -79,6 +85,7 @@ frame.watermark('external.svg#element-id');
 ```
 
 <a href="#watermarkSize" name="watermarkSize">#</a> frame.<b>watermarkSize</b>( size )
+
 The size of the icon mentioned above, in pixels.
 
 
