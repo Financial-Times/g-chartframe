@@ -1,5 +1,5 @@
 {
-  "name": "chartframe-d3",
+  "name": "d3-chartframe",
   "version": "0.1.0",
   "description": "Draw the title, subtitle etc. for a D3 graphic without much boiler plate code",
   "license": "ISC",
