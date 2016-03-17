@@ -68,12 +68,12 @@ How much the source is offset from the bottom of the SVG. (if no position is pro
 
 <a href="#width" name="width">#</a> frame.<b>width</b>( size )
 
-Set (or if no argument is specified, retrieve) the width of the available space for the chart frame. *
+Set (or if no argument is specified, retrieve) the width of the available space for the chart frame. 👇
 
 
 <a href="#height" name="height">#</a> frame.<b>height</b>( size )
 
-Set (or if no argument is specified, retrieve) the height of the available space for the chart frame. *
+Set (or if no argument is specified, retrieve) the height of the available space for the chart frame. 👇
 
 
 <a href="#watermark" name="watermark">#</a>  frame.<b>watermark</b>( href )
@@ -89,7 +89,7 @@ frame.watermark('external.svg#element-id');
 The size of the icon mentioned above, in pixels.
 
 
-* _Note_: If the chart frame is being called on an SVG element the width, height and title functions will re-write those properties of the parent SVG. If you don't want this to happen you can avoid it by calling the function on a group element instead.
+👉 _Note_: If the chart frame is being called on an SVG element the width, height and title functions will re-write those properties of the parent SVG. If you don't want this to happen you can avoid it by calling the function on a group element instead.
 
 --
 
