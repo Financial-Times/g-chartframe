@@ -2,7 +2,7 @@
 
 What is it? It's for making the boring but necessary stuff on D3 charts in as painless a fashion as possible.
 
-check the documentation here from more information:  http://www.toffeemilkshake.co.uk/chart-frame/
+more information here:  http://www.toffeemilkshake.co.uk/chart-frame/
 
 ## Installing
 
@@ -10,10 +10,79 @@ If you use NPM, `npm install d3-chart-frame`. Otherwise, download the [latest re
 
 ## API Reference
 
-YOUR API DOCUMENTATION HERE. Use bold for symbols (such as constructor and method names) and italics for instances. See the other D3 modules for examples.
+<a href="#margin" name="margin">#</a> frame.<b>margin</b>({ D3 margin convention })
 
-<a href="#foo" name="foo">#</a> <b>foo</b>()
+Uses the D3 margin convention to position the plot area, i.e. the bit inside the frame.
 
+```
+frame.margin({
+  top:20,
+  left:20,
+  right:20,
+  bottom:20
+});
+```
+
+You can provide just top, or just left or whatever. The rest will be defaults. If you don't provide any arguments the function returns the currently set margins.
+
+<a href="#title" name="title">#</a> frame.<b>title</b>( string )
+
+Set the HTML of the chart's title (if no string is specified returns the current value)
+
+
+<a href="#subtitle" name="subtitle">#</a> frame.<b>subtitle</b>( string )
+
+Set the HTML of the chart's subtitle (if no string is specified returns the current value).
+
+
+<a href="#source" name="source">#</a> frame.<b>source</b>( string )
+
+Set the HTML of the chart's source (if no string is specified returns the current value).
+
+
+<a href="#dimension" name="dimension">#</a> frame.<b>dimension</b>()
+Get the size of the available area i.e. size of the SVG without the margins. Returns an object:
+
+```
+{
+	width:500,
+	height:500
+}
+```
+
+
+<a href="#titleY" name="titleY">#</a> frame.<b>titleY</b>( position )
+Set the Y position of the title (if no position is provided returns the current value).
+
+
+<a href="#subtitleY" name="subtitleY">#</a> frame.<b>subtitleY</b>( position )
+Set the Y position of the subtitle (if no position is provided returns the current value).
+
+
+<a href="#sourceYOffset" name="sourceYOffset">#</a> frame.<b>sourceYOffset</b>( position )
+How much the source is offset from the bottom of the SVG. (if no position is provided returns the current value).
+
+
+<a href="#width" name="width">#</a> frame.<b>width</b>( size )
+Set (or if no argument is specified, retrieve) the width of the available space for the chart frame. *
+
+
+<a href="#height" name="height">#</a> frame.<b>height</b>( size )
+Set (or if no argument is specified, retrieve) the height of the available space for the chart frame. *
+
+
+<a href="#watermark" name="watermark">#</a>  frame.<b>watermark</b>( href )
+This adds a little icon to the bottom right of the chart for attribution purposes, not really awatermark I suppose. Typically I'd use an external svg file:
+
+```
+frame.watermark('external.svg#element-id');
+```
+
+<a href="#watermarkSize" name="watermarkSize">#</a> frame.<b>watermarkSize</b>( size )
+The size of the icon mentioned above, in pixels.
+
+
+* _Note_: If the chart frame is being called on an SVG element the width, height and title functions will re-write those properties of the parent SVG. If you don't want this to happen you can avoid it by calling the function on a group element instead.
 
 --
 
