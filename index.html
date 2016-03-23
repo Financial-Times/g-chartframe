@@ -6,7 +6,8 @@
 	<title>Chart frame for D3</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<link rel="stylesheet" type="text/css" href="chart-frame.css">
-	<script type="text/javascript" src="bundle.js" defer></script>
+	<script src="//d3js.org/d3.v4.0.0-alpha.24.min.js" charset="utf-8"></script>
+	<script type="text/javascript" src="build/d3-chartframe.js"  charset="utf-8"></script>
 </head>
 <body>
 <article>
@@ -14,7 +15,7 @@
 	Skip to <a href="#example">an example</a> or <a href="#options">a list of configuration options</a>
 	<section><p>Titles, subtitle, sources, footnotes and so on are <a href="http://www.storybench.org/understanding-what-makes-a-visualization-memorable">really important</a> for charts but can be tiresome to make in D3 &mdash; espescially if you're sticking to some kind of house style and these elements are likely to behave in a similar way accross many charts.</p>
 	<p>My goals are (1) to make that boiler-plate code as painless as possible (2) to make the source code for the library very easy to change to whatever defaults are sensible i.e. no clever code (3) try to be idiomaticlly D3ish.</p>
-	<p>Source code is all <a href="https://github.com/tomgp/chart-frame">here on GitHub</a>. As it stands, it's setup to be used with <i>Browserify</i> or another tool that supports the <span class="inline-code">require('./chartframe.js')</span> type syntax (<i>NodeJS</i> etc). The only hard dependency is <i>D3</i>. But, as per goal 2, it should be trivial to change that if you want.</p></section>
+	<p>A <a href="https://bost.ocks.org/mike/d3-plugin/">D3 v4 plugin</a>, the source code is all <a href="https://github.com/tomgp/d3-chartframe">here on GitHub</a>.</p></section>
 	<section id="example">
 		<h2>An example</h2>
 		<figure>
@@ -125,4 +126,20 @@ frame.margin({
 </article>
 
 </body>
+<script type="text/javascript">
+console.log('d3_chartframe ' + d3_chartframe.version);
+var frame = d3_chartframe.frame()
+	.margin({
+		left:0
+	})
+	.watermark('icons.svg#kiss')
+	.watermarkSize(50);
+
+d3.select('svg')
+	.call(frame);
+
+// the g.chart-plot element has been created in the correct place by calling 'frame'
+
+
+</script>
 </html>
