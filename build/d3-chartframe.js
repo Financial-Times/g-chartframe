@@ -20,7 +20,7 @@
 			source = 'Source: research',
 			width = 500, 
 			height = 500,
-			watermark = 'icons.svg#flower_playing_cards',
+			watermark = 'icons.svg#ft-logo',
 			watermarkSize = 20;
 
 		function frame(p){
@@ -136,7 +136,7 @@
 		return frame;
 	}
 
-	var version = "0.1.0";
+	var version = "1.0.0";
 
 	exports.version = version;
 	exports.frame = chartFrame;
