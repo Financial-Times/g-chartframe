@@ -11,12 +11,7 @@
 </head>
 <body>
 <article>
-	<h1>Chart Frame for D3</h1>
-	Skip to <a href="#example">an example</a> or <a href="#options">a list of configuration options</a>
-	<section><p>Titles, subtitle, sources, footnotes and so on are <a href="http://www.storybench.org/understanding-what-makes-a-visualization-memorable">really important</a> for charts but can be tiresome to make in D3 &mdash; espescially if you're sticking to some kind of house style and these elements are likely to behave in a similar way accross many charts.</p>
-	<p>My goals are (1) to make that boiler-plate code as painless as possible (2) to make the source code for the library very easy to change to whatever defaults are sensible i.e. no clever code (3) try to be idiomaticlly D3ish.</p>
-	<p>A <a href="https://bost.ocks.org/mike/d3-plugin/">D3 v4 plugin</a>, the source code is all <a href="https://github.com/tomgp/d3-chartframe">here on GitHub</a>.</p></section>
-	<section id="example">
+	<h1>FT Chart Frames for D3</h1>
 		<h2>An example</h2>
 		<figure>
 			<svg class="example" width="550" height="500"></svg>
@@ -106,9 +101,9 @@ frame.margin({
 			<p>Set (or if no argument is specified, retrieve) the height of the available space for the chart frame. *</p>
 		</section>
 		<section class="option">
-			<h3>frame.<b>watermark</b>( <i>href</i> )</h3>
+			<h3>frame.<b>watermarkLocation</b>( <i>href</i> )</h3>
 			<p>This adds a little icon to the bottom right of the chart for attribution purposes, not really  awatermark I suppose. Typically I'd use an external svg file:
-				<pre class="code">frame.watermark('external.svg#element-id');</pre>
+				<pre class="code">frame.watermarkLocation('external.svg#element-id');</pre>
 			</p>
 		</section>
 		<section class="option">
@@ -127,13 +122,9 @@ frame.margin({
 
 </body>
 <script type="text/javascript">
+
 console.log('d3_chartframe ' + d3_chartframe.version);
-var frame = d3_chartframe.frame()
-	.margin({
-		left:0
-	})
-	.watermark('icons.svg#kiss')
-	.watermarkSize(50);
+var frame = d3_chartframe.webframe();
 
 d3.select('svg')
 	.call(frame);

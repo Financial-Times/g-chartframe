@@ -4,8 +4,7 @@
 	(factory((global.d3_chartframe = global.d3_chartframe || {}),global.d3Selection));
 }(this, function (exports,d3Selection) { 'use strict';
 
-	function chartFrame(){
-
+	function webFrame(){
 		var margin = {
 				top:60,
 				left:20,
@@ -20,34 +19,37 @@
 			source = 'Source: research',
 			width = 500, 
 			height = 500,
-			watermark = 'icons.svg#ft-logo',
-			watermarkSize = 20;
+			watermarkLocation = 'icons.svg#ft-logo',
+			watermarkMarkup = '',
+			watermarkSize = 50,
+			units = 'px';
 
 		function frame(p){
 			if (p.node().nodeName.toLowerCase() == 'svg') {
-				p.attr('width', width);
-				p.attr('height', height);
+				p.attr('width', width+units);
+				p.attr('height', height+units);
+				p.attr('viewBox',['0 0', width, height].join(' '))
 				p.append('title')
 					.text(title).html(title);
 			}
 
 			p.append('text')
 				.attr('class', 'chart-title')
-				.attr('dy', titleY)
+				.attr('dy', titleY+units)
 				.html(title);
 
 			p.append('text')
 				.attr('class','chart-subtitle')
-				.attr('dy',subtitleY)
+				.attr('dy',subtitleY+units)
 				.html(subtitle);
 
 			p.append('text')
 				.attr('class','chart-source')
-				.attr('dy',height + sourceYOffset)
+				.attr('dy',height + sourceYOffset+units)
 				.html(source);
 
 			p.append('use')
-				.attr('xlink:href',watermark)
+				.attr('xlink:href',watermarkLocation)
 				.attr('class','chart-watermark')
 				.attr('transform','translate('+(width-watermarkSize)+','+(height-watermarkSize)+') scale('+watermarkSize/100+') ');
 
@@ -55,6 +57,12 @@
 				.append('g')
 					.attr('class','chart-plot')
 					.attr('transform','translate(' + margin.left + ',' + margin.top + ')');
+		}
+
+		frame.units = function(u){
+			if(!u) return units
+			units = u; 
+			return frame;
 		}
 
 		frame.dimension = function(){
@@ -70,10 +78,17 @@
 			return frame;
 		}
 
+		frame.watermarkLocation = function(location){
+			if(!location) return watermarkLocation;
+			watermarkMarkup = '';
+			watermarkLocation = location;
+			return frame;
+		}
 
-		frame.watermark = function(location){
-			if(!location) return watermark;
-			watermark = location;
+		frame.watermark = function(markup){
+			if(!markup) return watermarkMarkup;
+			watermarkLocation = '';
+			watermarkMarkup = markup;
 			return frame;
 		}
 
@@ -139,6 +154,6 @@
 	var version = "1.0.0";
 
 	exports.version = version;
-	exports.frame = chartFrame;
+	exports.webframe = webFrame;
 
 }));

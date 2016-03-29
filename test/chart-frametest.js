@@ -4,7 +4,7 @@ var tape = require("tape"),
 console.log(chartFrame)
 
 tape("chartFrame defaults", function(test) {
-var frame = chartFrame.frame()
+var frame = chartFrame.webframe()
   test.equal(frame.title(), 'Title: A description of the charts purpose');
   test.equal(frame.subtitle(), 'some supporting information, units perhaps');
   test.equal(frame.source(), 'Source: research');

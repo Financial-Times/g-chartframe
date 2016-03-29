@@ -1,5 +1,5 @@
 {
-  "name": "FT-chart-frame",
+  "name": "ft-chart-frame",
   "version": "1.0.0",
   "description": "Draw the title, subtitle etc. for a D3 graphic without much boiler plate code",
   "license": "ISC",
@@ -15,7 +15,9 @@
     "url": "https://github.com/ft-interactive/FT-chart-frame.git"
   },
   "scripts": {
-    "pretest": "mkdir -p build && node -e 'process.stdout.write(\"var version = \\\"\" + require(\"./package.json\").version + \"\\\"; export * from \\\"../index\\\"; export {version};\");' > build/bundle.js && rollup -f umd -n d3_chartframe -o build/d3-chartframe.js -- build/bundle.js",
+    "watch": "watch 'npm run build' ./src",
+    "pretest": "npm run build",
+    "build": "mkdir -p build && node -e 'process.stdout.write(\"var version = \\\"\" + require(\"./package.json\").version + \"\\\"; export * from \\\"../index\\\"; export {version};\");' > build/bundle.js && rollup -f umd -n d3_chartframe -o build/d3-chartframe.js -- build/bundle.js",
     "test": "faucet `find test -name '*-test.js'`",
     "prepublish": "npm run test && uglifyjs build/d3-chartframe.js -c -m -o build/d3-chartframe.min.js && rm -f build/d3-chartframe.zip && zip -j build/d3-chartframe.zip -- LICENSE README.md build/d3-chartframe.js build/d3-chartframe.min.js"
   },
@@ -25,9 +27,11 @@
     "faucet": "0.0",
     "rollup": "0.25",
     "tape": "4",
-    "uglify-js": "2"
+    "uglify-js": "2",
+    "watch": "^0.17.1"
   },
   "dependencies": {
+    "d3-selection-multi": "^0.2.0",
     "d3-selection": "^0.7.0"
   }
 }

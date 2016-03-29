@@ -1,1 +1,1 @@
-export {default as frame} from "./src/chartframe";
+export {web as webframe} from "./src/chartframe";
