@@ -4,8 +4,9 @@
 	(factory((global.d3_chartframe = global.d3_chartframe || {}),global.d3Selection));
 }(this, function (exports,d3Selection) { 'use strict';
 
-	function webFrame(){
-		var margin = {
+	function chartFrame(){
+		var plot,
+			margin = {
 				top:60,
 				left:20,
 				bottom:20,
@@ -22,7 +23,16 @@
 			watermarkLocation = 'icons.svg#ft-logo',
 			watermarkMarkup = '',
 			watermarkSize = 50,
-			units = 'px';
+			units = 'px',
+			sourceStyle={},
+			titleStyle={},
+			subtitleStyle={};	
+
+		function attributeStyle(parent, style){
+		    Object.keys(style).forEach(function(attribute){
+		        parent.attr(attribute, style[attribute]);
+		    });
+		}
 
 		function frame(p){
 			if (p.node().nodeName.toLowerCase() == 'svg') {
@@ -36,27 +46,43 @@
 			p.append('text')
 				.attr('class', 'chart-title')
 				.attr('dy', titleY+units)
-				.html(title);
+				.html(title)
+				.call(attributeStyle, titleStyle);
 
 			p.append('text')
 				.attr('class','chart-subtitle')
 				.attr('dy',subtitleY+units)
-				.html(subtitle);
+				.html(subtitle)
+				.call(attributeStyle, subtitleStyle);
 
 			p.append('text')
 				.attr('class','chart-source')
 				.attr('dy',height + sourceYOffset+units)
-				.html(source);
+				.html(source)
+				.call(attributeStyle, sourceStyle);
 
-			p.append('use')
-				.attr('xlink:href',watermarkLocation)
-				.attr('class','chart-watermark')
-				.attr('transform','translate('+(width-watermarkSize)+','+(height-watermarkSize)+') scale('+watermarkSize/100+') ');
 
-			var plot = p
+			if(watermarkLocation!=''){
+				var mark = p.append('use')
+					.attr('xlink:href',watermarkLocation);
+			}
+
+			if(watermarkMarkup!=''){
+				mark = p.append('g')
+					.html(watermarkMarkup);
+			}
+
+			mark.attr('class','chart-watermark')
+				.attr('transform','translate('+(width-watermarkSize)+','+(height-watermarkSize)+') scale('+watermarkSize/100+') ');	
+			
+			plot = p
 				.append('g')
 					.attr('class','chart-plot')
 					.attr('transform','translate(' + margin.left + ',' + margin.top + ')');
+		}
+
+		frame.plot = function(){
+			return plot;
 		}
 
 		frame.units = function(u){
@@ -130,17 +156,35 @@
 			return frame;
 		};
 
+		frame.titleStyle = function(o){
+			if(!o) return titleStyle;
+			titleStyle = o;
+			return frame;
+		}
+
 		frame.subtitle = function(s){
 			if(!s) return subtitle;
 			subtitle = s;
 			return frame;
 		};
 
+		frame.subtitleStyle = function(o){
+			if(!o) return subtitleStyle;
+			subtitleStyle = o;
+			return frame;
+		}
+
 		frame.source = function(s){
 			if(!s) return source;
 			source = s;
 			return frame;
 		};
+
+		frame.sourceStyle = function(o){
+			if(!o) return sourceStyle;
+			sourceStyle = o;
+			return frame;
+		}
 
 		frame.sourceYOffset = function(n){
 			if(!n) return sourceYOffset;
@@ -154,6 +198,6 @@
 	var version = "1.0.0";
 
 	exports.version = version;
-	exports.webframe = webFrame;
+	exports.frame = chartFrame;
 
 }));
