@@ -2,7 +2,7 @@
 
 What is it? It's for making the boring but necessary stuff on D3 charts in as painless a fashion as possible.
 
-more information here:  http://www.toffeemilkshake.co.uk/chart-frame/
+more information here:  http://www.toffeemilkshake.co.uk/d3-chartframe/
 
 ## Installing
 
