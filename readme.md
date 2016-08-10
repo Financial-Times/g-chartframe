@@ -1,4 +1,4 @@
-# d3-chart-frame
+# d3-chartframe
 
 What is it? It's for making the boring but necessary stuff on D3 charts in as painless a fashion as possible.
 
@@ -6,7 +6,7 @@ more information here:  http://www.toffeemilkshake.co.uk/d3-chartframe/
 
 ## Installing
 
-If you use NPM, `npm install d3-chart-frame`. Otherwise, download the [latest release](https://github.com/d3/d3-foo/releases/latest).
+If you use NPM, `npm install d3-chartframe`. Otherwise, download the [latest release](https://github.com/d3/d3-foo/releases/latest).
 
 ## API Reference
 
