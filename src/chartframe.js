@@ -9,11 +9,14 @@ function chartFrame(){
 			right:20
 		},
 		titleY = 20,
+		titleLineHeight = 20,
 		subtitleY = 50,
-		sourceYOffset = -5,
+		subtitleLineHeight = 20,
+		sourceY = 480,
+		sourceLineHeight = 18,
 		title = 'Title: A description of the charts purpose',
 		subtitle = 'some supporting information, units perhaps',
-		source = 'Source: research',
+		source = 'Source: research|FT Graphic Tom Pearson',
 		width = 500, 
 		height = 500,
 		watermarkLocation = 'icons.svg#ft-logo',
@@ -53,20 +56,35 @@ function chartFrame(){
 
 		p.append('text')
 			.attr('class', 'chart-title')
-			.attr('dy', titleY+units)
-			.html(title)
+			.selectAll('tspan')
+				.data(title.split('|'))
+			.enter()
+				.append('tspan')
+			.attr('y',function(d,i){ return (titleY + (i * titleLineHeight)) + units; })
+			.attr('x',0)
+			.html(function(d){ return d; })
 			.call(attributeStyle, titleStyle);
 
 		p.append('text')
 			.attr('class','chart-subtitle')
-			.attr('dy',subtitleY+units)
-			.html(subtitle)
+			.selectAll('tspan')
+				.data(subtitle.split('|'))
+			.enter()
+				.append('tspan')
+			.attr('y',function(d,i){ return (subtitleY + (i * subtitleLineHeight)) + units})
+			.attr('x',0)
+			.html(function(d){ return d; })
 			.call(attributeStyle, subtitleStyle);
 
 		p.append('text')
 			.attr('class','chart-source')
-			.attr('dy',height + sourceYOffset+units)
-			.html(source)
+			.selectAll('tspan')
+				.data(source.split('|'))
+			.enter()
+				.append('tspan')
+			.attr('y',function(d,i){ return (sourceY +(i * sourceLineHeight)) + units})
+			.attr('x',0)
+			.html(function(d){ console.log(d); return d; })
 			.call(attributeStyle, sourceStyle);
 
 
@@ -175,6 +193,12 @@ function chartFrame(){
 		return frame;
 	}
 
+	frame.titleLineHeight = function(x){
+		if(!x) return titleLineHeight;
+		titleLineHeight = x;
+		return frame;
+	}
+
 	frame.subtitle = function(s){
 		if(!s) return subtitle;
 		subtitle = s;
@@ -215,36 +239,86 @@ function chartFrame(){
 }
 
 var webFrame = chartFrame()
-	.containerClass('ft-webchart')
+	.containerClass('ft-webgraphic')
 	.backgroundColour('#FFF1E0')
 	.width(700)
 	.watermark(watermarkPath)
-	.margin({bottom:50})
+	.margin({bottom:50, right:50})
 	.titleStyle({
-		'font-size':25
+		'font-size':25,
+		'font-family': 'MetricWeb,sans-serif',
+		'fill':'#3b3d3b',
 	})
+	.titleLineHeight(20)
 	.subtitleStyle({
-		'font-size':20
+		'font-size':20,
+		'font-family': 'MetricWeb,sans-serif',
+		'fill': '#6b6e68',
 	})
 	.sourceStyle({ 
-		'font-style':'italic'
+		'font-family': 'MetricWeb,sans-serif',
+		'fill': '#6b6e68',
 	});
 
 var printFrame = chartFrame()
-	.containerClass('ft-printchart')
+	.containerClass('ft-printgraphic')
 	.backgroundColour('#FFAAFF')
 	.width(300)
 	.watermark(watermarkPath)
 	.titleStyle({
-		'font-size':25
+		'font-size': 25,
+		'font-family': 'MetricWeb,sans-serif',
 	})
 	.subtitleStyle({
-		'font-size':20
+		'font-size':20,
+		'font-family': 'MetricWeb,sans-serif',
 	})
 	.sourceStyle({ 
-		'font-style':'italic'
+		'font-size':14,
+		'font-style':'italic',
+		'font-family': 'MetricWeb,sans-serif',
+	});
+
+var socialFrame = chartFrame()
+	.containerClass('ft-socialgraphic')
+	.backgroundColour('#FFAAFF')
+	.width(300)
+	.watermark(watermarkPath)
+	.titleStyle({
+		'font-size': 25,
+		'font-family': 'MetricWeb,sans-serif',
+	})
+	.subtitleStyle({
+		'font-size':20,
+		'font-family': 'MetricWeb,sans-serif',
+	})
+	.sourceStyle({ 
+		'font-size':14,
+		'font-style':'italic',
+		'font-family': 'MetricWeb,sans-serif',
+	});
+
+var videoFrame = chartFrame()
+	.containerClass('ft-videographic')
+	.backgroundColour('#FFAAFF')
+	.width(300)
+	.watermark(watermarkPath)
+	.titleStyle({
+		'font-size': 25,
+		'font-family': 'MetricWeb,sans-serif',
+	})
+	.subtitleStyle({
+		'font-size':20,
+		'font-family': 'MetricWeb,sans-serif',
+	})
+	.sourceStyle({ 
+		'font-size':14,
+		'font-style':'italic',
+		'font-family': 'MetricWeb,sans-serif',
 	});
 
 export { chartFrame as frame };
 export { webFrame as webFrame };
 export { printFrame as printFrame };
+export { socialFrame as socialFrame };
+export { videoFrame as videoFrame };

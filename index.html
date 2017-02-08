@@ -5,123 +5,40 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Chart frame for D3</title>
 	<link rel="stylesheet" type="text/css" href="chart-frame.css">
+	<link rel="stylesheet" href="https://build.origami.ft.com/v2/bundles/css?modules=o-fonts@^2.2.0" />
 	<script src="//d3js.org/d3.v4.min.js" charset="utf-8"></script>
 	<script type="text/javascript" src="build/d3-chartframe.js"  charset="utf-8"></script>
+
+<style type="text/css">
+</style>
 </head>
 <body>
 <article>
 	<h1>FT Chart Frames for D3</h1>
 		<h2>An example</h2>
 		<figure class="web-example">
-			<svg width="550" height="500"></svg>
 			<figcaption>Web example</figcaption>
+			<svg width="550" height="500"></svg>
 		</figure>
 
 		<figure class="print-example">
-			<svg width="550" height="500"></svg>
 			<figcaption>Print example</figcaption>
+			<svg width="550" height="500"></svg>
 		</figure>
 
-		<p>First make and configure the chart frame (there are some  'sensible' defaults which you'll almost certainly want to change) &#8230;</p>
-		<pre class="code">
-var frame = chartFrame()
-  .margin({
-    left:0
-  })
-  .title('My lovely chart')
-  .subtitle('time vs money')
-  .source('Ministry of statistics');
-		</pre>
-		<p>Then select an SVG element and call &lsquo;frame&rsquo; on it &#8230;</p>
-		<pre class="code">
-d3.select('svg')
-  .call(frame);
-		</pre>
-		<p>This will result in your SVG having a title and all that stuff and also a &lsquo;g.plot&lsquo; element from where you can get down to the business of making the visualisation bit of the chart. In the case above &#8230;</p>
-		<pre class="code">
-d3.select('g.chart-plot')
-  .append('use')
+		<figure class="social-example">
+			<figcaption>Social example</figcaption>
+			<svg width="550" height="500"></svg>
+		</figure>
 
-  	[etc]
-		</pre>
-	</section>
-	<section id="options">
-		<h2>Options</h2>
+		<figure class="video-example">
+			<figcaption>Video example</figcaption>
+			<svg width="550" height="500"></svg>
+		</figure>
 
-		<section class="option">
-			<h3>frame.<b>margin</b>(<i>{ D3 margin convention }</i>)</h3>
-			<p>
-				Uses the <a href="http://bl.ocks.org/mbostock/3019563">D3 margin convention</a> to position the plot area, i.e. the bit inside the frame.
-			</p>
-			<pre class="code">
-frame.margin({
-  top:20,
-  left:20,
-  right:20,
-  bottom:20
-});</pre>
-			<p>
-				You can just <span class="inline-code">top</span>, or just <span class="inline-code">left</span> or whatever. The rest will be defaults. If you don't provide any arguments the function returns the currently set margins.
-			</p>
-		</section>
-		<section class="option">
-			<h3>frame.<b>title</b>( <i>string</i> )</h3>
-			<p>Set the HTML of the chart's title (if no string is specified returns the current value). *</p>
-		</section>
-		<section class="option">
-			<h3>frame.<b>subtitle</b>( <i>string</i> )</h3>
-			<p>Set the HTML of the chart's subtitle (if no string is specified returns the current value).</p>
-		</section>
-		<section class="option">			
-			<h3>frame.<b>source</b>( <i>string</i> )</h3>
-			<p>Set the HTML of the chart's source (if no string is specified returns the current value).</p>
-		</section>
-		<section class="option">
-			<h3>frame.<b>dimension</b>()</h3>
-			<p>Get the size of the available area i.e. size of the SVG without the margins. Returns an object:</p>
-			<pre class="code">
-{
-	width:500,
-	height:500
-}</pre>
-		</section>
-		<section class="option">
-			<h3>frame.<b>titleY</b>( <i>position</i> )</h3>
-			<p>Set the Y position of the title (if no position is provided returns the current value).</p>
-		</section>
-		<section class="option">
-			<h3>frame.<b>subtitleY</b>( <i>position</i> )</h3>
-			<p>Set the Y position of the subtitle (if no position is provided returns the current value).</p>
-		</section>
-		<section class="option">
-			<h3>frame.<b>sourceYOffset</b>( <i>position</i> )</h3>
-			<p>How much the source is offset from the bottom of the SVG. (if no position is provided returns the current value).</p>
-		</section>
-		<section class="option">
-			<h3>frame.<b>width</b>( <i>size</i> )</h3>
-			<p>Set (or if no argument is specified, retrieve) the width of the available space for the chart frame. *</p>
-		</section>
-			<section class="option">
-			<h3>frame.<b>height</b>( <i>size</i> )</h3>
-			<p>Set (or if no argument is specified, retrieve) the height of the available space for the chart frame. *</p>
-		</section>
-		<section class="option">
-			<h3>frame.<b>watermarkLocation</b>( <i>href</i> )</h3>
-			<p>This adds a little icon to the bottom right of the chart for attribution purposes, not really  awatermark I suppose. Typically I'd use an external svg file:
-				<pre class="code">frame.watermarkLocation('external.svg#element-id');</pre>
-			</p>
-		</section>
-		<section class="option">
-			<h3>frame.<b>watermarkSize</b>( <i>size</i> )</h3>
-			<p>The size of the icon mentioned above, in pixels.</p>
-		</section>
-		<section>
-			<p><b>* Note:</b> If the chart frame is being called on an SVG element the <i>width</i>, <i>height</i> and <i>title</i> functions will re-write those properties of the parent SVG. If you don't want this to happen you can avoid it by calling the function on a <i><a href="https://developer.mozilla.org/en/docs/Web/SVG/Element/g">group</a></i> element instead.</p>
-		</section>
-	</section>
 	<hr>
 	<section>
-		Tom Pearson &ndash; December 2015
+		Tom Pearson &ndash; Feb 2017
 	</section>
 </article>
 
@@ -133,7 +50,7 @@ console.log('d3_chartframe ' + d3_chartframe.version);
 
 var webframe = d3_chartframe.webFrame;
 webframe
-	.title('Web customise the title');
+	.title('Web customise the title'); //add a `|` character to insert a line break
 
 var printframe = d3_chartframe.printFrame;
 printframe.title('Print customise the title');
