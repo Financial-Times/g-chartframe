@@ -22,7 +22,9 @@ function chartFrame(){
 		units = 'px',
 		sourceStyle={},
 		titleStyle={},
-		subtitleStyle={};	
+		subtitleStyle={},
+		containerClass='g-chartframe',
+		backgroundColour;	
 
 	function attributeStyle(parent, style){
 	    Object.keys(style).forEach(function(attribute){
@@ -31,6 +33,7 @@ function chartFrame(){
 	}
 
 	function frame(p){
+		p.attr('class', containerClass);
 		if (p.node().nodeName.toLowerCase() == 'svg') {
 			p.attr('width', width+units);
 			p.attr('height', height+units);
@@ -38,6 +41,15 @@ function chartFrame(){
 			p.append('title')
 				.text(title).html(title);
 		}
+
+		if(backgroundColour !== undefined){
+			p.append('rect')
+				.attr('x',0)
+				.attr('y',0)
+				.attr('width',width)
+				.attr('height',height)
+				.attr('fill',backgroundColour);
+		};
 
 		p.append('text')
 			.attr('class', 'chart-title')
@@ -71,14 +83,19 @@ function chartFrame(){
 		mark.attr('class','chart-watermark')
 			.attr('transform','translate('+(width-watermarkSize)+','+(height-watermarkSize)+') scale('+watermarkSize/100+') ');	
 		
-		plot = p
-			.append('g')
-				.attr('class','chart-plot')
-				.attr('transform','translate(' + margin.left + ',' + margin.top + ')');
+		plot = p.append('g')
+			.attr('class','chart-plot')
+			.attr('transform','translate(' + margin.left + ',' + margin.top + ')');
 	}
 
 	frame.plot = function(){
 		return plot;
+	}
+
+	frame.containerClass = function(c){
+		if(!c) return containerClass;
+		containerClass = c;
+		return frame;
 	}
 
 	frame.units = function(u){
@@ -188,10 +205,35 @@ function chartFrame(){
 		return frame;
 	}
 
+	frame.backgroundColour = function(c){
+		if(!c) return backgroundColour;
+		backgroundColour = c;
+		return frame;
+	}
+
 	return frame;
 }
 
 var webFrame = chartFrame()
+	.containerClass('ft-webchart')
+	.backgroundColour('#FFF1E0')
+	.width(700)
+	.watermark(watermarkPath)
+	.margin({bottom:50})
+	.titleStyle({
+		'font-size':25
+	})
+	.subtitleStyle({
+		'font-size':20
+	})
+	.sourceStyle({ 
+		'font-style':'italic'
+	});
+
+var printFrame = chartFrame()
+	.containerClass('ft-printchart')
+	.backgroundColour('#FFAAFF')
+	.width(300)
 	.watermark(watermarkPath)
 	.titleStyle({
 		'font-size':25
@@ -205,3 +247,4 @@ var webFrame = chartFrame()
 
 export { chartFrame as frame };
 export { webFrame as webFrame };
+export { printFrame as printFrame };
