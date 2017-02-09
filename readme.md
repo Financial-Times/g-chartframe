@@ -1,107 +1,101 @@
-<<<<<<< HEAD
+# g-chartframe
 
+For making the boring but necessary stuff on D3 charts in as painless a fashion as possible.
 
-A fork of: http://www.toffeemilkshake.co.uk/chart-frame/
+## Installation
 
-# d3-chart-frame
-=======
-# d3-chartframe
->>>>>>> tomgp/master
+If you use NPM, `npm install @financial-times/g-chartframe`. Otherwise, download the [latest release](https://github.com/financial-times/g-chartframe/releases/latest).
 
-What is it? It's for making the boring but necessary stuff on D3 charts in as painless a fashion as possible.
+## Use
 
-more information here:  http://www.toffeemilkshake.co.uk/d3-chartframe/
+Preconfigured frames...
 
-## Installing
+```
+const webframe = gChartframe.webFrame;
+webframe.title('A simple chart')
+	.subtitle('showing some interesting things')
+	.source('source: FT research|FT Graphic Tom Pearson');
 
-If you use NPM, `npm install d3-chartframe`. Otherwise, download the [latest release](https://github.com/d3/d3-foo/releases/latest).
+d3.select('.web-chart-container svg')
+	.call(webframe);
+
+webframe.plot()
+	...add your visualisation code here...
+
+```
+
+Configure your own frame...
+```
+const myFrame = gChartframe.frame()
+	.width(350)
+	.height(350)
+	.margin({top:20,left:20,bottom:20,right:20,})
+	.title('My totally custom title')
+	.subtitle('hello hello hello')
+
+d3.select('.custom-chart-container')
+	.append('svg')
+	.call(myFrame);
+```
 
 ## API Reference
 
-<a href="#margin" name="margin">#</a> frame.<b>margin</b>({ D3 margin convention })
+*frame.backgroundColour(_[string]_)*
 
-Uses the D3 margin convention to position the plot area, i.e. the bit inside the frame.
+*frame.containerClass(_[string]_)*
 
-```
-frame.margin({
-  top:20,
-  left:20,
-  right:20,
-  bottom:20
-});
-```
+*frame.dimension()*
 
-You can provide just top, or just left or whatever. The rest will be defaults. If you don't provide any arguments the function returns the currently set margins.
+*frame.height(_[number]_)*
 
-<a href="#title" name="title">#</a> frame.<b>title</b>( string )
+*frame.margin(_[{top:number,left:number,bottom:number,right:number,}]_)*
 
-Set the HTML of the chart's title (if no string is specified returns the current value)
+*frame.plot()*
 
+*frame.source(_[string]_)*
 
-<a href="#subtitle" name="subtitle">#</a> frame.<b>subtitle</b>( string )
+*frame.sourceLineHeight(_[number]_)*
 
-Set the HTML of the chart's subtitle (if no string is specified returns the current value).
+*frame.sourceStyle(_[{attribute:value}]_)*
 
+*frame.sourceX(_[number]_)*
 
-<a href="#source" name="source">#</a> frame.<b>source</b>( string )
+*frame.sourceY(_[number]_)*
 
-Set the HTML of the chart's source (if no string is specified returns the current value).
+*frame.subtitle(_[string]_)*
 
+*frame.subtitleLineHeight(_[number]_)*
 
-<a href="#dimension" name="dimension">#</a> frame.<b>dimension</b>()
-Get the size of the available area i.e. size of the SVG without the margins. Returns an object:
+*frame.subtitleStyle(_[{attribute:value}]_)*
 
-```
-{
-	width:500,
-	height:500
-}
-```
+*frame.subtitleX(_[number]_)*
 
+*frame.subtitleY(_[number]_)*
 
-<a href="#titleY" name="titleY">#</a> frame.<b>titleY</b>( position )
+*frame.title(_[string]_)*
 
-Set the Y position of the title (if no position is provided returns the current value).
+*frame.titleStyle(_[number]_)*
 
+*frame.titleLineHeight(_[number]_)*
 
-<a href="#subtitleY" name="subtitleY">#</a> frame.<b>subtitleY</b>( position )
+*frame.titleX(_[number]_)*
 
-Set the Y position of the subtitle (if no position is provided returns the current value).
+*frame.titleY(_[number]_)*
 
+*frame.units(_[string]_)*
 
-<a href="#sourceYOffset" name="sourceYOffset">#</a> frame.<b>sourceYOffset</b>( position )
+*frame.watermark(_[svgnodes]_)*
 
-How much the source is offset from the bottom of the SVG. (if no position is provided returns the current value).
+*frame.watermarkLocation(_[href]_)*
 
-
-<a href="#width" name="width">#</a> frame.<b>width</b>( size )
-
-Set (or if no argument is specified, retrieve) the width of the available space for the chart frame. 👇
-
-
-<a href="#height" name="height">#</a> frame.<b>height</b>( size )
-
-Set (or if no argument is specified, retrieve) the height of the available space for the chart frame. 👇
-
-
-<a href="#watermark" name="watermark">#</a>  frame.<b>watermark</b>( href )
-
-This adds a little icon to the bottom right of the chart for attribution purposes, not really awatermark I suppose. Typically I'd use an external svg file:
-
-```
-frame.watermark('external.svg#element-id');
-```
-
-<a href="#watermarkSize" name="watermarkSize">#</a> frame.<b>watermarkSize</b>( size )
-
-The size of the icon mentioned above, in pixels.
+*frame.width(_[number]_)*
 
 
 👉 _Note_: If the chart frame is being called on an SVG element the width, height and title functions will re-write those properties of the parent SVG. If you don't want this to happen you can avoid it by calling the function on a group element instead.
 
 --
 
-Copyright (c) 2015, 2016, Tom G Pearson
+Copyright (c) 2015, 2016, 2017 Tom G Pearson
 
 Permission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.
 THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.

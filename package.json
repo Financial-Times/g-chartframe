@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Draw the title, subtitle etc. for a D3 graphic without much boiler plate code",
   "license": "ISC",
-  "main": "build/d3-chartframe.js",
+  "main": "build/g-chartframe.js",
   "keywords": [
     "dom",
     "visualization",
@@ -17,9 +17,9 @@
   "scripts": {
     "watch": "watch 'npm run build' ./src",
     "pretest": "npm run build",
-    "build": "mkdir -p build && node -e 'process.stdout.write(\"var version = \\\"\" + require(\"./package.json\").version + \"\\\"; export * from \\\"../index\\\"; export {version};\");' > build/bundle.js && rollup -f umd -n d3_chartframe -o build/d3-chartframe.js -- build/bundle.js",
+    "build": "mkdir -p build && node -e 'process.stdout.write(\"var version = \\\"\" + require(\"./package.json\").version + \"\\\"; export * from \\\"../index\\\"; export {version};\");' > build/bundle.js && rollup -f umd -n gChartframe -o build/g-chartframe.js -- build/bundle.js",
     "test": "faucet `find test -name '*-test.js'`",
-    "prepublish": "npm run test && uglifyjs build/d3-chartframe.js -c -m -o build/d3-chartframe.min.js && rm -f build/d3-chartframe.zip && zip -j build/d3-chartframe.zip -- LICENSE README.md build/d3-chartframe.js build/d3-chartframe.min.js"
+    "prepublish": "npm run test && uglifyjs build/g-chartframe.js -c -m -o build/g-chartframe.min.js && rm -f build/g-chartframe.zip && zip -j build/g-chartframe.zip -- LICENSE README.md build/g-chartframe.js build/g-chartframe.min.js"
   },
   "homepage": "http://www.toffeemilkshake.co.uk/d3-chartframe/",
   "author": "tom.g.pearson@gmail.com",
@@ -31,7 +31,6 @@
     "watch": "^0.17.1"
   },
   "dependencies": {
-    "d3-selection-multi": "^0.2.0",
     "d3-selection": "^0.7.0"
   }
 }

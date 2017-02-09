@@ -7,7 +7,7 @@
 	<link rel="stylesheet" type="text/css" href="chart-frame.css">
 	<link rel="stylesheet" href="https://build.origami.ft.com/v2/bundles/css?modules=o-fonts@^2.2.0" />
 	<script src="//d3js.org/d3.v4.min.js" charset="utf-8"></script>
-	<script type="text/javascript" src="build/d3-chartframe.js"  charset="utf-8"></script>
+	<script type="text/javascript" src="build/g-chartframe.js"  charset="utf-8"></script>
 
 <style type="text/css">
 </style>
@@ -46,13 +46,13 @@
 
 <script type="text/javascript">
 
-console.log('d3_chartframe ' + d3_chartframe.version);
+console.log('gChartframe ' + gChartframe.version);
 
-var webframe = d3_chartframe.webFrame;
+var webframe = gChartframe.webFrame;
 webframe
 	.title('Web customise the title'); //add a `|` character to insert a line break
 
-var printframe = d3_chartframe.printFrame;
+var printframe = gChartframe.printFrame;
 printframe.title('Print customise the title');
 
 d3.select('.web-example svg')

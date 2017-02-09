@@ -18,17 +18,17 @@ function chartFrame(){
 		
 		subtitle = 'some supporting information, units perhaps',
 		subtitleLineHeight = 20,
-		subtitlePosition = {x:0, y:50},
+		subtitlePosition = {x:4, y:50},
 		subtitleStyle={},
 
 		source = 'Source: research|FT Graphic Tom Pearson',
 		sourceLineHeight = 18,	
-		sourcePosition = {x:0,y:480},
+		sourcePosition = {x:4,y:480},
 		sourceStyle={},
 
 		title = 'Title: A description of the charts purpose',
 		titleLineHeight = 20,
-		titlePosition = {x:0, y:20},
+		titlePosition = {x:4, y:20},
 		titleStyle={},
 
 		watermarkLocation = 'icons.svg#ft-logo',
@@ -279,11 +279,12 @@ function chartFrame(){
 
 //Some Conventional frames
 
-var webFrame = chartFrame()
+const webFrame = chartFrame()
 	.containerClass('ft-webgraphic')
 	.backgroundColour('#FFF1E0')
 	.width(700)
 	.watermark(watermarkPath)
+	.watermarkSize(35)
 	.margin({bottom:50, right:50})
 	.titleStyle({
 		'font-size':25,
@@ -301,7 +302,7 @@ var webFrame = chartFrame()
 		'fill': '#6b6e68',
 	});
 
-var printFrame = chartFrame()
+const printFrame = chartFrame()
 	.containerClass('ft-printgraphic')
 	.backgroundColour('#FFAAFF')
 	.width(300)
@@ -320,7 +321,7 @@ var printFrame = chartFrame()
 		'font-family': 'MetricWeb,sans-serif',
 	});
 
-var socialFrame = chartFrame()
+const socialFrame = chartFrame()
 	.containerClass('ft-socialgraphic')
 	.backgroundColour('#FFAAFF')
 	.width(300)
@@ -339,7 +340,7 @@ var socialFrame = chartFrame()
 		'font-family': 'MetricWeb,sans-serif',
 	});
 
-var videoFrame = chartFrame()
+const videoFrame = chartFrame()
 	.containerClass('ft-videographic')
 	.backgroundColour('#FFAAFF')
 	.width(300)
