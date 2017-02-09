@@ -1,4 +1,4 @@
-var watermarkPath = '<path id="logo" d="M1.502 1.5h97.996v98h-97.996v-98zm46.127 23.686h1.866l-.287-9.762h-36.988v1.675c1.18.063 2.074.151 2.68.263.606.112 1.148.359 1.627.742s.797.909.957 1.579c.159.67.239 1.595.239 2.775v30.193c0 1.18-.08 2.097-.239 2.747-.16.654-.479 1.181-.957 1.562-.479.383-1.037.639-1.675.766-.638.128-1.547.208-2.728.239v1.723h20.958v-1.723c-1.468-.031-2.568-.111-3.302-.239-.734-.127-1.372-.383-1.914-.766-.542-.382-.893-.908-1.053-1.562-.16-.65-.239-1.567-.239-2.747v-14.451h3.302c2.967 0 5.136.454 6.507 1.364 1.372.908 2.281 2.623 2.728 5.144h1.675v-15.647h-1.675c-.287 1.627-.71 2.84-1.268 3.637-.558.798-1.443 1.372-2.656 1.723-1.212.352-2.982.527-5.311.527h-3.302v-14.021c0-.894.16-1.491.479-1.794.319-.304.973-.455 1.962-.455h6.699c2.201 0 3.972.096 5.312.287s2.448.566 3.326 1.125c.877.558 1.539 1.212 1.985 1.961.447.75.877 1.795 1.292 3.135zm42.107 0h2.249l-.909-9.762h-38.805l-.909 9.762h2.249c.702-2.393 1.658-4.075 2.871-5.049 1.212-.973 2.982-1.459 5.312-1.459h5.454v33.974c0 1.18-.079 2.097-.239 2.747-.159.654-.502 1.181-1.028 1.562-.526.383-1.141.639-1.843.766-.701.128-1.738.208-3.109.239v1.723h21.341v-1.723c-1.372-.031-2.417-.111-3.135-.239-.718-.127-1.34-.383-1.866-.766-.526-.382-.869-.908-1.028-1.562-.159-.65-.239-1.567-.239-2.747v-33.974h5.455c2.328 0 4.099.486 5.311 1.459 1.21.973 2.167 2.656 2.868 5.049z"/>';
+var watermarkPath = '<path fill="#000" fill-opacity="0.2" id="logo" d="M1.502 1.5h97.996v98h-97.996v-98zm46.127 23.686h1.866l-.287-9.762h-36.988v1.675c1.18.063 2.074.151 2.68.263.606.112 1.148.359 1.627.742s.797.909.957 1.579c.159.67.239 1.595.239 2.775v30.193c0 1.18-.08 2.097-.239 2.747-.16.654-.479 1.181-.957 1.562-.479.383-1.037.639-1.675.766-.638.128-1.547.208-2.728.239v1.723h20.958v-1.723c-1.468-.031-2.568-.111-3.302-.239-.734-.127-1.372-.383-1.914-.766-.542-.382-.893-.908-1.053-1.562-.16-.65-.239-1.567-.239-2.747v-14.451h3.302c2.967 0 5.136.454 6.507 1.364 1.372.908 2.281 2.623 2.728 5.144h1.675v-15.647h-1.675c-.287 1.627-.71 2.84-1.268 3.637-.558.798-1.443 1.372-2.656 1.723-1.212.352-2.982.527-5.311.527h-3.302v-14.021c0-.894.16-1.491.479-1.794.319-.304.973-.455 1.962-.455h6.699c2.201 0 3.972.096 5.312.287s2.448.566 3.326 1.125c.877.558 1.539 1.212 1.985 1.961.447.75.877 1.795 1.292 3.135zm42.107 0h2.249l-.909-9.762h-38.805l-.909 9.762h2.249c.702-2.393 1.658-4.075 2.871-5.049 1.212-.973 2.982-1.459 5.312-1.459h5.454v33.974c0 1.18-.079 2.097-.239 2.747-.159.654-.502 1.181-1.028 1.562-.526.383-1.141.639-1.843.766-.701.128-1.738.208-3.109.239v1.723h21.341v-1.723c-1.372-.031-2.417-.111-3.135-.239-.718-.127-1.34-.383-1.866-.766-.526-.382-.869-.908-1.028-1.562-.159-.65-.239-1.567-.239-2.747v-33.974h5.455c2.328 0 4.099.486 5.311 1.459 1.21.973 2.167 2.656 2.868 5.049z"/>';
 
 function chartFrame(){
 	var plot,
@@ -110,15 +110,15 @@ function chartFrame(){
 		return plot;
 	}
 
-	frame.containerClass = function(c){
-		if(!c) return containerClass;
-		containerClass = c;
+	frame.containerClass = function(x){
+		if(!x) return containerClass;
+		containerClass = x;
 		return frame;
 	}
 
-	frame.units = function(u){
-		if(!u) return units
-		units = u; 
+	frame.units = function(x){
+		if(!x) return units
+		units = x; 
 		return frame;
 	}
 
@@ -129,67 +129,67 @@ function chartFrame(){
 		};
 	}
 
-	frame.watermarkSize = function(n){
-		if(!n) return watermarkSize;
-		watermarkSize = n;
+	frame.watermarkSize = function(x){
+		if(!x) return watermarkSize;
+		watermarkSize = x;
 		return frame;
 	}
 
-	frame.watermarkLocation = function(location){
-		if(!location) return watermarkLocation;
+	frame.watermarkLocation = function(x){
+		if(!x) return watermarkLocation;
 		watermarkMarkup = '';
-		watermarkLocation = location;
+		watermarkLocation = x;
 		return frame;
 	}
 
-	frame.watermark = function(markup){
-		if(!markup) return watermarkMarkup;
+	frame.watermark = function(x){
+		if(!x) return watermarkMarkup;
 		watermarkLocation = '';
-		watermarkMarkup = markup;
+		watermarkMarkup = x;
 		return frame;
 	}
 
-	frame.titleY = function(n){
-		if(!n) return titleY;
-		titleY = n;
+	frame.titleY = function(x){
+		if(!x) return titleY;
+		titleY = x;
 		return frame;
 	}
 
-	frame.subtitleY = function(n){
-		if(!n) return subtitleY;
-		subtitleY = n;
+	frame.subtitleY = function(x){
+		if(!x) return subtitleY;
+		subtitleY = x;
 		return frame;
 	}
 
-	frame.width = function(n){
-		if(!n) return width;
-		width = n;
+	frame.width = function(x){
+		if(!x) return width;
+		width = x;
 		return frame;
 	};
 
-	frame.height = function(n){
-		if(!n) return height;
-		height = n;
+	frame.height = function(x){
+		if(!x) return height;
+		height = x;
 		return frame;
 	};
 
-	frame.margin = function(o){
-		if(!o) return margin;
-		Object.keys(o).forEach(function(k){
-			margin[k] = o[k];
+	frame.margin = function(x){
+		if(!x) return margin;
+		Object.keys(x).forEach(function(k){
+			margin[k] = x[k];
 		});
 		return frame;
 	};
 
-	frame.title = function(s){
-		if(!s) return title;
-		title = s;
+	frame.title = function(x){
+		if(!x) return title;
+		title = x;
 		return frame;
 	};
 
-	frame.titleStyle = function(o){
-		if(!o) return titleStyle;
-		titleStyle = o;
+	frame.titleStyle = function(x){
+		if(!x) return titleStyle;
+		titleStyle = x;
 		return frame;
 	}
 
@@ -199,44 +199,46 @@ function chartFrame(){
 		return frame;
 	}
 
-	frame.subtitle = function(s){
-		if(!s) return subtitle;
-		subtitle = s;
+	frame.subtitle = function(x){
+		if(!x) return subtitle;
+		subtitle = x;
 		return frame;
 	};
 
-	frame.subtitleStyle = function(o){
-		if(!o) return subtitleStyle;
-		subtitleStyle = o;
+	frame.subtitleStyle = function(x){
+		if(!x) return subtitleStyle;
+		subtitleStyle = x;
 		return frame;
 	}
 
-	frame.source = function(s){
-		if(!s) return source;
-		source = s;
+	frame.source = function(x){
+		if(!x) return source;
+		source = x;
 		return frame;
 	};
 
-	frame.sourceStyle = function(o){
-		if(!o) return sourceStyle;
-		sourceStyle = o;
+	frame.sourceStyle = function(x){
+		if(!x) return sourceStyle;
+		sourceStyle = x;
 		return frame;
 	}
 
-	frame.sourceYOffset = function(n){
-		if(!n) return sourceYOffset;
-		sourceYOffset = n;
+	frame.sourceYOffset = function(x){
+		if(!x) return sourceYOffset;
+		sourceYOffset = x;
 		return frame;
 	}
 
-	frame.backgroundColour = function(c){
-		if(!c) return backgroundColour;
-		backgroundColour = c;
+	frame.backgroundColour = function(x){
+		if(!x) return backgroundColour;
+		backgroundColour = x;
 		return frame;
 	}
 
 	return frame;
 }
+
+//Some Conventional frames
 
 var webFrame = chartFrame()
 	.containerClass('ft-webgraphic')
