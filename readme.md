@@ -4,7 +4,7 @@ For making the boring but necessary stuff on D3 charts in as painless a fashion 
 
 ## Installation
 
-If you use NPM, `npm install @financial-times/g-chartframe`. Otherwise, download the [latest release](https://github.com/financial-times/g-chartframe/releases/latest).
+If you use NPM, `npm install @financial-times/g-chartframe`(er... not yet!). Otherwise, download the [latest release](https://github.com/ft-interactive/g-chartframe/releases/latest).
 
 ## Use
 
