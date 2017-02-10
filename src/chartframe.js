@@ -130,20 +130,20 @@ function chartFrame(){
 		if(x == undefined) return backgroundColour;
 		backgroundColour = x;
 		return frame;
-	}
+	};
 
 	frame.containerClass = function(x){
 		if(x == undefined) return containerClass;
 		containerClass = x;
 		return frame;
-	}
+	};
 
 	frame.dimension = function(){
 		return {
 			width:graphicWidth-(margin.left+margin.right),
 			height:graphicHeight-(margin.top+margin.bottom)
 		};
-	}
+	};
 
 	frame.height = function(x){
 		if(x == undefined) return graphicHeight;
@@ -161,7 +161,7 @@ function chartFrame(){
 
 	frame.plot = function(){
 		return plot;
-	}
+	};
 
 	frame.source = function(x){
 		if(x == undefined) return source;
@@ -173,25 +173,25 @@ function chartFrame(){
 		if(x == undefined) return sourceLineHeight;
 		sourceLineHeight = x;
 		return frame;
-	}
+	};
 
 	frame.sourceStyle = function(x){
 		if(x == undefined) return sourceStyle;
 		sourceStyle = x;
 		return frame;
-	}
+	};
 
 	frame.sourceX = function(x){
 		if(x == undefined) return sourcePosition.x;
 		sourcePosition.x = x;
 		return frame;
-	}
+	};
 
 	frame.sourceY = function(x){
 		if(x == undefined) return sourcePosition.y;
 		sourcePosition.y = x;
 		return frame;
-	}
+	};
 
 	frame.subtitle = function(x){
 		if(x == undefined) return subtitle;
@@ -203,25 +203,25 @@ function chartFrame(){
 		if(x == undefined) return subtitleLineHeight;
 		subtitleLineHeight = x;
 		return frame;
-	}
+	};
 
 	frame.subtitleStyle = function(x){
 		if(x == undefined) return subtitleStyle;
 		subtitleStyle = x;
 		return frame;
-	}
+	};
 
 	frame.subtitleX = function(x){
 		if(x == undefined) return subtitlePosition.x;
 		subtitlePosition.x = x;
 		return frame;
-	}
+	};
 
 	frame.subtitleY = function(x){
 		if(x == undefined) return subtitlePosition.y;
 		subtitlePosition.y = x;
 		return frame;
-	}
+	};
 
 	frame.title = function(x){
 		if(x == undefined) return title;
@@ -233,51 +233,51 @@ function chartFrame(){
 		if(x == undefined) return titleStyle;
 		titleStyle = x;
 		return frame;
-	}
+	};
 
 	frame.titleLineHeight = function(x){
 		if(x == undefined) return titleLineHeight;
 		titleLineHeight = x;
 		return frame;
-	}
+	};
 	
 	frame.titleX = function(x){
 		if(x == undefined) return titlePosition.x;
 		titlePosition.x = x;
 		return frame;
-	}
+	};
 
 	frame.titleY = function(x){
 		if(x == undefined) return titlePosition.y;
 		titlePosition.y = x;
 		return frame;
-	}
+	};
 
 	frame.units = function(x){
 		if(x == undefined) return units
 		units = x; 
 		return frame;
-	}
+	};
 
 	frame.watermark = function(x){
 		if(x == undefined) return watermarkMarkup;
 		watermarkLocation = '';
 		watermarkMarkup = x;
 		return frame;
-	}
+	};
 
 	frame.watermarkSize = function(x){
 		if(x == undefined) return watermarkSize;
 		watermarkSize = x;
 		return frame;
-	}
+	};
 
 	frame.watermarkLocation = function(x){
 		if(x == undefined) return watermarkLocation;
 		watermarkMarkup = '';
 		watermarkLocation = x;
 		return frame;
-	}
+	};
 
 	frame.width = function(x){
 		if(!x) return graphicWidth;
