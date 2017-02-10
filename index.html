@@ -61,6 +61,8 @@
 
 console.log('gChartframe ' + gChartframe.version);
 
+//first, create and configure the frames...
+
 var webframe = gChartframe.webFrame
 	.title('Web customise the title')
 	.source('Note: use the <a href="https://en.wikipedia.org/wiki/Vertical_bar">&ldquo;vertical bar&rdquo;</a> (aka &ldquo;pipe&rdquo;) character|to add linebreaks.'); //add a `|` character to insert a line break
@@ -87,7 +89,7 @@ d3.select('.social-example svg')
 d3.select('.video-example svg')
 	.call(videoframe);
 
-
+// then add the visualisations to the plot area (in this case some place-holder rectangles)
 
 printframe.plot()
 	.append('rect') //a rectangle to illustrate the plot area
@@ -109,7 +111,6 @@ socialframe.plot()
 	.attr('height',socialframe.dimension().height)
 	.attr('fill','#FFF')
 	.attr('fill-opacity',0.2);
-
 
 videoframe.plot()
 	.append('rect') //a rectangle to illustratet he plot area
