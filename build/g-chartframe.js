@@ -380,9 +380,9 @@
 		.width(560)
 		.height(750)
 		.watermark(watermarkPathLight)
-		.margin({left:50, right:40, bottom:75, top:100})
+		.margin({left:50, right:40, bottom:80, top:160})
 		.titleX(50)
-		.titleY(50)
+		.titleY(100)
 		.titleStyle({
 			'font-size': '38px',
 		    'fill': '#ffffff',
@@ -391,7 +391,7 @@
 			'font-family': 'MetricWeb,sans-serif',
 		})
 		.subtitleX(50)
-		.subtitleY(85)
+		.subtitleY(135)
 		.subtitleStyle({
 			'font-size': '28px',
 		    'fill': '#ffffff',
