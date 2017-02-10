@@ -6,6 +6,7 @@ function chartFrame(){
 	let backgroundColour,
 		containerClass='g-chartframe',
 
+		goalposts = false, 	//goalpost is the bit at the top and bottom of pritn charts
 		graphicHeight = 500,
 		graphicWidth = 500, 
 
@@ -38,6 +39,7 @@ function chartFrame(){
 		
 		units = 'px';
 
+
 	const convertFrom = {
 		mm: x => (x * 2.83464480558843),
 		px: x => x,
@@ -67,6 +69,19 @@ function chartFrame(){
 				.attr('height',graphicHeight)
 				.attr('fill',backgroundColour);
 		};
+
+		if(goalposts){
+			p.append('path')
+				.attr('d',`M 0, ${graphicHeight} L ${graphicWidth}, ${graphicHeight}`)
+				.attr('stroke-width', 1)
+				.attr('stroke', goalposts);
+
+			p.append('path')
+				.attr('d',`M 0, 15 L 0, 0 L ${graphicWidth}, 0 L ${graphicWidth}, 15`)
+				.attr('stroke-width', 1)
+				.attr('stroke', goalposts)
+				.attr('fill', 'none');
+		}
 
 		p.append('text')
 			.attr('class', 'chart-title')
@@ -144,6 +159,12 @@ function chartFrame(){
 			height:graphicHeight-(margin.top+margin.bottom)
 		};
 	};
+
+	frame.goalposts = function(x){
+		if(x == undefined) return goalposts;
+		goalposts = x;
+		return frame;
+	}
 
 	frame.height = function(x){
 		if(x == undefined) return graphicHeight;
@@ -316,9 +337,11 @@ const webFrame = chartFrame()
 const printFrame = chartFrame()
 	.containerClass('ft-printgraphic')
 	.backgroundColour('#FFF')
+	.goalposts('#000')
 	.units('mm')
-	.width(112.25)
+	.width(112.25) //these are after the units are set so they are converted from mm to px
 	.height(68)
+	.margin({top:40})
 	.watermark(watermarkPathDark)
 	.titleStyle({
 	    'font-size': '12px',
@@ -326,18 +349,22 @@ const printFrame = chartFrame()
     	'font-weight': '600',
 		'font-family': 'MetricWeb,sans-serif',
 	})
+	.titleLineHeight(13)
 	.subtitleStyle({
 		'fill': '#000000',
 	    'font-size': '9.6px',
 	    'font-weight': 400,
 		'font-family': 'MetricWeb,sans-serif',
 	})
+	.subtitleLineHeight(10)
+	.subtitleY(35)
 	.sourceStyle({ 
 	    'fill': '#000000',
 	    'font-size': '7.2px',
 	    'font-weight': 400,
 		'font-family': 'MetricWeb,sans-serif',
 	})
+	.sourceLineHeight(8)
 	.watermark('');
 
 const socialFrame = chartFrame()
