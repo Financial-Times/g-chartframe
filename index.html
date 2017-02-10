@@ -6,6 +6,20 @@
 	<title>Chart frame for D3</title>
 	<link rel="stylesheet" type="text/css" href="chart-frame.css">
 	<link rel="stylesheet" href="https://build.origami.ft.com/v2/bundles/css?modules=o-fonts@^2.2.0" />
+	<style type="text/css">
+		body{font-family:sans-serif;}
+		h1{
+			font-size: xx-large;
+		}
+		figcaption{
+			background-color: #000;
+			color: #FFF;
+			padding: 3px;
+			margin-bottom: 20px;
+			display: block;
+			width: 50%;
+		}
+	</style>
 	<script src="//d3js.org/d3.v4.min.js" charset="utf-8"></script>
 	<script type="text/javascript" src="build/g-chartframe.js"  charset="utf-8"></script>
 
@@ -14,8 +28,7 @@
 </head>
 <body>
 <article>
-	<h1>FT Chart Frames for D3</h1>
-		<h2>An example</h2>
+	<h1>g-chartframe: FT styled graphic frames for D3</h1>
 		<figure class="web-example">
 			<figcaption>Web example</figcaption>
 			<svg width="550" height="500"></svg>
@@ -60,6 +73,8 @@ var socialframe = gChartframe.socialFrame
 	.title('Social customise the title')
 	.subtitle('typically shorter subtitle');
 
+var videoframe = gChartframe.videoFrame;
+
 d3.select('.web-example svg')
 	.call(webframe);
 
@@ -68,6 +83,11 @@ d3.select('.print-example svg')
 
 d3.select('.social-example svg')
 	.call(socialframe);
+
+d3.select('.video-example svg')
+	.call(videoframe);
+
+
 
 printframe.plot()
 	.append('rect') //a rectangle to illustrate the plot area
@@ -87,6 +107,14 @@ socialframe.plot()
 	.append('rect') //a rectangle to illustratet he plot area
 	.attr('width',socialframe.dimension().width)
 	.attr('height',socialframe.dimension().height)
+	.attr('fill','#FFF')
+	.attr('fill-opacity',0.2);
+
+
+videoframe.plot()
+	.append('rect') //a rectangle to illustratet he plot area
+	.attr('width',videoframe.dimension().width)
+	.attr('height',videoframe.dimension().height)
 	.attr('fill','#FFF')
 	.attr('fill-opacity',0.2);
 

@@ -405,21 +405,36 @@ const socialFrame = chartFrame()
 	});
 
 const videoFrame = chartFrame()
-	.containerClass('ft-videographic')
-	.backgroundColour('#FFAAFF')
-	.width(300)
-	.watermark(watermarkPathLight)
+.backgroundColour('#212121')
+	.width(1920)
+	.height(1080)
+	.watermark('')
+	.margin({left:207, right:207, bottom:150, top:233})
+	.titleX(207)
+	.titleY(130)
 	.titleStyle({
-		'font-size': 25,
+		'font-size': '68px',
+	    'fill': '#ffffff',
+	    'font-weight': 600,
+	    'fill-opacity': 0.9,
 		'font-family': 'MetricWeb,sans-serif',
 	})
+	.subtitleX(207)
+	.subtitleY(200)
 	.subtitleStyle({
-		'font-size':20,
+		'font-size': '48px',
+	    'fill': '#ffffff',
+	    'font-weight': 400,
+	    'fill-opacity': 0.7,
 		'font-family': 'MetricWeb,sans-serif',
 	})
+	.sourceX(207)
+	.sourceLineHeight(38)
 	.sourceStyle({ 
-		'font-size':14,
-		'font-style':'italic',
+		'font-size': '36px',
+	    'fill': '#ffffff',
+	    'font-weight': 400,
+	    'fill-opacity': 0.5,
 		'font-family': 'MetricWeb,sans-serif',
 	});
 
