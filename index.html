@@ -52,25 +52,28 @@ var webframe = gChartframe.webFrame;
 webframe
 	.title('Web customise the title'); //add a `|` character to insert a line break
 
-var printframe = gChartframe.printFrame;
-printframe.title('Print customise the title');
+var socialframe = gChartframe.socialFrame;
+socialframe.title('Social customise the title');
 
 d3.select('.web-example svg')
 	.call(webframe);
 
-d3.select('.print-example svg')
-	.call(printframe);
+d3.select('.social-example svg')
+	.call(socialframe);
 
 webframe.plot()
 	.append('rect')
 	.attr('width',webframe.dimension().width)
 	.attr('height',webframe.dimension().height)
+	.attr('fill','#000')
+	.attr('fill-opacity',0.2);
+
+socialframe.plot()
+	.append('rect')
+	.attr('width',socialframe.dimension().width)
+	.attr('height',socialframe.dimension().height)
 	.attr('fill','#FFF')
-
-console.log('print plot area dimensions\t:', printframe.dimension())
-console.log('web plot area dimensions\t:', webframe.dimension())
-
-// the g.chart-plot element has been created in the correct place by calling 'frame'
+	.attr('fill-opacity',0.2);
 
 
 </script>
