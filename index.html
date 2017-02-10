@@ -49,11 +49,12 @@
 console.log('gChartframe ' + gChartframe.version);
 
 var webframe = gChartframe.webFrame;
-webframe
-	.title('Web customise the title'); //add a `|` character to insert a line break
+webframe.title('Web customise the title')
+	.source('use the &ldquo;pipe&rdquo; character|to add linebreaks'); //add a `|` character to insert a line break
 
 var socialframe = gChartframe.socialFrame;
-socialframe.title('Social customise the title');
+socialframe.title('Social customise the title')
+	.subtitle('typically shorter subtitle');
 
 d3.select('.web-example svg')
 	.call(webframe);
@@ -62,14 +63,14 @@ d3.select('.social-example svg')
 	.call(socialframe);
 
 webframe.plot()
-	.append('rect')
+	.append('rect') //a rectangle to illustrate the plot area
 	.attr('width',webframe.dimension().width)
 	.attr('height',webframe.dimension().height)
 	.attr('fill','#000')
 	.attr('fill-opacity',0.2);
 
 socialframe.plot()
-	.append('rect')
+	.append('rect') //a rectangle to illustratet he plot area
 	.attr('width',socialframe.dimension().width)
 	.attr('height',socialframe.dimension().height)
 	.attr('fill','#FFF')
