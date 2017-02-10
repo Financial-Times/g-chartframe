@@ -40,6 +40,10 @@ d3.select('.custom-chart-container')
 
 ## API Reference
 
+![reference image indicating whcih properties refer to which bits of the chart frame](https://raw.githubusercontent.com/ft-interactive/g-chartframe/master/markup-frame.png)
+
+
+
 *frame.backgroundColour(_[string]_)*
 
 *frame.containerClass(_[string]_)*
