@@ -38,6 +38,11 @@ function chartFrame(){
 		
 		units = 'px';
 
+	const convertFrom = {
+		mm: x => (x * 2.83464480558843),
+		px: x => x,
+	};
+
 	function attributeStyle(parent, style){
 	    Object.keys(style).forEach(function(attribute){
 	        parent.attr(attribute, style[attribute]);
@@ -47,8 +52,8 @@ function chartFrame(){
 	function frame(p){
 		p.attr('class', containerClass);
 		if (p.node().nodeName.toLowerCase() == 'svg') {
-			p.attr('width', graphicWidth+units);
-			p.attr('height', graphicHeight+units);
+			p.attr('width', graphicWidth);
+			p.attr('height', graphicHeight);
 			p.attr('viewBox',['0 0', graphicWidth, graphicHeight].join(' '))
 			p.append('title')
 				.text(title).html(title);
@@ -69,7 +74,7 @@ function chartFrame(){
 				.data(title.split('|'))
 			.enter()
 				.append('tspan')
-			.attr('y',function(d,i){ return (titlePosition.y + (i * titleLineHeight)) + units; })
+			.attr('y',function(d,i){ return (titlePosition.y + (i * titleLineHeight)); })
 			.attr('x',titlePosition.x)
 			.html(function(d){ return d; })
 			.call(attributeStyle, titleStyle);
@@ -80,7 +85,7 @@ function chartFrame(){
 				.data(subtitle.split('|'))
 			.enter()
 				.append('tspan')
-			.attr('y',function(d,i){ return (subtitlePosition.y + (i * subtitleLineHeight)) + units})
+			.attr('y',function(d,i){ return (subtitlePosition.y + (i * subtitleLineHeight)); })
 			.attr('x',subtitlePosition.x)
 			.html(function(d){ return d; })
 			.call(attributeStyle, subtitleStyle);
@@ -93,9 +98,9 @@ function chartFrame(){
 				.append('tspan')
 			.attr('y',function(d,i){ 
 				if(sourcePosition.y){
-					return (sourcePosition.y +(i * sourceLineHeight)) + units;
+					return (sourcePosition.y +(i * sourceLineHeight));
 				}
-				return ((graphicHeight - margin.bottom + sourceLineHeight*1.5) + ((i) * sourceLineHeight)) + units;
+				return ((graphicHeight - margin.bottom + sourceLineHeight*1.5) + ((i) * sourceLineHeight));
 			})
 			.attr('x',sourcePosition.x)
 			.html(function(d){ return d; })
@@ -122,13 +127,13 @@ function chartFrame(){
 //Setters and getters
 
 	frame.backgroundColour = function(x){
-		if(!x) return backgroundColour;
+		if(x == undefined) return backgroundColour;
 		backgroundColour = x;
 		return frame;
 	}
 
 	frame.containerClass = function(x){
-		if(!x) return containerClass;
+		if(x == undefined) return containerClass;
 		containerClass = x;
 		return frame;
 	}
@@ -141,13 +146,13 @@ function chartFrame(){
 	}
 
 	frame.height = function(x){
-		if(!x) return graphicHeight;
-		graphicHeight = x;
+		if(x == undefined) return graphicHeight;
+		graphicHeight = convertFrom[units](x);
 		return frame;
 	};
 
 	frame.margin = function(x){
-		if(!x) return margin;
+		if(x == undefined) return margin;
 		Object.keys(x).forEach(function(k){
 			margin[k] = x[k];
 		});
@@ -159,116 +164,116 @@ function chartFrame(){
 	}
 
 	frame.source = function(x){
-		if(!x) return source;
+		if(x == undefined) return source;
 		source = x;
 		return frame;
 	};
 
 	frame.sourceLineHeight = function(x){
-		if(!x) return sourceLineHeight;
+		if(x == undefined) return sourceLineHeight;
 		sourceLineHeight = x;
 		return frame;
 	}
 
 	frame.sourceStyle = function(x){
-		if(!x) return sourceStyle;
+		if(x == undefined) return sourceStyle;
 		sourceStyle = x;
 		return frame;
 	}
 
 	frame.sourceX = function(x){
-		if(!x) return sourcePosition.x;
+		if(x == undefined) return sourcePosition.x;
 		sourcePosition.x = x;
 		return frame;
 	}
 
 	frame.sourceY = function(x){
-		if(!x) return sourcePosition.y;
+		if(x == undefined) return sourcePosition.y;
 		sourcePosition.y = x;
 		return frame;
 	}
 
 	frame.subtitle = function(x){
-		if(!x) return subtitle;
+		if(x == undefined) return subtitle;
 		subtitle = x;
 		return frame;
 	};
 
 	frame.subtitleLineHeight = function(x){
-		if(!x) return subtitleLineHeight;
+		if(x == undefined) return subtitleLineHeight;
 		subtitleLineHeight = x;
 		return frame;
 	}
 
 	frame.subtitleStyle = function(x){
-		if(!x) return subtitleStyle;
+		if(x == undefined) return subtitleStyle;
 		subtitleStyle = x;
 		return frame;
 	}
 
 	frame.subtitleX = function(x){
-		if(!x) return subtitlePosition.x;
+		if(x == undefined) return subtitlePosition.x;
 		subtitlePosition.x = x;
 		return frame;
 	}
 
 	frame.subtitleY = function(x){
-		if(!x) return subtitlePosition.y;
+		if(x == undefined) return subtitlePosition.y;
 		subtitlePosition.y = x;
 		return frame;
 	}
 
 	frame.title = function(x){
-		if(!x) return title;
+		if(x == undefined) return title;
 		title = x;
 		return frame;
 	};
 
 	frame.titleStyle = function(x){
-		if(!x) return titleStyle;
+		if(x == undefined) return titleStyle;
 		titleStyle = x;
 		return frame;
 	}
 
 	frame.titleLineHeight = function(x){
-		if(!x) return titleLineHeight;
+		if(x == undefined) return titleLineHeight;
 		titleLineHeight = x;
 		return frame;
 	}
 	
 	frame.titleX = function(x){
-		if(!x) return titlePosition.x;
+		if(x == undefined) return titlePosition.x;
 		titlePosition.x = x;
 		return frame;
 	}
 
 	frame.titleY = function(x){
-		if(!x) return titlePosition.y;
+		if(x == undefined) return titlePosition.y;
 		titlePosition.y = x;
 		return frame;
 	}
 
 	frame.units = function(x){
-		if(!x) return units
+		if(x == undefined) return units
 		units = x; 
 		return frame;
 	}
 
 	frame.watermark = function(x){
-		if(!x) return watermarkMarkup;
+		if(x == undefined) return watermarkMarkup;
 		watermarkLocation = '';
 		watermarkMarkup = x;
 		return frame;
 	}
 
 	frame.watermarkSize = function(x){
-		if(!x) return watermarkSize;
+		if(x == undefined) return watermarkSize;
 		watermarkSize = x;
 		return frame;
 	}
 
 	frame.watermarkLocation = function(x){
-		if(!x) return watermarkLocation;
+		if(x == undefined) return watermarkLocation;
 		watermarkMarkup = '';
 		watermarkLocation = x;
 		return frame;
@@ -276,7 +281,7 @@ function chartFrame(){
 
 	frame.width = function(x){
 		if(!x) return graphicWidth;
-		graphicWidth = x;
+		graphicWidth = convertFrom[units](x);
 		return frame;
 	};
 
@@ -310,22 +315,30 @@ const webFrame = chartFrame()
 
 const printFrame = chartFrame()
 	.containerClass('ft-printgraphic')
-	.backgroundColour('#FFAAFF')
-	.width(300)
+	.backgroundColour('#FFF')
+	.units('mm')
+	.width(112.25)
+	.height(68)
 	.watermark(watermarkPathDark)
 	.titleStyle({
-		'font-size': 25,
+	    'font-size': '12px',
+		'fill': '#000000',
+    	'font-weight': '600',
 		'font-family': 'MetricWeb,sans-serif',
 	})
 	.subtitleStyle({
-		'font-size':20,
+		'fill': '#000000',
+	    'font-size': '9.6px',
+	    'font-weight': 400,
 		'font-family': 'MetricWeb,sans-serif',
 	})
 	.sourceStyle({ 
-		'font-size':14,
-		'font-style':'italic',
+	    'fill': '#000000',
+	    'font-size': '7.2px',
+	    'font-weight': 400,
 		'font-family': 'MetricWeb,sans-serif',
-	});
+	})
+	.watermark('');
 
 const socialFrame = chartFrame()
 	.containerClass('ft-socialgraphic')

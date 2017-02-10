@@ -48,19 +48,33 @@
 
 console.log('gChartframe ' + gChartframe.version);
 
-var webframe = gChartframe.webFrame;
-webframe.title('Web customise the title')
-	.source('use the &ldquo;pipe&rdquo; character|to add linebreaks'); //add a `|` character to insert a line break
+var webframe = gChartframe.webFrame
+	.title('Web customise the title')
+	.source('Note: use the <a href="https://en.wikipedia.org/wiki/Vertical_bar">&ldquo;vertical bar&rdquo;</a> (aka &ldquo;pipe&rdquo;) character|to add linebreaks.'); //add a `|` character to insert a line break
 
-var socialframe = gChartframe.socialFrame;
-socialframe.title('Social customise the title')
+var printframe = gChartframe.printFrame
+	.title('A print frame')
+	.subtitle('allows for width and height specified in mm'); //note! print frame allows you to specify width and height in mm which will be converted to 'px'
+
+var socialframe = gChartframe.socialFrame
+	.title('Social customise the title')
 	.subtitle('typically shorter subtitle');
 
 d3.select('.web-example svg')
 	.call(webframe);
 
+d3.select('.print-example svg')
+	.call(printframe);
+
 d3.select('.social-example svg')
 	.call(socialframe);
+
+printframe.plot()
+	.append('rect') //a rectangle to illustrate the plot area
+	.attr('width',printframe.dimension().width)
+	.attr('height',printframe.dimension().height)
+	.attr('fill','#000')
+	.attr('fill-opacity',0.2);
 
 webframe.plot()
 	.append('rect') //a rectangle to illustrate the plot area
