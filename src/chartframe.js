@@ -52,7 +52,9 @@ function chartFrame(){
 	}
 
 	function frame(p){
-		p.attr('class', containerClass);
+		p.attr('class', containerClass)
+			.attr('font-family','MetricWeb,sans-serif');
+			
 		if (p.node().nodeName.toLowerCase() == 'svg') {
 			p.attr('width', graphicWidth);
 			p.attr('height', graphicHeight);
