@@ -1,7 +1,7 @@
 {
-  "name": "ft-chart-frame",
+  "name": "g-chartframe",
   "version": "1.0.0",
-  "description": "Draw the title, subtitle etc. for a D3 graphic without much boiler plate code",
+  "description": "FT styled frames for D3 graphics",
   "license": "ISC",
   "main": "build/g-chartframe.js",
   "keywords": [
@@ -12,16 +12,16 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/ft-interactive/FT-chart-frame.git"
+    "url": "https://github.com/Financial-Times/g-chartframe/"
   },
   "scripts": {
     "watch": "watch 'npm run build' ./src",
     "pretest": "npm run build",
     "build": "mkdir -p build && node -e 'process.stdout.write(\"var version = \\\"\" + require(\"./package.json\").version + \"\\\"; export * from \\\"../index\\\"; export {version};\");' > build/bundle.js && rollup -f umd -n gChartframe -o build/g-chartframe.js -- build/bundle.js",
     "test": "faucet `find test -name '*-test.js'`",
-    "prepublish": "npm run test && uglifyjs build/g-chartframe.js -c -m -o build/g-chartframe.min.js && rm -f build/g-chartframe.zip && zip -j build/g-chartframe.zip -- LICENSE README.md build/g-chartframe.js build/g-chartframe.min.js"
+    "prepublish": "npm run test"
   },
-  "homepage": "http://www.toffeemilkshake.co.uk/d3-chartframe/",
+  "homepage": "https://github.com/Financial-Times/g-chartframe/",
   "author": "tom.g.pearson@gmail.com",
   "devDependencies": {
     "faucet": "0.0",
@@ -31,6 +31,5 @@
     "watch": "^0.17.1"
   },
   "dependencies": {
-    "d3-selection": "^0.7.0"
   }
 }
