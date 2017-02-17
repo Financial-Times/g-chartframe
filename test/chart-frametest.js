@@ -2,7 +2,7 @@ var tape = require("tape");
 
 tape("chartFrame defaults", function(test) {
 	var chartFrame = require("../");
-	console.log('CF' , chartFrame);
+	test.equal(chartFrame.frame().title(), 'Title: A description of the charts purpose');
 
 	test.end();
 });
