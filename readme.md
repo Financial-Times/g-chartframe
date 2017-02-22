@@ -46,17 +46,75 @@ d3.select('.custom-chart-container')
 
 *frame.backgroundColour(_[string]_)*
 
+Set the background colour of the frame. For the single argument you can use the same css color naming schemes that you use in HTML, whether that's color names (that is red), rgb values (that is rgb(255,0,0)), hex values, rgba values, etc. If no argument is specified returns the current value.
+
+```
+myFrame.backgroundColour('#00FF00');
+```
+
 *frame.containerClass(_[string]_)*
+
+Set the class assigned to the containing SVG element. This allows you to select the frame later and to define CSS styles pertaining only to its contents. If no argument is specified returns the current value.
+
+```
+myFrame.containerClass('special-frame');
+```
+would allow you to target the frames contents in your CSS like this...
+```
+.special-frame line{
+	stroke-width:2;
+	stroke:#00FF00;
+	stroke-opacity:0.5;
+	fill:none;
+}
+```
 
 *frame.dimension()*
 
+This returns an object with the `height` and `width` of the suggested plot area. This is useful for determining the range of scales.
+If no argument is specified returns the current value.
+
+```
+const dimension = myFrame.dimension(); // e.g. { width: 200 ,height: 550,}
+const horizontalScale = d3.linearScale()
+	.range([0, dimension.width]);
+
+const verticalScale = d.lineaScale()
+	.range([dimension.height, 0]);
+```
+
 *frame.height(_[number]_)*
+
+Set the height for the frames container (typically be an SVG).
+If no argument is specified returns the current value.
 
 *frame.margin(_[{top:number,left:number,bottom:number,right:number,}]_)*
 
+Set the margins for the frame follwing the <a href="https://bl.ocks.org/mbostock/3019563">D3 margin convention</a>.
+If no argument is specified returns the current value.
+
 *frame.plot()*
 
+This returns a d3 selection of the frames plot group. This is where the graphical elements of the chart can be appended.
+
+```
+const plot = myFrame.plot();
+
+plot.selectAll('rect')
+	.data(theData)
+	.enter()
+	.append('rect')
+	...
+
+```
+
 *frame.source(_[string]_)*
+
+A string describes the source of the graphic's data, line breaks can be added with the `|` character. The property can also be used to add notes, credits etc. 
+
+```
+
+```
 
 *frame.sourceLineHeight(_[number]_)*
 
