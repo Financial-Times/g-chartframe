@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "description": "FT styled frames for D3 graphics",
   "license": "ISC",
-  "main": "index.js",
+  "jsnext:main":"index.js",
+  "main": "build/bundle.js",
   "keywords": [
     "dom",
     "visualization",
