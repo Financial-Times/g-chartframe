@@ -445,7 +445,7 @@
 			'font-family': 'MetricWeb,sans-serif',
 		});
 
-	var version = "0.1.0";
+	var version = "0.1.1";
 
 	exports.version = version;
 	exports.frame = chartFrame;
