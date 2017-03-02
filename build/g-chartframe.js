@@ -22,7 +22,7 @@
 				right:20
 			},
 			plot,
-			
+			rem = 18,
 			subtitle = 'some supporting information, units perhaps',
 			subtitleLineHeight = 20,
 			subtitlePosition = {x:4, y:46},
@@ -40,8 +40,8 @@
 
 			watermarkLocation = 'icons.svg#ft-logo',
 			watermarkMarkup = '',
-			watermarkSize = 58,
 			watermarkOffset = 0,
+			watermarkSize = 58,
 			
 			units = 'px';
 
@@ -192,6 +192,12 @@
 			return plot;
 		};
 
+		frame.rem = function(x){
+			if(x == undefined) return rem;
+			rem = x;
+			return frame;
+		};
+
 		frame.source = function(x){
 			if(x == undefined) return source;
 			source = x;
@@ -295,12 +301,6 @@
 			return frame;
 		};
 
-		frame.watermarkSize = function(x){
-			if(x == undefined) return watermarkSize;
-			watermarkSize = x;
-			return frame;
-		};
-
 		frame.watermarkOffset = function(x){
 			if(x == undefined) return watermarkOffset;
 			watermarkOffset = x;
@@ -311,6 +311,12 @@
 			if(x == undefined) return watermarkLocation;
 			watermarkMarkup = '';
 			watermarkLocation = x;
+			return frame;
+		};
+
+		frame.watermarkSize = function(x){
+			if(x == undefined) return watermarkSize;
+			watermarkSize = x;
 			return frame;
 		};
 
@@ -333,6 +339,7 @@
 		.watermarkSize(80)
 		.watermarkOffset(-28)
 		.margin({bottom:50, right:20})
+		.rem(18)
 		.titleStyle({
 			'font-size':25,
 			'font-family': 'MetricWeb,sans-serif',
@@ -359,6 +366,7 @@
 		.height(68)
 		.margin({top:40, left:5, bottom:27, right:10})
 		.watermark(watermarkPathDark)
+		.rem(12)
 		.titleStyle({
 		  'font-size': '12px',
 			'fill': '#000000',
@@ -369,8 +377,8 @@
 		.titleLineHeight(13)
 		.subtitleStyle({
 			'fill': '#000000',
-		    'font-size': '9.6px',
-		    'font-weight': 400,
+	    'font-size': '9.6px',
+	    'font-weight': 400,
 			'font-family': 'MetricWeb,sans-serif',
 		})
 		.subtitleLineHeight(10)
@@ -393,31 +401,32 @@
 		.watermark(watermarkPathLight)
 		.watermarkOffset(25)
 		.margin({left:50, right:40, bottom:88, top:140})
+		.rem(28)
 		.titleX(50)
 		.titleY(80)
 		.titleStyle({
 			'font-size': '38px',
-		    'fill': '#ffffff',
-		    'font-weight': 600,
-		    'fill-opacity': 0.9,
+		  'fill': '#ffffff',
+		  'font-weight': 600,
+		  'fill-opacity': 0.9,
 			'font-family': 'MetricWeb,sans-serif',
 		})
 		.subtitleX(50)
 		.subtitleY(115)
 		.subtitleStyle({
 			'font-size': '28px',
-		    'fill': '#ffffff',
-		    'font-weight': 400,
-		    'fill-opacity': 0.7,
+	    'fill': '#ffffff',
+	    'font-weight': 400,
+	    'fill-opacity': 0.7,
 			'font-family': 'MetricWeb,sans-serif',
 		})
 		.sourceX(50)
 		.sourceLineHeight(25)
 		.sourceStyle({ 
 			'font-size': '25px',
-		    'fill': '#ffffff',
-		    'font-weight': 400,
-		    'fill-opacity': 0.5,
+	    'fill': '#ffffff',
+	    'font-weight': 400,
+	    'fill-opacity': 0.5,
 			'font-family': 'MetricWeb,sans-serif',
 		});
 
@@ -427,31 +436,32 @@
 		.height(1080)
 		.watermark('')
 		.margin({left:207, right:207, bottom:150, top:233})
+		.rem(48)
 		.titleX(207)
 		.titleY(130)
 		.titleStyle({
 			'font-size': '68px',
-		    'fill': '#ffffff',
-		    'font-weight': 600,
-		    'fill-opacity': 0.9,
+	    'fill': '#ffffff',
+	    'font-weight': 600,
+	    'fill-opacity': 0.9,
 			'font-family': 'MetricWeb,sans-serif',
 		})
 		.subtitleX(207)
 		.subtitleY(200)
 		.subtitleStyle({
 			'font-size': '48px',
-		    'fill': '#ffffff',
-		    'font-weight': 400,
-		    'fill-opacity': 0.7,
+	    'fill': '#ffffff',
+	    'font-weight': 400,
+	    'fill-opacity': 0.7,
 			'font-family': 'MetricWeb,sans-serif',
 		})
 		.sourceX(207)
 		.sourceLineHeight(38)
 		.sourceStyle({ 
 			'font-size': '36px',
-		    'fill': '#ffffff',
-		    'font-weight': 400,
-		    'fill-opacity': 0.5,
+	    'fill': '#ffffff',
+	    'font-weight': 400,
+	    'fill-opacity': 0.5,
 			'font-family': 'MetricWeb,sans-serif',
 		});
 
