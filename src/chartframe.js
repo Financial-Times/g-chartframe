@@ -359,7 +359,7 @@ const printFrame = chartFrame()
 	.units('mm')
 	.width(112.25) //these are after the units are set so they are converted from mm to px
 	.height(68)
-	.margin({top:40, left:5, bottom:27, right:10})
+	.margin({top:40, left:7, bottom:27, right:7})
 	.watermark(watermarkPathDark)
 	.rem(12)
 	.titleStyle({
@@ -368,6 +368,7 @@ const printFrame = chartFrame()
     'font-weight': '600',
 		'font-family': 'MetricWeb,sans-serif',
 	})
+	.titleX(7)
 	.titleY(15)
 	.titleLineHeight(13)
 	.subtitleStyle({
@@ -377,6 +378,7 @@ const printFrame = chartFrame()
 		'font-family': 'MetricWeb,sans-serif',
 	})
 	.subtitleLineHeight(10)
+	.subtitleX(7)
 	.subtitleY(27)
 	.sourceStyle({ 
 	    'fill': '#000000',
@@ -384,7 +386,7 @@ const printFrame = chartFrame()
 	    'font-weight': 400,
 		'font-family': 'MetricWeb,sans-serif',
 	})
-	.sourceX(1)
+	.sourceX(7)
 	.sourceLineHeight(8)
 	.watermark('');
 
@@ -398,7 +400,7 @@ const socialFrame = chartFrame()
 	.margin({left:50, right:40, bottom:88, top:140})
 	.rem(28)
 	.titleX(50)
-	.titleY(80)
+	.titleY(72)
 	.titleStyle({
 		'font-size': '38px',
 	  'fill': '#ffffff',
@@ -407,7 +409,7 @@ const socialFrame = chartFrame()
 		'font-family': 'MetricWeb,sans-serif',
 	})
 	.subtitleX(50)
-	.subtitleY(115)
+	.subtitleY(110)
 	.subtitleStyle({
 		'font-size': '28px',
     'fill': '#ffffff',
