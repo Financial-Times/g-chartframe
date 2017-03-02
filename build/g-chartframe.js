@@ -81,12 +81,12 @@
 			if(goalposts){
 				p.append('path')
 					.attr('d',`M 0, ${graphicHeight} L ${graphicWidth}, ${graphicHeight}`)
-					.attr('stroke-width', 1)
+					.attr('stroke-width', '0.3px')
 					.attr('stroke', goalposts);
 
 				p.append('path')
 					.attr('d',`M 0, 15 L 0, 0 L ${graphicWidth}, 0 L ${graphicWidth}, 15`)
-					.attr('stroke-width', 1)
+					.attr('stroke-width', '0.3px')
 					.attr('stroke', goalposts)
 					.attr('fill', 'none');
 			}
