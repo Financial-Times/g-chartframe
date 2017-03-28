@@ -65,19 +65,19 @@ console.log('gChartframe ' + gChartframe.version);
 
 //first, create and configure the frames...
 
-var webframe = gChartframe.webFrame
+var webframe = gChartframe.webFrame()
 	.title('Web customise the title')
 	.source('Note: use the <a href="https://en.wikipedia.org/wiki/Vertical_bar">&ldquo;vertical bar&rdquo;</a> (aka &ldquo;pipe&rdquo;) character|to add linebreaks.'); //add a `|` character to insert a line break
 
-var printframe = gChartframe.printFrame
+var printframe = gChartframe.printFrame()
 	.title('A print frame')
 	.subtitle('allows for width and height specified in mm'); //note! print frame allows you to specify width and height in mm which will be converted to 'px'
 
-var socialframe = gChartframe.socialFrame
+var socialframe = gChartframe.socialFrame()
 	.title('Social customise the title')
 	.subtitle('typically shorter subtitle');
 
-var videoframe = gChartframe.videoFrame;
+var videoframe = gChartframe.videoFrame();
 
 d3.select('.web-example svg')
 	.call(webframe);
