@@ -326,8 +326,26 @@
 			return frame;
 		};
 
+	  frame.attrs = function(x){
+	    if(x===undefined)return {containerClass,goalposts,graphicHeight,graphicWidth,margin,plot,rem,subtitle,subtitleLineHeight,subtitlePosition,subtitleStyle,source,sourceLineHeight,sourcePosition,sourceStyle,title,titleLineHeight,titlePosition,titleStyle,watermarkLocation,watermarkMarkup,watermarkOffset,watermarkSize,units};
+
+	    Object.keys(x).forEach(function(setterName){
+	      var value = x[setterName];
+	      if(isFunction(frame[setterName])){
+	        frame[setterName](value);
+	      }
+	    });
+	    return frame;
+	  }
+
 		return frame;
 	}
+
+	function isFunction(functionToCheck) {
+	  var getType = {};
+	  return functionToCheck && getType.toString.call(functionToCheck) === '[object Function]';
+	}
+
 
 	//Some Conventional frames
 
@@ -474,7 +492,7 @@
 	    });
 	}
 
-	var version = "0.1.1";
+	var version = "0.2.0";
 
 	exports.version = version;
 	exports.frame = chartFrame;
