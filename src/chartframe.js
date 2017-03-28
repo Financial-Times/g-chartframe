@@ -8,7 +8,7 @@ function chartFrame(){
 
 		goalposts = false, 	//goalpost is the bit at the top and bottom of pritn charts
 		graphicHeight = 400,
-		graphicWidth = 500, 
+		graphicWidth = 500,
 
 		margin = {
 			top:60,
@@ -24,7 +24,7 @@ function chartFrame(){
 		subtitleStyle={},
 
 		source = 'Source: research|FT Graphic Tom Pearson',
-		sourceLineHeight = 16,	
+		sourceLineHeight = 16,
 		sourcePosition = {x:4},
 		sourceStyle={},
 
@@ -37,7 +37,7 @@ function chartFrame(){
 		watermarkMarkup = '',
 		watermarkOffset = 0,
 		watermarkSize = 58,
-		
+
 		units = 'px';
 
 
@@ -55,7 +55,7 @@ function chartFrame(){
 	function frame(p){
 		p.attr('class', containerClass)
 			.attr('font-family','MetricWeb,sans-serif');
-			
+
 		if (p.node().nodeName.toLowerCase() == 'svg') {
 			p.attr('width', graphicWidth);
 			p.attr('height', graphicHeight);
@@ -114,7 +114,7 @@ function chartFrame(){
 				.data(source.split('|'))
 			.enter()
 				.append('tspan')
-			.attr('y',function(d,i){ 
+			.attr('y',function(d,i){
 				if(sourcePosition.y){
 					return (sourcePosition.y +(i * sourceLineHeight));
 				}
@@ -134,8 +134,8 @@ function chartFrame(){
 		}
 
 		mark.attr('class','chart-watermark')
-			.attr('transform','translate('+(graphicWidth-watermarkSize -watermarkOffset)+','+(graphicHeight-watermarkSize-watermarkOffset)+') scale('+watermarkSize/100+') ');	
-		
+			.attr('transform','translate('+(graphicWidth-watermarkSize -watermarkOffset)+','+(graphicHeight-watermarkSize-watermarkOffset)+') scale('+watermarkSize/100+') ');
+
 		plot = p.append('g')
 			.attr('class','chart-plot')
 			.attr('transform','translate(' + margin.left + ',' + margin.top + ')');
@@ -270,7 +270,7 @@ function chartFrame(){
 		titleLineHeight = x;
 		return frame;
 	};
-	
+
 	frame.titleX = function(x){
 		if(x == undefined) return titlePosition.x;
 		titlePosition.x = x;
@@ -285,7 +285,7 @@ function chartFrame(){
 
 	frame.units = function(x){
 		if(x == undefined) return units
-		units = x; 
+		units = x;
 		return frame;
 	};
 
@@ -326,141 +326,148 @@ function chartFrame(){
 
 //Some Conventional frames
 
-const webFrame = chartFrame()
-	.containerClass('ft-webgraphic')
-	.backgroundColour('#FFF1E0')
-	.width(600)
-	.watermark(watermarkPathDark)
-	.watermarkSize(80)
-	.watermarkOffset(-28)
-	.margin({bottom:50, right:20})
-	.rem(18)
-	.titleStyle({
-		'font-size':25,
-		'font-family': 'MetricWeb,sans-serif',
-		'fill':'#43423e',
-	})
-	.titleLineHeight(20)
-	.subtitleStyle({
-		'font-size':18,
-		'font-family': 'MetricWeb,sans-serif',
-		'fill': '#74736c',
-	})
-	.sourceStyle({ 
-	  'font-size': '14px',
-		'font-family': 'MetricWeb,sans-serif',
-		'fill': '#74736c'
-	});
+function webFrame(){
+   return chartFrame()
+    .containerClass('ft-webgraphic')
+    .backgroundColour('#FFF1E0')
+    .width(600)
+    .watermark(watermarkPathDark)
+    .watermarkSize(80)
+    .watermarkOffset(-28)
+    .margin({bottom:50, right:20})
+    .rem(18)
+    .titleStyle({
+      'font-size':25,
+      'font-family': 'MetricWeb,sans-serif',
+      'fill':'#43423e',
+    })
+    .titleLineHeight(20)
+    .subtitleStyle({
+      'font-size':18,
+      'font-family': 'MetricWeb,sans-serif',
+      'fill': '#74736c',
+    })
+    .sourceStyle({
+      'font-size': '14px',
+      'font-family': 'MetricWeb,sans-serif',
+      'fill': '#74736c'
+    });
+}
+function printFrame(){
+  return chartFrame()
+    .containerClass('ft-printgraphic')
+    .backgroundColour('#FFF')
+    .goalposts('#000')
+    .units('mm')
+    .width(112.25) //these are after the units are set so they are converted from mm to px
+    .height(68)
+    .margin({top:40, left:7, bottom:27, right:7})
+    .watermark(watermarkPathDark)
+    .rem(12)
+    .titleStyle({
+      'font-size': '12px',
+      'fill': '#000000',
+      'font-weight': '600',
+      'font-family': 'MetricWeb,sans-serif',
+    })
+    .titleX(7)
+    .titleY(15)
+    .titleLineHeight(13)
+    .subtitleStyle({
+      'fill': '#000000',
+      'font-size': '9.6px',
+      'font-weight': 400,
+      'font-family': 'MetricWeb,sans-serif',
+    })
+    .subtitleLineHeight(10)
+    .subtitleX(7)
+    .subtitleY(27)
+    .sourceStyle({
+        'fill': '#000000',
+        'font-size': '7.2px',
+        'font-weight': 400,
+      'font-family': 'MetricWeb,sans-serif',
+    })
+    .sourceX(7)
+    .sourceLineHeight(8)
+    .watermark('');
+  }
 
-const printFrame = chartFrame()
-	.containerClass('ft-printgraphic')
-	.backgroundColour('#FFF')
-	.goalposts('#000')
-	.units('mm')
-	.width(112.25) //these are after the units are set so they are converted from mm to px
-	.height(68)
-	.margin({top:40, left:7, bottom:27, right:7})
-	.watermark(watermarkPathDark)
-	.rem(12)
-	.titleStyle({
-	  'font-size': '12px',
-		'fill': '#000000',
-    'font-weight': '600',
-		'font-family': 'MetricWeb,sans-serif',
-	})
-	.titleX(7)
-	.titleY(15)
-	.titleLineHeight(13)
-	.subtitleStyle({
-		'fill': '#000000',
-    'font-size': '9.6px',
-    'font-weight': 400,
-		'font-family': 'MetricWeb,sans-serif',
-	})
-	.subtitleLineHeight(10)
-	.subtitleX(7)
-	.subtitleY(27)
-	.sourceStyle({ 
-	    'fill': '#000000',
-	    'font-size': '7.2px',
-	    'font-weight': 400,
-		'font-family': 'MetricWeb,sans-serif',
-	})
-	.sourceX(7)
-	.sourceLineHeight(8)
-	.watermark('');
+function socialFrame(){
+  return chartFrame()
+    .containerClass('ft-socialgraphic')
+    .backgroundColour('#212121')
+    .width(560)
+    .height(750)
+    .watermark(watermarkPathLight)
+    .watermarkOffset(25)
+    .margin({left:50, right:40, bottom:88, top:140})
+    .rem(28)
+    .titleX(50)
+    .titleY(72)
+    .titleStyle({
+      'font-size': '38px',
+      'fill': '#ffffff',
+      'font-weight': 600,
+      'fill-opacity': 0.9,
+      'font-family': 'MetricWeb,sans-serif',
+    })
+    .subtitleX(50)
+    .subtitleY(110)
+    .subtitleStyle({
+      'font-size': '28px',
+      'fill': '#ffffff',
+      'font-weight': 400,
+      'fill-opacity': 0.7,
+      'font-family': 'MetricWeb,sans-serif',
+    })
+    .sourceX(50)
+    .sourceLineHeight(25)
+    .sourceStyle({
+      'font-size': '25px',
+      'fill': '#ffffff',
+      'font-weight': 400,
+      'fill-opacity': 0.5,
+      'font-family': 'MetricWeb,sans-serif',
+    });
+}
 
-const socialFrame = chartFrame()
-	.containerClass('ft-socialgraphic')
-	.backgroundColour('#212121')
-	.width(560)
-	.height(750)
-	.watermark(watermarkPathLight)
-	.watermarkOffset(25)
-	.margin({left:50, right:40, bottom:88, top:140})
-	.rem(28)
-	.titleX(50)
-	.titleY(72)
-	.titleStyle({
-		'font-size': '38px',
-	  'fill': '#ffffff',
-	  'font-weight': 600,
-	  'fill-opacity': 0.9,
-		'font-family': 'MetricWeb,sans-serif',
-	})
-	.subtitleX(50)
-	.subtitleY(110)
-	.subtitleStyle({
-		'font-size': '28px',
-    'fill': '#ffffff',
-    'font-weight': 400,
-    'fill-opacity': 0.7,
-		'font-family': 'MetricWeb,sans-serif',
-	})
-	.sourceX(50)
-	.sourceLineHeight(25)
-	.sourceStyle({ 
-		'font-size': '25px',
-    'fill': '#ffffff',
-    'font-weight': 400,
-    'fill-opacity': 0.5,
-		'font-family': 'MetricWeb,sans-serif',
-	});
-
-const videoFrame = chartFrame()
-.backgroundColour('#212121')
-	.width(1920)
-	.height(1080)
-	.watermark('')
-	.margin({left:207, right:207, bottom:150, top:233})
-	.rem(48)
-	.titleX(207)
-	.titleY(130)
-	.titleStyle({
-		'font-size': '68px',
-    'fill': '#ffffff',
-    'font-weight': 600,
-    'fill-opacity': 0.9,
-		'font-family': 'MetricWeb,sans-serif',
-	})
-	.subtitleX(207)
-	.subtitleY(200)
-	.subtitleStyle({
-		'font-size': '48px',
-    'fill': '#ffffff',
-    'font-weight': 400,
-    'fill-opacity': 0.7,
-		'font-family': 'MetricWeb,sans-serif',
-	})
-	.sourceX(207)
-	.sourceLineHeight(38)
-	.sourceStyle({ 
-		'font-size': '36px',
-    'fill': '#ffffff',
-    'font-weight': 400,
-    'fill-opacity': 0.5,
-		'font-family': 'MetricWeb,sans-serif',
-	});
+function videoFrame(){
+  return chartFrame()
+  .backgroundColour('#212121')
+    .width(1920)
+    .height(1080)
+    .watermark('')
+    .margin({left:207, right:207, bottom:150, top:233})
+    .rem(48)
+    .titleX(207)
+    .titleY(130)
+    .titleStyle({
+      'font-size': '68px',
+      'fill': '#ffffff',
+      'font-weight': 600,
+      'fill-opacity': 0.9,
+      'font-family': 'MetricWeb,sans-serif',
+    })
+    .subtitleX(207)
+    .subtitleY(200)
+    .subtitleStyle({
+      'font-size': '48px',
+      'fill': '#ffffff',
+      'font-weight': 400,
+      'fill-opacity': 0.7,
+      'font-family': 'MetricWeb,sans-serif',
+    })
+    .sourceX(207)
+    .sourceLineHeight(38)
+    .sourceStyle({
+      'font-size': '36px',
+      'fill': '#ffffff',
+      'font-weight': 400,
+      'fill-opacity': 0.5,
+      'font-family': 'MetricWeb,sans-serif',
+    });
+}
 
 export { chartFrame as frame };
 export { webFrame as webFrame };

@@ -1,6 +1,6 @@
 {
   "name": "g-chartframe",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "FT styled frames for D3 graphics",
   "license": "ISC",
   "jsnext:main":"index.js",
