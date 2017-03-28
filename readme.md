@@ -204,4 +204,4 @@ If no argument is specified returns the current value.
 
 --
 
-Copyright (c) 2015, 2016, 2017 Fiancial Times
+Copyright (c) 2015, 2016, 2017 Financial Times
