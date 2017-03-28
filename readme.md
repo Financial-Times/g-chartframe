@@ -12,8 +12,8 @@ If you use NPM, `npm install @financial-times/g-chartframe`(er... not yet!). Oth
 
 Preconfigured frames...
 
-```
-const webframe = gChartframe.webFrame;
+```js
+const webframe = gChartframe.webFrame();
 webframe.title('A simple chart')
 	.subtitle('showing some interesting things')
 	.source('source: FT research|FT Graphic Tom Pearson');
@@ -27,7 +27,7 @@ webframe.plot()
 ```
 
 Configure your own frame...
-```
+```js
 const myFrame = gChartframe.frame()
 	.width(350)
 	.height(350)
@@ -40,6 +40,17 @@ d3.select('.custom-chart-container')
 	.call(myFrame);
 ```
 
+You may also set frame properties en-masse via the `attrs` function. Though note: if you're relying on setting units you should do so before calling `attrs` as you can't guarantee in which order the setters will be called. 
+
+```js
+myFrame.attrs({
+  title:'A different title',
+  subtitle:'A different subtitle',
+  width:600,
+  ...etc
+})
+```
+
 ## API Reference
 
 ![reference image indicating whcih properties refer to which bits of the chart frame](https://raw.githubusercontent.com/ft-interactive/g-chartframe/master/markup-frame.png)
@@ -50,7 +61,7 @@ d3.select('.custom-chart-container')
 
 Set the background colour of the frame. For the single argument you can use the same css color naming schemes that you use in HTML, whether that's color names (that is red), rgb values (that is rgb(255,0,0)), hex values, rgba values, etc. If no argument is specified returns the current value.
 
-```
+```js
 myFrame.backgroundColour('#00FF00');
 ```
 
@@ -58,11 +69,11 @@ myFrame.backgroundColour('#00FF00');
 
 Set the class assigned to the containing SVG element. This allows you to select the frame later and to define CSS styles pertaining only to its contents. If no argument is specified returns the current value.
 
-```
+```js
 myFrame.containerClass('special-frame');
 ```
 would allow you to target the frames contents in your CSS like this...
-```
+```js
 .special-frame line{
 	stroke-width:2;
 	stroke:#00FF00;
@@ -76,7 +87,7 @@ would allow you to target the frames contents in your CSS like this...
 This returns an object with the `height` and `width` of the suggested plot area. This is useful for determining the range of scales.
 If no argument is specified returns the current value.
 
-```
+```js
 const dimension = myFrame.dimension(); // e.g. { width: 200 ,height: 550,}
 const horizontalScale = d3.linearScale()
 	.range([0, dimension.width]);
@@ -99,7 +110,7 @@ If no argument is specified returns the current value.
 
 This returns a d3 selection of the frames plot group. This is where the graphical elements of the chart can be appended.
 
-```
+```js
 const plot = myFrame.plot();
 
 plot.selectAll('rect')
@@ -114,7 +125,7 @@ plot.selectAll('rect')
 
 A string describes the source of the graphic's data, line breaks can be added with the `|` character. The property can also be used to add notes, credits etc. If no argument is specified returns the current value.
 
-```
+```js
 myFrame.source('Source:FT Research|Graphic: Pam Ampersand');
 
 ```
@@ -127,7 +138,7 @@ Set the line height for the graphic's source text. If no argument is specified r
 
 Set the appearnce of the graphic's source text. A series of attributes are added to the text element with the specified values. If no argument is specified returns the current value.
 
-```
+```js
 myFrame.sourceStyle({
 	'font-family':'Sans-serif, Helvetica',
 	'fill':'#00FF00';
