@@ -1,6 +1,6 @@
 # g-chartframe
 _0.2.0 Relese notes: The default frame types are now made by functions rather than provided as constants._
-_allow for bulk settgin of attributes_
+_allow for bulk setting of attributes_
 
 
 For making the boring but necessary stuff on D3 charts in as painless a fashion as possible.
