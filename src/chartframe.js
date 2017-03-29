@@ -215,7 +215,7 @@ function chartFrame(configObject){
       .attr('class','chart-plot')
       .attr('transform','translate(' + margin.left + ',' + margin.top + ')');
 
-    plot = p.selectAll('g.chart-plot')
+    plot = p.selectAll('g.chart-plot');
 
     plot.transition(transition)
 			.attr('transform','translate(' + margin.left + ',' + margin.top + ')');
