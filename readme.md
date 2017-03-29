@@ -56,33 +56,47 @@ myFrame.attrs({
 
 ![reference image indicating whcih properties refer to which bits of the chart frame](https://raw.githubusercontent.com/ft-interactive/g-chartframe/master/markup-frame.png)
 
-<a id="frame-factory" href="#frame-factory">#</a>**frame()**
+<a id="frame-factory" href="#frame-factory">#</a>**frame(_[configuration]_)**
 
 Make a new chart frame drawer:
 ```js
 const myFrame = gChartframe.frame();
 ```
 
+_configuration_ is an optional parameter which sets the initial properties of the frame via the setter functions as defined below.
+
+e.g. 
+```js
+const config = {
+  title:'The fastest cars in the world',
+  subtitle:'acceleration m/s<sup>2</sup>',
+  source:'Guiness book of records,
+}
+
+const myFrame = gChartframe.frame(config);
+``` 
+
 Most of the time you won't want to use this though but instead use one of the pre configured chartframe factories...
 ```js
-const myFrame = gChartframe.webFrame();
+const myFrame = gChartframe.webFrame(config);
 ```
 or...
 ```js
-const myFrame = gChartframe.printFrame();
+const myFrame = gChartframe.printFrame(config);
 ```
 or...
 ```js
-const myFrame = gChartframe.socialFrame();
+const myFrame = gChartframe.socialFrame(config);
 ```
 or...
 ```js
-const myFrame = gChartframe.videoFrame();
+const myFrame = gChartframe.videoFrame(config);
 ```
-these provide appropriate positioning, size and fonts for the specified use within the FT (web, print, social media or video) 
+these provide appropriate positioning, size and fonts for the specified use within the FT (web, print, social media or video)
+
 <a id="frame-attrs" href="#frame-attrs">#</a>frame.**attrs(_object_)**
 
-A convenience setter: Set as many values as you choose by passing a big object to the frame (see above)
+A convenience setter: Set as many values as you choose by passing a big object to the frame (see above).
 
 <a id="frame-backgroundColour" href="#frame-backgroundColour">#</a>frame.**backgroundColour(_string_)**
 
