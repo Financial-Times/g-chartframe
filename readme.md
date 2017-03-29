@@ -79,10 +79,10 @@ or...
 ```js
 const myFrame = gChartframe.videoFrame();
 ```
-these provide appropriate positioning, size and and fonts for the specified use within the FT (web, social media, video or print) 
+these provide appropriate positioning, size and fonts for the specified use within the FT (web, print, social media or video) 
 <a id="frame-attrs" href="#frame-attrs">#</a>frame.**attrs(_object_)**
 
-A convineience setter. Set as many values as you choose by passing a big object to the frame (see above)
+A convenience setter: Set as many values as you choose by passing a big object to the frame (see above)
 
 <a id="frame-backgroundColour" href="#frame-backgroundColour">#</a>frame.**backgroundColour(_string_)**
 
