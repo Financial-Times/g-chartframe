@@ -70,7 +70,7 @@ e.g.
 const config = {
   title:'The fastest cars in the world',
   subtitle:'acceleration m/s<sup>2</sup>',
-  source:'Guiness book of records,
+  source:'Guiness book of records',
 }
 
 const myFrame = gChartframe.frame(config);
@@ -114,7 +114,7 @@ Set the class assigned to the containing SVG element. This allows you to select 
 myFrame.containerClass('special-frame');
 ```
 would allow you to target the frames contents in your CSS like this...
-```js
+```css
 .special-frame line{
 	stroke-width:2;
 	stroke:#00FF00;
