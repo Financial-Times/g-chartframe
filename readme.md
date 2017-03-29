@@ -56,7 +56,33 @@ myFrame.attrs({
 
 ![reference image indicating whcih properties refer to which bits of the chart frame](https://raw.githubusercontent.com/ft-interactive/g-chartframe/master/markup-frame.png)
 
+<a id="frame-factory" href="#frame-factory">#</a>**frame()**
 
+Make a new chart frame drawer:
+```js
+const myFrame = gChartframe.frame();
+```
+
+Most of the time you won't want to use this though but instead use one of the pre configured chartframe factories...
+```js
+const myFrame = gChartframe.webFrame();
+```
+or...
+```js
+const myFrame = gChartframe.printFrame();
+```
+or...
+```js
+const myFrame = gChartframe.socialFrame();
+```
+or...
+```js
+const myFrame = gChartframe.videoFrame();
+```
+these provide appropriate positioning, size and and fonts for the specified use within the FT (web, social media, video or print) 
+<a id="frame-attrs" href="#frame-attrs">#</a>frame.**attrs(_object_)**
+
+A convineience setter. Set as many values as you choose by passing a big object to the frame (see above)
 
 <a id="frame-backgroundColour" href="#frame-backgroundColour">#</a>frame.**backgroundColour(_string_)**
 
