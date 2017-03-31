@@ -220,7 +220,7 @@
         .attr('class','chart-plot')
         .attr('transform','translate(' + margin.left + ',' + margin.top + ')');
 
-      plot = p.selectAll('g.chart-plot')
+      plot = p.selectAll('g.chart-plot');
 
       plot.transition(transition)
   			.attr('transform','translate(' + margin.left + ',' + margin.top + ')');
@@ -589,7 +589,7 @@
       return f;
   }
 
-  var version = "0.2.1";
+  var version = "0.3.0";
 
   exports.version = version;
   exports.frame = chartFrame;
