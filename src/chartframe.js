@@ -33,6 +33,8 @@ function chartFrame(configObject){
 		titlePosition = {x:4, y:20},
 		titleStyle={},
 
+    transition = 0.2,
+
 		watermarkLocation = 'icons.svg#ft-logo',
 		watermarkMarkup = '',
 		watermarkOffset = 0,
@@ -53,91 +55,169 @@ function chartFrame(configObject){
 	}
 
 	function frame(p){
+
+//overall graphic properties
 		p.attr('class', containerClass)
 			.attr('font-family','MetricWeb,sans-serif');
 
 		if (p.node().nodeName.toLowerCase() == 'svg') {
-			p.attr('width', graphicWidth);
-			p.attr('height', graphicHeight);
-			p.attr('viewBox',['0 0', graphicWidth, graphicHeight].join(' '))
-			p.append('title')
-				.text(title).html(title);
+			p.transition(transition)
+        .attr('width', graphicWidth)
+        .attr('height', graphicHeight)
+        .attr('viewBox', ['0 0', graphicWidth, graphicHeight].join(' '));
+
+			p.selectAll('title')
+        .data([title])
+        .enter()
+        .append('title');
+
+			p.selectAll('title').text(title);
 		}
 
+//background
 		if(backgroundColour !== undefined){
-			p.append('rect')
-				.attr('x',0)
-				.attr('y',0)
-				.attr('width',graphicWidth)
-				.attr('height',graphicHeight)
-				.attr('fill',backgroundColour);
+      p.selectAll('rect.chart-background')
+        .data([backgroundColour])
+        .enter()
+        .append('rect')
+        .attr('class','chart-background');
+
+      p.selectAll('rect.chart-background')
+        .transition(transition)
+				.attr('x', 0)
+				.attr('y', 0)
+				.attr('width', graphicWidth)
+				.attr('height', graphicHeight)
+				.attr('fill', backgroundColour);
 		};
 
+// 'goalposts' (the bit at the top and the bottom of print charts)
 		if(goalposts){
-			p.append('path')
-				.attr('d',`M 0, ${graphicHeight} L ${graphicWidth}, ${graphicHeight}`)
+      const goalpostPaths = [
+        `M 0, ${graphicHeight} L ${graphicWidth}, ${graphicHeight}`,
+        `M 0, 15 L 0, 0 L ${graphicWidth}, 0 L ${graphicWidth}, 15`,
+      ];
+
+      p.selectAll('path.chart-goalposts')
+        .data(goalpostPaths)
+        .enter()
+        .append('path').attr('class','chart-goalposts');
+
+			p.selectAll('path.chart-goalposts')
+        .transition(transition)
+				.attr('d',d=>d)
 				.attr('stroke-width', 1)
+        .attr('fill','none')
 				.attr('stroke', goalposts);
-
-			p.append('path')
-				.attr('d',`M 0, 15 L 0, 0 L ${graphicWidth}, 0 L ${graphicWidth}, 15`)
-				.attr('stroke-width', 1)
-				.attr('stroke', goalposts)
-				.attr('fill', 'none');
 		}
 
-		p.append('text')
-			.attr('class', 'chart-title')
-			.selectAll('tspan')
-				.data(title.split('|'))
-			.enter()
-				.append('tspan')
-			.attr('y',function(d,i){ return (titlePosition.y + (i * titleLineHeight)); })
-			.attr('x',titlePosition.x)
-			.html(function(d){ return d; })
-			.call(attributeStyle, titleStyle);
+//title
+    p.selectAll('text.chart-title')
+      .data([title])
+      .enter()
+      .append('text')
+      .attr('class', 'chart-title')
+      .call(function(titleText){
+        titleText.selectAll('tspan')
+          .data(title.split('|'))
+          .enter()
+        .append('tspan')
+          .html((d) => d)
+          .attr('y',function(d,i){ return (titlePosition.y + (i * titleLineHeight)); })
+          .attr('x',titlePosition.x)
+          .call(attributeStyle, titleStyle);
+      });
 
-		p.append('text')
-			.attr('class','chart-subtitle')
-			.selectAll('tspan')
-				.data(subtitle.split('|'))
-			.enter()
-				.append('tspan')
-			.attr('y',function(d,i){ return (subtitlePosition.y + (i * subtitleLineHeight)); })
-			.attr('x',subtitlePosition.x)
-			.html(function(d){ return d; })
-			.call(attributeStyle, subtitleStyle);
+    p.selectAll('text.chart-title tspan')
+      .html((d) => d)
+      .transition(transition)
+        .attr('y', function(d,i){ return (titlePosition.y + (i * titleLineHeight)); })
+        .attr('x', titlePosition.x)
+        .call(attributeStyle, titleStyle);
 
-		p.append('text')
-			.attr('class','chart-source')
-			.selectAll('tspan')
-				.data(source.split('|'))
-			.enter()
-				.append('tspan')
-			.attr('y',function(d,i){
-				if(sourcePosition.y){
-					return (sourcePosition.y +(i * sourceLineHeight));
-				}
-				return ((graphicHeight - margin.bottom + sourceLineHeight*1.5) + ((i) * sourceLineHeight));
-			})
-			.attr('x',sourcePosition.x)
-			.html(function(d){ return d; })
-			.call(attributeStyle, sourceStyle);
+//subtitle
+    p.selectAll('text.chart-subtitle')
+      .data([subtitle])
+      .enter()
+      .append('text')
+      .attr('class', 'chart-subtitle')
+      .call(function(subtitleText){
+        subtitleText.selectAll('tspan')
+          .data(subtitle.split('|'))
+          .enter()
+        .append('tspan')
+          .html((d) => d)
+          .attr('y',function(d,i){ return (subtitlePosition.y + (i * subtitleLineHeight)); })
+          .attr('x',subtitlePosition.x)
+          .call(attributeStyle, subtitleStyle);
+      });
 
-		let mark =p.append('g');
+    p.selectAll('text.chart-subtitle tspan')
+      .html((d) => d)
+      .transition(transition)
+        .attr('y', function(d,i){ return (subtitlePosition.y + (i * subtitleLineHeight)); })
+        .attr('x', subtitlePosition.x)
+        .call(attributeStyle, subtitleStyle);
 
-		if(watermarkMarkup!=''){
-			mark.html(watermarkMarkup);
-		}else if(watermarkLocation!=''){
-			mark.append('use')
-				.attr('xlink:href',watermarkLocation);
-		}
+//source
+    p.selectAll('text.chart-source')
+      .data([source])
+      .enter()
+      .append('text')
+      .attr('class', 'chart-source')
+      .call(function(sourceText){
+        sourceText.selectAll('tspan')
+          .data(source.split('|'))
+          .enter()
+        .append('tspan')
+          .html((d) => d)
+          .attr('y', function(d,i){
+            if(sourcePosition.y){
+              return (sourcePosition.y +(i * sourceLineHeight));
+            }
+            return ((graphicHeight - margin.bottom + sourceLineHeight*1.5) + ((i) * sourceLineHeight));
+          })
+          .attr('x',subtitlePosition.x)
+          .call(attributeStyle, subtitleStyle);
+      });
 
-		mark.attr('class','chart-watermark')
-			.attr('transform','translate('+(graphicWidth-watermarkSize -watermarkOffset)+','+(graphicHeight-watermarkSize-watermarkOffset)+') scale('+watermarkSize/100+') ');
+    p.selectAll('text.chart-source tspan')
+      .html((d) => d)
+      .transition(transition)
+        .attr('y', function(d,i){
+          if(sourcePosition.y){
+            return (sourcePosition.y +(i * sourceLineHeight));
+          }
+          return ((graphicHeight - margin.bottom + sourceLineHeight*1.5) + ((i) * sourceLineHeight));
+        })
+        .attr('x', sourcePosition.x)
+        .call(attributeStyle, sourceStyle);
 
-		plot = p.append('g')
-			.attr('class','chart-plot')
+//watermark
+
+		p.selectAll('g.chart-watermark')
+      .data([0])
+      .enter()
+      .append('g').attr('class','chart-watermark')
+      .html(watermarkMarkup)
+			.attr('transform', 'translate('+(graphicWidth-watermarkSize -watermarkOffset)+','+(graphicHeight-watermarkSize-watermarkOffset)+') scale('+watermarkSize/100+') ');
+
+		p.selectAll('g.chart-watermark')
+      .html(watermarkMarkup)
+      .transition()
+			.attr('transform', 'translate('+(graphicWidth-watermarkSize -watermarkOffset)+','+(graphicHeight-watermarkSize-watermarkOffset)+') scale('+watermarkSize/100+') ');
+
+//plot area (where you put the chart itself)
+		p.selectAll('g.chart-plot')
+      .data([0])
+      .enter()
+      .append('g')
+      .attr('class','chart-plot')
+      .attr('transform','translate(' + margin.left + ',' + margin.top + ')');
+
+    plot = p.selectAll('g.chart-plot');
+
+    plot.transition(transition)
 			.attr('transform','translate(' + margin.left + ',' + margin.top + ')');
 	}
 
