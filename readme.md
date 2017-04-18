@@ -1,13 +1,10 @@
 # g-chartframe
-_0.2.0 Relese notes: The default frame types are now made by functions rather than provided as constants._
-_allow for bulk setting of attributes_
-
 
 For making the boring but necessary stuff on D3 charts in as painless a fashion as possible.
 
 ## Installation
 
-If you use NPM, `npm install g-chartframe`. Otherwise, download the [latest release](https://github.com/ft-interactive/g-chartframe/releases/latest).
+If you use NPM, `npm install g-chartframe`. Otherwise, download the [latest release](https://github.com/ft-interactive/g-chartframe/releases/latest). Or you could include it stright in your page via unpkg (or equiv) https://unpkg.com/g-chartframe@0.3.0/build/g-chartframe.js 
 
 ## Use
 
