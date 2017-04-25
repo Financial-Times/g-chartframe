@@ -1,6 +1,6 @@
 
-const watermarkPathDark = '<path fill="#000" fill-opacity="0.2" id="logo" d="M12,57h11.9v-0.9c-0.8,0-1.4,0-1.9-0.2c-0.5,0-0.8-0.2-1.1-0.5c-0.3-0.2-0.5-0.5-0.6-0.9c-0.2-0.3-0.2-0.9-0.2-1.6v-8.1H22c1.7,0,3,0.3,3.6,0.8c0.8,0.5,1.2,1.4,1.6,3h0.9v-8.8h-0.8c-0.2,0.9-0.5,1.6-0.8,2s-0.8,0.8-1.6,0.9c-0.6,0.2-1.6,0.3-2.8,0.3h-1.9v-8c0-0.5,0.2-0.8,0.3-1.1c0.2-0.2,0.5-0.3,1.1-0.3h3.8c1.3,0,2.2,0,3,0.2s1.4,0.3,1.9,0.6s0.9,0.6,1.1,1.1c0.3,0.5,0.5,1.1,0.8,1.7h1.1L32.9,32H12v0.9c0.6,0,1.2,0.2,1.6,0.2s0.6,0.2,0.9,0.5c0.3,0.2,0.5,0.5,0.6,0.8s0.2,0.9,0.2,1.6v17c0,0.6,0,1.2-0.2,1.6s-0.3,0.6-0.6,0.9c-0.3,0.2-0.6,0.3-0.9,0.5c-0.3,0-0.9,0.2-1.6,0.2V57z M34.2,37.5h1.2c0.5-1.4,0.9-2.3,1.6-2.8c0.6-0.6,1.7-0.8,3-0.8h3.1v19.2c0,0.6,0,1.2-0.2,1.6s-0.3,0.6-0.6,0.9c-0.3,0.2-0.6,0.3-1.1,0.5c-0.5,0-0.9,0.2-1.7,0.2V57h12v-0.9c-0.8,0-1.4,0-1.7-0.2c-0.5,0-0.8-0.2-1.1-0.5c-0.3-0.2-0.5-0.5-0.6-0.9c-0.2-0.3-0.2-0.9-0.2-1.6V33.9h3.1c1.2,0,2.3,0.3,3,0.8c0.6,0.6,1.2,1.6,1.6,2.8h1.2L56.5,32H34.8L34.2,37.5z"/>';
-const watermarkPathLight = '<path fill="#FFF" fill-opacity="0.2" id="logo" d="M1.502 1.5h97.996v98h-97.996v-98zm46.127 23.686h1.866l-.287-9.762h-36.988v1.675c1.18.063 2.074.151 2.68.263.606.112 1.148.359 1.627.742s.797.909.957 1.579c.159.67.239 1.595.239 2.775v30.193c0 1.18-.08 2.097-.239 2.747-.16.654-.479 1.181-.957 1.562-.479.383-1.037.639-1.675.766-.638.128-1.547.208-2.728.239v1.723h20.958v-1.723c-1.468-.031-2.568-.111-3.302-.239-.734-.127-1.372-.383-1.914-.766-.542-.382-.893-.908-1.053-1.562-.16-.65-.239-1.567-.239-2.747v-14.451h3.302c2.967 0 5.136.454 6.507 1.364 1.372.908 2.281 2.623 2.728 5.144h1.675v-15.647h-1.675c-.287 1.627-.71 2.84-1.268 3.637-.558.798-1.443 1.372-2.656 1.723-1.212.352-2.982.527-5.311.527h-3.302v-14.021c0-.894.16-1.491.479-1.794.319-.304.973-.455 1.962-.455h6.699c2.201 0 3.972.096 5.312.287s2.448.566 3.326 1.125c.877.558 1.539 1.212 1.985 1.961.447.75.877 1.795 1.292 3.135zm42.107 0h2.249l-.909-9.762h-38.805l-.909 9.762h2.249c.702-2.393 1.658-4.075 2.871-5.049 1.212-.973 2.982-1.459 5.312-1.459h5.454v33.974c0 1.18-.079 2.097-.239 2.747-.159.654-.502 1.181-1.028 1.562-.526.383-1.141.639-1.843.766-.701.128-1.738.208-3.109.239v1.723h21.341v-1.723c-1.372-.031-2.417-.111-3.135-.239-.718-.127-1.34-.383-1.866-.766-.526-.382-.869-.908-1.028-1.562-.159-.65-.239-1.567-.239-2.747v-33.974h5.455c2.328 0 4.099.486 5.311 1.459 1.21.973 2.167 2.656 2.868 5.049z"/>';
+var watermarkPathDark = '<path fill="#000" fill-opacity="0.2" id="logo" d="M12,57h11.9v-0.9c-0.8,0-1.4,0-1.9-0.2c-0.5,0-0.8-0.2-1.1-0.5c-0.3-0.2-0.5-0.5-0.6-0.9c-0.2-0.3-0.2-0.9-0.2-1.6v-8.1H22c1.7,0,3,0.3,3.6,0.8c0.8,0.5,1.2,1.4,1.6,3h0.9v-8.8h-0.8c-0.2,0.9-0.5,1.6-0.8,2s-0.8,0.8-1.6,0.9c-0.6,0.2-1.6,0.3-2.8,0.3h-1.9v-8c0-0.5,0.2-0.8,0.3-1.1c0.2-0.2,0.5-0.3,1.1-0.3h3.8c1.3,0,2.2,0,3,0.2s1.4,0.3,1.9,0.6s0.9,0.6,1.1,1.1c0.3,0.5,0.5,1.1,0.8,1.7h1.1L32.9,32H12v0.9c0.6,0,1.2,0.2,1.6,0.2s0.6,0.2,0.9,0.5c0.3,0.2,0.5,0.5,0.6,0.8s0.2,0.9,0.2,1.6v17c0,0.6,0,1.2-0.2,1.6s-0.3,0.6-0.6,0.9c-0.3,0.2-0.6,0.3-0.9,0.5c-0.3,0-0.9,0.2-1.6,0.2V57z M34.2,37.5h1.2c0.5-1.4,0.9-2.3,1.6-2.8c0.6-0.6,1.7-0.8,3-0.8h3.1v19.2c0,0.6,0,1.2-0.2,1.6s-0.3,0.6-0.6,0.9c-0.3,0.2-0.6,0.3-1.1,0.5c-0.5,0-0.9,0.2-1.7,0.2V57h12v-0.9c-0.8,0-1.4,0-1.7-0.2c-0.5,0-0.8-0.2-1.1-0.5c-0.3-0.2-0.5-0.5-0.6-0.9c-0.2-0.3-0.2-0.9-0.2-1.6V33.9h3.1c1.2,0,2.3,0.3,3,0.8c0.6,0.6,1.2,1.6,1.6,2.8h1.2L56.5,32H34.8L34.2,37.5z"/>';
+var watermarkPathLight = '<path fill="#FFF" fill-opacity="0.2" id="logo" d="M1.502 1.5h97.996v98h-97.996v-98zm46.127 23.686h1.866l-.287-9.762h-36.988v1.675c1.18.063 2.074.151 2.68.263.606.112 1.148.359 1.627.742s.797.909.957 1.579c.159.67.239 1.595.239 2.775v30.193c0 1.18-.08 2.097-.239 2.747-.16.654-.479 1.181-.957 1.562-.479.383-1.037.639-1.675.766-.638.128-1.547.208-2.728.239v1.723h20.958v-1.723c-1.468-.031-2.568-.111-3.302-.239-.734-.127-1.372-.383-1.914-.766-.542-.382-.893-.908-1.053-1.562-.16-.65-.239-1.567-.239-2.747v-14.451h3.302c2.967 0 5.136.454 6.507 1.364 1.372.908 2.281 2.623 2.728 5.144h1.675v-15.647h-1.675c-.287 1.627-.71 2.84-1.268 3.637-.558.798-1.443 1.372-2.656 1.723-1.212.352-2.982.527-5.311.527h-3.302v-14.021c0-.894.16-1.491.479-1.794.319-.304.973-.455 1.962-.455h6.699c2.201 0 3.972.096 5.312.287s2.448.566 3.326 1.125c.877.558 1.539 1.212 1.985 1.961.447.75.877 1.795 1.292 3.135zm42.107 0h2.249l-.909-9.762h-38.805l-.909 9.762h2.249c.702-2.393 1.658-4.075 2.871-5.049 1.212-.973 2.982-1.459 5.312-1.459h5.454v33.974c0 1.18-.079 2.097-.239 2.747-.159.654-.502 1.181-1.028 1.562-.526.383-1.141.639-1.843.766-.701.128-1.738.208-3.109.239v1.723h21.341v-1.723c-1.372-.031-2.417-.111-3.135-.239-.718-.127-1.34-.383-1.866-.766-.526-.382-.869-.908-1.028-1.562-.159-.65-.239-1.567-.239-2.747v-33.974h5.455c2.328 0 4.099.486 5.311 1.459 1.21.973 2.167 2.656 2.868 5.049z"/>';
 
 function chartFrame(configObject){
 	let backgroundColour,
@@ -43,9 +43,9 @@ function chartFrame(configObject){
 		units = 'px';
 
 
-	const convertFrom = {
-		mm: x => (x * 2.83464480558843),
-		px: x => x,
+	var convertFrom = {
+		mm: function(x){return (x * 2.83464480558843); },
+		px: function(x){return x; },
 	};
 
 	function attributeStyle(parent, style){
@@ -93,7 +93,7 @@ function chartFrame(configObject){
 
 // 'goalposts' (the bit at the top and the bottom of print charts)
 		if(goalposts){
-      const goalpostPaths = [
+      var goalpostPaths = [
         `M 0, ${graphicHeight} L ${graphicWidth}, ${graphicHeight}`,
         `M 0, 15 L 0, 0 L ${graphicWidth}, 0 L ${graphicWidth}, 15`,
       ];
@@ -105,7 +105,7 @@ function chartFrame(configObject){
 
 			p.selectAll('path.chart-goalposts')
         .transition(transition)
-				.attr('d',d=>d)
+				.attr('d',function(d){ return d; })
 				.attr('stroke-width', 1)
         .attr('fill','none')
 				.attr('stroke', goalposts);
@@ -122,14 +122,14 @@ function chartFrame(configObject){
           .data(title.split('|'))
           .enter()
         .append('tspan')
-          .html((d) => d)
+          .html(function(d){ return d; })
           .attr('y',function(d,i){ return (titlePosition.y + (i * titleLineHeight)); })
           .attr('x',titlePosition.x)
           .call(attributeStyle, titleStyle);
       });
 
     p.selectAll('text.chart-title tspan')
-      .html((d) => d)
+      .html(function(d){ return d; })
       .transition(transition)
         .attr('y', function(d,i){ return (titlePosition.y + (i * titleLineHeight)); })
         .attr('x', titlePosition.x)
@@ -146,14 +146,14 @@ function chartFrame(configObject){
           .data(subtitle.split('|'))
           .enter()
         .append('tspan')
-          .html((d) => d)
+          .html(function(d){ return d; })
           .attr('y',function(d,i){ return (subtitlePosition.y + (i * subtitleLineHeight)); })
           .attr('x',subtitlePosition.x)
           .call(attributeStyle, subtitleStyle);
       });
 
     p.selectAll('text.chart-subtitle tspan')
-      .html((d) => d)
+      .html(function(d){ return d; })
       .transition(transition)
         .attr('y', function(d,i){ return (subtitlePosition.y + (i * subtitleLineHeight)); })
         .attr('x', subtitlePosition.x)
@@ -170,7 +170,7 @@ function chartFrame(configObject){
           .data(source.split('|'))
           .enter()
         .append('tspan')
-          .html((d) => d)
+          .html(function(d){ return d; })
           .attr('y', function(d,i){
             if(sourcePosition.y){
               return (sourcePosition.y +(i * sourceLineHeight));
@@ -182,7 +182,7 @@ function chartFrame(configObject){
       });
 
     p.selectAll('text.chart-source tspan')
-      .html((d) => d)
+      .html(function(d){ return d; })
       .transition(transition)
         .attr('y', function(d,i){
           if(sourcePosition.y){
@@ -402,7 +402,31 @@ function chartFrame(configObject){
 	};
 
   frame.attrs = function(x){
-    if(x===undefined)return {containerClass,goalposts,graphicHeight,graphicWidth,margin,plot,rem,subtitle,subtitleLineHeight,subtitlePosition,subtitleStyle,source,sourceLineHeight,sourcePosition,sourceStyle,title,titleLineHeight,titlePosition,titleStyle,watermarkLocation,watermarkMarkup,watermarkOffset,watermarkSize,units};
+    if(x===undefined)return {
+      containerClass:containerClass,
+      goalposts:goalposts,
+      graphicHeight:graphicHeight,
+      graphicWidth:graphicWidth,
+      margin:margin,
+      plot:plot,
+      rem:rem,
+      subtitle:subtitle,
+      subtitleLineHeight:subtitleLineHeight,
+      subtitlePosition:subtitlePosition,
+      subtitleStyle:subtitleStyle,
+      source:source,
+      sourceLineHeight:sourceLineHeight,
+      sourcePosition:sourcePosition,
+      sourceStyle:sourceStyle,
+      title:title,
+      titleLineHeight:titleLineHeight,
+      titlePosition:titlePosition,
+      titleStyle:titleStyle,
+      watermarkLocation:watermarkLocation,
+      watermarkMarkup:watermarkMarkup,
+      watermarkOffset:watermarkOffset,
+      watermarkSize:watermarkSize,
+      units:units};
 
     Object.keys(x).forEach(function(setterName){
       var value = x[setterName];
