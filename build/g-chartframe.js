@@ -99,8 +99,8 @@
   // 'goalposts' (the bit at the top and the bottom of print charts)
   		if(goalposts){
         var goalpostPaths = [
-          `M 0, ${graphicHeight} L ${graphicWidth}, ${graphicHeight}`,
-          `M 0, 15 L 0, 0 L ${graphicWidth}, 0 L ${graphicWidth}, 15`,
+          'M 0, '+graphicHeight+' L '+graphicWidth+', ' + graphicHeight,
+          'M 0, 15 L 0, 0 L '+graphicWidth+', 0 L '+graphicWidth+', 15',
         ];
 
         p.selectAll('path.chart-goalposts')
@@ -613,7 +613,7 @@
       return f;
   }
 
-  var version = "0.3.7";
+  var version = "0.3.8";
 
   exports.version = version;
   exports.frame = chartFrame;
