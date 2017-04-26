@@ -1,10 +1,10 @@
 {
   "name": "g-chartframe",
-  "version": "0.3.6",
+  "version": "0.3.7",
   "description": "FT styled frames for D3 graphics",
   "license": "ISC",
   "jsnext:main":"index.js",
-  "main": "build/bundle.js",
+  "main": "build/g-chartframe.js",
   "keywords": [
     "dom",
     "visualization",
