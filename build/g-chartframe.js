@@ -65,7 +65,7 @@
   		p.attr('class', containerClass)
   			.attr('font-family','MetricWeb,sans-serif');
 
-  		if (p.node().nodeName.toLowerCase() == 'svg') {
+  		if ((p.node()!= undefined) && (p.node().nodeName.toLowerCase() == 'svg')) {
   			p.transition(transition)
           .attr('width', graphicWidth)
           .attr('height', graphicHeight)
@@ -117,8 +117,9 @@
   		}
 
   //title
+      p.selectAll('text.chart-title').remove();
       p.selectAll('text.chart-title')
-        .data([title])
+        .data([title],identity)
         .enter()
         .append('text')
         .attr('class', 'chart-title')
@@ -134,39 +135,43 @@
         });
 
       p.selectAll('text.chart-title tspan')
-        .html(function(d){ return d; })
+        .html(identity)
         .transition(transition)
           .attr('y', function(d,i){ return (titlePosition.y + (i * titleLineHeight)); })
           .attr('x', titlePosition.x)
           .call(attributeStyle, titleStyle);
 
   //subtitle
+      p.selectAll('text.chart-subtitle').remove();
       p.selectAll('text.chart-subtitle')
-        .data([subtitle])
+        .data([subtitle], identity)
         .enter()
         .append('text')
         .attr('class', 'chart-subtitle')
         .call(function(subtitleText){
           subtitleText.selectAll('tspan')
-            .data(subtitle.split('|'))
+            .data(subtitle.split('|'),identity)
             .enter()
           .append('tspan')
-            .html(function(d){ return d; })
+            .html(identity)
             .attr('y',function(d,i){ return (subtitlePosition.y + (i * subtitleLineHeight)); })
             .attr('x',subtitlePosition.x)
             .call(attributeStyle, subtitleStyle);
+
+          subtitleText.selectAll('tspan').exit().remove();
         });
 
       p.selectAll('text.chart-subtitle tspan')
-        .html(function(d){ return d; })
+        .html(identity)
         .transition(transition)
           .attr('y', function(d,i){ return (subtitlePosition.y + (i * subtitleLineHeight)); })
           .attr('x', subtitlePosition.x)
           .call(attributeStyle, subtitleStyle);
 
   //source
+      p.selectAll('text.chart-source').remove();
       p.selectAll('text.chart-source')
-        .data([source])
+        .data([source],identity)
         .enter()
         .append('text')
         .attr('class', 'chart-source')
@@ -175,14 +180,14 @@
             .data(source.split('|'))
             .enter()
           .append('tspan')
-            .html(function(d){ return d; })
+            .html(identity)
             .attr('y', function(d,i){
               if(sourcePosition.y){
                 return (sourcePosition.y +(i * sourceLineHeight));
               }
               return ((graphicHeight - margin.bottom + sourceLineHeight*1.5) + ((i) * sourceLineHeight));
             })
-            .attr('x',subtitlePosition.x)
+            .attr('x',sourcePosition.x)
             .call(attributeStyle, subtitleStyle);
         });
 
@@ -613,7 +618,9 @@
       return f;
   }
 
-  var version = "0.3.8";
+  function identity(d){ return d; }
+
+  var version = "0.3.9";
 
   exports.version = version;
   exports.frame = chartFrame;
