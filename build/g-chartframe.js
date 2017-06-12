@@ -31,6 +31,7 @@
   		source = 'Source: research|FT Graphic Tom Pearson',
   		sourceLineHeight = 16,
   		sourcePosition = {x:4},
+  		sourcePlotYOffset = 30,
   		sourceStyle={},
 
   		title = 'Title: A description of the charts purpose',
@@ -180,7 +181,7 @@
               if(sourcePosition.y){
                 return (sourcePosition.y +(i * sourceLineHeight));
               }
-              return ((graphicHeight - margin.bottom + sourceLineHeight*1.5) + ((i) * sourceLineHeight));
+              return ((graphicHeight - (margin.bottom - sourcePlotYOffset) + sourceLineHeight*1.5) + ((i) * sourceLineHeight));
             })
             .attr('x',subtitlePosition.x)
             .call(attributeStyle, subtitleStyle);
@@ -193,7 +194,7 @@
             if(sourcePosition.y){
               return (sourcePosition.y +(i * sourceLineHeight));
             }
-            return ((graphicHeight - margin.bottom + sourceLineHeight*1.5) + ((i) * sourceLineHeight));
+            return ((graphicHeight - (margin.bottom - sourcePlotYOffset) + sourceLineHeight*1.5) + ((i) * sourceLineHeight));
           })
           .attr('x', sourcePosition.x)
           .call(attributeStyle, sourceStyle);
@@ -289,6 +290,12 @@
   		sourceLineHeight = x;
   		return frame;
   	};
+
+  	frame.sourcePlotYOffset = function(x){
+      if(x == undefined) return sourcePlotYOffset;
+      sourcePlotYOffset = x;
+      return frame;
+    };
 
   	frame.sourceStyle = function(x){
   		if(x == undefined) return sourceStyle;
@@ -465,7 +472,7 @@
       .watermark(watermarkPathDark)
       .watermarkSize(80)
       .watermarkOffset(-28)
-      .margin({bottom:50, right:20})
+      .margin({bottom:80, right:20})
       .rem(18)
       .titleStyle({
         'font-size':25,
@@ -496,7 +503,7 @@
       .units('mm')
       .width(112.25) //these are after the units are set so they are converted from mm to px
       .height(68)
-      .margin({top:40, left:7, bottom:27, right:7})
+      .margin({top:40, left:7, bottom:35, right:7})
       .watermark(watermarkPathDark)
       .rem(12)
       .titleStyle({
@@ -524,6 +531,7 @@
         'font-family': 'MetricWeb,sans-serif',
       })
       .sourceX(7)
+      .sourcePlotYOffset(10)
       .sourceLineHeight(8)
       .watermark('');
 
@@ -539,7 +547,7 @@
       .height(750)
       .watermark(watermarkPathLight)
       .watermarkOffset(25)
-      .margin({left:50, right:40, bottom:88, top:140})
+      .margin({left:50, right:40, bottom:128, top:140})
       .rem(28)
       .titleX(50)
       .titleY(72)
@@ -579,7 +587,7 @@
       .width(1920)
       .height(1080)
       .watermark('')
-      .margin({left:207, right:207, bottom:150, top:233})
+      .margin({left:207, right:207, bottom:210, top:233})
       .rem(48)
       .titleX(207)
       .titleY(130)
@@ -600,6 +608,7 @@
         'font-family': 'MetricWeb,sans-serif',
       })
       .sourceX(207)
+      .sourcePlotYOffset(50)
       .sourceLineHeight(38)
       .sourceStyle({
         'font-size': '36px',
