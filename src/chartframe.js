@@ -526,7 +526,7 @@ function printFrame(configObject){
       'font-family': 'MetricWeb,sans-serif',
     })
     .sourceX(7)
-    .sourcePlotYOffset(10)
+    .sourcePlotYOffset(18)
     .sourceLineHeight(8)
     .watermark('');
 
@@ -542,7 +542,7 @@ function socialFrame(configObject){
     .height(750)
     .watermark(watermarkPathLight)
     .watermarkOffset(25)
-    .margin({left:50, right:40, bottom:128, top:140})
+    .margin({left:50, right:40, bottom:138, top:140})
     .rem(28)
     .titleX(50)
     .titleY(72)
@@ -603,7 +603,7 @@ function videoFrame(configObject){
       'font-family': 'MetricWeb,sans-serif',
     })
     .sourceX(207)
-    .sourcePlotYOffset(50)
+    .sourcePlotYOffset(60)
     .sourceLineHeight(38)
     .sourceStyle({
       'font-size': '36px',
