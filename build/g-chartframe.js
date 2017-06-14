@@ -19,7 +19,7 @@
 
   		margin = {
   			top:80,
-  			left:10,
+  			left:1,
   			bottom:20,
   			right:20
   		},
