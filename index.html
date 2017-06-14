@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Chart frame for D3</title>
-	<link rel="stylesheet" type="text/css" href="chart-frame.css">
+	<link rel="stylesheet" type="text/css" href="style.css">
 	<link rel="stylesheet" href="https://www.ft.com/__origami/service/build/v2/bundles/css?modules=o-fonts@^2.2.0" />
 	<style type="text/css">
 		body{font-family:sans-serif;}
@@ -31,7 +31,17 @@
 	<h1>g-chartframe: FT styled frames for D3 graphics</h1>
 	<a href="https://github.com/ft-interactive/g-chartframe">Code and documentation on GitHub</a>
 	<hr>
-		<figure class="web-example">
+		<figure class="web-s-example">
+			<figcaption>Web example</figcaption>
+			<svg width="550" height="500"></svg>
+		</figure>
+		
+		<figure class="web-m-example">
+			<figcaption>Web example</figcaption>
+			<svg width="550" height="500"></svg>
+		</figure>
+		
+		<figure class="web-l-example">
 			<figcaption>Web example</figcaption>
 			<svg width="550" height="500"></svg>
 		</figure>
@@ -65,7 +75,15 @@ console.log('gChartframe ' + gChartframe.version);
 
 //first, create and configure the frames...
 
-var webframe = gChartframe.webFrame()
+var webframeS = gChartframe.webFrameS()
+	.title('Web customise <i>the</i> title')
+	.source('Note: use the <a href="https://en.wikipedia.org/wiki/Vertical_bar">&ldquo;vertical bar&rdquo;</a> (aka &ldquo;pipe&rdquo;) character|to add linebreaks.'); //add a `|` character to insert a line break
+
+var webframeM = gChartframe.webFrameM()
+	.title('Web customise <i>the</i> title')
+	.source('Note: use the <a href="https://en.wikipedia.org/wiki/Vertical_bar">&ldquo;vertical bar&rdquo;</a> (aka &ldquo;pipe&rdquo;) character|to add linebreaks.'); //add a `|` character to insert a line break
+
+var webframeL = gChartframe.webFrameL()
 	.title('Web customise <i>the</i> title')
 	.source('Note: use the <a href="https://en.wikipedia.org/wiki/Vertical_bar">&ldquo;vertical bar&rdquo;</a> (aka &ldquo;pipe&rdquo;) character|to add linebreaks.'); //add a `|` character to insert a line break
 
@@ -79,8 +97,14 @@ var socialframe = gChartframe.socialFrame()
 
 var videoframe = gChartframe.videoFrame();
 
-d3.select('.web-example svg')
-	.call(webframe);
+d3.select('.web-example-s svg')
+	.call(webframeS);
+
+d3.select('.web-example-m svg')
+	.call(webframeM);
+
+d3.select('.web-example-l svg')
+	.call(webframeL);
 
 d3.select('.print-example svg')
 	.call(printframe);
@@ -100,10 +124,24 @@ printframe.plot()
 	.attr('fill','#000')
 	.attr('fill-opacity',0.2);
 
-webframe.plot()
+webframeS.plot()
 	.append('rect') //a rectangle to illustrate the plot area
-	.attr('width',webframe.dimension().width)
-	.attr('height',webframe.dimension().height)
+	.attr('width',webframeS.dimension().width)
+	.attr('height',webframeS.dimension().height)
+	.attr('fill','#000')
+	.attr('fill-opacity',0.2);
+
+webframeM.plot()
+	.append('rect') //a rectangle to illustrate the plot area
+	.attr('width',webframeM.dimension().width)
+	.attr('height',webframeM.dimension().height)
+	.attr('fill','#000')
+	.attr('fill-opacity',0.2);
+
+webframeL.plot()
+	.append('rect') //a rectangle to illustrate the plot area
+	.attr('width',webframeL.dimension().width)
+	.attr('height',webframeL.dimension().height)
 	.attr('fill','#000')
 	.attr('fill-opacity',0.2);
 
