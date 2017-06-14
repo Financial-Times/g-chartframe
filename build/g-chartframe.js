@@ -12,12 +12,14 @@
   		containerClass='g-chartframe',
 
   		goalposts = false, 	//goalpost is the bit at the top and bottom of pritn charts
+  		blackbar = false, 	//blackbar the short black bar above web graphics
+
   		graphicHeight = 400,
   		graphicWidth = 500,
 
   		margin = {
-  			top:60,
-  			left:10,
+  			top:80,
+  			left:1,
   			bottom:20,
   			right:20
   		},
@@ -25,18 +27,18 @@
   		rem = 18,
   		subtitle = 'some supporting information, units perhaps',
   		subtitleLineHeight = 20,
-  		subtitlePosition = {x:4, y:46},
+  		subtitlePosition = {x:1, y:59},
   		subtitleStyle={},
 
   		source = 'Source: research|FT Graphic Tom Pearson',
   		sourceLineHeight = 16,
-  		sourcePosition = {x:4},
+  		sourcePosition = {x:1},
   		sourcePlotYOffset = 30,
   		sourceStyle={},
 
   		title = 'Title: A description of the charts purpose',
   		titleLineHeight = 20,
-  		titlePosition = {x:4, y:20},
+  		titlePosition = {x:1, y:34},
   		titleStyle={},
 
       transition = 0.2,
@@ -96,6 +98,14 @@
   				.attr('height', graphicHeight)
   				.attr('fill', backgroundColour);
   		};
+
+  //	'blackbar' (the short black bar above web graphics)
+  		if(blackbar) {
+  			p.append('rect')
+  				.attr('width', 50)
+  				.attr('height', 4)
+  				.style('fill', blackbar)
+  		}
 
   // 'goalposts' (the bit at the top and the bottom of print charts)
   		if(goalposts){
@@ -235,6 +245,12 @@
   		backgroundColour = x;
   		return frame;
   	};
+
+  	frame.blackbar = function(x){
+  		if(x == undefined) return blackbar;
+  		blackbar = x;
+  		return frame;
+  	}
 
   	frame.containerClass = function(x){
   		if(x == undefined) return containerClass;
@@ -416,6 +432,7 @@
     frame.attrs = function(x){
       if(x===undefined)return {
         containerClass:containerClass,
+        blackbar:blackbar,
         goalposts:goalposts,
         graphicHeight:graphicHeight,
         graphicWidth:graphicWidth,
@@ -468,6 +485,7 @@
      var f = chartFrame()
       .containerClass('ft-webgraphic-s')
       .backgroundColour('#FFF1E0')
+      .blackbar('#000')
       .width(350)
       .watermark(watermarkPathDark)
       .watermarkSize(80)
@@ -499,6 +517,7 @@
      var f = chartFrame()
       .containerClass('ft-webgraphic-m')
       .backgroundColour('#FFF1E0')
+      .blackbar('#000')
       .width(700)
       .height(500)
       .watermark(watermarkPathDark)
@@ -533,6 +552,7 @@
       .backgroundColour('#FFF1E0')
       .width(1260)
       .height(600)
+      .blackbar('#000')
       .watermark(watermarkPathDark)
       .watermarkSize(80)
       .watermarkOffset(-28)
@@ -686,7 +706,7 @@
       return f;
   }
 
-  var version = "0.4.3";
+  var version = "0.4.4";
 
   exports.version = version;
   exports.frame = chartFrame;
