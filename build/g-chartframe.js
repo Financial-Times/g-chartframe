@@ -65,7 +65,7 @@
   //overall graphic properties
   		p.attr('class', containerClass)
   			.attr('font-family','MetricWeb,sans-serif');
-
+  			console.log(p)
   		if (p.node().nodeName.toLowerCase() == 'svg') {
   			p.transition(transition)
           .attr('width', graphicWidth)
@@ -464,11 +464,75 @@
 
   //Some Conventional frames
 
-  function webFrame(configObject){
+  function webFrameS(configObject){
      var f = chartFrame()
-      .containerClass('ft-webgraphic')
+      .containerClass('ft-webgraphic-s')
       .backgroundColour('#FFF1E0')
-      .width(600)
+      .width(350)
+      .watermark(watermarkPathDark)
+      .watermarkSize(80)
+      .watermarkOffset(-28)
+      .margin({bottom:80, right:20})
+      .rem(18)
+      .titleStyle({
+        'font-size':25,
+        'font-family': 'MetricWeb,sans-serif',
+        'fill':'#43423e',
+      })
+      .titleLineHeight(20)
+      .subtitleStyle({
+        'font-size':18,
+        'font-family': 'MetricWeb,sans-serif',
+        'fill': '#74736c',
+      })
+      .sourceStyle({
+        'font-size': '14px',
+        'font-family': 'MetricWeb,sans-serif',
+        'fill': '#74736c'
+      });
+
+      if(configObject !== undefined) f.attrs(configObject);
+      return f;
+  }
+
+  function webFrameM(configObject){
+     var f = chartFrame()
+      .containerClass('ft-webgraphic-m')
+      .backgroundColour('#FFF1E0')
+      .width(700)
+      .height(500)
+      .watermark(watermarkPathDark)
+      .watermarkSize(80)
+      .watermarkOffset(-28)
+      .margin({bottom:80, right:20})
+      .rem(18)
+      .titleStyle({
+        'font-size':25,
+        'font-family': 'MetricWeb,sans-serif',
+        'fill':'#43423e',
+      })
+      .titleLineHeight(20)
+      .subtitleStyle({
+        'font-size':18,
+        'font-family': 'MetricWeb,sans-serif',
+        'fill': '#74736c',
+      })
+      .sourceStyle({
+        'font-size': '14px',
+        'font-family': 'MetricWeb,sans-serif',
+        'fill': '#74736c'
+      });
+
+      if(configObject !== undefined) f.attrs(configObject);
+      return f;
+  }
+
+  function webFrameL(configObject){
+     var f = chartFrame()
+      .containerClass('ft-webgraphic-l')
+      .backgroundColour('#FFF1E0')
+      .width(1260)
+      .height(600)
       .watermark(watermarkPathDark)
       .watermarkSize(80)
       .watermarkOffset(-28)
@@ -626,7 +690,9 @@
 
   exports.version = version;
   exports.frame = chartFrame;
-  exports.webFrame = webFrame;
+  exports.webFrameS = webFrameS;
+  exports.webFrameM = webFrameM;
+  exports.webFrameL = webFrameL;
   exports.printFrame = printFrame;
   exports.socialFrame = socialFrame;
   exports.videoFrame = videoFrame;
