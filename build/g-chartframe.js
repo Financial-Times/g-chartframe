@@ -65,7 +65,7 @@
   //overall graphic properties
   		p.attr('class', containerClass)
   			.attr('font-family','MetricWeb,sans-serif');
-  			console.log(p.node().nodeName.toLowerCase())
+  			console.log(p)
   		if (p.node().nodeName.toLowerCase() == 'svg') {
   			p.transition(transition)
           .attr('width', graphicWidth)
@@ -468,7 +468,7 @@
      var f = chartFrame()
       .containerClass('ft-webgraphic-s')
       .backgroundColour('#FFF1E0')
-      .width(600)
+      .width(350)
       .watermark(watermarkPathDark)
       .watermarkSize(80)
       .watermarkOffset(-28)
@@ -499,7 +499,8 @@
      var f = chartFrame()
       .containerClass('ft-webgraphic-m')
       .backgroundColour('#FFF1E0')
-      .width(600)
+      .width(700)
+      .height(500)
       .watermark(watermarkPathDark)
       .watermarkSize(80)
       .watermarkOffset(-28)
@@ -530,7 +531,8 @@
      var f = chartFrame()
       .containerClass('ft-webgraphic-l')
       .backgroundColour('#FFF1E0')
-      .width(600)
+      .width(1260)
+      .height(600)
       .watermark(watermarkPathDark)
       .watermarkSize(80)
       .watermarkOffset(-28)
