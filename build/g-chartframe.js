@@ -19,7 +19,7 @@
   		graphicWidth = 500,
 
   		margin = {
-  			top:80,
+  			top:100,
   			left:1,
   			bottom:20,
   			right:20
@@ -34,7 +34,7 @@
   		source = 'Source: research|FT Graphic Tom Pearson',
   		sourceLineHeight = 16,
   		sourcePosition = {x:1},
-  		sourcePlotYOffset = 36,
+  		sourcePlotYOffset = 42,
   		sourceStyle={},
 
   		title = 'Title: A description of the charts purpose',
@@ -511,6 +511,7 @@
         'font-family': 'MetricWeb,sans-serif',
         'fill': '#66605C',
       })
+      .sourcePlotYOffset(34)
       .sourceStyle({
         'font-size': '12px',
         'font-family': 'MetricWeb,sans-serif',
@@ -544,6 +545,7 @@
         'font-family': 'MetricWeb,sans-serif',
         'fill': '#66605C',
       })
+      .sourcePlotYOffset(34)
       .sourceStyle({
         'font-size': '14px',
         'font-family': 'MetricWeb,sans-serif',
