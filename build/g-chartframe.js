@@ -34,7 +34,7 @@
   		source = 'Source: research|FT Graphic Tom Pearson',
   		sourceLineHeight = 16,
   		sourcePosition = {x:1},
-  		sourcePlotYOffset = 30,
+  		sourcePlotYOffset = 36,
   		sourceStyle={},
 
   		title = 'Title: A description of the charts purpose',
@@ -212,17 +212,17 @@
 
   //watermark
 
-  		p.selectAll('g.chart-watermark')
-        .data([0])
-        .enter()
-        .append('g').attr('class','chart-watermark')
-        .html(watermarkMarkup)
-  			.attr('transform', 'translate('+(graphicWidth-watermarkSize -watermarkOffset)+','+(graphicHeight-watermarkSize-watermarkOffset)+') scale('+watermarkSize/100+') ');
+  		// p.selectAll('g.chart-watermark')
+    //     .data([0])
+    //     .enter()
+    //     .append('g').attr('class','chart-watermark')
+    //     .html(watermarkMarkup)
+  		// 	.attr('transform', 'translate('+(graphicWidth-watermarkSize -watermarkOffset)+','+(graphicHeight-watermarkSize-watermarkOffset)+') scale('+watermarkSize/100+') ');
 
-  		p.selectAll('g.chart-watermark')
-        .html(watermarkMarkup)
-        .transition()
-  			.attr('transform', 'translate('+(graphicWidth-watermarkSize -watermarkOffset)+','+(graphicHeight-watermarkSize-watermarkOffset)+') scale('+watermarkSize/100+') ');
+  		// p.selectAll('g.chart-watermark')
+    //     .html(watermarkMarkup)
+    //     .transition()
+  		// 	.attr('transform', 'translate('+(graphicWidth-watermarkSize -watermarkOffset)+','+(graphicHeight-watermarkSize-watermarkOffset)+') scale('+watermarkSize/100+') ');
 
   //plot area (where you put the chart itself)
   		p.selectAll('g.chart-plot')
@@ -494,27 +494,27 @@
       .containerClass('ft-webgraphic-s')
       .backgroundColour('#FFF1E0')
       .blackbar('#000')
-      .width(350)
+      .width(300)
       .watermark(watermarkPathDark)
       .watermarkSize(80)
       .watermarkOffset(-28)
-      .margin({bottom:80, right:20})
-      .rem(18)
+      .margin({bottom:80, right:20, left:15})
+      .rem(14)
       .titleStyle({
-        'font-size':25,
+        'font-size':24,
         'font-family': 'MetricWeb,sans-serif',
-        'fill':'#43423e',
+        'fill':'#33302E',
       })
       .titleLineHeight(20)
       .subtitleStyle({
-        'font-size':18,
+        'font-size':14,
         'font-family': 'MetricWeb,sans-serif',
-        'fill': '#74736c',
+        'fill': '#66605C',
       })
       .sourceStyle({
-        'font-size': '14px',
+        'font-size': '12px',
         'font-family': 'MetricWeb,sans-serif',
-        'fill': '#74736c'
+        'fill': '#66605C'
       });
 
       if(configObject !== undefined) f.attrs(configObject);
@@ -531,23 +531,23 @@
       .watermark(watermarkPathDark)
       .watermarkSize(80)
       .watermarkOffset(-28)
-      .margin({bottom:80, right:20})
-      .rem(18)
+      .margin({bottom:80, right:20, left:20})
+      .rem(16)
       .titleStyle({
-        'font-size':25,
+        'font-size':24,
         'font-family': 'MetricWeb,sans-serif',
-        'fill':'#43423e',
+        'fill':'#33302E',
       })
       .titleLineHeight(20)
       .subtitleStyle({
-        'font-size':18,
+        'font-size':16,
         'font-family': 'MetricWeb,sans-serif',
-        'fill': '#74736c',
+        'fill': '#66605C',
       })
       .sourceStyle({
         'font-size': '14px',
         'font-family': 'MetricWeb,sans-serif',
-        'fill': '#74736c'
+        'fill': '#66605C'
       });
 
       if(configObject !== undefined) f.attrs(configObject);
@@ -564,23 +564,23 @@
       .watermark(watermarkPathDark)
       .watermarkSize(80)
       .watermarkOffset(-28)
-      .margin({bottom:80, right:20})
+      .margin({bottom:80, right:20, left:20})
       .rem(18)
       .titleStyle({
         'font-size':25,
         'font-family': 'MetricWeb,sans-serif',
-        'fill':'#43423e',
+        'fill':'#33302E',
       })
       .titleLineHeight(20)
       .subtitleStyle({
         'font-size':18,
         'font-family': 'MetricWeb,sans-serif',
-        'fill': '#74736c',
+        'fill': '#66605C',
       })
       .sourceStyle({
-        'font-size': '14px',
+        'font-size': '16px',
         'font-family': 'MetricWeb,sans-serif',
-        'fill': '#74736c'
+        'fill': '#66605C'
       });
 
       if(configObject !== undefined) f.attrs(configObject);
@@ -595,7 +595,7 @@
       .units('mm')
       .width(112.25) //these are after the units are set so they are converted from mm to px
       .height(68)
-      .margin({top:40, left:7, bottom:35, right:7})
+      .margin({top:40, left:15, bottom:35, right:7})
       .watermark(watermarkPathDark)
       .rem(12)
       .titleStyle({
@@ -714,7 +714,7 @@
       return f;
   }
 
-  var version = "0.4.5";
+  var version = "0.4.7";
 
   exports.version = version;
   exports.frame = chartFrame;
