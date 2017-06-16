@@ -540,7 +540,7 @@ function webFrameS(configObject){
       'fill': '#66605C',
     })
     .sourceLineHeight(14)
-    .sourcePlotYOffset(38)
+    .sourcePlotYOffset(34)
     .sourceStyle({
       'font-size': '14px',
       'font-family': 'MetricWeb,sans-serif',
