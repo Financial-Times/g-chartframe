@@ -506,7 +506,7 @@ function webFrameS(configObject){
       'font-family': 'MetricWeb,sans-serif',
       'fill': '#66605C',
     })
-    .sourcePlotYOffset(34)
+    .sourcePlotYOffset(28)
     .sourceStyle({
       'font-size': '12px',
       'font-family': 'MetricWeb,sans-serif',
@@ -540,7 +540,7 @@ function webFrameM(configObject){
       'font-family': 'MetricWeb,sans-serif',
       'fill': '#66605C',
     })
-    .sourcePlotYOffset(34)
+    .sourcePlotYOffset(28)
     .sourceStyle({
       'font-size': '14px',
       'font-family': 'MetricWeb,sans-serif',
