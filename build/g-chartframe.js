@@ -770,7 +770,7 @@
       return f;
   }
 
-  var version = "0.4.11";
+  var version = "0.4.12";
 
   exports.version = version;
   exports.frame = chartFrame;
