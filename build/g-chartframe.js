@@ -545,7 +545,7 @@
         'fill': '#66605C',
       })
       .sourceLineHeight(14)
-      .sourcePlotYOffset(38)
+      .sourcePlotYOffset(34)
       .sourceStyle({
         'font-size': '14px',
         'font-family': 'MetricWeb,sans-serif',
@@ -770,7 +770,7 @@
       return f;
   }
 
-  var version = "0.4.14";
+  var version = "0.4.15";
 
   exports.version = version;
   exports.frame = chartFrame;
