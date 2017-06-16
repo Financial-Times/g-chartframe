@@ -221,7 +221,7 @@ function chartFrame(configObject){
 	      .append('tspan')
 	      	.html(function(d){ return d; })
 	      	.attr('x', sourcePosition.x)
-	      	.attr('y', function(d) { return (graphicHeight - (margin.bottom - sourcePlotYOffset) + sourceLineHeight*2 +sourceText.node().getBBox().height); })
+	      	.attr('y', function(d) { return (graphicHeight - (margin.bottom - sourcePlotYOffset) + (sourceLineHeight * 1.25) +sourceText.node().getBBox().height); })
 	    		.call(attributeStyle, copyrightStyle);
 		}
 
@@ -539,9 +539,10 @@ function webFrameS(configObject){
       'font-family': 'MetricWeb,sans-serif',
       'fill': '#66605C',
     })
+    .sourceLineHeight(14)
     .sourcePlotYOffset(28)
     .sourceStyle({
-      'font-size': '12px',
+      'font-size': '14px',
       'font-family': 'MetricWeb,sans-serif',
       'fill': '#66605C'
     })
@@ -579,6 +580,7 @@ function webFrameM(configObject){
       'font-family': 'MetricWeb,sans-serif',
       'fill': '#66605C',
     })
+    .sourceLineHeight(14)
     .sourcePlotYOffset(28)
     .sourceStyle({
       'font-size': '14px',
