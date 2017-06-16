@@ -38,7 +38,7 @@
   		source = 'Source: research|FT Graphic Tom Pearson',
   		sourceLineHeight = 16,
   		sourcePosition = {x:1},
-  		sourcePlotYOffset = 42,
+  		sourcePlotYOffset = 43,
   		sourceStyle={},
 
   		title = 'Title: A description of the charts purpose',
@@ -531,7 +531,7 @@
       .watermark(watermarkPathDark)
       .watermarkSize(80)
       .watermarkOffset(-28)
-      .margin({bottom:100, right:20, left:15})
+      .margin({bottom:82, right:20, left:15})
       .rem(14)
       .titleStyle({
         'font-size':24,
@@ -545,7 +545,7 @@
         'fill': '#66605C',
       })
       .sourceLineHeight(14)
-      .sourcePlotYOffset(28)
+      .sourcePlotYOffset(32)
       .sourceStyle({
         'font-size': '14px',
         'font-family': 'MetricWeb,sans-serif',
@@ -572,7 +572,7 @@
       .watermark(watermarkPathDark)
       .watermarkSize(80)
       .watermarkOffset(-28)
-      .margin({bottom:100, right:20, left:20})
+      .margin({bottom:86, right:20, left:20})
       .rem(16)
       .titleStyle({
         'font-size':24,
@@ -586,7 +586,7 @@
         'fill': '#66605C',
       })
       .sourceLineHeight(14)
-      .sourcePlotYOffset(28)
+      .sourcePlotYOffset(34)
       .sourceStyle({
         'font-size': '14px',
         'font-family': 'MetricWeb,sans-serif',
@@ -614,7 +614,7 @@
       .watermark(watermarkPathDark)
       .watermarkSize(80)
       .watermarkOffset(-28)
-      .margin({bottom:114, right:20, left:20})
+      .margin({bottom:104, right:20, left:20})
       .rem(18)
       .titleStyle({
         'font-size':28,
