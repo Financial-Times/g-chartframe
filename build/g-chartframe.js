@@ -569,7 +569,7 @@
       .margin({bottom:80, right:20, left:20})
       .rem(18)
       .titleStyle({
-        'font-size':25,
+        'font-size':28,
         'font-family': 'MetricWeb,sans-serif',
         'fill':'#33302E',
       })
