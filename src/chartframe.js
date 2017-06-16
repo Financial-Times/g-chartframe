@@ -280,6 +280,12 @@ function chartFrame(configObject){
 		return frame;
 	};
 
+	frame.copyright = function(x){
+		if(x == undefined) return copyright;
+		copyright = x;
+		return frame;
+	};
+
 	frame.copyrightStyle = function(x){
 		if(x == undefined) return copyrightStyle;
 		copyrightStyle = x;
@@ -467,6 +473,7 @@ function chartFrame(configObject){
     if(x===undefined)return {
     	axisAlign:axisAlign,
       containerClass:containerClass,
+      copyright:copyright,
       copyrightStyle:copyrightStyle,
       blackbar:blackbar,
       goalposts:goalposts,
