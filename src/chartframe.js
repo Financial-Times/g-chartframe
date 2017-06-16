@@ -33,7 +33,7 @@ function chartFrame(configObject){
 		source = 'Source: research|FT Graphic Tom Pearson',
 		sourceLineHeight = 16,
 		sourcePosition = {x:1},
-		sourcePlotYOffset = 43,
+		sourcePlotYOffset = 46,
 		sourceStyle={},
 
 		title = 'Title: A description of the charts purpose',
@@ -540,7 +540,7 @@ function webFrameS(configObject){
       'fill': '#66605C',
     })
     .sourceLineHeight(14)
-    .sourcePlotYOffset(32)
+    .sourcePlotYOffset(38)
     .sourceStyle({
       'font-size': '14px',
       'font-family': 'MetricWeb,sans-serif',
@@ -581,7 +581,7 @@ function webFrameM(configObject){
       'fill': '#66605C',
     })
     .sourceLineHeight(14)
-    .sourcePlotYOffset(34)
+    .sourcePlotYOffset(37)
     .sourceStyle({
       'font-size': '14px',
       'font-family': 'MetricWeb,sans-serif',
