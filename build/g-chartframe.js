@@ -12,9 +12,13 @@
   		backgroundColour,
   		containerClass='g-chartframe',
 
+  		copyright = '© FT',
+  		copyrightStyle = false,
+
   		goalposts = false, 	//goalpost is the bit at the top and bottom of pritn charts
   		blackbar = false, 	//blackbar the short black bar above web graphics
 
+  		fullYear = false,
   		graphicHeight = 400,
   		graphicWidth = 500,
 
@@ -210,6 +214,22 @@
           .attr('x', sourcePosition.x)
           .call(attributeStyle, sourceStyle);
 
+      var sourceText = p.selectAll('text.chart-source');
+      
+      // copyright
+      if(copyrightStyle) {
+      	p.selectAll('text.chart-copyright')
+  	      .data([copyright])
+  	      .enter()
+  	      .append('text')
+  	      .attr('class', 'chart-copyright')
+  	      .append('tspan')
+  	      	.html(function(d){ return d; })
+  	      	.attr('x', sourcePosition.x)
+  	      	.attr('y', function(d) { return (graphicHeight - (margin.bottom - sourcePlotYOffset) + (sourceLineHeight * 1.25) +sourceText.node().getBBox().height); })
+  	    		.call(attributeStyle, copyrightStyle);
+  		}
+
   //watermark
 
   		// p.selectAll('g.chart-watermark')
@@ -265,6 +285,12 @@
   		return frame;
   	};
 
+  	frame.copyrightStyle = function(x){
+  		if(x == undefined) return copyrightStyle;
+  		copyrightStyle = x;
+  		return frame;
+  	};
+
   	frame.dimension = function(){
   		return {
   			width:graphicWidth-(margin.left+margin.right),
@@ -272,6 +298,12 @@
   		};
   	};
 
+  	frame.fullYear = function(x){
+  		if(x == undefined) return fullYear;
+  		fullYear = x;
+  		return frame;
+  	}
+  	
   	frame.goalposts = function(x){
   		if(x == undefined) return goalposts;
   		goalposts = x;
@@ -440,6 +472,7 @@
       if(x===undefined)return {
       	axisAlign:axisAlign,
         containerClass:containerClass,
+        copyrightStyle:copyrightStyle,
         blackbar:blackbar,
         goalposts:goalposts,
         graphicHeight:graphicHeight,
@@ -498,7 +531,7 @@
       .watermark(watermarkPathDark)
       .watermarkSize(80)
       .watermarkOffset(-28)
-      .margin({bottom:80, right:20, left:15})
+      .margin({bottom:100, right:20, left:15})
       .rem(14)
       .titleStyle({
         'font-size':24,
@@ -511,11 +544,18 @@
         'font-family': 'MetricWeb,sans-serif',
         'fill': '#66605C',
       })
+      .sourceLineHeight(14)
       .sourcePlotYOffset(28)
       .sourceStyle({
-        'font-size': '12px',
+        'font-size': '14px',
         'font-family': 'MetricWeb,sans-serif',
         'fill': '#66605C'
+      })
+      .copyrightStyle({
+        'font-size': '12px',
+        'font-style': 'italic',
+        'font-family': 'MetricWeb,sans-serif',
+        'fill': '#66605C',
       });
 
       if(configObject !== undefined) f.attrs(configObject);
@@ -532,7 +572,7 @@
       .watermark(watermarkPathDark)
       .watermarkSize(80)
       .watermarkOffset(-28)
-      .margin({bottom:80, right:20, left:20})
+      .margin({bottom:100, right:20, left:20})
       .rem(16)
       .titleStyle({
         'font-size':24,
@@ -545,11 +585,18 @@
         'font-family': 'MetricWeb,sans-serif',
         'fill': '#66605C',
       })
+      .sourceLineHeight(14)
       .sourcePlotYOffset(28)
       .sourceStyle({
         'font-size': '14px',
         'font-family': 'MetricWeb,sans-serif',
         'fill': '#66605C'
+      })
+      .copyrightStyle({
+        'font-size': '14px',
+        'font-style': 'italic',
+        'font-family': 'MetricWeb,sans-serif',
+        'fill': '#66605C',
       });
 
       if(configObject !== undefined) f.attrs(configObject);
@@ -561,12 +608,13 @@
       .containerClass('ft-webgraphic-l')
       .backgroundColour('#FFF1E0')
       .width(1260)
-      .height(600)
+      .height(700)
       .blackbar('#000')
+      .fullYear(true)
       .watermark(watermarkPathDark)
       .watermarkSize(80)
       .watermarkOffset(-28)
-      .margin({bottom:80, right:20, left:20})
+      .margin({bottom:114, right:20, left:20})
       .rem(18)
       .titleStyle({
         'font-size':28,
@@ -583,6 +631,12 @@
         'font-size': '16px',
         'font-family': 'MetricWeb,sans-serif',
         'fill': '#66605C'
+      })
+      .copyrightStyle({
+        'font-size': '14px',
+        'font-style': 'italic',
+        'font-family': 'MetricWeb,sans-serif',
+        'fill': '#66605C',
       });
 
       if(configObject !== undefined) f.attrs(configObject);
