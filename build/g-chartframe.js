@@ -107,7 +107,7 @@
   //	'blackbar' (the short black bar above web graphics)
   		if(blackbar) {
   			p.append('rect')
-  				.attr('width', 50)
+  				.attr('width', 60)
   				.attr('height', 4)
   				.style('fill', blackbar)
   		}
@@ -777,7 +777,7 @@
       return f;
   }
 
-  var version = "0.4.18";
+  var version = "0.4.19";
 
   exports.version = version;
   exports.frame = chartFrame;
