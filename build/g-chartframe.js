@@ -614,7 +614,7 @@
      var f = chartFrame()
       .containerClass('ft-webgraphic-l')
       .backgroundColour('#FFF1E0')
-      .width(1260)
+      .width(1180)
       .height(700)
       .blackbar('#000')
       .fullYear(true)
