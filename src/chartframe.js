@@ -102,7 +102,7 @@ function chartFrame(configObject){
 //	'blackbar' (the short black bar above web graphics)
 		if(blackbar) {
 			p.append('rect')
-				.attr('width', 50)
+				.attr('width', 60)
 				.attr('height', 4)
 				.style('fill', blackbar)
 		}
