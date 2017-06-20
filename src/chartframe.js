@@ -128,6 +128,7 @@ function chartFrame(configObject){
 		}
 
 //title
+    var titleLineCount = title.split('|').length;
     p.selectAll('text.chart-title')
       .data([title])
       .enter()
@@ -151,6 +152,7 @@ function chartFrame(configObject){
         .attr('x', titlePosition.x)
         .call(attributeStyle, titleStyle);
 
+    var subtitleLineCount = subtitle.split('|').length;
 //subtitle
     p.selectAll('text.chart-subtitle')
       .data([subtitle])
@@ -163,7 +165,14 @@ function chartFrame(configObject){
           .enter()
         .append('tspan')
           .html(function(d){ return d; })
-          .attr('y',function(d,i){ return (subtitlePosition.y + (i * subtitleLineHeight)); })
+          .attr('y',function(d,i){ 
+            if(titleLineCount > 1) {
+              console.log('yes')
+              return (titlePosition.y + (titleLineCount * titleLineHeight) +(subtitleLineHeight*i));
+            } else {
+              return (subtitlePosition.y + (i * subtitleLineHeight)); }
+            })
+            
           .attr('x',subtitlePosition.x)
           .call(attributeStyle, subtitleStyle);
       });
@@ -171,12 +180,17 @@ function chartFrame(configObject){
     p.selectAll('text.chart-subtitle tspan')
       .html(function(d){ return d; })
       .transition(transition)
-        .attr('y', function(d,i){ return (subtitlePosition.y + (i * subtitleLineHeight)); })
+        .attr('y', function(d,i){ 
+          if(titleLineCount > 1) {
+              console.log('yes')
+              return (titlePosition.y + (titleLineCount * titleLineHeight) +(subtitleLineHeight*i));
+            } else {
+              return (subtitlePosition.y + (i * subtitleLineHeight)); }
+        })
         .attr('x', subtitlePosition.x)
         .call(attributeStyle, subtitleStyle);
 
 //source
-    var sourceLineCount = source.split('|').length;
     p.selectAll('text.chart-source')
       .data([source])
       .enter()
@@ -210,8 +224,7 @@ function chartFrame(configObject){
         .attr('x', sourcePosition.x)
         .call(attributeStyle, sourceStyle);
 
-    var sourceTextLength = source.split('|').length;
-    console.log(sourceTextLength)
+    var sourceLineCount = source.split('|').length;
     // copyright
     if(copyrightStyle) {
     	p.selectAll('text.chart-copyright')
@@ -223,8 +236,8 @@ function chartFrame(configObject){
 	      	.html(function(d){ return d; })
 	      	.attr('x', sourcePosition.x)
 	      	.attr('y', function(d) { 
-            if(sourceTextLength > 1) {
-              return (graphicHeight - (margin.bottom - sourcePlotYOffset) + (sourceLineHeight * 1.25) + (sourceTextLength * sourceLineHeight * 1.2));
+            if(sourceLineCount > 1) {
+              return (graphicHeight - (margin.bottom - sourcePlotYOffset) + (sourceLineHeight * 1.25) + (sourceLineCount * sourceLineHeight * 1.2));
             } else {
               return (graphicHeight - (margin.bottom - sourcePlotYOffset) + (sourceLineHeight * 2.5));
             }
@@ -233,20 +246,30 @@ function chartFrame(configObject){
             
           .call(attributeStyle, copyrightStyle);
 		}
-
+    if(containerClass === 'ft-webgraphic-s') {
+      margin.top = (titlePosition.y + (titleLineCount * titleLineHeight) + (subtitleLineCount * subtitleLineHeight) + 24)
+    } else if(containerClass === 'ft-webgraphic-m') {
+      margin.top = (titlePosition.y + (titleLineCount * titleLineHeight) + (subtitleLineCount * subtitleLineHeight) + 23)
+    } else if(containerClass === 'ft-webgraphic-l') {
+      margin.top = (titlePosition.y + (titleLineCount * titleLineHeight) + (subtitleLineCount * subtitleLineHeight) + 17)
+    } else {
+      margin.top = (titlePosition.y + (titleLineCount * titleLineHeight) + (subtitleLineCount * subtitleLineHeight) + (rem/3))
+    }
+// set chart margin.top
+console.log(p.id)
 //watermark
 
-		// p.selectAll('g.chart-watermark')
-  //     .data([0])
-  //     .enter()
-  //     .append('g').attr('class','chart-watermark')
-  //     .html(watermarkMarkup)
-		// 	.attr('transform', 'translate('+(graphicWidth-watermarkSize -watermarkOffset)+','+(graphicHeight-watermarkSize-watermarkOffset)+') scale('+watermarkSize/100+') ');
+		p.selectAll('g.chart-watermark')
+      .data([0])
+      .enter()
+      .append('g').attr('class','chart-watermark')
+      .html(watermarkMarkup)
+			.attr('transform', 'translate('+(graphicWidth-watermarkSize -watermarkOffset)+','+(graphicHeight-watermarkSize-watermarkOffset)+') scale('+watermarkSize/100+') ');
 
-		// p.selectAll('g.chart-watermark')
-  //     .html(watermarkMarkup)
-  //     .transition()
-		// 	.attr('transform', 'translate('+(graphicWidth-watermarkSize -watermarkOffset)+','+(graphicHeight-watermarkSize-watermarkOffset)+') scale('+watermarkSize/100+') ');
+		p.selectAll('g.chart-watermark')
+      .html(watermarkMarkup)
+      .transition()
+			.attr('transform', 'translate('+(graphicWidth-watermarkSize -watermarkOffset)+','+(graphicHeight-watermarkSize-watermarkOffset)+') scale('+watermarkSize/100+') ');
 
 //plot area (where you put the chart itself)
 		p.selectAll('g.chart-plot')
@@ -539,9 +562,9 @@ function webFrameS(configObject){
     .backgroundColour('#FFF1E0')
     .blackbar('#000')
     .width(300)
-    .watermark(watermarkPathDark)
-    .watermarkSize(80)
-    .watermarkOffset(-28)
+    // .watermark(watermarkPathDark)
+    // .watermarkSize(80)
+    // .watermarkOffset(-28)
     .margin({bottom:90, right:5, left:15})
     .rem(14)
     .titleStyle({
@@ -581,9 +604,9 @@ function webFrameM(configObject){
     .blackbar('#000')
     .width(700)
     .height(500)
-    .watermark(watermarkPathDark)
-    .watermarkSize(80)
-    .watermarkOffset(-28)
+    // .watermark(watermarkPathDark)
+    // .watermarkSize(80)
+    // .watermarkOffset(-28)
     .margin({bottom:95, right:5, left:20})
     .rem(16)
     .titleStyle({
@@ -624,11 +647,12 @@ function webFrameL(configObject){
     .height(700)
     .blackbar('#000')
     .fullYear(true)
-    .watermark(watermarkPathDark)
-    .watermarkSize(80)
-    .watermarkOffset(-28)
+    // .watermark(watermarkPathDark)
+    // .watermarkSize(80)
+    // .watermarkOffset(-28)
     .margin({bottom:105, right:5, left:20})
     .rem(18)
+    .titleY(38)
     .titleStyle({
       'font-size':28,
       'font-family': 'MetricWeb,sans-serif',
@@ -636,6 +660,7 @@ function webFrameL(configObject){
     })
     .titleLineHeight(28)
     .subtitleLineHeight(20)
+    .subtitleY(63)
     .subtitleStyle({
       'font-size':18,
       'font-family': 'MetricWeb,sans-serif',
@@ -765,6 +790,7 @@ function videoFrame(configObject){
     })
     .subtitleX(207)
     .subtitleY(200)
+    .subtitleLineHeight(48)
     .subtitleStyle({
       'font-size': '48px',
       'fill': '#ffffff',
