@@ -723,6 +723,7 @@ function socialFrame(configObject){
     })
     .subtitleX(50)
     .subtitleY(110)
+    .subtitleLineHeight(28)
     .subtitleStyle({
       'font-size': '28px',
       'fill': '#ffffff',
