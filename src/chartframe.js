@@ -226,7 +226,7 @@ function chartFrame(configObject){
             if(sourceTextLength > 1) {
               return (graphicHeight - (margin.bottom - sourcePlotYOffset) + (sourceLineHeight * 1.25) + (sourceTextLength * sourceLineHeight * 1.2));
             } else {
-              return (graphicHeight - (margin.bottom - sourcePlotYOffset) + (sourceLineHeight * 1.25));
+              return (graphicHeight - (margin.bottom - sourcePlotYOffset) + (sourceLineHeight * 2.5));
             }
           })
 
