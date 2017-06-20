@@ -1,1 +1,1 @@
-var version = "0.4.23"; export * from "../index"; export {version};
+var version = "0.4.24"; export * from "../index"; export {version};

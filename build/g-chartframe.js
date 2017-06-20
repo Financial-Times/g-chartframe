@@ -779,7 +779,8 @@
 
   function videoFrame(configObject){
     var f = chartFrame()
-    .backgroundColour('#212121')
+      .backgroundColour('#212121')
+      .containerClass('ft-videographic')
       .width(1920)
       .height(1080)
       .watermark('')
@@ -820,7 +821,7 @@
       return f;
   }
 
-  var version = "0.4.23";
+  var version = "0.4.24";
 
   exports.version = version;
   exports.frame = chartFrame;
