@@ -774,7 +774,8 @@ function socialFrame(configObject){
 
 function videoFrame(configObject){
   var f = chartFrame()
-  .backgroundColour('#212121')
+    .backgroundColour('#212121')
+    .containerClass('ft-videographic')
     .width(1920)
     .height(1080)
     .watermark('')
