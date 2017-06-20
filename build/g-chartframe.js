@@ -728,6 +728,7 @@
       })
       .subtitleX(50)
       .subtitleY(110)
+      .subtitleLineHeight(28)
       .subtitleStyle({
         'font-size': '28px',
         'fill': '#ffffff',
@@ -791,7 +792,7 @@
       return f;
   }
 
-  var version = "0.4.20";
+  var version = "0.4.21";
 
   exports.version = version;
   exports.frame = chartFrame;
