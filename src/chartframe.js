@@ -26,7 +26,7 @@ function chartFrame(configObject){
 		plot,
 		rem = 18,
 		subtitle = 'some supporting information, units perhaps',
-		subtitleLineHeight = 20,
+		subtitleLineHeight = 16,
 		subtitlePosition = {x:1, y:59},
 		subtitleStyle={},
 
@@ -176,6 +176,7 @@ function chartFrame(configObject){
         .call(attributeStyle, subtitleStyle);
 
 //source
+    var sourceLineCount = source.split('|').length;
     p.selectAll('text.chart-source')
       .data([source])
       .enter()
@@ -209,8 +210,8 @@ function chartFrame(configObject){
         .attr('x', sourcePosition.x)
         .call(attributeStyle, sourceStyle);
 
-    var sourceText = p.selectAll('text.chart-source');
-    
+    var sourceTextLength = source.split('|').length;
+    console.log(sourceTextLength)
     // copyright
     if(copyrightStyle) {
     	p.selectAll('text.chart-copyright')
@@ -221,8 +222,16 @@ function chartFrame(configObject){
 	      .append('tspan')
 	      	.html(function(d){ return d; })
 	      	.attr('x', sourcePosition.x)
-	      	.attr('y', function(d) { return (graphicHeight - (margin.bottom - sourcePlotYOffset) + (sourceLineHeight * 1.25) +sourceText.node().getBBox().height); })
-	    		.call(attributeStyle, copyrightStyle);
+	      	.attr('y', function(d) { 
+            if(sourceTextLength > 1) {
+              return (graphicHeight - (margin.bottom - sourcePlotYOffset) + (sourceLineHeight * 1.25) + (sourceTextLength * sourceLineHeight * 1.2));
+            } else {
+              return (graphicHeight - (margin.bottom - sourcePlotYOffset) + (sourceLineHeight * 1.25));
+            }
+          })
+
+            
+          .call(attributeStyle, copyrightStyle);
 		}
 
 //watermark
@@ -533,14 +542,15 @@ function webFrameS(configObject){
     .watermark(watermarkPathDark)
     .watermarkSize(80)
     .watermarkOffset(-28)
-    .margin({bottom:82, right:5, left:15})
+    .margin({bottom:90, right:5, left:15})
     .rem(14)
     .titleStyle({
       'font-size':24,
       'font-family': 'MetricWeb,sans-serif',
       'fill':'#33302E',
     })
-    .titleLineHeight(20)
+    .titleLineHeight(24)
+    .subtitleLineHeight(16)
     .subtitleStyle({
       'font-size':14,
       'font-family': 'MetricWeb,sans-serif',
@@ -574,14 +584,15 @@ function webFrameM(configObject){
     .watermark(watermarkPathDark)
     .watermarkSize(80)
     .watermarkOffset(-28)
-    .margin({bottom:86, right:5, left:20})
+    .margin({bottom:95, right:5, left:20})
     .rem(16)
     .titleStyle({
       'font-size':24,
       'font-family': 'MetricWeb,sans-serif',
       'fill':'#33302E',
     })
-    .titleLineHeight(20)
+    .titleLineHeight(24)
+    .subtitleLineHeight(18)
     .subtitleStyle({
       'font-size':16,
       'font-family': 'MetricWeb,sans-serif',
@@ -616,14 +627,15 @@ function webFrameL(configObject){
     .watermark(watermarkPathDark)
     .watermarkSize(80)
     .watermarkOffset(-28)
-    .margin({bottom:104, right:5, left:20})
+    .margin({bottom:105, right:5, left:20})
     .rem(18)
     .titleStyle({
       'font-size':28,
       'font-family': 'MetricWeb,sans-serif',
       'fill':'#33302E',
     })
-    .titleLineHeight(20)
+    .titleLineHeight(28)
+    .subtitleLineHeight(20)
     .subtitleStyle({
       'font-size':18,
       'font-family': 'MetricWeb,sans-serif',
