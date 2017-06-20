@@ -246,6 +246,9 @@ function chartFrame(configObject){
             
           .call(attributeStyle, copyrightStyle);
 		}
+
+// set chart margin.top
+
     if(containerClass === 'ft-webgraphic-s') {
       margin.top = (titlePosition.y + (titleLineCount * titleLineHeight) + (subtitleLineCount * subtitleLineHeight) + 24)
     } else if(containerClass === 'ft-webgraphic-m') {
@@ -255,8 +258,7 @@ function chartFrame(configObject){
     } else {
       margin.top = (titlePosition.y + (titleLineCount * titleLineHeight) + (subtitleLineCount * subtitleLineHeight) + (rem/3))
     }
-// set chart margin.top
-console.log(p.id)
+
 //watermark
 
 		p.selectAll('g.chart-watermark')
