@@ -713,6 +713,7 @@ function socialFrame(configObject){
     .rem(28)
     .titleX(50)
     .titleY(72)
+    .titleLineHeight(38)
     .titleStyle({
       'font-size': '38px',
       'fill': '#ffffff',
@@ -753,6 +754,7 @@ function videoFrame(configObject){
     .rem(48)
     .titleX(207)
     .titleY(130)
+    .titleLineHeight(68)
     .titleStyle({
       'font-size': '68px',
       'fill': '#ffffff',
