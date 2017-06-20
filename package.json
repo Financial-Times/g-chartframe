@@ -25,7 +25,9 @@
   "homepage": "https://github.com/Financial-Times/g-chartframe/",
   "author": "tom.g.pearson@gmail.com",
   "devDependencies": {
+    "d3": "^4.9.1",
     "faucet": "0.0",
+    "jsdom": "^11.0.0",
     "rollup": "0.25",
     "tape": "4",
     "uglify-js": "2",
