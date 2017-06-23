@@ -27,7 +27,7 @@ function chartFrame(configObject){
 		rem = 18,
 		subtitle = 'some supporting information, units perhaps',
 		subtitleLineHeight = 16,
-		subtitlePosition = {x:1, y:59},
+		subtitlePosition = {x:1, y:64},
 		subtitleStyle={},
 
 		source = 'Source: research|FT Graphic Tom Pearson',
@@ -37,7 +37,7 @@ function chartFrame(configObject){
 		sourceStyle={},
 
 		title = 'Title: A description of the charts purpose',
-		titleLineHeight = 20,
+		titleLineHeight = 32,
 		titlePosition = {x:1, y:34},
 		titleStyle={},
 
@@ -249,12 +249,8 @@ function chartFrame(configObject){
 
 // set chart margin.top
 
-    if(containerClass === 'ft-webgraphic-s') {
+    if(containerClass === 'ft-webgraphic-s' || containerClass === 'ft-webgraphic-m' || containerClass === 'ft-webgraphic-l') {
       margin.top = (titlePosition.y + (titleLineCount * titleLineHeight) + (subtitleLineCount * subtitleLineHeight) + 24)
-    } else if(containerClass === 'ft-webgraphic-m') {
-      margin.top = (titlePosition.y + (titleLineCount * titleLineHeight) + (subtitleLineCount * subtitleLineHeight) + 23)
-    } else if(containerClass === 'ft-webgraphic-l') {
-      margin.top = (titlePosition.y + (titleLineCount * titleLineHeight) + (subtitleLineCount * subtitleLineHeight) + 17)
     } else {
       margin.top = (titlePosition.y + (titleLineCount * titleLineHeight) + (subtitleLineCount * subtitleLineHeight) + (rem/3))
     }
@@ -570,11 +566,12 @@ function webFrameS(configObject){
     .margin({bottom:90, right:5, left:15})
     .rem(14)
     .titleStyle({
-      'font-size':24,
+      'font-size':28,
       'font-family': 'MetricWeb,sans-serif',
-      'fill':'#33302E',
+      'font-weight': 600,
+      'fill':'#000',
     })
-    .titleLineHeight(24)
+    .titleLineHeight(32)
     .subtitleLineHeight(16)
     .subtitleStyle({
       'font-size':14,
@@ -612,17 +609,19 @@ function webFrameM(configObject){
     .margin({bottom:95, right:5, left:20})
     .rem(16)
     .titleStyle({
-      'font-size':24,
+      'font-size':28,
       'font-family': 'MetricWeb,sans-serif',
-      'fill':'#33302E',
+      'font-weight': 600,
+      'fill':'#000',
     })
-    .titleLineHeight(24)
+    .titleLineHeight(32)
     .subtitleLineHeight(18)
     .subtitleStyle({
       'font-size':16,
       'font-family': 'MetricWeb,sans-serif',
       'fill': '#66605C',
     })
+    .subtitleY(65)
     .sourceLineHeight(14)
     .sourcePlotYOffset(37)
     .sourceStyle({
@@ -654,15 +653,16 @@ function webFrameL(configObject){
     // .watermarkOffset(-28)
     .margin({bottom:105, right:5, left:20})
     .rem(18)
-    .titleY(38)
+    .titleY(34)
     .titleStyle({
       'font-size':28,
       'font-family': 'MetricWeb,sans-serif',
-      'fill':'#33302E',
+      'font-weight': 600,
+      'fill':'#000',
     })
-    .titleLineHeight(28)
+    .titleLineHeight(32)
     .subtitleLineHeight(20)
-    .subtitleY(63)
+    .subtitleY(65)
     .subtitleStyle({
       'font-size':18,
       'font-family': 'MetricWeb,sans-serif',
