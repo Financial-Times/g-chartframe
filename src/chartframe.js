@@ -27,7 +27,7 @@ function chartFrame(configObject){
 		rem = 18,
 		subtitle = 'some supporting information, units perhaps',
 		subtitleLineHeight = 16,
-		subtitlePosition = {x:1, y:59},
+		subtitlePosition = {x:1, y:64},
 		subtitleStyle={},
 
 		source = 'Source: research|FT Graphic Tom Pearson',
@@ -621,7 +621,7 @@ function webFrameM(configObject){
       'font-family': 'MetricWeb,sans-serif',
       'fill': '#66605C',
     })
-    .subtitleY(63)
+    .subtitleY(65)
     .sourceLineHeight(14)
     .sourcePlotYOffset(37)
     .sourceStyle({
@@ -662,6 +662,7 @@ function webFrameL(configObject){
     })
     .titleLineHeight(32)
     .subtitleLineHeight(20)
+    .subtitleY(65)
     .subtitleStyle({
       'font-size':18,
       'font-family': 'MetricWeb,sans-serif',
