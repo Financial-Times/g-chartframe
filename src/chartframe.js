@@ -280,6 +280,7 @@ function chartFrame(configObject){
     plot = p.selectAll('g.chart-plot');
 
     plot.transition(transition)
+      .duration(0)
 			.attr('transform','translate(' + margin.left + ',' + margin.top + ')');
 	}
 
