@@ -700,7 +700,7 @@
       .height(68)
       .margin({top:40, left:15, bottom:35, right:7})
       .watermark(watermarkPathDark)
-      .rem(12)
+      .rem(9.6)
       .titleStyle({
         'font-size': '12px',
         'fill': '#000000',
@@ -822,7 +822,7 @@
       return f;
   }
 
-  var version = "0.4.27";
+  var version = "0.4.28";
 
   exports.version = version;
   exports.frame = chartFrame;
