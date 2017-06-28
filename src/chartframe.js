@@ -26,8 +26,8 @@ function chartFrame(configObject){
 		plot,
 		rem = 18,
 		subtitle = 'some supporting information, units perhaps',
-		subtitleLineHeight = 16,
-		subtitlePosition = {x:1, y:64},
+		subtitleLineHeight = 20,
+		subtitlePosition = {x:1, y:67},
 		subtitleStyle={},
 
 		source = 'Source: research|FT Graphic Tom Pearson',
@@ -572,9 +572,9 @@ function webFrameS(configObject){
       'fill':'#000',
     })
     .titleLineHeight(32)
-    .subtitleLineHeight(16)
+    .subtitleLineHeight(20)
     .subtitleStyle({
-      'font-size':14,
+      'font-size':18,
       'font-family': 'MetricWeb,sans-serif',
       'fill': '#66605C',
     })
@@ -615,13 +615,13 @@ function webFrameM(configObject){
       'fill':'#000',
     })
     .titleLineHeight(32)
-    .subtitleLineHeight(18)
+    .subtitleLineHeight(20)
     .subtitleStyle({
-      'font-size':16,
+      'font-size':18,
       'font-family': 'MetricWeb,sans-serif',
       'fill': '#66605C',
     })
-    .subtitleY(65)
+    .subtitleY(66)
     .sourceLineHeight(14)
     .sourcePlotYOffset(37)
     .sourceStyle({
@@ -662,7 +662,7 @@ function webFrameL(configObject){
     })
     .titleLineHeight(32)
     .subtitleLineHeight(20)
-    .subtitleY(65)
+    .subtitleY(67)
     .subtitleStyle({
       'font-size':18,
       'font-family': 'MetricWeb,sans-serif',
