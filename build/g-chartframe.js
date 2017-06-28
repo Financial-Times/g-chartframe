@@ -285,6 +285,7 @@
       plot = p.selectAll('g.chart-plot');
 
       plot.transition(transition)
+        .duration(0)
   			.attr('transform','translate(' + margin.left + ',' + margin.top + ')');
   	}
 
@@ -821,7 +822,7 @@
       return f;
   }
 
-  var version = "0.4.26";
+  var version = "0.4.27";
 
   exports.version = version;
   exports.frame = chartFrame;
