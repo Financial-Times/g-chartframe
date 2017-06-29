@@ -256,8 +256,6 @@
 
       if(autoPosition) {
         margin.top = (titlePosition.y + (titleLineCount * titleLineHeight) + (subtitleLineCount * subtitleLineHeight) + 24)
-      } else {
-        margin.top = (titlePosition.y + (titleLineCount * titleLineHeight) + (subtitleLineCount * subtitleLineHeight) + (rem/3))
       }
 
   //watermark
