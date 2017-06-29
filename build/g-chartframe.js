@@ -9,7 +9,6 @@
 
   function chartFrame(configObject){
   	var autoPosition = false,
-      axisAlign = 'right',
   		backgroundColour,
   		containerClass='g-chartframe',
 
@@ -292,15 +291,10 @@
 
 
   //Setters and getters
-    frame.autoPosition = function(x){
-      if(x == undefined) return autoPosition;
-      autoPosition = x;
-      return frame;
-    }
 
-  	frame.axisAlign = function(x){
-  		if(x == undefined) return axisAlign;
-  		axisAlign = x;
+  	frame.autoPosition = function(x){
+  		if(x == undefined) return autoPosition;
+  		autoPosition = x;
   		return frame;
   	};
 
@@ -514,7 +508,6 @@
     frame.attrs = function(x){
       if(x===undefined)return {
       	axisAlign:axisAlign,
-        autoPosition:autoPosition,
         containerClass:containerClass,
         copyright:copyright,
         copyrightStyle:copyrightStyle,
@@ -569,8 +562,8 @@
 
   function webFrameS(configObject){
      var f = chartFrame()
-      .containerClass('ft-webgraphic-s')
       .autoPosition(true)
+      .containerClass('ft-webgraphic-s')
       .backgroundColour('#FFF1E0')
       .blackbar('#000')
       .width(300)
@@ -612,8 +605,8 @@
 
   function webFrameM(configObject){
      var f = chartFrame()
-      .containerClass('ft-webgraphic-m')
       .autoPosition(true)
+      .containerClass('ft-webgraphic-m')
       .backgroundColour('#FFF1E0')
       .blackbar('#000')
       .width(700)
@@ -657,8 +650,8 @@
 
   function webFrameL(configObject){
      var f = chartFrame()
-      .containerClass('ft-webgraphic-l')
       .autoPosition(true)
+      .containerClass('ft-webgraphic-l')
       .backgroundColour('#FFF1E0')
       .width(1180)
       .height(700)
