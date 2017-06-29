@@ -95,6 +95,10 @@ these provide appropriate positioning, size and fonts for the specified use with
 
 A convenience setter: Set as many values as you choose by passing a big object to the frame (see above).
 
+<a id="frame-autoposition" href="#frame-attrs">#</a>frame.**autoPosition(_boolean_)**
+
+This get the frame to try and automatically comput its top margin. _Not really reccomended though it it used by the pre-packaged webframes_.
+
 <a id="frame-backgroundColour" href="#frame-backgroundColour">#</a>frame.**backgroundColour(_string_)**
 
 Set the background colour of the frame. For the single argument you can use the same css color naming schemes that you use in HTML, whether that's color names (that is red), rgb values (that is rgb(255,0,0)), hex values, rgba values, etc. If no argument is specified returns the current value.
