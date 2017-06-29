@@ -825,7 +825,7 @@
       return f;
   }
 
-  var version = "0.4.28";
+  var version = "5.1.0";
 
   exports.version = version;
   exports.frame = chartFrame;
