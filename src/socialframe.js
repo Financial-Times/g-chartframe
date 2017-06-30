@@ -3,6 +3,7 @@ import watermarkPath from './watermarks';
 
 function socialFrame(configObject){
   var f = frame()
+    .autoPosition(true)
     .containerClass('ft-socialgraphic')
     .backgroundColour('#212121')
     .width(560)

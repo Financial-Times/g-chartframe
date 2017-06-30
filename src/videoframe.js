@@ -2,6 +2,7 @@ import frame from './chartframe';
 
 function videoFrame(configObject){
   var f = frame()
+    .autoPosition(true)
     .backgroundColour('#212121')
     .containerClass('ft-videographic')
     .width(1920)
