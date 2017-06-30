@@ -243,11 +243,11 @@ function chartFrame(configObject){
           .call(attributeStyle, copyrightStyle);
 		}
 
-// set chart margin.top
 
+//TODO figure out a way to improve this autoPosition stuff, needs ot be configurable so we don't have to reference specific classes
     if(autoPosition) {
       margin.top = (titlePosition.y + (titleLineCount * titleLineHeight) + (subtitleLineCount * subtitleLineHeight) + 24)
-    } else if(autoPosition && containerClass == 'ft-print-graphic') {
+    } else if(autoPosition && (containerClass == 'ft-print-graphic' || ontainerClass == 'ft-socialgraphic' || ontainerClass == 'ft-videographic')) {
       margin.top = (titlePosition.y + (titleLineCount * titleLineHeight) + (subtitleLineCount * subtitleLineHeight) + (rem/3))
     }
 

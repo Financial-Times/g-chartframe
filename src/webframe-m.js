@@ -41,8 +41,8 @@ function webFrameM(configObject){
       'fill': '#66605C',
     });
 
-    if(configObject !== undefined) f.attrs(configObject);
-    return f;
+  if(configObject !== undefined) f.attrs(configObject);
+  return f;
 }
 
 export default webFrameM;

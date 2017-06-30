@@ -249,11 +249,11 @@
 	          .call(attributeStyle, copyrightStyle);
 			}
 
-	// set chart margin.top
 
+	//TODO figure out a way to improve this autoPosition stuff, needs ot be configurable so we don't have to reference specific classes
 	    if(autoPosition) {
 	      margin.top = (titlePosition.y + (titleLineCount * titleLineHeight) + (subtitleLineCount * subtitleLineHeight) + 24)
-	    } else if(autoPosition && containerClass == 'ft-print-graphic') {
+	    } else if(autoPosition && (containerClass == 'ft-print-graphic' || ontainerClass == 'ft-socialgraphic' || ontainerClass == 'ft-videographic')) {
 	      margin.top = (titlePosition.y + (titleLineCount * titleLineHeight) + (subtitleLineCount * subtitleLineHeight) + (rem/3))
 	    }
 
@@ -593,8 +593,8 @@
 	      'fill': '#66605C',
 	    });
 
-	    if(configObject !== undefined) f.attrs(configObject);
-	    return f;
+	  if(configObject !== undefined) f.attrs(configObject);
+	  return f;
 	}
 
 	function webFrameM(configObject){
@@ -638,8 +638,8 @@
 	      'fill': '#66605C',
 	    });
 
-	    if(configObject !== undefined) f.attrs(configObject);
-	    return f;
+	  if(configObject !== undefined) f.attrs(configObject);
+	  return f;
 	}
 
 	function webFrameL(configObject){
@@ -683,8 +683,8 @@
 	      'fill': '#66605C',
 	    });
 
-	    if(configObject !== undefined) f.attrs(configObject);
-	    return f;
+	  if(configObject !== undefined) f.attrs(configObject);
+	  return f;
 	}
 
 	var watermarkPathDark = '<path fill="#000" fill-opacity="0.2" id="logo" d="M12,57h11.9v-0.9c-0.8,0-1.4,0-1.9-0.2c-0.5,0-0.8-0.2-1.1-0.5c-0.3-0.2-0.5-0.5-0.6-0.9c-0.2-0.3-0.2-0.9-0.2-1.6v-8.1H22c1.7,0,3,0.3,3.6,0.8c0.8,0.5,1.2,1.4,1.6,3h0.9v-8.8h-0.8c-0.2,0.9-0.5,1.6-0.8,2s-0.8,0.8-1.6,0.9c-0.6,0.2-1.6,0.3-2.8,0.3h-1.9v-8c0-0.5,0.2-0.8,0.3-1.1c0.2-0.2,0.5-0.3,1.1-0.3h3.8c1.3,0,2.2,0,3,0.2s1.4,0.3,1.9,0.6s0.9,0.6,1.1,1.1c0.3,0.5,0.5,1.1,0.8,1.7h1.1L32.9,32H12v0.9c0.6,0,1.2,0.2,1.6,0.2s0.6,0.2,0.9,0.5c0.3,0.2,0.5,0.5,0.6,0.8s0.2,0.9,0.2,1.6v17c0,0.6,0,1.2-0.2,1.6s-0.3,0.6-0.6,0.9c-0.3,0.2-0.6,0.3-0.9,0.5c-0.3,0-0.9,0.2-1.6,0.2V57z M34.2,37.5h1.2c0.5-1.4,0.9-2.3,1.6-2.8c0.6-0.6,1.7-0.8,3-0.8h3.1v19.2c0,0.6,0,1.2-0.2,1.6s-0.3,0.6-0.6,0.9c-0.3,0.2-0.6,0.3-1.1,0.5c-0.5,0-0.9,0.2-1.7,0.2V57h12v-0.9c-0.8,0-1.4,0-1.7-0.2c-0.5,0-0.8-0.2-1.1-0.5c-0.3-0.2-0.5-0.5-0.6-0.9c-0.2-0.3-0.2-0.9-0.2-1.6V33.9h3.1c1.2,0,2.3,0.3,3,0.8c0.6,0.6,1.2,1.6,1.6,2.8h1.2L56.5,32H34.8L34.2,37.5z"/>';
@@ -780,8 +780,8 @@
 	      'font-family': 'MetricWeb,sans-serif',
 	    });
 
-	    if(configObject !== undefined) f.attrs(configObject);
-	    return f;
+	  if(configObject !== undefined) f.attrs(configObject);
+	  return f;
 	}
 
 	function videoFrame(configObject){
@@ -824,8 +824,8 @@
 	      'font-family': 'MetricWeb,sans-serif',
 	    });
 
-	    if(configObject !== undefined) f.attrs(configObject);
-	    return f;
+	  if(configObject !== undefined) f.attrs(configObject);
+	  return f;
 	}
 
 	var version = "5.1.3";

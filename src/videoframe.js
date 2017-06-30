@@ -40,8 +40,8 @@ function videoFrame(configObject){
       'font-family': 'MetricWeb,sans-serif',
     });
 
-    if(configObject !== undefined) f.attrs(configObject);
-    return f;
+  if(configObject !== undefined) f.attrs(configObject);
+  return f;
 }
 
 export default videoFrame;
