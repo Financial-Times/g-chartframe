@@ -256,6 +256,8 @@
 
       if(autoPosition) {
         margin.top = (titlePosition.y + (titleLineCount * titleLineHeight) + (subtitleLineCount * subtitleLineHeight) + 24)
+      } else {
+        margin.top = (titlePosition.y + (titleLineCount * titleLineHeight) + (subtitleLineCount * subtitleLineHeight) + (rem/3))
       }
 
   //watermark
@@ -823,7 +825,7 @@
       return f;
   }
 
-  var version = "5.1.0";
+  var version = "5.1.1";
 
   exports.version = version;
   exports.frame = chartFrame;
