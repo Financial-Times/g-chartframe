@@ -251,7 +251,7 @@ function chartFrame(configObject){
 
     if(autoPosition) {
       margin.top = (titlePosition.y + (titleLineCount * titleLineHeight) + (subtitleLineCount * subtitleLineHeight) + 24)
-    } else {
+    } else if(autoPosition && containerClass == 'ft-print-graphic') {
       margin.top = (titlePosition.y + (titleLineCount * titleLineHeight) + (subtitleLineCount * subtitleLineHeight) + (rem/3))
     }
 
