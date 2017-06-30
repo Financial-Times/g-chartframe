@@ -3,8 +3,8 @@ import watermarkPath from './watermarks';
 
 function printFrame(configObject){
   var f = frame()
-    .autoPosition(true)
     .containerClass('ft-printgraphic')
+    .autoPosition(true)
     .backgroundColour('#FFF')
     .goalposts('#000')
     .units('mm')

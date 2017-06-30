@@ -251,10 +251,10 @@
 
 
 	//TODO figure out a way to improve this autoPosition stuff, needs ot be configurable so we don't have to reference specific classes
-	    if(autoPosition) {
-	      margin.top = (titlePosition.y + (titleLineCount * titleLineHeight) + (subtitleLineCount * subtitleLineHeight) + 24)
-	    } else if(autoPosition && (containerClass == 'ft-printgraphic' || containerClass == 'ft-socialgraphic' || containerClass == 'ft-videographic')) {
+	    if(autoPosition && (containerClass == 'ft-printgraphic' || containerClass == 'ft-socialgraphic' || containerClass == 'ft-videographic')) {
 	      margin.top = (titlePosition.y + (titleLineCount * titleLineHeight) + (subtitleLineCount * subtitleLineHeight) + (rem/3))
+	    } else if(autoPosition) {
+	      margin.top = (titlePosition.y + (titleLineCount * titleLineHeight) + (subtitleLineCount * subtitleLineHeight) + 24)
 	    }
 
 	//watermark
@@ -697,8 +697,8 @@
 
 	function printFrame(configObject){
 	  var f = chartFrame()
-	    .autoPosition(true)
 	    .containerClass('ft-printgraphic')
+	    .autoPosition(true)
 	    .backgroundColour('#FFF')
 	    .goalposts('#000')
 	    .units('mm')
