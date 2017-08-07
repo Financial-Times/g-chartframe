@@ -13,6 +13,7 @@ function webFrameMDefault(configObject){
     // .watermarkOffset(-28)
     .margin({bottom:95, right:5, left:20})
     .rem(16)
+    .titleY(36)
     .titleStyle({
       'font-size':28,
       'font-family': 'MetricWeb,sans-serif',
@@ -46,4 +47,4 @@ function webFrameMDefault(configObject){
 }
 
 export default webFrameMDefault;
-  
+

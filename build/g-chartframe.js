@@ -572,7 +572,7 @@
 	      'font-weight': 400,
 	      'fill':'#000',
 	    })
-	    .titleY(26)
+	    .titleY(32)
 	    .titleLineHeight(24)
 	    .subtitleLineHeight(20)
 	    .subtitleStyle({
@@ -580,7 +580,7 @@
 	      'font-family': 'MetricWeb,sans-serif',
 	      'fill': '#66605C',
 	    })
-	    .subtitleY(55)
+	    .subtitleY(64)
 	    .sourceLineHeight(14)
 	    .sourcePlotYOffset(34)
 	    .sourceStyle({
@@ -612,6 +612,7 @@
 	    // .watermarkOffset(-28)
 	    .margin({bottom:95, right:5, left:20})
 	    .rem(16)
+	    .titleY(36)
 	    .titleStyle({
 	      'font-size':24,
 	      'font-family': 'MetricWeb,sans-serif',
@@ -625,7 +626,7 @@
 	      'font-family': 'MetricWeb,sans-serif',
 	      'fill': '#66605C',
 	    })
-	    .subtitleY(62)
+	    .subtitleY(68)
 	    .sourceLineHeight(14)
 	    .sourcePlotYOffset(37)
 	    .sourceStyle({
@@ -657,6 +658,7 @@
 	    // .watermarkOffset(-28)
 	    .margin({bottom:95, right:5, left:20})
 	    .rem(16)
+	    .titleY(36)
 	    .titleStyle({
 	      'font-size':28,
 	      'font-family': 'MetricWeb,sans-serif',
@@ -703,7 +705,7 @@
 	    // .watermarkOffset(-28)
 	    .margin({bottom:105, right:5, left:20})
 	    .rem(18)
-	    .titleY(34)
+	    .titleY(36)
 	    .titleStyle({
 	      'font-size':28,
 	      'font-family': 'MetricWeb,sans-serif',
@@ -712,7 +714,7 @@
 	    })
 	    .titleLineHeight(32)
 	    .subtitleLineHeight(20)
-	    .subtitleY(67)
+	    .subtitleY(68)
 	    .subtitleStyle({
 	      'font-size':18,
 	      'font-family': 'MetricWeb,sans-serif',

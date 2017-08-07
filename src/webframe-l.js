@@ -14,7 +14,7 @@ function webFrameL(configObject){
     // .watermarkOffset(-28)
     .margin({bottom:105, right:5, left:20})
     .rem(18)
-    .titleY(34)
+    .titleY(36)
     .titleStyle({
       'font-size':28,
       'font-family': 'MetricWeb,sans-serif',
@@ -23,7 +23,7 @@ function webFrameL(configObject){
     })
     .titleLineHeight(32)
     .subtitleLineHeight(20)
-    .subtitleY(67)
+    .subtitleY(68)
     .subtitleStyle({
       'font-size':18,
       'font-family': 'MetricWeb,sans-serif',

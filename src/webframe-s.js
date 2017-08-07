@@ -18,7 +18,7 @@ function webFrameS(configObject){
       'font-weight': 400,
       'fill':'#000',
     })
-    .titleY(26)
+    .titleY(32)
     .titleLineHeight(24)
     .subtitleLineHeight(20)
     .subtitleStyle({
@@ -26,7 +26,7 @@ function webFrameS(configObject){
       'font-family': 'MetricWeb,sans-serif',
       'fill': '#66605C',
     })
-    .subtitleY(55)
+    .subtitleY(64)
     .sourceLineHeight(14)
     .sourcePlotYOffset(34)
     .sourceStyle({
