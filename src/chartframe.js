@@ -20,6 +20,7 @@ function chartFrame(configObject){
 			right:20
 		},
 		plot,
+		plotAdjuster = 0,
 		rem = 18,
 		subtitle = 'some supporting information, units perhaps',
 		subtitleLineHeight = 20,
@@ -233,7 +234,7 @@ function chartFrame(configObject){
 	      	.attr('x', sourcePosition.x)
 	      	.attr('y', function(d) {
             if(sourceLineCount > 1) {
-              return (graphicHeight - (margin.bottom - sourcePlotYOffset) + (sourceLineHeight * 1.25) + (sourceLineCount * sourceLineHeight * 1.2));
+              return (graphicHeight - (margin.bottom - sourcePlotYOffset) + (sourceLineHeight * 1.125) + (sourceLineCount * sourceLineHeight * 1.2));
             } else {
               return (graphicHeight - (margin.bottom - sourcePlotYOffset) + (sourceLineHeight * 2.5));
             }
@@ -248,7 +249,7 @@ function chartFrame(configObject){
     if(autoPosition && (containerClass == 'ft-printgraphic' || containerClass == 'ft-socialgraphic' || containerClass == 'ft-videographic')) {
       margin.top = (titlePosition.y + (titleLineCount * titleLineHeight) + (subtitleLineCount * subtitleLineHeight) + (rem/3))
     } else if(autoPosition) {
-      margin.top = (titlePosition.y + (titleLineCount * titleLineHeight) + (subtitleLineCount * subtitleLineHeight) + 24)
+      margin.top = (titlePosition.y + (titleLineCount * titleLineHeight) + (subtitleLineCount * subtitleLineHeight) + 28 - plotAdjuster)
     }
 
 //watermark
@@ -354,6 +355,12 @@ function chartFrame(configObject){
 
 	frame.plot = function(){
 		return plot;
+	};
+
+	frame.plotAdjuster = function(x){
+		if(x == undefined) return plotAdjuster;
+		plotAdjuster = x;
+		return frame;
 	};
 
 	frame.rem = function(x){
@@ -498,6 +505,7 @@ function chartFrame(configObject){
 
   frame.attrs = function(x){
     if(x===undefined)return {
+    	autoPosition:autoPosition,
     	axisAlign:axisAlign,
       containerClass:containerClass,
       copyright:copyright,
@@ -508,6 +516,7 @@ function chartFrame(configObject){
       graphicWidth:graphicWidth,
       margin:margin,
       plot:plot,
+      plotAdjuster:plotAdjuster,
       rem:rem,
       subtitle:subtitle,
       subtitleLineHeight:subtitleLineHeight,

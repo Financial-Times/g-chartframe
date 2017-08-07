@@ -11,9 +11,10 @@ function webFrameM(configObject){
     // .watermark(watermarkPathDark)
     // .watermarkSize(80)
     // .watermarkOffset(-28)
-    .margin({bottom:95, right:5, left:20})
+    .margin({bottom:104, right:5, left:20})
     .rem(16)
-    .titleY(36)
+    .plotAdjuster(4)
+    .titleY(32)
     .titleStyle({
       'font-size':24,
       'font-family': 'MetricWeb,sans-serif',
@@ -27,9 +28,9 @@ function webFrameM(configObject){
       'font-family': 'MetricWeb,sans-serif',
       'fill': '#66605C',
     })
-    .subtitleY(68)
-    .sourceLineHeight(14)
-    .sourcePlotYOffset(37)
+    .subtitleY(64)
+    .sourceLineHeight(16)
+    .sourcePlotYOffset(44)
     .sourceStyle({
       'font-size': '14px',
       'font-family': 'MetricWeb,sans-serif',

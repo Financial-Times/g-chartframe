@@ -26,6 +26,7 @@
 				right:20
 			},
 			plot,
+			plotAdjuster = 0,
 			rem = 18,
 			subtitle = 'some supporting information, units perhaps',
 			subtitleLineHeight = 20,
@@ -239,7 +240,7 @@
 		      	.attr('x', sourcePosition.x)
 		      	.attr('y', function(d) {
 	            if(sourceLineCount > 1) {
-	              return (graphicHeight - (margin.bottom - sourcePlotYOffset) + (sourceLineHeight * 1.25) + (sourceLineCount * sourceLineHeight * 1.2));
+	              return (graphicHeight - (margin.bottom - sourcePlotYOffset) + (sourceLineHeight * 1.125) + (sourceLineCount * sourceLineHeight * 1.2));
 	            } else {
 	              return (graphicHeight - (margin.bottom - sourcePlotYOffset) + (sourceLineHeight * 2.5));
 	            }
@@ -254,7 +255,7 @@
 	    if(autoPosition && (containerClass == 'ft-printgraphic' || containerClass == 'ft-socialgraphic' || containerClass == 'ft-videographic')) {
 	      margin.top = (titlePosition.y + (titleLineCount * titleLineHeight) + (subtitleLineCount * subtitleLineHeight) + (rem/3))
 	    } else if(autoPosition) {
-	      margin.top = (titlePosition.y + (titleLineCount * titleLineHeight) + (subtitleLineCount * subtitleLineHeight) + 24)
+	      margin.top = (titlePosition.y + (titleLineCount * titleLineHeight) + (subtitleLineCount * subtitleLineHeight) + 28 - plotAdjuster)
 	    }
 
 	//watermark
@@ -360,6 +361,12 @@
 
 		frame.plot = function(){
 			return plot;
+		};
+
+		frame.plotAdjuster = function(x){
+			if(x == undefined) return plotAdjuster;
+			plotAdjuster = x;
+			return frame;
 		};
 
 		frame.rem = function(x){
@@ -504,6 +511,7 @@
 
 	  frame.attrs = function(x){
 	    if(x===undefined)return {
+	    	autoPosition:autoPosition,
 	    	axisAlign:axisAlign,
 	      containerClass:containerClass,
 	      copyright:copyright,
@@ -514,6 +522,7 @@
 	      graphicWidth:graphicWidth,
 	      margin:margin,
 	      plot:plot,
+	      plotAdjuster:plotAdjuster,
 	      rem:rem,
 	      subtitle:subtitle,
 	      subtitleLineHeight:subtitleLineHeight,
@@ -566,6 +575,7 @@
 	    // .watermarkOffset(-28)
 	    .margin({bottom:90, right:5, left:15})
 	    .rem(14)
+	    .plotAdjuster(0)
 	    .titleStyle({
 	      'font-size':20,
 	      'font-family': 'MetricWeb,sans-serif',
@@ -581,10 +591,10 @@
 	      'fill': '#66605C',
 	    })
 	    .subtitleY(64)
-	    .sourceLineHeight(14)
-	    .sourcePlotYOffset(34)
+	    .sourceLineHeight(12)
+	    .sourcePlotYOffset(38)
 	    .sourceStyle({
-	      'font-size': '14px',
+	      'font-size': '12px',
 	      'font-family': 'MetricWeb,sans-serif',
 	      'fill': '#66605C'
 	    })
@@ -610,9 +620,10 @@
 	    // .watermark(watermarkPathDark)
 	    // .watermarkSize(80)
 	    // .watermarkOffset(-28)
-	    .margin({bottom:95, right:5, left:20})
+	    .margin({bottom:104, right:5, left:20})
 	    .rem(16)
-	    .titleY(36)
+	    .plotAdjuster(4)
+	    .titleY(32)
 	    .titleStyle({
 	      'font-size':24,
 	      'font-family': 'MetricWeb,sans-serif',
@@ -626,9 +637,9 @@
 	      'font-family': 'MetricWeb,sans-serif',
 	      'fill': '#66605C',
 	    })
-	    .subtitleY(68)
-	    .sourceLineHeight(14)
-	    .sourcePlotYOffset(37)
+	    .subtitleY(64)
+	    .sourceLineHeight(16)
+	    .sourcePlotYOffset(44)
 	    .sourceStyle({
 	      'font-size': '14px',
 	      'font-family': 'MetricWeb,sans-serif',
@@ -657,8 +668,9 @@
 	    // .watermarkSize(80)
 	    // .watermarkOffset(-28)
 	    .margin({bottom:95, right:5, left:20})
-	    .rem(16)
-	    .titleY(36)
+	    .rem(20)
+	    .plotAdjuster(8)
+	    .titleY(32)
 	    .titleStyle({
 	      'font-size':28,
 	      'font-family': 'MetricWeb,sans-serif',
@@ -673,8 +685,8 @@
 	      'fill': '#66605C',
 	    })
 	    .subtitleY(68)
-	    .sourceLineHeight(14)
-	    .sourcePlotYOffset(37)
+	    .sourceLineHeight(16)
+	    .sourcePlotYOffset(44)
 	    .sourceStyle({
 	      'font-size': '14px',
 	      'font-family': 'MetricWeb,sans-serif',
@@ -705,7 +717,8 @@
 	    // .watermarkOffset(-28)
 	    .margin({bottom:105, right:5, left:20})
 	    .rem(18)
-	    .titleY(36)
+	    .plotAdjuster(8)
+	    .titleY(32)
 	    .titleStyle({
 	      'font-size':28,
 	      'font-family': 'MetricWeb,sans-serif',
@@ -714,19 +727,21 @@
 	    })
 	    .titleLineHeight(32)
 	    .subtitleLineHeight(20)
-	    .subtitleY(68)
+	    .subtitleY(64)
 	    .subtitleStyle({
 	      'font-size':18,
 	      'font-family': 'MetricWeb,sans-serif',
 	      'fill': '#66605C',
 	    })
+	    .sourceLineHeight(16)
+	    .sourcePlotYOffset(44)
 	    .sourceStyle({
 	      'font-size': '16px',
 	      'font-family': 'MetricWeb,sans-serif',
 	      'fill': '#66605C'
 	    })
 	    .copyrightStyle({
-	      'font-size': '14px',
+	      'font-size': '16px',
 	      'font-style': 'italic',
 	      'font-family': 'MetricWeb,sans-serif',
 	      'fill': '#66605C',

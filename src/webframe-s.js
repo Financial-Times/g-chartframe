@@ -12,6 +12,7 @@ function webFrameS(configObject){
     // .watermarkOffset(-28)
     .margin({bottom:90, right:5, left:15})
     .rem(14)
+    .plotAdjuster(0)
     .titleStyle({
       'font-size':20,
       'font-family': 'MetricWeb,sans-serif',
@@ -27,10 +28,10 @@ function webFrameS(configObject){
       'fill': '#66605C',
     })
     .subtitleY(64)
-    .sourceLineHeight(14)
-    .sourcePlotYOffset(34)
+    .sourceLineHeight(12)
+    .sourcePlotYOffset(38)
     .sourceStyle({
-      'font-size': '14px',
+      'font-size': '12px',
       'font-family': 'MetricWeb,sans-serif',
       'fill': '#66605C'
     })
