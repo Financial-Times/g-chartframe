@@ -1,36 +1,36 @@
 import frame from './chartframe';
 
-function webFrameL(configObject){
+function webFrameMDefault(configObject){
    var f = frame()
     .autoPosition(true)
-    .containerClass('ft-webgraphic-l')
+    .containerClass('ft-webgraphic-m-default')
     .backgroundColour('#FFF1E0')
-    .width(1180)
-    .height(700)
     .blackbar('#000')
-    .fullYear(true)
+    .width(700)
+    .height(500)
     // .watermark(watermarkPathDark)
     // .watermarkSize(80)
     // .watermarkOffset(-28)
-    .margin({bottom:105, right:5, left:20})
-    .rem(18)
-    .titleY(34)
+    .margin({bottom:95, right:5, left:20})
+    .rem(16)
     .titleStyle({
       'font-size':28,
       'font-family': 'MetricWeb,sans-serif',
       'font-weight': 400,
       'fill':'#000',
     })
-    .titleLineHeight(32)
-    .subtitleLineHeight(20)
-    .subtitleY(67)
+    .titleLineHeight(28)
+    .subtitleLineHeight(28)
     .subtitleStyle({
-      'font-size':18,
+      'font-size':24,
       'font-family': 'MetricWeb,sans-serif',
       'fill': '#66605C',
     })
+    .subtitleY(68)
+    .sourceLineHeight(14)
+    .sourcePlotYOffset(37)
     .sourceStyle({
-      'font-size': '16px',
+      'font-size': '14px',
       'font-family': 'MetricWeb,sans-serif',
       'fill': '#66605C'
     })
@@ -45,4 +45,5 @@ function webFrameL(configObject){
   return f;
 }
 
-export default webFrameL;
+export default webFrameMDefault;
+  

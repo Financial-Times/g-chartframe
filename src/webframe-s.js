@@ -13,18 +13,20 @@ function webFrameS(configObject){
     .margin({bottom:90, right:5, left:15})
     .rem(14)
     .titleStyle({
-      'font-size':28,
+      'font-size':20,
       'font-family': 'MetricWeb,sans-serif',
-      'font-weight': 600,
+      'font-weight': 400,
       'fill':'#000',
     })
-    .titleLineHeight(32)
+    .titleY(26)
+    .titleLineHeight(24)
     .subtitleLineHeight(20)
     .subtitleStyle({
       'font-size':18,
       'font-family': 'MetricWeb,sans-serif',
       'fill': '#66605C',
     })
+    .subtitleY(55)
     .sourceLineHeight(14)
     .sourcePlotYOffset(34)
     .sourceStyle({

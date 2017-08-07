@@ -34,7 +34,7 @@ function chartFrame(configObject){
 
 		title = 'Title: A description of the charts purpose',
 		titleLineHeight = 32,
-		titlePosition = {x:1, y:34},
+		titlePosition = {x:1, y:30},
 		titleStyle={},
 
     transition = 0.2,
