@@ -145,7 +145,6 @@
 	          .enter()
 	        .append('tspan')
 	          .html(function(d){ return d; })
-	          .attr('id',containerClass+'title')
 	          .attr('y',function(d,i){ return (titlePosition.y + (i * titleLineHeight)); })
 	          .attr('x',titlePosition.x)
 	          .call(attributeStyle, titleStyle);
@@ -205,6 +204,7 @@
 	      .enter()
 	      .append('text')
 	      .attr('class', 'chart-source')
+	      .attr('id',containerClass+'source')
 	      .call(function(sourceText){
 	        sourceText.selectAll('tspan')
 	          .data(source.split('|'))
