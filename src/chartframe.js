@@ -54,6 +54,7 @@ function chartFrame(configObject){
 	};
 
 	function attributeStyle(parent, style){
+		console.log('attributeStyle', parent, style)
 	    Object.keys(style).forEach(function(attribute){
 	        parent.attr(attribute, style[attribute]);
 	    });
@@ -137,6 +138,7 @@ function chartFrame(configObject){
           .enter()
         .append('tspan')
           .html(function(d){ return d; })
+          .attr('id',containerClass+'title')
           .attr('y',function(d,i){ return (titlePosition.y + (i * titleLineHeight)); })
           .attr('x',titlePosition.x)
           .call(attributeStyle, titleStyle);
@@ -155,6 +157,7 @@ function chartFrame(configObject){
       .data([subtitle])
       .enter()
       .append('text')
+      .attr('id',containerClass+'subtitle')
       .attr('class', 'chart-subtitle')
       .call(function(subtitleText){
         subtitleText.selectAll('tspan')
@@ -175,7 +178,8 @@ function chartFrame(configObject){
       });
 
     p.selectAll('text.chart-subtitle tspan')
-      .html(function(d){ return d; })
+      .html(function(d){ 
+      	return d; })
       .transition(transition)
         .attr('y', function(d,i){
           if(titleLineCount > 1) {
@@ -193,6 +197,7 @@ function chartFrame(configObject){
       .enter()
       .append('text')
       .attr('class', 'chart-source')
+      .attr('id',containerClass+'title')
       .call(function(sourceText){
         sourceText.selectAll('tspan')
           .data(source.split('|'))
