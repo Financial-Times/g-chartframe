@@ -132,13 +132,13 @@ function chartFrame(configObject){
       .enter()
       .append('text')
       .attr('class', 'chart-title')
+      .attr('id',containerClass+'title')
       .call(function(titleText){
         titleText.selectAll('tspan')
           .data(title.split('|'))
           .enter()
         .append('tspan')
           .html(function(d){ return d; })
-          .attr('id',containerClass+'title')
           .attr('y',function(d,i){ return (titlePosition.y + (i * titleLineHeight)); })
           .attr('x',titlePosition.x)
           .call(attributeStyle, titleStyle);
