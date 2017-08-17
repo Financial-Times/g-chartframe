@@ -145,6 +145,7 @@
 	          .enter()
 	        .append('tspan')
 	          .html(function(d){ return d; })
+	          .attr('id',containerClass+'title')
 	          .attr('y',function(d,i){ return (titlePosition.y + (i * titleLineHeight)); })
 	          .attr('x',titlePosition.x)
 	          .call(attributeStyle, titleStyle);
@@ -171,6 +172,7 @@
 	          .enter()
 	        .append('tspan')
 	          .html(function(d){ return d; })
+	          .attr('id',containerClass+'subtitle')
 	          .attr('y',function(d,i){
 	            if(titleLineCount > 1) {
 	              console.log('yes')
@@ -203,13 +205,13 @@
 	      .enter()
 	      .append('text')
 	      .attr('class', 'chart-source')
-	      .attr('id',containerClass+'title')
 	      .call(function(sourceText){
 	        sourceText.selectAll('tspan')
 	          .data(source.split('|'))
 	          .enter()
 	        .append('tspan')
 	          .html(function(d){ return d; })
+	          .attr('id',containerClass+'source')
 	          .attr('y', function(d,i){
 	            if(sourcePosition.y){
 	              return (sourcePosition.y +(i * sourceLineHeight));
