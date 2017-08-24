@@ -92,7 +92,8 @@
 	        .data([backgroundColour])
 	        .enter()
 	        .append('rect')
-	        .attr('class','chart-background');
+	        .attr('id','chart-background')
+	        .attr('class','chart-background')
 
 	      p.selectAll('rect.chart-background')
 	        .transition(transition)
@@ -126,7 +127,7 @@
 				p.selectAll('path.chart-goalposts')
 	        .transition(transition)
 					.attr('d',function(d){ return d; })
-					.attr('stroke-width', 1)
+					.attr('stroke-width', .3)
 	        .attr('fill','none')
 					.attr('stroke', goalposts);
 			}
