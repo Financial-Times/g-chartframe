@@ -60,7 +60,6 @@
 		};
 
 		function attributeStyle(parent, style){
-			console.log('attributeStyle', parent, style)
 		    Object.keys(style).forEach(function(attribute){
 		        parent.attr(attribute, style[attribute]);
 		    });
@@ -71,7 +70,6 @@
 	//overall graphic properties
 			p.attr('class', containerClass)
 				.attr('font-family','MetricWeb,sans-serif');
-				console.log(p)
 			if (p.node().nodeName.toLowerCase() == 'svg') {
 				p.transition(transition)
 	        .attr('width', graphicWidth)
@@ -175,7 +173,6 @@
 	          .attr('id',containerClass+'subtitle')
 	          .attr('y',function(d,i){
 	            if(titleLineCount > 1) {
-	              console.log('yes')
 	              return (titlePosition.y + (titleLineCount * titleLineHeight) +(subtitleLineHeight*i));
 	            } else {
 	              return (subtitlePosition.y + (i * subtitleLineHeight)); }
@@ -186,12 +183,11 @@
 	      });
 
 	    p.selectAll('text.chart-subtitle tspan')
-	      .html(function(d){ 
+	      .html(function(d){
 	      	return d; })
 	      .transition(transition)
 	        .attr('y', function(d,i){
 	          if(titleLineCount > 1) {
-	              console.log('yes')
 	              return (titlePosition.y + (titleLineCount * titleLineHeight) +(subtitleLineHeight*i));
 	            } else {
 	              return (subtitlePosition.y + (i * subtitleLineHeight)); }
