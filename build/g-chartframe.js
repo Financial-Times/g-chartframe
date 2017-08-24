@@ -902,7 +902,7 @@
 	  return f;
 	}
 
-	var version = "5.1.9";
+	var version = "5.1.10";
 
 	exports.version = version;
 	exports.frame = chartFrame;
