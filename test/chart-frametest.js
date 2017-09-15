@@ -19,3 +19,19 @@ tape('chartFrame works outside browser', (test) => {
     test.equal(chartContainer.select('.chart-title tspan').text(), 'Title: A description of the charts purpose');
     test.end();
 });
+
+tape('chartFrame can be extended', (test) => {
+    const defaultFrame = chartFrame.frame();
+    defaultFrame.extend('llama', 'duck');
+
+    // Test getter
+    test.equal(defaultFrame.llama(), 'duck');
+
+    // Test setter
+    defaultFrame.llama('quack');
+    test.equal(defaultFrame.llama(), 'quack');
+
+    // Test attrs
+    test.equal(defaultFrame.attrs().llama, 'quack');
+    test.end();
+});
