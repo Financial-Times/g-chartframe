@@ -44,11 +44,11 @@
         const sourcePosition = { x: 1 };
         const titlePosition = { x: 1, y: 30 };
         const transition = 0.2;
-
         const convertFrom = {
             mm(x) { return (x * 2.83464480558843); },
             px(x) { return x; },
         };
+        const custom = {};
 
         function attributeStyle(parent, style) {
             Object.keys(style).forEach((attribute) => {
@@ -325,6 +325,15 @@
             height: graphicHeight - (margin.top + margin.bottom),
         });
 
+        frame.extend = (key, value) => {
+            custom[key] = value;
+            frame[key] = (d) => {
+                if (d === undefined) return custom[key];
+                custom[key] = d;
+                return frame;
+            };
+        };
+
         frame.fullYear = (x) => {
             if (x === undefined) return fullYear;
             fullYear = x;
@@ -501,7 +510,7 @@
 
         frame.attrs = (x) => {
             if (x === undefined) {
-                return {
+                return Object.assign({}, {
                     autoPosition,
                     // axisAlign, // @FIX This is undef?
                     containerClass,
@@ -532,7 +541,7 @@
                     watermarkOffset,
                     watermarkSize,
                     units,
-                };
+                }, custom);
             }
 
             Object.keys(x).forEach((setterName) => {
