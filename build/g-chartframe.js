@@ -332,6 +332,8 @@
                 custom[key] = d;
                 return frame;
             };
+
+            return frame;
         };
 
         frame.fullYear = (x) => {
