@@ -203,7 +203,7 @@
                             if (sourcePosition.y) {
                                 return (sourcePosition.y + (i * sourceLineHeight));
                             }
-                            return (((graphicHeight - (margin.bottom - sourcePlotYOffset)) + (sourceLineHeight * 1.5)) + ((i) * sourceLineHeight));
+                            return ((graphicHeight - (margin.bottom - sourcePlotYOffset) + sourceLineHeight * 1.5) + ((i) * sourceLineHeight)); // eslint-disable-line
                         })
                         .attr('x', subtitlePosition.x)
                         .call(attributeStyle, subtitleStyle);
@@ -216,7 +216,7 @@
                     if (sourcePosition.y) {
                         return (sourcePosition.y + (i * sourceLineHeight));
                     }
-                    return (((graphicHeight - (margin.bottom - sourcePlotYOffset)) + (sourceLineHeight * 1.5)) + ((i) * sourceLineHeight));
+                    return ((graphicHeight - (margin.bottom - sourcePlotYOffset) + sourceLineHeight * 1.5) + ((i) * sourceLineHeight)); // eslint-disable-line
                 })
                 .attr('x', sourcePosition.x)
                 .call(attributeStyle, sourceStyle);
@@ -234,9 +234,9 @@
                     .attr('x', sourcePosition.x)
                     .attr('y', () => {
                         if (sourceLineCount > 1) {
-                            return ((graphicHeight - (margin.bottom - sourcePlotYOffset)) + (sourceLineHeight * 1.125) + (sourceLineCount * sourceLineHeight * 1.2));
+                            return (graphicHeight - (margin.bottom - sourcePlotYOffset) + (sourceLineHeight * 1.125) + (sourceLineCount * sourceLineHeight * 1.2)); // eslint-disable-line
                         }
-                        return ((graphicHeight - (margin.bottom - sourcePlotYOffset)) + (sourceLineHeight * 2.5));
+                        return (graphicHeight - (margin.bottom - sourcePlotYOffset) + (sourceLineHeight * 2.5)); // eslint-disable-line
                     })
 
 
@@ -248,7 +248,7 @@
             if (autoPosition && (containerClass === 'ft-printgraphic' || containerClass === 'ft-socialgraphic' || containerClass === 'ft-videographic')) {
                 margin.top = (titlePosition.y + (titleLineCount * titleLineHeight) + (subtitleLineCount * subtitleLineHeight) + (rem / 3));
             } else if (autoPosition) {
-                margin.top = ((titlePosition.y + (titleLineCount * titleLineHeight) + (subtitleLineCount * subtitleLineHeight) + 28) - plotAdjuster);
+                margin.top = (titlePosition.y + (titleLineCount * titleLineHeight) + (subtitleLineCount * subtitleLineHeight) + 28 - plotAdjuster); // eslint-disable-line
             }
 
             // watermark
