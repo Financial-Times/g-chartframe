@@ -17,7 +17,7 @@ function videoFrame(configObject) {
             'font-size': '68px',
             fill: '#ffffff',
             'font-weight': 600,
-            'fill-opacity': 0.9,
+            opacity: 0.9,
             'font-family': 'MetricWeb,sans-serif',
         })
         .subtitleX(207)
@@ -27,7 +27,7 @@ function videoFrame(configObject) {
             'font-size': '48px',
             fill: '#ffffff',
             'font-weight': 400,
-            'fill-opacity': 0.7,
+            opacity: 0.7,
             'font-family': 'MetricWeb,sans-serif',
         })
         .sourceX(207)
@@ -37,7 +37,7 @@ function videoFrame(configObject) {
             'font-size': '36px',
             fill: '#ffffff',
             'font-weight': 400,
-            'fill-opacity': 0.5,
+            opacity: 0.5,
             'font-family': 'MetricWeb,sans-serif',
         });
 
