@@ -827,7 +827,7 @@
                 'font-size': '38px',
                 fill: '#ffffff',
                 'font-weight': 600,
-                'fill-opacity': 0.9,
+                opacity: 0.9,
                 'font-family': 'MetricWeb,sans-serif',
             })
             .subtitleX(50)
@@ -837,7 +837,7 @@
                 'font-size': '28px',
                 fill: '#ffffff',
                 'font-weight': 400,
-                'fill-opacity': 0.7,
+                opacity: 0.7,
                 'font-family': 'MetricWeb,sans-serif',
             })
             .sourceX(50)
@@ -846,7 +846,7 @@
                 'font-size': '25px',
                 fill: '#ffffff',
                 'font-weight': 400,
-                'fill-opacity': 0.5,
+                opacity: 0.5,
                 'font-family': 'MetricWeb,sans-serif',
             });
 
@@ -871,7 +871,7 @@
                 'font-size': '68px',
                 fill: '#ffffff',
                 'font-weight': 600,
-                'fill-opacity': 0.9,
+                opacity: 0.9,
                 'font-family': 'MetricWeb,sans-serif',
             })
             .subtitleX(207)
@@ -881,7 +881,7 @@
                 'font-size': '48px',
                 fill: '#ffffff',
                 'font-weight': 400,
-                'fill-opacity': 0.7,
+                opacity: 0.7,
                 'font-family': 'MetricWeb,sans-serif',
             })
             .sourceX(207)
@@ -891,7 +891,7 @@
                 'font-size': '36px',
                 fill: '#ffffff',
                 'font-weight': 400,
-                'fill-opacity': 0.5,
+                opacity: 0.5,
                 'font-family': 'MetricWeb,sans-serif',
             });
 
@@ -899,7 +899,7 @@
         return f;
     }
 
-    var version = "5.1.11";
+    var version = "5.1.12";
 
     exports.version = version;
     exports.frame = chartFrame;
