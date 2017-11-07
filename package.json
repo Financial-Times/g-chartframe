@@ -19,15 +19,18 @@
     "watch": "watch 'npm run build' ./src",
     "pretest": "npm run build",
     "build": "mkdir -p build && node -e 'process.stdout.write(\"var version = \\\"\" + require(\"./package.json\").version + \"\\\"; export * from \\\"../index\\\"; export {version};\");' > build/bundle.js && rollup -f umd -n gChartframe -o build/g-chartframe.js -- build/bundle.js",
-    "test": "faucet `find test -name '*-test.js'`",
-    "prepublish": "npm run test"
+    "test": "nyc faucet `find test -name '*-test.js'`",
+    "prepublish": "npm run test",
+    "report-coverage": "nyc report --reporter=lcov | codecov"
   },
   "homepage": "https://github.com/Financial-Times/g-chartframe/",
   "author": "tom.g.pearson@gmail.com",
   "devDependencies": {
+    "codecov": "^3.0.0",
     "d3": "^4.9.1",
     "faucet": "0.0",
     "jsdom": "^11.0.0",
+    "nyc": "^11.3.0",
     "rollup": "0.25",
     "tape": "4",
     "uglify-js": "2",
