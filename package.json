@@ -20,8 +20,8 @@
     "pretest": "npm run build",
     "build": "mkdir -p build && node -e 'process.stdout.write(\"var version = \\\"\" + require(\"./package.json\").version + \"\\\"; export * from \\\"../index\\\"; export {version};\");' > build/bundle.js && rollup -f umd -n gChartframe -o build/g-chartframe.js -- build/bundle.js",
     "test": "nyc tape -r '@babel/register' test/*.js",
-    "prepublish": "npm run test",
-    "report-coverage": "nyc report --reporter=lcov | codecov"
+    "prepublishOnly": "npm run test",
+    "report-coverage": "nyc report --reporter=lcov && codecov"
   },
   "homepage": "https://github.com/Financial-Times/g-chartframe/",
   "author": "tom.g.pearson@gmail.com",
