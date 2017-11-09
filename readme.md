@@ -1,4 +1,4 @@
-# g-chartframe
+# g-chartframe [![codecov](https://codecov.io/gh/financial-times/g-chartframe/branch/master/graph/badge.svg)](https://codecov.io/gh/financial-times/g-chartframe)
 
 For making the boring but necessary stuff on D3 charts in as painless a fashion as possible.
 
