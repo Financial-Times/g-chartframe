@@ -1,8 +1,8 @@
-const tape = require('tape');
-const fs = require('fs');
-const d3 = require('d3');
-const chartFrame = require('../build/g-chartframe');
-const jsdom = require('jsdom');
+import * as fs from 'fs';
+import * as d3 from 'd3';
+import tape from 'tape';
+import * as chartFrame from '../index';
+import jsdom from 'jsdom';
 
 tape('chartFrame defaults', (test) => {
     test.equal(chartFrame.frame().title(), 'Title: A description of the charts purpose');
