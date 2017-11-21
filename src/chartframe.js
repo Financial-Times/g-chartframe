@@ -1,4 +1,5 @@
 import saveSvgAsPng from 'save-svg-as-png';
+import * as d3 from 'd3-selection';
 
 function chartFrame(configObject) {
     let autoPosition = false;
@@ -278,7 +279,12 @@ function chartFrame(configObject) {
             .attr('transform', `translate(${margin.left},${margin.top})`);
 
         if (showDownloadPngButtons) {
-            const holder = p.append('div');
+            let holder;
+            if (p.node().nodeName.toLowerCase() === 'svg') {
+                holder = d3.select(p.node().parentNode).append('div');
+            } else {
+                holder = p;
+            }
 
             holder.append('button')
                 .attr('class', 'save-png-button save-png-button__1x')
@@ -293,9 +299,6 @@ function chartFrame(configObject) {
                 .style('opacity', 0.6)
                 .text('Save as double size .png')
                 .on('click', () => savePNG(plot, p, 2));
-
-            holder.append('div')
-                .html('<br/>');
         }
     }
 
