@@ -1,3 +1,6 @@
+import { saveSvgAsPng } from 'save-svg-as-png';
+import * as d3 from 'd3-selection';
+
 function chartFrame(configObject) {
     let autoPosition = false;
     let backgroundColour;
@@ -7,6 +10,7 @@ function chartFrame(configObject) {
     let goalposts = false; // goalpost is the bit at the top and bottom of pritn charts
     let blackbar = false; // blackbar the short black bar above web graphics
     let fullYear = false;
+    let showDownloadPngButtons = true;
     let graphicHeight = 400;
     let graphicWidth = 500;
     let plot;
@@ -273,6 +277,33 @@ function chartFrame(configObject) {
         plot.transition(transition)
             .duration(0)
             .attr('transform', `translate(${margin.left},${margin.top})`);
+
+        if (showDownloadPngButtons) {
+            let parent;
+            if (p.node().nodeName.toLowerCase() === 'svg') {
+                parent = d3.select(p.node().parentNode);
+            } else {
+                parent = d3.select(p.node());
+            }
+
+            // Prevent this from being rendered twice
+            if (parent.selectAll('.button-holder').size() === 0) {
+                const holder = parent.append('div').attr('class', 'button-holder');
+                holder.append('button')
+                    .attr('class', 'save-png-button save-png-button__1x')
+                    .text('Save as .png')
+                    .style('float', 'left')
+                    .style('opacity', 0.6)
+                    .on('click', () => savePNG(p, 1));
+
+                holder.append('button')
+                    .attr('class', 'save-png-button save-png-button__2x')
+                    .style('float', 'left')
+                    .style('opacity', 0.6)
+                    .text('Save as double size .png')
+                    .on('click', () => savePNG(p, 2));
+            }
+        }
     }
 
 
@@ -367,6 +398,13 @@ function chartFrame(configObject) {
     frame.rem = (x) => {
         if (x === undefined) return rem;
         rem = x;
+        return frame;
+    };
+
+    frame.showDownloadPngButtons = (d) => {
+        if (typeof d === 'undefined') return showDownloadPngButtons;
+        showDownloadPngButtons = d;
+
         return frame;
     };
 
@@ -559,6 +597,23 @@ function chartFrame(configObject) {
 function isFunction(functionToCheck) {
     const getType = {};
     return functionToCheck && getType.toString.call(functionToCheck) === '[object Function]';
+}
+
+function savePNG(svg, scaleFactor) {
+    svg.selectAll('.axis path, .axis text, .axis line, .axis, .baseline , .baseline line, .legend, .legend text')
+        .each(function inlineProps() {
+            const element = this;
+            const computedStyle = getComputedStyle(element, null);
+
+            // loop through and compute inline svg styles
+            for (let i = 0; i < computedStyle.length; i += 1) {
+                const property = computedStyle.item(i);
+                const value = computedStyle.getPropertyValue(property);
+                element.style[property] = value;
+            }
+        });
+
+    saveSvgAsPng(svg.node(), `${svg.select('title').text().replace(/\s/g, '-').toLowerCase()}.png`, { scale: scaleFactor });
 }
 
 export default chartFrame;
