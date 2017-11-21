@@ -1633,27 +1633,30 @@
 	            .attr('transform', `translate(${margin.left},${margin.top})`);
 
 	        if (showDownloadPngButtons) {
-	            let holder;
+	            let parent;
 	            if (p.node().nodeName.toLowerCase() === 'svg') {
-	                holder = select(p.node().parentNode)
-	                    .append('div').attr('class', 'button-holder');
+	                parent = select(p.node().parentNode);
 	            } else {
-	                holder = p.append('div').attr('class', 'button-holder');
+	                parent = select(p.node());
 	            }
 
-	            holder.append('button')
-	                .attr('class', 'save-png-button save-png-button__1x')
-	                .text('Save as .png')
-	                .style('float', 'left')
-	                .style('opacity', 0.6)
-	                .on('click', () => savePNG(p, 1));
+	            // Prevent this from being rendered twice
+	            if (!parent.select('.button-holder')) {
+	                const holder = parent.append('div').attr('class', 'button-holder');
+	                holder.append('button')
+	                    .attr('class', 'save-png-button save-png-button__1x')
+	                    .text('Save as .png')
+	                    .style('float', 'left')
+	                    .style('opacity', 0.6)
+	                    .on('click', () => savePNG(p, 1));
 
-	            holder.append('button')
-	                .attr('class', 'save-png-button save-png-button__2x')
-	                .style('float', 'left')
-	                .style('opacity', 0.6)
-	                .text('Save as double size .png')
-	                .on('click', () => savePNG(p, 2));
+	                holder.append('button')
+	                    .attr('class', 'save-png-button save-png-button__2x')
+	                    .style('float', 'left')
+	                    .style('opacity', 0.6)
+	                    .text('Save as double size .png')
+	                    .on('click', () => savePNG(p, 2));
+	            }
 	        }
 	    }
 
