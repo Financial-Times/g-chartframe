@@ -497,6 +497,8 @@
 	})();
 	});
 
+	var saveSvgAsPng_1 = saveSvgAsPng.saveSvgAsPng;
+
 	var xhtml = "http://www.w3.org/1999/xhtml";
 
 	var namespaces = {
@@ -1961,7 +1963,7 @@
 	            }
 	        });
 
-	    saveSvgAsPng(svg, 'area-chart.png', { scale: scaleFactor });
+	    saveSvgAsPng_1(svg, `${figure.select('title').text().replace(/\s/g, '-').toLowerCase()}.png`, { scale: scaleFactor });
 	}
 
 	function webFrameS(configObject) {

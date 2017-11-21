@@ -1,4 +1,4 @@
-import * as saveSvgAsPng from 'save-svg-as-png';
+import { saveSvgAsPng } from 'save-svg-as-png';
 import * as d3 from 'd3-selection';
 
 function chartFrame(configObject) {
@@ -609,11 +609,7 @@ function savePNG(svg, figure, scaleFactor) {
             }
         });
 
-    saveSvgAsPng(
-        svg,
-        `${figure.select('title').text().replace(/\s/g, '-').toLowerCase()}.png`,
-        { scale: scaleFactor },
-    );
+    saveSvgAsPng(svg, `${figure.select('title').text().replace(/\s/g, '-').toLowerCase()}.png`, { scale: scaleFactor });
 }
 
 export default chartFrame;
