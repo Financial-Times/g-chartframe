@@ -1,8 +1,8 @@
 import * as fs from 'fs';
 import * as d3 from 'd3';
 import tape from 'tape';
-import * as chartFrame from '../index';
 import jsdom from 'jsdom';
+import * as chartFrame from '../index';
 
 tape('chartFrame defaults', (test) => {
     test.equal(chartFrame.frame().title(), 'Title: A description of the charts purpose');
@@ -33,5 +33,27 @@ tape('chartFrame can be extended', (test) => {
 
     // Test attrs
     test.equal(defaultFrame.attrs().llama, 'quack');
+    test.end();
+});
+
+tape('chartFrame can have "Save PNG" buttons', (test) => {
+    const { JSDOM } = jsdom;
+    const defaultFrame = chartFrame.frame(); // enabled by default
+    const dom = new JSDOM(fs.readFileSync('test/scaffold.html'));
+    const chartContainer = d3.select(dom.window.document.querySelector('body div.chart-container'));
+    chartContainer.call(defaultFrame);
+
+    test.equal(chartContainer.selectAll('.save-png-button').size(), 2);
+    test.end();
+});
+
+tape('chartFrame "Save PNG" buttons can be disabled', (test) => {
+    const { JSDOM } = jsdom;
+    const defaultFrame = chartFrame.frame().showDownloadPngButtons(false);
+    const dom = new JSDOM(fs.readFileSync('test/scaffold.html'));
+    const chartContainer = d3.select(dom.window.document.querySelector('body div.chart-container'));
+    chartContainer.call(defaultFrame);
+
+    test.equal(chartContainer.selectAll('.save-png-button').size(), 0);
     test.end();
 });

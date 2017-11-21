@@ -1,3 +1,5 @@
+import saveSvgAsPng from 'save-svg-as-png';
+
 function chartFrame(configObject) {
     let autoPosition = false;
     let backgroundColour;
@@ -7,6 +9,7 @@ function chartFrame(configObject) {
     let goalposts = false; // goalpost is the bit at the top and bottom of pritn charts
     let blackbar = false; // blackbar the short black bar above web graphics
     let fullYear = false;
+    let showDownloadPngButtons = true;
     let graphicHeight = 400;
     let graphicWidth = 500;
     let plot;
@@ -273,6 +276,27 @@ function chartFrame(configObject) {
         plot.transition(transition)
             .duration(0)
             .attr('transform', `translate(${margin.left},${margin.top})`);
+
+        if (showDownloadPngButtons) {
+            const holder = p.append('div');
+
+            holder.append('button')
+                .attr('class', 'save-png-button save-png-button__1x')
+                .text('Save as .png')
+                .style('float', 'left')
+                .style('opacity', 0.6)
+                .on('click', () => savePNG(plot, p, 1));
+
+            holder.append('button')
+                .attr('class', 'save-png-button save-png-button__2x')
+                .style('float', 'left')
+                .style('opacity', 0.6)
+                .text('Save as double size .png')
+                .on('click', () => savePNG(plot, p, 2));
+
+            holder.append('div')
+                .html('<br/>');
+        }
     }
 
 
@@ -367,6 +391,13 @@ function chartFrame(configObject) {
     frame.rem = (x) => {
         if (x === undefined) return rem;
         rem = x;
+        return frame;
+    };
+
+    frame.showDownloadPngButtons = (d) => {
+        if (typeof d === 'undefined') return showDownloadPngButtons;
+        showDownloadPngButtons = d;
+
         return frame;
     };
 
@@ -559,6 +590,23 @@ function chartFrame(configObject) {
 function isFunction(functionToCheck) {
     const getType = {};
     return functionToCheck && getType.toString.call(functionToCheck) === '[object Function]';
+}
+
+function savePNG(svg, figure, scaleFactor) {
+    figure.selectAll('.axis path, .axis text, .axis line, .axis, .baseline , .baseline line, .legend, .legend text')
+        .each(function inlineProps() {
+            const element = this;
+            const computedStyle = getComputedStyle(element, null);
+
+            // loop through and compute inline svg styles
+            for (let i = 0; i < computedStyle.length; i += 1) {
+                const property = computedStyle.item(i);
+                const value = computedStyle.getPropertyValue(property);
+                element.style[property] = value;
+            }
+        });
+
+    saveSvgAsPng(svg, 'area-chart.png', { scale: scaleFactor });
 }
 
 export default chartFrame;
