@@ -1641,7 +1641,7 @@
 	            }
 
 	            // Prevent this from being rendered twice
-	            if (!parent.select('.button-holder')) {
+	            if (parent.selectAll('.button-holder').size() === 0) {
 	                const holder = parent.append('div').attr('class', 'button-holder');
 	                holder.append('button')
 	                    .attr('class', 'save-png-button save-png-button__1x')
