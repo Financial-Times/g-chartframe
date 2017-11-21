@@ -1635,9 +1635,10 @@
 	        if (showDownloadPngButtons) {
 	            let holder;
 	            if (p.node().nodeName.toLowerCase() === 'svg') {
-	                holder = select(p.node().parentNode).append('div');
+	                holder = select(p.node().parentNode)
+	                    .append('div').attr('class', 'button-holder');
 	            } else {
-	                holder = p;
+	                holder = p.append('div').attr('class', 'button-holder');
 	            }
 
 	            holder.append('button')
@@ -1645,14 +1646,14 @@
 	                .text('Save as .png')
 	                .style('float', 'left')
 	                .style('opacity', 0.6)
-	                .on('click', () => savePNG(plot, p, 1));
+	                .on('click', () => savePNG(p, 1));
 
 	            holder.append('button')
 	                .attr('class', 'save-png-button save-png-button__2x')
 	                .style('float', 'left')
 	                .style('opacity', 0.6)
 	                .text('Save as double size .png')
-	                .on('click', () => savePNG(plot, p, 2));
+	                .on('click', () => savePNG(p, 2));
 	        }
 	    }
 
@@ -1949,7 +1950,7 @@
 	    return functionToCheck && getType.toString.call(functionToCheck) === '[object Function]';
 	}
 
-	function savePNG(svg, figure, scaleFactor) {
+	function savePNG(figure, scaleFactor) {
 	    figure.selectAll('.axis path, .axis text, .axis line, .axis, .baseline , .baseline line, .legend, .legend text')
 	        .each(function inlineProps() {
 	            const element = this;
@@ -1963,7 +1964,7 @@
 	            }
 	        });
 
-	    saveSvgAsPng_1(svg, `${figure.select('title').text().replace(/\s/g, '-').toLowerCase()}.png`, { scale: scaleFactor });
+	    saveSvgAsPng_1(figure.select('svg').node(), `${figure.select('title').text().replace(/\s/g, '-').toLowerCase()}.png`, { scale: scaleFactor });
 	}
 
 	function webFrameS(configObject) {
