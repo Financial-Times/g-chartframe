@@ -596,8 +596,8 @@ function isFunction(functionToCheck) {
     return functionToCheck && getType.toString.call(functionToCheck) === '[object Function]';
 }
 
-function savePNG(figure, scaleFactor) {
-    figure.selectAll('.axis path, .axis text, .axis line, .axis, .baseline , .baseline line, .legend, .legend text')
+function savePNG(svg, scaleFactor) {
+    svg.selectAll('.axis path, .axis text, .axis line, .axis, .baseline , .baseline line, .legend, .legend text')
         .each(function inlineProps() {
             const element = this;
             const computedStyle = getComputedStyle(element, null);
@@ -610,7 +610,7 @@ function savePNG(figure, scaleFactor) {
             }
         });
 
-    saveSvgAsPng(figure.select('svg').node(), `${figure.select('title').text().replace(/\s/g, '-').toLowerCase()}.png`, { scale: scaleFactor });
+    saveSvgAsPng(svg.node(), `${svg.select('title').text().replace(/\s/g, '-').toLowerCase()}.png`, { scale: scaleFactor });
 }
 
 export default chartFrame;

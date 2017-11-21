@@ -1950,8 +1950,8 @@
 	    return functionToCheck && getType.toString.call(functionToCheck) === '[object Function]';
 	}
 
-	function savePNG(figure, scaleFactor) {
-	    figure.selectAll('.axis path, .axis text, .axis line, .axis, .baseline , .baseline line, .legend, .legend text')
+	function savePNG(svg, scaleFactor) {
+	    svg.selectAll('.axis path, .axis text, .axis line, .axis, .baseline , .baseline line, .legend, .legend text')
 	        .each(function inlineProps() {
 	            const element = this;
 	            const computedStyle = getComputedStyle(element, null);
@@ -1964,7 +1964,7 @@
 	            }
 	        });
 
-	    saveSvgAsPng_1(figure.select('svg').node(), `${figure.select('title').text().replace(/\s/g, '-').toLowerCase()}.png`, { scale: scaleFactor });
+	    saveSvgAsPng_1(svg.node(), `${svg.select('title').text().replace(/\s/g, '-').toLowerCase()}.png`, { scale: scaleFactor });
 	}
 
 	function webFrameS(configObject) {
