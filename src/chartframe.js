@@ -600,7 +600,7 @@ function isFunction(functionToCheck) {
 }
 
 function savePNG(svg, scaleFactor) {
-    svg.selectAll('.axis path, .axis text, .axis line, .axis, .baseline , .baseline line, .legend, .legend text')
+    svg.selectAll('.annotation, .lines, .highlights, .axis path, .axis text, .axis line, .axis, .baseline , .baseline line, .legend, .legend text')
         .each(function inlineProps() {
             const element = this;
             const computedStyle = getComputedStyle(element, null);
