@@ -599,8 +599,35 @@ function isFunction(functionToCheck) {
     return functionToCheck && getType.toString.call(functionToCheck) === '[object Function]';
 }
 
+const classes = [
+    '.annotation',
+    '.lines',
+    '.highlights',
+    '.axis path',
+    '.axis text',
+    '.axis line',
+    '.axis',
+    '.baseline',
+    '.baseline line',
+    '.legend',
+    '.legend text',
+    '.chart-goalposts',
+    '.chart-title',
+    '.chart-subtitle',
+    '.chart-source',
+    '.chart-copyright',
+    '.chart-watermark',
+    '.annotations-holder',
+    '.lines highlighlines',
+    '.highlights',
+    '.annotation',
+    '.annotations-holder line',
+    '.annotations-holder text',
+    '.line path',
+];
+
 function savePNG(svg, scaleFactor) {
-    svg.selectAll('.annotation, .lines, .highlights, .axis path, .axis text, .axis line, .axis, .baseline , .baseline line, .legend, .legend text')
+    svg.selectAll(classes.join(', '))
         .each(function inlineProps() {
             const element = this;
             const computedStyle = getComputedStyle(element, null);
