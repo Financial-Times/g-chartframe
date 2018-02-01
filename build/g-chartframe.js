@@ -2243,40 +2243,37 @@
 	    const f = chartFrame()
 	        .autoPosition(true)
 	        .containerClass('ft-socialgraphic')
-	        .backgroundColour('#212121')
-	        .width(560)
-	        .height(750)
+	        .backgroundColour('#262a33')
+	        .width(612)
+	        .height(612)
 	        .watermark(watermarkPath.light)
 	        .watermarkOffset(25)
-	        .margin({ left: 50, right: 40, bottom: 138, top: 140 })
-	        .rem(28)
-	        .titleX(50)
-	        .titleY(72)
-	        .titleLineHeight(38)
+	        .margin({ left: 40, right: 40, bottom: 138, top: 140 })
+	        .rem(24)
+	        .titleX(40)
+	        .titleY(80)
+	        .titleLineHeight(32)
 	        .titleStyle({
-	            'font-size': '38px',
+	            'font-size': '30px',
 	            fill: '#ffffff',
-	            'font-weight': 600,
-	            opacity: 0.9,
+	            'font-weight': 400,
 	            'font-family': 'MetricWeb,sans-serif',
 	        })
-	        .subtitleX(50)
-	        .subtitleY(110)
-	        .subtitleLineHeight(28)
+	        .subtitleX(40)
+	        .subtitleY(112)
+	        .subtitleLineHeight(26)
 	        .subtitleStyle({
-	            'font-size': '28px',
-	            fill: '#ffffff',
+	            'font-size': '24px',
+	            fill: '#8e9095',
 	            'font-weight': 400,
-	            opacity: 0.7,
 	            'font-family': 'MetricWeb,sans-serif',
 	        })
-	        .sourceX(50)
-	        .sourceLineHeight(25)
+	        .sourceX(40)
+	        .sourceLineHeight(22)
 	        .sourceStyle({
-	            'font-size': '25px',
-	            fill: '#ffffff',
+	            'font-size': '20px',
+	            fill: '#8e9095',
 	            'font-weight': 400,
-	            opacity: 0.5,
 	            'font-family': 'MetricWeb,sans-serif',
 	        });
 
