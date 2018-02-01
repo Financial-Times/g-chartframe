@@ -9,6 +9,7 @@ function chartFrame(configObject) {
     let copyrightStyle = false;
     let goalposts = false; // goalpost is the bit at the top and bottom of pritn charts
     let blackbar = false; // blackbar the short black bar above web graphics
+    let whitebar = false; // whitebar the short white bar above social graphics
     let fullYear = false;
     let showDownloadPngButtons = true;
     let graphicHeight = 400;
@@ -28,8 +29,10 @@ function chartFrame(configObject) {
     let titleStyle = {};
     let watermarkLocation = 'icons.svg#ft-logo';
     let watermarkMarkup = '';
-    let watermarkOffset = 0;
-    let watermarkSize = 58;
+    let watermarkOffsetX = 40;
+    let watermarkOffsetY = 0;
+    let watermarkWidth = 124;
+    let watermarkHeight = 10;
     let units = 'px';
 
     const margin = {
@@ -96,6 +99,13 @@ function chartFrame(configObject) {
                 .attr('width', 60)
                 .attr('height', 4)
                 .style('fill', blackbar);
+        }
+        if (whitebar) {
+            p.append('rect')
+                .attr('width', 60)
+                .attr('height', 4)
+                .style('fill', whitebar)
+                .attr('transform', `translate(${margin.left},${margin.left})`);
         }
 
         // 'goalposts' (the bit at the top and the bottom of print charts)
@@ -257,12 +267,12 @@ function chartFrame(configObject) {
             .append('g')
             .attr('class', 'chart-watermark')
             .html(watermarkMarkup)
-            .attr('transform', `translate(${graphicWidth - watermarkSize - watermarkOffset},${graphicHeight - watermarkSize - watermarkOffset}) scale(${watermarkSize / 100}) `);
+            .attr('transform', `translate(${graphicWidth - watermarkWidth - watermarkOffsetX},${graphicHeight - watermarkHeight - watermarkOffsetY}) scale(1) `);
 
         p.selectAll('g.chart-watermark')
             .html(watermarkMarkup)
             .transition()
-            .attr('transform', `translate(${graphicWidth - watermarkSize - watermarkOffset},${graphicHeight - watermarkSize - watermarkOffset}) scale(${watermarkSize / 100}) `);
+            .attr('transform', `translate(${graphicWidth - watermarkWidth - watermarkOffsetX},${graphicHeight - watermarkHeight - watermarkOffsetY}) scale(1) `);
 
         // plot area (where you put the chart itself)
         p.selectAll('g.chart-plot')
@@ -517,9 +527,15 @@ function chartFrame(configObject) {
         return frame;
     };
 
-    frame.watermarkOffset = (x) => {
-        if (x === undefined) return watermarkOffset;
-        watermarkOffset = x;
+    frame.watermarkOffsetY = (x) => {
+        if (x === undefined) return watermarkOffsetY;
+        watermarkOffsetY = x;
+        return frame;
+    };
+
+    frame.watermarkOffsetX = (x) => {
+        if (x === undefined) return watermarkOffsetX;
+        watermarkOffsetX = x;
         return frame;
     };
 
@@ -530,9 +546,21 @@ function chartFrame(configObject) {
         return frame;
     };
 
-    frame.watermarkSize = (x) => {
-        if (x === undefined) return watermarkSize;
-        watermarkSize = x;
+    frame.watermarkWidth = (x) => {
+        if (x === undefined) return watermarkWidth;
+        watermarkWidth = x;
+        return frame;
+    };
+
+    frame.watermarkHeight = (x) => {
+        if (x === undefined) return watermarkHeight;
+        watermarkHeight = x;
+        return frame;
+    };
+
+    frame.whitebar = (x) => {
+        if (x === undefined) return whitebar;
+        whitebar = x;
         return frame;
     };
 
@@ -572,8 +600,11 @@ function chartFrame(configObject) {
                 titleStyle,
                 watermarkLocation,
                 watermarkMarkup,
-                watermarkOffset,
-                watermarkSize,
+                watermarkOffsetX,
+                watermarkOffsetY,
+                watermarkHeight,
+                watermarkWidth,
+                whitebar,
                 units,
             }, custom);
         }

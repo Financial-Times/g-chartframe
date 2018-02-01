@@ -1356,969 +1356,761 @@
 	}
 
 	function chartFrame(configObject) {
-	    let autoPosition = false;
-	    let backgroundColour;
-	    let containerClass = 'g-chartframe';
-	    let copyright = '© FT';
-	    let copyrightStyle = false;
-	    let goalposts = false; // goalpost is the bit at the top and bottom of pritn charts
-	    let blackbar = false; // blackbar the short black bar above web graphics
-	    let fullYear = false;
-	    let showDownloadPngButtons = true;
-	    let graphicHeight = 400;
-	    let graphicWidth = 500;
-	    let plot;
-	    let plotAdjuster = 0;
-	    let rem = 18;
-	    let subtitle = 'some supporting information, units perhaps';
-	    let subtitleLineHeight = 20;
-	    let subtitleStyle = {};
-	    let source = 'Source: research|FT Graphic Tom Pearson';
-	    let sourceLineHeight = 16;
-	    let sourcePlotYOffset = 46;
-	    let sourceStyle = {};
-	    let title = 'Title: A description of the charts purpose';
-	    let titleLineHeight = 32;
-	    let titleStyle = {};
-	    let watermarkLocation = 'icons.svg#ft-logo';
-	    let watermarkMarkup = '';
-	    let watermarkOffset = 0;
-	    let watermarkSize = 58;
-	    let units = 'px';
+	  var autoPosition = false;
+	  var backgroundColour;
+	  var containerClass = 'g-chartframe';
+	  var copyright = '© FT';
+	  var copyrightStyle = false;
+	  var goalposts = false; // goalpost is the bit at the top and bottom of pritn charts
 
-	    const margin = {
-	        top: 100,
-	        left: 1,
-	        bottom: 20,
-	        right: 20,
-	    };
-	    const subtitlePosition = { x: 1, y: 67 };
-	    const sourcePosition = { x: 1 };
-	    const titlePosition = { x: 1, y: 30 };
-	    const transition = 0.2;
-	    const convertFrom = {
-	        mm(x) { return (x * 2.83464480558843); },
-	        px(x) { return x; },
-	    };
-	    const custom = {};
+	  var blackbar = false; // blackbar the short black bar above web graphics
 
-	    function attributeStyle(parent, style) {
-	        Object.keys(style).forEach((attribute) => {
-	            parent.attr(attribute, style[attribute]);
-	        });
+	  var whitebar = false; // whitebar the short white bar above social graphics
+
+	  var fullYear = false;
+	  var showDownloadPngButtons = true;
+	  var graphicHeight = 400;
+	  var graphicWidth = 500;
+	  var plot;
+	  var plotAdjuster = 0;
+	  var rem = 18;
+	  var subtitle = 'some supporting information, units perhaps';
+	  var subtitleLineHeight = 20;
+	  var subtitleStyle = {};
+	  var source = 'Source: research|FT Graphic Tom Pearson';
+	  var sourceLineHeight = 16;
+	  var sourcePlotYOffset = 46;
+	  var sourceStyle = {};
+	  var title = 'Title: A description of the charts purpose';
+	  var titleLineHeight = 32;
+	  var titleStyle = {};
+	  var watermarkLocation = 'icons.svg#ft-logo';
+	  var watermarkMarkup = '';
+	  var watermarkOffsetX = 40;
+	  var watermarkOffsetY = 0;
+	  var watermarkWidth = 124;
+	  var watermarkHeight = 10;
+	  var units = 'px';
+	  var margin = {
+	    top: 100,
+	    left: 1,
+	    bottom: 20,
+	    right: 20
+	  };
+	  var subtitlePosition = {
+	    x: 1,
+	    y: 67
+	  };
+	  var sourcePosition = {
+	    x: 1
+	  };
+	  var titlePosition = {
+	    x: 1,
+	    y: 30
+	  };
+	  var transition = 0.2;
+	  var convertFrom = {
+	    mm: function mm(x) {
+	      return x * 2.83464480558843;
+	    },
+	    px: function px(x) {
+	      return x;
 	    }
+	  };
+	  var custom = {};
 
-	    function frame(p) {
-	        // overall graphic properties
-	        p.attr('class', containerClass)
-	            .attr('font-family', 'MetricWeb,sans-serif');
-	        if (p.node().nodeName.toLowerCase() === 'svg') {
-	            p.transition(transition)
-	                .attr('width', graphicWidth)
-	                .attr('height', graphicHeight)
-	                .attr('viewBox', ['0 0', graphicWidth, graphicHeight].join(' '));
-
-	            p.selectAll('title')
-	                .data([title])
-	                .enter()
-	                .append('title');
-
-	            p.selectAll('title').text(title);
-	        }
-
-	        // background
-	        if (backgroundColour !== undefined) {
-	            p.selectAll('rect.chart-background')
-	                .data([backgroundColour])
-	                .enter()
-	                .append('rect')
-	                .attr('id', 'chart-background')
-	                .attr('class', 'chart-background');
-
-	            p.selectAll('rect.chart-background')
-	                .transition(transition)
-	                .attr('x', 0)
-	                .attr('y', 0)
-	                .attr('width', graphicWidth)
-	                .attr('height', graphicHeight)
-	                .attr('fill', backgroundColour);
-	        }
-
-	        // 'blackbar' (the short black bar above web graphics)
-	        if (blackbar) {
-	            p.append('rect')
-	                .attr('width', 60)
-	                .attr('height', 4)
-	                .style('fill', blackbar);
-	        }
-
-	        // 'goalposts' (the bit at the top and the bottom of print charts)
-	        if (goalposts) {
-	            const goalpostPaths = [
-	                `M 0, ${graphicHeight} L ${graphicWidth}, ${graphicHeight}`,
-	                `M 0, 15 L 0, 0 L ${graphicWidth}, 0 L ${graphicWidth}, 15`,
-	            ];
-
-	            p.selectAll('path.chart-goalposts')
-	                .data(goalpostPaths)
-	                .enter()
-	                .append('path')
-	                .attr('class', 'chart-goalposts');
-
-	            p.selectAll('path.chart-goalposts')
-	                .transition(transition)
-	                .attr('d', d => d)
-	                .attr('stroke-width', 0.3)
-	                .attr('fill', 'none')
-	                .attr('stroke', goalposts);
-	        }
-
-	        // title
-	        const titleLineCount = title.split('|').length;
-	        p.selectAll('text.chart-title')
-	            .data([title])
-	            .enter()
-	            .append('text')
-	            .attr('class', 'chart-title')
-	            .attr('id', `${containerClass}title`)
-	            .call((titleText) => {
-	                titleText.selectAll('tspan')
-	                    .data(title.split('|'))
-	                    .enter()
-	                    .append('tspan')
-	                    .html(d => d)
-	                    .attr('y', (d, i) => (titlePosition.y + (i * titleLineHeight)))
-	                    .attr('x', titlePosition.x)
-	                    .call(attributeStyle, titleStyle);
-	            });
-
-	        p.selectAll('text.chart-title tspan')
-	            .html(d => d)
-	            .transition(transition)
-	            .attr('y', (d, i) => (titlePosition.y + (i * titleLineHeight)))
-	            .attr('x', titlePosition.x)
-	            .call(attributeStyle, titleStyle);
-
-	        const subtitleLineCount = subtitle.split('|').length;
-	        // subtitle
-	        p.selectAll('text.chart-subtitle')
-	            .data([subtitle])
-	            .enter()
-	            .append('text')
-	            .attr('id', `${containerClass}subtitle`)
-	            .attr('class', 'chart-subtitle')
-	            .call((subtitleText) => {
-	                subtitleText.selectAll('tspan')
-	                    .data(subtitle.split('|'))
-	                    .enter()
-	                    .append('tspan')
-	                    .html(d => d)
-	                    .attr('id', `${containerClass}subtitle`)
-	                    .attr('y', (d, i) => {
-	                        if (titleLineCount > 1) {
-	                            return (titlePosition.y + (titleLineCount * titleLineHeight) + (subtitleLineHeight * i));
-	                        }
-	                        return (subtitlePosition.y + (i * subtitleLineHeight));
-	                    })
-
-	                    .attr('x', subtitlePosition.x)
-	                    .call(attributeStyle, subtitleStyle);
-	            });
-
-	        p.selectAll('text.chart-subtitle tspan')
-	            .html(d => d)
-	            .transition(transition)
-	            .attr('y', (d, i) => {
-	                if (titleLineCount > 1) {
-	                    return (titlePosition.y + (titleLineCount * titleLineHeight) + (subtitleLineHeight * i));
-	                }
-	                return (subtitlePosition.y + (i * subtitleLineHeight));
-	            })
-	            .attr('x', subtitlePosition.x)
-	            .call(attributeStyle, subtitleStyle);
-
-	        // source
-	        p.selectAll('text.chart-source')
-	            .data([source])
-	            .enter()
-	            .append('text')
-	            .attr('class', 'chart-source')
-	            .attr('id', `${containerClass}source`)
-	            .call((sourceText) => {
-	                sourceText.selectAll('tspan')
-	                    .data(source.split('|'))
-	                    .enter()
-	                    .append('tspan')
-	                    .html(d => d)
-	                    .attr('id', `${containerClass}source`)
-	                    .attr('y', (d, i) => {
-	                        if (sourcePosition.y) {
-	                            return (sourcePosition.y + (i * sourceLineHeight));
-	                        }
-	                        return ((graphicHeight - (margin.bottom - sourcePlotYOffset) + sourceLineHeight * 1.5) + ((i) * sourceLineHeight)); // eslint-disable-line
-	                    })
-	                    .attr('x', subtitlePosition.x)
-	                    .call(attributeStyle, subtitleStyle);
-	            });
-
-	        p.selectAll('text.chart-source tspan')
-	            .html(d => d)
-	            .transition(transition)
-	            .attr('y', (d, i) => {
-	                if (sourcePosition.y) {
-	                    return (sourcePosition.y + (i * sourceLineHeight));
-	                }
-	                return ((graphicHeight - (margin.bottom - sourcePlotYOffset) + sourceLineHeight * 1.5) + ((i) * sourceLineHeight)); // eslint-disable-line
-	            })
-	            .attr('x', sourcePosition.x)
-	            .call(attributeStyle, sourceStyle);
-
-	        const sourceLineCount = source.split('|').length;
-	        // copyright
-	        if (copyrightStyle) {
-	            p.selectAll('text.chart-copyright')
-	                .data([copyright])
-	                .enter()
-	                .append('text')
-	                .attr('class', 'chart-copyright')
-	                .append('tspan')
-	                .html(d => d)
-	                .attr('x', sourcePosition.x)
-	                .attr('y', () => {
-	                    if (sourceLineCount > 1) {
-	                        return (graphicHeight - (margin.bottom - sourcePlotYOffset) + (sourceLineHeight * 1.125) + (sourceLineCount * sourceLineHeight * 1.2)); // eslint-disable-line
-	                    }
-	                    return (graphicHeight - (margin.bottom - sourcePlotYOffset) + (sourceLineHeight * 2.5)); // eslint-disable-line
-	                })
-
-
-	                .call(attributeStyle, copyrightStyle);
-	        }
-
-
-	        // TODO figure out a way to improve this autoPosition stuff, needs ot be configurable so we don't have to reference specific classes
-	        if (autoPosition && (containerClass === 'ft-printgraphic' || containerClass === 'ft-socialgraphic' || containerClass === 'ft-videographic')) {
-	            margin.top = (titlePosition.y + (titleLineCount * titleLineHeight) + (subtitleLineCount * subtitleLineHeight) + (rem / 3));
-	        } else if (autoPosition) {
-	            margin.top = (titlePosition.y + (titleLineCount * titleLineHeight) + (subtitleLineCount * subtitleLineHeight) + 28 - plotAdjuster); // eslint-disable-line
-	        }
-
-	        // watermark
-
-	        p.selectAll('g.chart-watermark')
-	            .data([0])
-	            .enter()
-	            .append('g')
-	            .attr('class', 'chart-watermark')
-	            .html(watermarkMarkup)
-	            .attr('transform', `translate(${graphicWidth - watermarkSize - watermarkOffset},${graphicHeight - watermarkSize - watermarkOffset}) scale(${watermarkSize / 100}) `);
-
-	        p.selectAll('g.chart-watermark')
-	            .html(watermarkMarkup)
-	            .transition()
-	            .attr('transform', `translate(${graphicWidth - watermarkSize - watermarkOffset},${graphicHeight - watermarkSize - watermarkOffset}) scale(${watermarkSize / 100}) `);
-
-	        // plot area (where you put the chart itself)
-	        p.selectAll('g.chart-plot')
-	            .data([0])
-	            .enter()
-	            .append('g')
-	            .attr('class', 'chart-plot')
-	            .attr('transform', `translate(${margin.left},${margin.top})`);
-
-	        plot = p.selectAll('g.chart-plot');
-
-	        plot.transition(transition)
-	            .duration(0)
-	            .attr('transform', `translate(${margin.left},${margin.top})`);
-
-	        if (showDownloadPngButtons) {
-	            let parent;
-	            if (p.node().nodeName.toLowerCase() === 'svg') {
-	                parent = select(p.node().parentNode);
-	            } else {
-	                parent = select(p.node());
-	            }
-
-	            // Prevent this from being rendered twice
-	            if (parent.selectAll('.button-holder').size() === 0) {
-	                const holder = parent.append('div').attr('class', 'button-holder');
-	                holder.append('button')
-	                    .attr('class', 'save-png-button save-png-button__1x')
-	                    .text('Save as .png')
-	                    .style('float', 'left')
-	                    .style('opacity', 0.6)
-	                    .on('click', () => savePNG(p, 1));
-
-	                holder.append('button')
-	                    .attr('class', 'save-png-button save-png-button__2x')
-	                    .style('float', 'left')
-	                    .style('opacity', 0.6)
-	                    .text('Save as double size .png')
-	                    .on('click', () => savePNG(p, 2));
-	            }
-	        }
-	    }
-
-
-	    // Setters and getters
-
-	    frame.autoPosition = (x) => {
-	        if (x === undefined) return autoPosition;
-	        autoPosition = x;
-	        return frame;
-	    };
-
-	    frame.backgroundColour = (x) => {
-	        if (x === undefined) return backgroundColour;
-	        backgroundColour = x;
-	        return frame;
-	    };
-
-	    frame.blackbar = (x) => {
-	        if (x === undefined) return blackbar;
-	        blackbar = x;
-	        return frame;
-	    };
-
-	    frame.containerClass = (x) => {
-	        if (x === undefined) return containerClass;
-	        containerClass = x;
-	        return frame;
-	    };
-
-	    frame.copyright = (x) => {
-	        if (x === undefined) return copyright;
-	        copyright = x;
-	        return frame;
-	    };
-
-	    frame.copyrightStyle = (x) => {
-	        if (x === undefined) return copyrightStyle;
-	        copyrightStyle = x;
-	        return frame;
-	    };
-
-	    frame.dimension = () => ({
-	        width: graphicWidth - (margin.left + margin.right),
-	        height: graphicHeight - (margin.top + margin.bottom),
+	  function attributeStyle(parent, style) {
+	    Object.keys(style).forEach(function (attribute) {
+	      parent.attr(attribute, style[attribute]);
 	    });
+	  }
 
-	    frame.extend = (key, value) => {
-	        custom[key] = value;
-	        frame[key] = (d) => {
-	            if (d === undefined) return custom[key];
-	            custom[key] = d;
-	            return frame;
-	        };
+	  function frame(p) {
+	    // overall graphic properties
+	    p.attr('class', containerClass).attr('font-family', 'MetricWeb,sans-serif');
 
-	        return frame;
-	    };
+	    if (p.node().nodeName.toLowerCase() === 'svg') {
+	      p.transition(transition).attr('width', graphicWidth).attr('height', graphicHeight).attr('viewBox', ['0 0', graphicWidth, graphicHeight].join(' '));
+	      p.selectAll('title').data([title]).enter().append('title');
+	      p.selectAll('title').text(title);
+	    } // background
 
-	    frame.fullYear = (x) => {
-	        if (x === undefined) return fullYear;
-	        fullYear = x;
-	        return frame;
-	    };
 
-	    frame.goalposts = (x) => {
-	        if (x === undefined) return goalposts;
-	        goalposts = x;
-	        return frame;
-	    };
+	    if (backgroundColour !== undefined) {
+	      p.selectAll('rect.chart-background').data([backgroundColour]).enter().append('rect').attr('id', 'chart-background').attr('class', 'chart-background');
+	      p.selectAll('rect.chart-background').transition(transition).attr('x', 0).attr('y', 0).attr('width', graphicWidth).attr('height', graphicHeight).attr('fill', backgroundColour);
+	    } // 'blackbar' (the short black bar above web graphics)
 
-	    frame.height = (x) => {
-	        if (x === undefined) return graphicHeight;
-	        graphicHeight = convertFrom[units](x);
-	        return frame;
-	    };
 
-	    frame.margin = (x) => {
-	        if (x === undefined) return margin;
-	        Object.keys(x).forEach((k) => {
-	            margin[k] = x[k];
-	        });
-	        return frame;
-	    };
+	    if (blackbar) {
+	      p.append('rect').attr('width', 60).attr('height', 4).style('fill', blackbar);
+	    }
 
-	    frame.plot = () => plot;
+	    if (whitebar) {
+	      p.append('rect').attr('width', 60).attr('height', 4).style('fill', whitebar).attr('transform', "translate(".concat(margin.left, ",").concat(margin.left, ")"));
+	    } // 'goalposts' (the bit at the top and the bottom of print charts)
 
-	    frame.plotAdjuster = (x) => {
-	        if (x === undefined) return plotAdjuster;
-	        plotAdjuster = x;
-	        return frame;
-	    };
 
-	    frame.rem = (x) => {
-	        if (x === undefined) return rem;
-	        rem = x;
-	        return frame;
-	    };
+	    if (goalposts) {
+	      var goalpostPaths = ["M 0, ".concat(graphicHeight, " L ").concat(graphicWidth, ", ").concat(graphicHeight), "M 0, 15 L 0, 0 L ".concat(graphicWidth, ", 0 L ").concat(graphicWidth, ", 15")];
+	      p.selectAll('path.chart-goalposts').data(goalpostPaths).enter().append('path').attr('class', 'chart-goalposts');
+	      p.selectAll('path.chart-goalposts').transition(transition).attr('d', function (d) {
+	        return d;
+	      }).attr('stroke-width', 0.3).attr('fill', 'none').attr('stroke', goalposts);
+	    } // title
 
-	    frame.showDownloadPngButtons = (d) => {
-	        if (typeof d === 'undefined') return showDownloadPngButtons;
-	        showDownloadPngButtons = d;
 
-	        return frame;
-	    };
+	    var titleLineCount = title.split('|').length;
+	    p.selectAll('text.chart-title').data([title]).enter().append('text').attr('class', 'chart-title').attr('id', "".concat(containerClass, "title")).call(function (titleText) {
+	      titleText.selectAll('tspan').data(title.split('|')).enter().append('tspan').html(function (d) {
+	        return d;
+	      }).attr('y', function (d, i) {
+	        return titlePosition.y + i * titleLineHeight;
+	      }).attr('x', titlePosition.x).call(attributeStyle, titleStyle);
+	    });
+	    p.selectAll('text.chart-title tspan').html(function (d) {
+	      return d;
+	    }).transition(transition).attr('y', function (d, i) {
+	      return titlePosition.y + i * titleLineHeight;
+	    }).attr('x', titlePosition.x).call(attributeStyle, titleStyle);
+	    var subtitleLineCount = subtitle.split('|').length; // subtitle
 
-	    frame.source = (x) => {
-	        if (x === undefined) return source;
-	        source = x;
-	        return frame;
-	    };
-
-	    frame.sourceLineHeight = (x) => {
-	        if (x === undefined) return sourceLineHeight;
-	        sourceLineHeight = x;
-	        return frame;
-	    };
-
-	    frame.sourcePlotYOffset = (x) => {
-	        if (x === undefined) return sourcePlotYOffset;
-	        sourcePlotYOffset = x;
-	        return frame;
-	    };
-
-	    frame.sourceStyle = (x) => {
-	        if (x === undefined) return sourceStyle;
-	        sourceStyle = x;
-	        return frame;
-	    };
-
-	    frame.sourceX = (x) => {
-	        if (x === undefined) return sourcePosition.x;
-	        sourcePosition.x = x;
-	        return frame;
-	    };
-
-	    frame.sourceY = (x) => {
-	        if (x === undefined) return sourcePosition.y;
-	        sourcePosition.y = x;
-	        return frame;
-	    };
-
-	    frame.subtitle = (x) => {
-	        if (x === undefined) return subtitle;
-	        subtitle = x;
-	        return frame;
-	    };
-
-	    frame.subtitleLineHeight = (x) => {
-	        if (x === undefined) return subtitleLineHeight;
-	        subtitleLineHeight = x;
-	        return frame;
-	    };
-
-	    frame.subtitleStyle = (x) => {
-	        if (x === undefined) return subtitleStyle;
-	        subtitleStyle = x;
-	        return frame;
-	    };
-
-	    frame.subtitleX = (x) => {
-	        if (x === undefined) return subtitlePosition.x;
-	        subtitlePosition.x = x;
-	        return frame;
-	    };
-
-	    frame.subtitleY = (x) => {
-	        if (x === undefined) return subtitlePosition.y;
-	        subtitlePosition.y = x;
-	        return frame;
-	    };
-
-	    frame.title = (x) => {
-	        if (x === undefined) return title;
-	        title = x;
-	        return frame;
-	    };
-
-	    frame.titleStyle = (x) => {
-	        if (x === undefined) return titleStyle;
-	        titleStyle = x;
-	        return frame;
-	    };
-
-	    frame.titleLineHeight = (x) => {
-	        if (x === undefined) return titleLineHeight;
-	        titleLineHeight = x;
-	        return frame;
-	    };
-
-	    frame.titleX = (x) => {
-	        if (x === undefined) return titlePosition.x;
-	        titlePosition.x = x;
-	        return frame;
-	    };
-
-	    frame.titleY = (x) => {
-	        if (x === undefined) return titlePosition.y;
-	        titlePosition.y = x;
-	        return frame;
-	    };
-
-	    frame.units = (x) => {
-	        if (x === undefined) return units;
-	        units = x;
-	        return frame;
-	    };
-
-	    frame.watermark = (x) => {
-	        if (x === undefined) return watermarkMarkup;
-	        watermarkLocation = '';
-	        watermarkMarkup = x;
-	        return frame;
-	    };
-
-	    frame.watermarkOffset = (x) => {
-	        if (x === undefined) return watermarkOffset;
-	        watermarkOffset = x;
-	        return frame;
-	    };
-
-	    frame.watermarkLocation = (x) => {
-	        if (x === undefined) return watermarkLocation;
-	        watermarkMarkup = '';
-	        watermarkLocation = x;
-	        return frame;
-	    };
-
-	    frame.watermarkSize = (x) => {
-	        if (x === undefined) return watermarkSize;
-	        watermarkSize = x;
-	        return frame;
-	    };
-
-	    frame.width = (x) => {
-	        if (!x) return graphicWidth;
-	        graphicWidth = convertFrom[units](x);
-	        return frame;
-	    };
-
-	    frame.attrs = (x) => {
-	        if (x === undefined) {
-	            return Object.assign({}, {
-	                autoPosition,
-	                // axisAlign, // @FIX This is undef?
-	                containerClass,
-	                copyright,
-	                copyrightStyle,
-	                blackbar,
-	                goalposts,
-	                graphicHeight,
-	                graphicWidth,
-	                margin,
-	                plot,
-	                plotAdjuster,
-	                rem,
-	                subtitle,
-	                subtitleLineHeight,
-	                subtitlePosition,
-	                subtitleStyle,
-	                source,
-	                sourceLineHeight,
-	                sourcePosition,
-	                sourceStyle,
-	                title,
-	                titleLineHeight,
-	                titlePosition,
-	                titleStyle,
-	                watermarkLocation,
-	                watermarkMarkup,
-	                watermarkOffset,
-	                watermarkSize,
-	                units,
-	            }, custom);
+	    p.selectAll('text.chart-subtitle').data([subtitle]).enter().append('text').attr('id', "".concat(containerClass, "subtitle")).attr('class', 'chart-subtitle').call(function (subtitleText) {
+	      subtitleText.selectAll('tspan').data(subtitle.split('|')).enter().append('tspan').html(function (d) {
+	        return d;
+	      }).attr('id', "".concat(containerClass, "subtitle")).attr('y', function (d, i) {
+	        if (titleLineCount > 1) {
+	          return titlePosition.y + titleLineCount * titleLineHeight + subtitleLineHeight * i;
 	        }
 
-	        Object.keys(x).forEach((setterName) => {
-	            const value = x[setterName];
-	            if (isFunction(frame[setterName])) {
-	                frame[setterName](value);
-	            }
-	        });
-	        return frame;
-	    };
+	        return subtitlePosition.y + i * subtitleLineHeight;
+	      }).attr('x', subtitlePosition.x).call(attributeStyle, subtitleStyle);
+	    });
+	    p.selectAll('text.chart-subtitle tspan').html(function (d) {
+	      return d;
+	    }).transition(transition).attr('y', function (d, i) {
+	      if (titleLineCount > 1) {
+	        return titlePosition.y + titleLineCount * titleLineHeight + subtitleLineHeight * i;
+	      }
 
-	    if (configObject !== undefined) {
-	        frame.attrs(configObject);
+	      return subtitlePosition.y + i * subtitleLineHeight;
+	    }).attr('x', subtitlePosition.x).call(attributeStyle, subtitleStyle); // source
+
+	    p.selectAll('text.chart-source').data([source]).enter().append('text').attr('class', 'chart-source').attr('id', "".concat(containerClass, "source")).call(function (sourceText) {
+	      sourceText.selectAll('tspan').data(source.split('|')).enter().append('tspan').html(function (d) {
+	        return d;
+	      }).attr('id', "".concat(containerClass, "source")).attr('y', function (d, i) {
+	        if (sourcePosition.y) {
+	          return sourcePosition.y + i * sourceLineHeight;
+	        }
+
+	        return graphicHeight - (margin.bottom - sourcePlotYOffset) + sourceLineHeight * 1.5 + i * sourceLineHeight; // eslint-disable-line
+	      }).attr('x', subtitlePosition.x).call(attributeStyle, subtitleStyle);
+	    });
+	    p.selectAll('text.chart-source tspan').html(function (d) {
+	      return d;
+	    }).transition(transition).attr('y', function (d, i) {
+	      if (sourcePosition.y) {
+	        return sourcePosition.y + i * sourceLineHeight;
+	      }
+
+	      return graphicHeight - (margin.bottom - sourcePlotYOffset) + sourceLineHeight * 1.5 + i * sourceLineHeight; // eslint-disable-line
+	    }).attr('x', sourcePosition.x).call(attributeStyle, sourceStyle);
+	    var sourceLineCount = source.split('|').length; // copyright
+
+	    if (copyrightStyle) {
+	      p.selectAll('text.chart-copyright').data([copyright]).enter().append('text').attr('class', 'chart-copyright').append('tspan').html(function (d) {
+	        return d;
+	      }).attr('x', sourcePosition.x).attr('y', function () {
+	        if (sourceLineCount > 1) {
+	          return graphicHeight - (margin.bottom - sourcePlotYOffset) + sourceLineHeight * 1.125 + sourceLineCount * sourceLineHeight * 1.2; // eslint-disable-line
+	        }
+
+	        return graphicHeight - (margin.bottom - sourcePlotYOffset) + sourceLineHeight * 2.5; // eslint-disable-line
+	      }).call(attributeStyle, copyrightStyle);
+	    } // TODO figure out a way to improve this autoPosition stuff, needs ot be configurable so we don't have to reference specific classes
+
+
+	    if (autoPosition && (containerClass === 'ft-printgraphic' || containerClass === 'ft-socialgraphic' || containerClass === 'ft-videographic')) {
+	      margin.top = titlePosition.y + titleLineCount * titleLineHeight + subtitleLineCount * subtitleLineHeight + rem / 3;
+	    } else if (autoPosition) {
+	      margin.top = titlePosition.y + titleLineCount * titleLineHeight + subtitleLineCount * subtitleLineHeight + 28 - plotAdjuster; // eslint-disable-line
+	    } // watermark
+
+
+	    p.selectAll('g.chart-watermark').data([0]).enter().append('g').attr('class', 'chart-watermark').html(watermarkMarkup).attr('transform', "translate(".concat(graphicWidth - watermarkWidth - watermarkOffsetX, ",").concat(graphicHeight - watermarkHeight - watermarkOffsetY, ") scale(1) "));
+	    p.selectAll('g.chart-watermark').html(watermarkMarkup).transition().attr('transform', "translate(".concat(graphicWidth - watermarkWidth - watermarkOffsetX, ",").concat(graphicHeight - watermarkHeight - watermarkOffsetY, ") scale(1) ")); // plot area (where you put the chart itself)
+
+	    p.selectAll('g.chart-plot').data([0]).enter().append('g').attr('class', 'chart-plot').attr('transform', "translate(".concat(margin.left, ",").concat(margin.top, ")"));
+	    plot = p.selectAll('g.chart-plot');
+	    plot.transition(transition).duration(0).attr('transform', "translate(".concat(margin.left, ",").concat(margin.top, ")"));
+
+	    if (showDownloadPngButtons) {
+	      var parent;
+
+	      if (p.node().nodeName.toLowerCase() === 'svg') {
+	        parent = select(p.node().parentNode);
+	      } else {
+	        parent = select(p.node());
+	      } // Prevent this from being rendered twice
+
+
+	      if (parent.selectAll('.button-holder').size() === 0) {
+	        var holder = parent.append('div').attr('class', 'button-holder');
+	        holder.append('button').attr('class', 'save-png-button save-png-button__1x').text('Save as .png').style('float', 'left').style('opacity', 0.6).on('click', function () {
+	          return savePNG(p, 1);
+	        });
+	        holder.append('button').attr('class', 'save-png-button save-png-button__2x').style('float', 'left').style('opacity', 0.6).text('Save as double size .png').on('click', function () {
+	          return savePNG(p, 2);
+	        });
+	      }
 	    }
+	  } // Setters and getters
+
+
+	  frame.autoPosition = function (x) {
+	    if (x === undefined) return autoPosition;
+	    autoPosition = x;
+	    return frame;
+	  };
+
+	  frame.backgroundColour = function (x) {
+	    if (x === undefined) return backgroundColour;
+	    backgroundColour = x;
+	    return frame;
+	  };
+
+	  frame.blackbar = function (x) {
+	    if (x === undefined) return blackbar;
+	    blackbar = x;
+	    return frame;
+	  };
+
+	  frame.containerClass = function (x) {
+	    if (x === undefined) return containerClass;
+	    containerClass = x;
+	    return frame;
+	  };
+
+	  frame.copyright = function (x) {
+	    if (x === undefined) return copyright;
+	    copyright = x;
+	    return frame;
+	  };
+
+	  frame.copyrightStyle = function (x) {
+	    if (x === undefined) return copyrightStyle;
+	    copyrightStyle = x;
+	    return frame;
+	  };
+
+	  frame.dimension = function () {
+	    return {
+	      width: graphicWidth - (margin.left + margin.right),
+	      height: graphicHeight - (margin.top + margin.bottom)
+	    };
+	  };
+
+	  frame.extend = function (key, value) {
+	    custom[key] = value;
+
+	    frame[key] = function (d) {
+	      if (d === undefined) return custom[key];
+	      custom[key] = d;
+	      return frame;
+	    };
 
 	    return frame;
+	  };
+
+	  frame.fullYear = function (x) {
+	    if (x === undefined) return fullYear;
+	    fullYear = x;
+	    return frame;
+	  };
+
+	  frame.goalposts = function (x) {
+	    if (x === undefined) return goalposts;
+	    goalposts = x;
+	    return frame;
+	  };
+
+	  frame.height = function (x) {
+	    if (x === undefined) return graphicHeight;
+	    graphicHeight = convertFrom[units](x);
+	    return frame;
+	  };
+
+	  frame.margin = function (x) {
+	    if (x === undefined) return margin;
+	    Object.keys(x).forEach(function (k) {
+	      margin[k] = x[k];
+	    });
+	    return frame;
+	  };
+
+	  frame.plot = function () {
+	    return plot;
+	  };
+
+	  frame.plotAdjuster = function (x) {
+	    if (x === undefined) return plotAdjuster;
+	    plotAdjuster = x;
+	    return frame;
+	  };
+
+	  frame.rem = function (x) {
+	    if (x === undefined) return rem;
+	    rem = x;
+	    return frame;
+	  };
+
+	  frame.showDownloadPngButtons = function (d) {
+	    if (typeof d === 'undefined') return showDownloadPngButtons;
+	    showDownloadPngButtons = d;
+	    return frame;
+	  };
+
+	  frame.source = function (x) {
+	    if (x === undefined) return source;
+	    source = x;
+	    return frame;
+	  };
+
+	  frame.sourceLineHeight = function (x) {
+	    if (x === undefined) return sourceLineHeight;
+	    sourceLineHeight = x;
+	    return frame;
+	  };
+
+	  frame.sourcePlotYOffset = function (x) {
+	    if (x === undefined) return sourcePlotYOffset;
+	    sourcePlotYOffset = x;
+	    return frame;
+	  };
+
+	  frame.sourceStyle = function (x) {
+	    if (x === undefined) return sourceStyle;
+	    sourceStyle = x;
+	    return frame;
+	  };
+
+	  frame.sourceX = function (x) {
+	    if (x === undefined) return sourcePosition.x;
+	    sourcePosition.x = x;
+	    return frame;
+	  };
+
+	  frame.sourceY = function (x) {
+	    if (x === undefined) return sourcePosition.y;
+	    sourcePosition.y = x;
+	    return frame;
+	  };
+
+	  frame.subtitle = function (x) {
+	    if (x === undefined) return subtitle;
+	    subtitle = x;
+	    return frame;
+	  };
+
+	  frame.subtitleLineHeight = function (x) {
+	    if (x === undefined) return subtitleLineHeight;
+	    subtitleLineHeight = x;
+	    return frame;
+	  };
+
+	  frame.subtitleStyle = function (x) {
+	    if (x === undefined) return subtitleStyle;
+	    subtitleStyle = x;
+	    return frame;
+	  };
+
+	  frame.subtitleX = function (x) {
+	    if (x === undefined) return subtitlePosition.x;
+	    subtitlePosition.x = x;
+	    return frame;
+	  };
+
+	  frame.subtitleY = function (x) {
+	    if (x === undefined) return subtitlePosition.y;
+	    subtitlePosition.y = x;
+	    return frame;
+	  };
+
+	  frame.title = function (x) {
+	    if (x === undefined) return title;
+	    title = x;
+	    return frame;
+	  };
+
+	  frame.titleStyle = function (x) {
+	    if (x === undefined) return titleStyle;
+	    titleStyle = x;
+	    return frame;
+	  };
+
+	  frame.titleLineHeight = function (x) {
+	    if (x === undefined) return titleLineHeight;
+	    titleLineHeight = x;
+	    return frame;
+	  };
+
+	  frame.titleX = function (x) {
+	    if (x === undefined) return titlePosition.x;
+	    titlePosition.x = x;
+	    return frame;
+	  };
+
+	  frame.titleY = function (x) {
+	    if (x === undefined) return titlePosition.y;
+	    titlePosition.y = x;
+	    return frame;
+	  };
+
+	  frame.units = function (x) {
+	    if (x === undefined) return units;
+	    units = x;
+	    return frame;
+	  };
+
+	  frame.watermark = function (x) {
+	    if (x === undefined) return watermarkMarkup;
+	    watermarkLocation = '';
+	    watermarkMarkup = x;
+	    return frame;
+	  };
+
+	  frame.watermarkOffsetY = function (x) {
+	    if (x === undefined) return watermarkOffsetY;
+	    watermarkOffsetY = x;
+	    return frame;
+	  };
+
+	  frame.watermarkOffsetX = function (x) {
+	    if (x === undefined) return watermarkOffsetX;
+	    watermarkOffsetX = x;
+	    return frame;
+	  };
+
+	  frame.watermarkLocation = function (x) {
+	    if (x === undefined) return watermarkLocation;
+	    watermarkMarkup = '';
+	    watermarkLocation = x;
+	    return frame;
+	  };
+
+	  frame.watermarkWidth = function (x) {
+	    if (x === undefined) return watermarkWidth;
+	    watermarkWidth = x;
+	    return frame;
+	  };
+
+	  frame.watermarkHeight = function (x) {
+	    if (x === undefined) return watermarkHeight;
+	    watermarkHeight = x;
+	    return frame;
+	  };
+
+	  frame.whitebar = function (x) {
+	    if (x === undefined) return whitebar;
+	    whitebar = x;
+	    return frame;
+	  };
+
+	  frame.width = function (x) {
+	    if (!x) return graphicWidth;
+	    graphicWidth = convertFrom[units](x);
+	    return frame;
+	  };
+
+	  frame.attrs = function (x) {
+	    if (x === undefined) {
+	      return Object.assign({}, {
+	        autoPosition: autoPosition,
+	        // axisAlign, // @FIX This is undef?
+	        containerClass: containerClass,
+	        copyright: copyright,
+	        copyrightStyle: copyrightStyle,
+	        blackbar: blackbar,
+	        goalposts: goalposts,
+	        graphicHeight: graphicHeight,
+	        graphicWidth: graphicWidth,
+	        margin: margin,
+	        plot: plot,
+	        plotAdjuster: plotAdjuster,
+	        rem: rem,
+	        subtitle: subtitle,
+	        subtitleLineHeight: subtitleLineHeight,
+	        subtitlePosition: subtitlePosition,
+	        subtitleStyle: subtitleStyle,
+	        source: source,
+	        sourceLineHeight: sourceLineHeight,
+	        sourcePosition: sourcePosition,
+	        sourceStyle: sourceStyle,
+	        title: title,
+	        titleLineHeight: titleLineHeight,
+	        titlePosition: titlePosition,
+	        titleStyle: titleStyle,
+	        watermarkLocation: watermarkLocation,
+	        watermarkMarkup: watermarkMarkup,
+	        watermarkOffsetX: watermarkOffsetX,
+	        watermarkOffsetY: watermarkOffsetY,
+	        watermarkHeight: watermarkHeight,
+	        watermarkWidth: watermarkWidth,
+	        whitebar: whitebar,
+	        units: units
+	      }, custom);
+	    }
+
+	    Object.keys(x).forEach(function (setterName) {
+	      var value = x[setterName];
+
+	      if (isFunction(frame[setterName])) {
+	        frame[setterName](value);
+	      }
+	    });
+	    return frame;
+	  };
+
+	  if (configObject !== undefined) {
+	    frame.attrs(configObject);
+	  }
+
+	  return frame;
 	}
 
 	function isFunction(functionToCheck) {
-	    const getType = {};
-	    return functionToCheck && getType.toString.call(functionToCheck) === '[object Function]';
+	  var getType = {};
+	  return functionToCheck && getType.toString.call(functionToCheck) === '[object Function]';
 	}
 
-	const classes = [
-	    '.annotation',
-	    '.lines',
-	    '.highlights',
-	    '.axis path',
-	    '.axis text',
-	    '.axis line',
-	    '.axis',
-	    '.baseline',
-	    '.baseline line',
-	    '.legend',
-	    '.legend text',
-	    '.chart-goalposts',
-	    '.chart-title',
-	    '.chart-subtitle',
-	    '.chart-source',
-	    '.chart-copyright',
-	    '.chart-watermark',
-	    '.annotations-holder',
-	    '.lines highlighlines',
-	    '.highlights',
-	    '.annotation',
-	    '.annotations-holder line',
-	    '.annotations-holder text',
-	    '.line path',
-	];
+	var classes = ['.annotation', '.lines', '.highlights', '.axis path', '.axis text', '.axis line', '.axis', '.baseline', '.baseline line', '.legend', '.legend text', '.chart-goalposts', '.chart-title', '.chart-subtitle', '.chart-source', '.chart-copyright', '.chart-watermark', '.annotations-holder', '.lines highlighlines', '.highlights', '.annotation', '.annotations-holder line', '.annotations-holder text', '.line path'];
 
 	function savePNG(svg, scaleFactor) {
-	    svg.selectAll(classes.join(', '))
-	        .each(function inlineProps() {
-	            const element = this;
-	            const computedStyle = getComputedStyle(element, null);
+	  svg.selectAll(classes.join(', ')).each(function inlineProps() {
+	    var element = this;
+	    var computedStyle = getComputedStyle(element, null); // loop through and compute inline svg styles
 
-	            // loop through and compute inline svg styles
-	            for (let i = 0; i < computedStyle.length; i += 1) {
-	                const property = computedStyle.item(i);
-	                const value = computedStyle.getPropertyValue(property);
-	                element.style[property] = value;
-	            }
-	        });
-
-	    saveSvgAsPng_1(svg.node(), `${svg.select('title').text().replace(/\s/g, '-').toLowerCase()}.png`, { scale: scaleFactor });
+	    for (var i = 0; i < computedStyle.length; i += 1) {
+	      var property = computedStyle.item(i);
+	      var value = computedStyle.getPropertyValue(property);
+	      element.style[property] = value;
+	    }
+	  });
+	  saveSvgAsPng_1(svg.node(), "".concat(svg.select('title').text().replace(/\s/g, '-').toLowerCase(), ".png"), {
+	    scale: scaleFactor
+	  });
 	}
 
 	function webFrameS(configObject) {
-	    const f = chartFrame()
-	        .autoPosition(true)
-	        .containerClass('ft-webgraphic-s')
-	        .backgroundColour('#FFF1E0')
-	        .blackbar('#000')
-	        .width(300)
-	        // .watermark(watermarkPathDark)
-	        // .watermarkSize(80)
-	        // .watermarkOffset(-28)
-	        .margin({ bottom: 90, right: 5, left: 15 })
-	        .rem(14)
-	        .plotAdjuster(0)
-	        .titleStyle({
-	            'font-size': 20,
-	            'font-family': 'MetricWeb,sans-serif',
-	            'font-weight': 400,
-	            fill: '#000',
-	        })
-	        .titleY(32)
-	        .titleLineHeight(24)
-	        .subtitleLineHeight(20)
-	        .subtitleStyle({
-	            'font-size': 18,
-	            'font-family': 'MetricWeb,sans-serif',
-	            fill: '#66605C',
-	        })
-	        .subtitleY(64)
-	        .sourceLineHeight(12)
-	        .sourcePlotYOffset(38)
-	        .sourceStyle({
-	            'font-size': '12px',
-	            'font-family': 'MetricWeb,sans-serif',
-	            fill: '#66605C',
-	        })
-	        .copyrightStyle({
-	            'font-size': '12px',
-	            'font-style': 'italic',
-	            'font-family': 'MetricWeb,sans-serif',
-	            fill: '#66605C',
-	        });
-
-	    if (configObject !== undefined) f.attrs(configObject);
-	    return f;
+	  var f = chartFrame().autoPosition(true).containerClass('ft-webgraphic-s').backgroundColour('#FFF1E0').blackbar('#000').width(300) // .watermark(watermarkPathDark)
+	  // .watermarkSize(80)
+	  // .watermarkOffset(-28)
+	  .margin({
+	    bottom: 90,
+	    right: 5,
+	    left: 15
+	  }).rem(14).plotAdjuster(0).titleStyle({
+	    'font-size': 20,
+	    'font-family': 'MetricWeb,sans-serif',
+	    'font-weight': 400,
+	    fill: '#000'
+	  }).titleY(32).titleLineHeight(24).subtitleLineHeight(20).subtitleStyle({
+	    'font-size': 18,
+	    'font-family': 'MetricWeb,sans-serif',
+	    fill: '#66605C'
+	  }).subtitleY(64).sourceLineHeight(12).sourcePlotYOffset(38).sourceStyle({
+	    'font-size': '12px',
+	    'font-family': 'MetricWeb,sans-serif',
+	    fill: '#66605C'
+	  }).copyrightStyle({
+	    'font-size': '12px',
+	    'font-style': 'italic',
+	    'font-family': 'MetricWeb,sans-serif',
+	    fill: '#66605C'
+	  });
+	  if (configObject !== undefined) f.attrs(configObject);
+	  return f;
 	}
 
 	function webFrameM(configObject) {
-	    const f = chartFrame()
-	        .autoPosition(true)
-	        .containerClass('ft-webgraphic-m')
-	        .backgroundColour('#FFF1E0')
-	        .blackbar('#000')
-	        .width(700)
-	        .height(500)
-	        // .watermark(watermarkPathDark)
-	        // .watermarkSize(80)
-	        // .watermarkOffset(-28)
-	        .margin({ bottom: 104, right: 5, left: 20 })
-	        .rem(16)
-	        .plotAdjuster(4)
-	        .titleY(32)
-	        .titleStyle({
-	            'font-size': 24,
-	            'font-family': 'MetricWeb,sans-serif',
-	            'font-weight': 400,
-	            fill: '#000',
-	        })
-	        .titleLineHeight(28)
-	        .subtitleLineHeight(20)
-	        .subtitleStyle({
-	            'font-size': 18,
-	            'font-family': 'MetricWeb,sans-serif',
-	            fill: '#66605C',
-	        })
-	        .subtitleY(64)
-	        .sourceLineHeight(16)
-	        .sourcePlotYOffset(44)
-	        .sourceStyle({
-	            'font-size': '14px',
-	            'font-family': 'MetricWeb,sans-serif',
-	            fill: '#66605C',
-	        })
-	        .copyrightStyle({
-	            'font-size': '14px',
-	            'font-style': 'italic',
-	            'font-family': 'MetricWeb,sans-serif',
-	            fill: '#66605C',
-	        });
-
-	    if (configObject !== undefined) f.attrs(configObject);
-	    return f;
+	  var f = chartFrame().autoPosition(true).containerClass('ft-webgraphic-m').backgroundColour('#FFF1E0').blackbar('#000').width(700).height(500) // .watermark(watermarkPathDark)
+	  // .watermarkSize(80)
+	  // .watermarkOffset(-28)
+	  .margin({
+	    bottom: 104,
+	    right: 5,
+	    left: 20
+	  }).rem(16).plotAdjuster(4).titleY(32).titleStyle({
+	    'font-size': 24,
+	    'font-family': 'MetricWeb,sans-serif',
+	    'font-weight': 400,
+	    fill: '#000'
+	  }).titleLineHeight(28).subtitleLineHeight(20).subtitleStyle({
+	    'font-size': 18,
+	    'font-family': 'MetricWeb,sans-serif',
+	    fill: '#66605C'
+	  }).subtitleY(64).sourceLineHeight(16).sourcePlotYOffset(44).sourceStyle({
+	    'font-size': '14px',
+	    'font-family': 'MetricWeb,sans-serif',
+	    fill: '#66605C'
+	  }).copyrightStyle({
+	    'font-size': '14px',
+	    'font-style': 'italic',
+	    'font-family': 'MetricWeb,sans-serif',
+	    fill: '#66605C'
+	  });
+	  if (configObject !== undefined) f.attrs(configObject);
+	  return f;
 	}
 
 	function webFrameMDefault(configObject) {
-	    const f = chartFrame()
-	        .autoPosition(true)
-	        .containerClass('ft-webgraphic-m-default')
-	        .backgroundColour('#FFF1E0')
-	        .blackbar('#000')
-	        .width(700)
-	        .height(500)
-	        // .watermark(watermarkPathDark)
-	        // .watermarkSize(80)
-	        // .watermarkOffset(-28)
-	        .margin({ bottom: 115, right: 5, left: 20 })
-	        .rem(20)
-	        .plotAdjuster(8)
-	        .titleY(32)
-	        .titleStyle({
-	            'font-size': 28,
-	            'font-family': 'MetricWeb,sans-serif',
-	            'font-weight': 400,
-	            fill: '#000',
-	        })
-	        .titleLineHeight(28)
-	        .subtitleLineHeight(28)
-	        .subtitleStyle({
-	            'font-size': 24,
-	            'font-family': 'MetricWeb,sans-serif',
-	            fill: '#66605C',
-	        })
-	        .subtitleY(68)
-	        .sourceLineHeight(18)
-	        .sourcePlotYOffset(34)
-	        .sourceStyle({
-	            'font-size': '16px',
-	            'font-family': 'MetricWeb,sans-serif',
-	            fill: '#66605C',
-	        })
-	        .copyrightStyle({
-	            'font-size': '14px',
-	            'font-style': 'italic',
-	            'font-family': 'MetricWeb,sans-serif',
-	            fill: '#66605C',
-	        });
-
-	    if (configObject !== undefined) f.attrs(configObject);
-	    return f;
+	  var f = chartFrame().autoPosition(true).containerClass('ft-webgraphic-m-default').backgroundColour('#FFF1E0').blackbar('#000').width(700).height(500) // .watermark(watermarkPathDark)
+	  // .watermarkSize(80)
+	  // .watermarkOffset(-28)
+	  .margin({
+	    bottom: 115,
+	    right: 5,
+	    left: 20
+	  }).rem(20).plotAdjuster(8).titleY(32).titleStyle({
+	    'font-size': 28,
+	    'font-family': 'MetricWeb,sans-serif',
+	    'font-weight': 400,
+	    fill: '#000'
+	  }).titleLineHeight(28).subtitleLineHeight(28).subtitleStyle({
+	    'font-size': 24,
+	    'font-family': 'MetricWeb,sans-serif',
+	    fill: '#66605C'
+	  }).subtitleY(68).sourceLineHeight(18).sourcePlotYOffset(34).sourceStyle({
+	    'font-size': '16px',
+	    'font-family': 'MetricWeb,sans-serif',
+	    fill: '#66605C'
+	  }).copyrightStyle({
+	    'font-size': '14px',
+	    'font-style': 'italic',
+	    'font-family': 'MetricWeb,sans-serif',
+	    fill: '#66605C'
+	  });
+	  if (configObject !== undefined) f.attrs(configObject);
+	  return f;
 	}
 
 	function webFrameL(configObject) {
-	    const f = chartFrame()
-	        .autoPosition(true)
-	        .containerClass('ft-webgraphic-l')
-	        .backgroundColour('#FFF1E0')
-	        .width(1180)
-	        .height(700)
-	        .blackbar('#000')
-	        .fullYear(true)
-	        // .watermark(watermarkPathDark)
-	        // .watermarkSize(80)
-	        // .watermarkOffset(-28)
-	        .margin({ bottom: 105, right: 5, left: 20 })
-	        .rem(18)
-	        .plotAdjuster(8)
-	        .titleY(32)
-	        .titleStyle({
-	            'font-size': 28,
-	            'font-family': 'MetricWeb,sans-serif',
-	            'font-weight': 400,
-	            fill: '#000',
-	        })
-	        .titleLineHeight(32)
-	        .subtitleLineHeight(20)
-	        .subtitleY(64)
-	        .subtitleStyle({
-	            'font-size': 18,
-	            'font-family': 'MetricWeb,sans-serif',
-	            fill: '#66605C',
-	        })
-	        .sourceLineHeight(16)
-	        .sourcePlotYOffset(44)
-	        .sourceStyle({
-	            'font-size': '16px',
-	            'font-family': 'MetricWeb,sans-serif',
-	            fill: '#66605C',
-	        })
-	        .copyrightStyle({
-	            'font-size': '16px',
-	            'font-style': 'italic',
-	            'font-family': 'MetricWeb,sans-serif',
-	            fill: '#66605C',
-	        });
-
-	    if (configObject !== undefined) f.attrs(configObject);
-	    return f;
+	  var f = chartFrame().autoPosition(true).containerClass('ft-webgraphic-l').backgroundColour('#FFF1E0').width(1180).height(700).blackbar('#000').fullYear(true) // .watermark(watermarkPathDark)
+	  // .watermarkSize(80)
+	  // .watermarkOffset(-28)
+	  .margin({
+	    bottom: 105,
+	    right: 5,
+	    left: 20
+	  }).rem(18).plotAdjuster(8).titleY(32).titleStyle({
+	    'font-size': 28,
+	    'font-family': 'MetricWeb,sans-serif',
+	    'font-weight': 400,
+	    fill: '#000'
+	  }).titleLineHeight(32).subtitleLineHeight(20).subtitleY(64).subtitleStyle({
+	    'font-size': 18,
+	    'font-family': 'MetricWeb,sans-serif',
+	    fill: '#66605C'
+	  }).sourceLineHeight(16).sourcePlotYOffset(44).sourceStyle({
+	    'font-size': '16px',
+	    'font-family': 'MetricWeb,sans-serif',
+	    fill: '#66605C'
+	  }).copyrightStyle({
+	    'font-size': '16px',
+	    'font-style': 'italic',
+	    'font-family': 'MetricWeb,sans-serif',
+	    fill: '#66605C'
+	  });
+	  if (configObject !== undefined) f.attrs(configObject);
+	  return f;
 	}
 
 	function printFrame(configObject) {
-	    const f = chartFrame()
-	        .containerClass('ft-printgraphic')
-	        .autoPosition(true)
-	        .backgroundColour('#FFF')
-	        .goalposts('#000')
-	        .units('mm')
-	        .width(112.25) // these are after the units are set so they are converted from mm to px
-	        .height(68)
-	        .margin({ top: 40, left: 15, bottom: 35, right: 7 })
-	        .rem(9.6)
-	        .titleStyle({
-	            'font-size': '12px',
-	            fill: '#000000',
-	            'font-weight': '600',
-	            'font-family': 'MetricWeb,sans-serif',
-	        })
-	        .titleX(7)
-	        .titleY(15)
-	        .titleLineHeight(13)
-	        .subtitleStyle({
-	            fill: '#000000',
-	            'font-size': '9.6px',
-	            'font-weight': 400,
-	            'font-family': 'MetricWeb,sans-serif',
-	        })
-	        .subtitleLineHeight(10)
-	        .subtitleX(7)
-	        .subtitleY(27)
-	        .sourceStyle({
-	            fill: '#000000',
-	            'font-size': '7.2px',
-	            'font-weight': 400,
-	            'font-family': 'MetricWeb,sans-serif',
-	        })
-	        .sourceX(7)
-	        .sourcePlotYOffset(18)
-	        .sourceLineHeight(8);
-
-	    if (configObject !== undefined) f.attrs(configObject);
-	    return f;
+	  var f = chartFrame().containerClass('ft-printgraphic').autoPosition(true).backgroundColour('#FFF').goalposts('#000').units('mm').width(112.25) // these are after the units are set so they are converted from mm to px
+	  .height(68).margin({
+	    top: 40,
+	    left: 15,
+	    bottom: 35,
+	    right: 7
+	  }).rem(9.6).titleStyle({
+	    'font-size': '12px',
+	    fill: '#000000',
+	    'font-weight': '600',
+	    'font-family': 'MetricWeb,sans-serif'
+	  }).titleX(7).titleY(15).titleLineHeight(13).subtitleStyle({
+	    fill: '#000000',
+	    'font-size': '9.6px',
+	    'font-weight': 400,
+	    'font-family': 'MetricWeb,sans-serif'
+	  }).subtitleLineHeight(10).subtitleX(7).subtitleY(27).sourceStyle({
+	    fill: '#000000',
+	    'font-size': '7.2px',
+	    'font-weight': 400,
+	    'font-family': 'MetricWeb,sans-serif'
+	  }).sourceX(7).sourcePlotYOffset(18).sourceLineHeight(8);
+	  if (configObject !== undefined) f.attrs(configObject);
+	  return f;
 	}
 
-	const watermarkPathLight = '<path fill="#8e9095" id="logo" d="M3,8.5c0,0.7,0.2,0.9,1.5,0.9v0.4H0V9.4c0.9,0,1.2-0.1,1.2-0.8V1.4c0-0.8-0.3-0.8-1.2-0.8V0.2h6.1c0.8,0,1.1,0,1.4-0.1l0,2.7H7.2c-0.2-2-0.7-2.2-2.6-2.2H3v4h1.3c1.3,0,1.3-0.2,1.4-1.2h0.4v2.9H5.7c-0.1-1-0.2-1.2-1.4-1.2H3V8.5zM8.4,9.8V9.4c0.9,0,1.2-0.1,1.2-0.8V1.4c0-0.8-0.3-0.8-1.2-0.8V0.2h4.2v0.4c-0.9,0-1.2,0.1-1.2,0.8v7.1c0,0.8,0.3,0.8,1.2,0.8v0.4H8.4z M22,10l-6.6-8.2v6.7c0,0.8,0.5,0.9,1.5,0.9v0.4h-3.5V9.4c0.9,0,1.4-0.1,1.4-0.9V1.1c-0.4-0.4-0.7-0.5-1.4-0.5V0.2h3.1l5.1,6.5V1.5c0-0.8-0.5-0.9-1.5-0.9V0.2h3.5v0.4c-0.9,0-1.4,0.1-1.4,0.9V10H22z M26.7,9.8h-3.5V9.4c0.9,0,1.3-0.1,1.6-0.9L28,0.1h0.9l3.4,8.5c0.3,0.8,0.4,0.8,1.1,0.8v0.4h-4.1V9.4c1.2,0,1.4-0.1,1.1-0.8l-1-2.6h-3l-0.9,2.5c-0.3,0.8,0.2,0.9,1.2,0.9V9.8z M26.6,5.5h2.6L27.9,2L26.6,5.5z M42.6,10l-6.6-8.2v6.7c0,0.8,0.5,0.9,1.5,0.9v0.4H34V9.4c0.8,0,1.3-0.1,1.3-0.9V1.1c-0.5-0.4-0.8-0.5-1.6-0.5V0.2H37l5.1,6.5V1.5c0-0.8-0.5-0.9-1.5-0.9V0.2h3.5v0.4c-0.9,0-1.4,0.1-1.4,0.9V10H42.6z M52.4,0.1h0.2L52.7,3l-0.4,0c-0.2-1.7-1.1-2.5-2.7-2.5c-1.8,0-3.2,1.5-3.2,3.9c0,3,1.9,4.7,3.9,4.7c0.9,0,1.6-0.2,2.4-1.1L53,8.4c-0.6,0.9-1.8,1.6-3.5,1.6c-2.4,0-4.9-1.8-4.9-4.9c0-3,2.3-5.1,5-5.1c1.3,0,2,0.6,2.3,0.6C52.2,0.6,52.3,0.4,52.4,0.1z M53.8,9.8V9.4c0.9,0,1.2-0.1,1.2-0.8V1.4c0-0.8-0.3-0.8-1.2-0.8V0.2H58v0.4c-0.9,0-1.2,0.1-1.2,0.8v7.1c0,0.8,0.3,0.8,1.2,0.8v0.4H53.8z M61.9,9.8h-3.3V9.4c0.7,0,1.1-0.1,1.4-0.9l3.2-8.4h0.9l3.4,8.5c0.3,0.8,0.4,0.8,1.1,0.8v0.4h-4.1V9.4c1.2,0,1.4-0.1,1.1-0.8l-1-2.6h-3l-0.9,2.5c-0.3,0.8,0.2,0.9,1.2,0.9V9.8z M61.8,5.5h2.6L63,2L61.8,5.5z M69.3,9.8V9.4c0.9,0,1.2-0.1,1.2-0.8V1.4c0-0.8-0.3-0.8-1.2-0.8V0.2h4.1v0.4c-0.9,0-1.2,0.1-1.2,0.8v7.2c0,0.6,0.3,0.7,0.8,0.7h0.5c1.9,0,2.5-0.3,3-2.4L77,7l-0.3,2.9H69.3z M89.4,0.1l0,2.9h-0.4c-0.2-2.1-0.7-2.3-2.6-2.3H86v7.9c0,0.8,0.3,0.9,1.5,0.9v0.4h-4.8V9.4c1.2,0,1.5-0.1,1.5-0.9V0.6h-0.6c-1.9,0-2.3,0.3-2.6,2.3h-0.4l0-2.9c0.3,0,0.5,0.1,1.4,0.1h6C88.9,0.2,89.2,0.1,89.4,0.1z M90.4,9.8V9.4c0.9,0,1.2-0.1,1.2-0.8V1.4c0-0.8-0.3-0.8-1.2-0.8V0.2h4.2v0.4c-0.9,0-1.2,0.1-1.2,0.8v7.1c0,0.8,0.3,0.8,1.2,0.8v0.4H90.4z M107,0.2v0.4c-0.9,0-1.3,0-1.2,0.8l0.8,7.2c0.1,0.7,0.4,0.8,1.2,0.8v0.4h-4.1V9.4c0.9,0,1.2-0.1,1.1-0.8L104,1l-3.1,9h-0.1l-3-9l-0.7,7.5c-0.1,0.8,0.4,0.8,1.3,0.8v0.4h-3.2V9.4c0.9,0,1.2-0.1,1.2-0.8l0.7-7.2c0.1-0.8-0.3-0.8-1.2-0.8V0.2h3.4l2,6.6l2.2-6.6H107z M114.8,6.3h-0.4c-0.1-1-0.2-1.2-1.4-1.2h-1.5v3.5c0,0.6,0.3,0.7,0.8,0.7h0.8c1.9,0,2.5-0.3,3-2.4l0.4,0l-0.3,2.9h-7.6V9.4c0.9,0,1.2-0.1,1.2-0.8V1.4c0-0.8-0.3-0.8-1.2-0.8V0.2h7.3l0,2.4h-0.4c-0.2-1.7-0.7-1.9-2.6-1.9h-1.4v3.9h1.5c1.3,0,1.3-0.2,1.4-1.2h0.4V6.3z M122.5,7.8c0-0.9-0.6-1.3-1.5-1.9l-1.5-0.8c-1.2-0.6-1.8-1.3-1.8-2.5c0-1.5,1.3-2.7,3-2.7c1.2,0,1.8,0.6,2.1,0.6c0.2,0,0.3-0.1,0.4-0.4h0.3l0.1,2.7l-0.4,0c-0.2-1.3-1.1-2.3-2.5-2.3c-1,0-1.7,0.6-1.7,1.4c0,0.9,0.7,1.3,1.5,1.7l1.3,0.7c1.2,0.7,2.1,1.4,2.1,2.7c0,1.7-1.5,2.9-3.3,2.9c-1.3,0-1.9-0.6-2.3-0.6c-0.2,0-0.3,0.2-0.4,0.5h-0.3L117.4,7l0.4,0c0.3,1.8,1.5,2.5,2.8,2.5C121.6,9.5,122.5,9,122.5,7.8z"/>';
-
+	var watermarkPathLight = '<path fill="#8e9095" id="logo" d="M3,8.5c0,0.7,0.2,0.9,1.5,0.9v0.4H0V9.4c0.9,0,1.2-0.1,1.2-0.8V1.4c0-0.8-0.3-0.8-1.2-0.8V0.2h6.1c0.8,0,1.1,0,1.4-0.1l0,2.7H7.2c-0.2-2-0.7-2.2-2.6-2.2H3v4h1.3c1.3,0,1.3-0.2,1.4-1.2h0.4v2.9H5.7c-0.1-1-0.2-1.2-1.4-1.2H3V8.5zM8.4,9.8V9.4c0.9,0,1.2-0.1,1.2-0.8V1.4c0-0.8-0.3-0.8-1.2-0.8V0.2h4.2v0.4c-0.9,0-1.2,0.1-1.2,0.8v7.1c0,0.8,0.3,0.8,1.2,0.8v0.4H8.4z M22,10l-6.6-8.2v6.7c0,0.8,0.5,0.9,1.5,0.9v0.4h-3.5V9.4c0.9,0,1.4-0.1,1.4-0.9V1.1c-0.4-0.4-0.7-0.5-1.4-0.5V0.2h3.1l5.1,6.5V1.5c0-0.8-0.5-0.9-1.5-0.9V0.2h3.5v0.4c-0.9,0-1.4,0.1-1.4,0.9V10H22z M26.7,9.8h-3.5V9.4c0.9,0,1.3-0.1,1.6-0.9L28,0.1h0.9l3.4,8.5c0.3,0.8,0.4,0.8,1.1,0.8v0.4h-4.1V9.4c1.2,0,1.4-0.1,1.1-0.8l-1-2.6h-3l-0.9,2.5c-0.3,0.8,0.2,0.9,1.2,0.9V9.8z M26.6,5.5h2.6L27.9,2L26.6,5.5z M42.6,10l-6.6-8.2v6.7c0,0.8,0.5,0.9,1.5,0.9v0.4H34V9.4c0.8,0,1.3-0.1,1.3-0.9V1.1c-0.5-0.4-0.8-0.5-1.6-0.5V0.2H37l5.1,6.5V1.5c0-0.8-0.5-0.9-1.5-0.9V0.2h3.5v0.4c-0.9,0-1.4,0.1-1.4,0.9V10H42.6z M52.4,0.1h0.2L52.7,3l-0.4,0c-0.2-1.7-1.1-2.5-2.7-2.5c-1.8,0-3.2,1.5-3.2,3.9c0,3,1.9,4.7,3.9,4.7c0.9,0,1.6-0.2,2.4-1.1L53,8.4c-0.6,0.9-1.8,1.6-3.5,1.6c-2.4,0-4.9-1.8-4.9-4.9c0-3,2.3-5.1,5-5.1c1.3,0,2,0.6,2.3,0.6C52.2,0.6,52.3,0.4,52.4,0.1z M53.8,9.8V9.4c0.9,0,1.2-0.1,1.2-0.8V1.4c0-0.8-0.3-0.8-1.2-0.8V0.2H58v0.4c-0.9,0-1.2,0.1-1.2,0.8v7.1c0,0.8,0.3,0.8,1.2,0.8v0.4H53.8z M61.9,9.8h-3.3V9.4c0.7,0,1.1-0.1,1.4-0.9l3.2-8.4h0.9l3.4,8.5c0.3,0.8,0.4,0.8,1.1,0.8v0.4h-4.1V9.4c1.2,0,1.4-0.1,1.1-0.8l-1-2.6h-3l-0.9,2.5c-0.3,0.8,0.2,0.9,1.2,0.9V9.8z M61.8,5.5h2.6L63,2L61.8,5.5z M69.3,9.8V9.4c0.9,0,1.2-0.1,1.2-0.8V1.4c0-0.8-0.3-0.8-1.2-0.8V0.2h4.1v0.4c-0.9,0-1.2,0.1-1.2,0.8v7.2c0,0.6,0.3,0.7,0.8,0.7h0.5c1.9,0,2.5-0.3,3-2.4L77,7l-0.3,2.9H69.3z M89.4,0.1l0,2.9h-0.4c-0.2-2.1-0.7-2.3-2.6-2.3H86v7.9c0,0.8,0.3,0.9,1.5,0.9v0.4h-4.8V9.4c1.2,0,1.5-0.1,1.5-0.9V0.6h-0.6c-1.9,0-2.3,0.3-2.6,2.3h-0.4l0-2.9c0.3,0,0.5,0.1,1.4,0.1h6C88.9,0.2,89.2,0.1,89.4,0.1z M90.4,9.8V9.4c0.9,0,1.2-0.1,1.2-0.8V1.4c0-0.8-0.3-0.8-1.2-0.8V0.2h4.2v0.4c-0.9,0-1.2,0.1-1.2,0.8v7.1c0,0.8,0.3,0.8,1.2,0.8v0.4H90.4z M107,0.2v0.4c-0.9,0-1.3,0-1.2,0.8l0.8,7.2c0.1,0.7,0.4,0.8,1.2,0.8v0.4h-4.1V9.4c0.9,0,1.2-0.1,1.1-0.8L104,1l-3.1,9h-0.1l-3-9l-0.7,7.5c-0.1,0.8,0.4,0.8,1.3,0.8v0.4h-3.2V9.4c0.9,0,1.2-0.1,1.2-0.8l0.7-7.2c0.1-0.8-0.3-0.8-1.2-0.8V0.2h3.4l2,6.6l2.2-6.6H107z M114.8,6.3h-0.4c-0.1-1-0.2-1.2-1.4-1.2h-1.5v3.5c0,0.6,0.3,0.7,0.8,0.7h0.8c1.9,0,2.5-0.3,3-2.4l0.4,0l-0.3,2.9h-7.6V9.4c0.9,0,1.2-0.1,1.2-0.8V1.4c0-0.8-0.3-0.8-1.2-0.8V0.2h7.3l0,2.4h-0.4c-0.2-1.7-0.7-1.9-2.6-1.9h-1.4v3.9h1.5c1.3,0,1.3-0.2,1.4-1.2h0.4V6.3z M122.5,7.8c0-0.9-0.6-1.3-1.5-1.9l-1.5-0.8c-1.2-0.6-1.8-1.3-1.8-2.5c0-1.5,1.3-2.7,3-2.7c1.2,0,1.8,0.6,2.1,0.6c0.2,0,0.3-0.1,0.4-0.4h0.3l0.1,2.7l-0.4,0c-0.2-1.3-1.1-2.3-2.5-2.3c-1,0-1.7,0.6-1.7,1.4c0,0.9,0.7,1.3,1.5,1.7l1.3,0.7c1.2,0.7,2.1,1.4,2.1,2.7c0,1.7-1.5,2.9-3.3,2.9c-1.3,0-1.9-0.6-2.3-0.6c-0.2,0-0.3,0.2-0.4,0.5h-0.3L117.4,7l0.4,0c0.3,1.8,1.5,2.5,2.8,2.5C121.6,9.5,122.5,9,122.5,7.8z"/>';
 	var watermarkPath = {
-	    light: watermarkPathLight,
+	  light: watermarkPathLight
 	};
 
 	function socialFrame(configObject) {
-	    const f = chartFrame()
-	        .autoPosition(true)
-	        .containerClass('ft-socialgraphic')
-	        .backgroundColour('#262a33')
-	        .width(612)
-	        .height(612)
-	        .watermark(watermarkPath.light)
-	        .watermarkOffset(25)
-	        .margin({ left: 40, right: 40, bottom: 138, top: 140 })
-	        .rem(24)
-	        .titleX(40)
-	        .titleY(80)
-	        .titleLineHeight(32)
-	        .titleStyle({
-	            'font-size': '30px',
-	            fill: '#ffffff',
-	            'font-weight': 400,
-	            'font-family': 'MetricWeb,sans-serif',
-	        })
-	        .subtitleX(40)
-	        .subtitleY(112)
-	        .subtitleLineHeight(26)
-	        .subtitleStyle({
-	            'font-size': '24px',
-	            fill: '#8e9095',
-	            'font-weight': 400,
-	            'font-family': 'MetricWeb,sans-serif',
-	        })
-	        .sourceX(40)
-	        .sourceLineHeight(22)
-	        .sourceStyle({
-	            'font-size': '20px',
-	            fill: '#8e9095',
-	            'font-weight': 400,
-	            'font-family': 'MetricWeb,sans-serif',
-	        });
-
-	    if (configObject !== undefined) f.attrs(configObject);
-	    return f;
+	  var f = chartFrame().autoPosition(true).containerClass('ft-socialgraphic').backgroundColour('#262a33').whitebar('#fff').width(612).height(612).watermark(watermarkPath.light).watermarkOffsetX(40).watermarkOffsetY(40).margin({
+	    left: 40,
+	    right: 40,
+	    bottom: 138,
+	    top: 140
+	  }).rem(24).titleX(40).titleY(80).titleLineHeight(32).titleStyle({
+	    'font-size': '30px',
+	    fill: '#ffffff',
+	    'font-weight': 400,
+	    'font-family': 'MetricWeb,sans-serif'
+	  }).subtitleX(40).subtitleY(112).subtitleLineHeight(26).subtitleStyle({
+	    'font-size': '24px',
+	    fill: '#8e9095',
+	    'font-weight': 400,
+	    'font-family': 'MetricWeb,sans-serif'
+	  }).sourceX(40).sourceLineHeight(22).sourceStyle({
+	    'font-size': '20px',
+	    fill: '#8e9095',
+	    'font-weight': 400,
+	    'font-family': 'MetricWeb,sans-serif'
+	  });
+	  if (configObject !== undefined) f.attrs(configObject);
+	  return f;
 	}
 
 	function videoFrame(configObject) {
-	    const f = chartFrame()
-	        .autoPosition(true)
-	        .backgroundColour('#212121')
-	        .containerClass('ft-videographic')
-	        .width(1920)
-	        .height(1080)
-	        .watermark('')
-	        .margin({ left: 207, right: 207, bottom: 210, top: 233 })
-	        .rem(48)
-	        .titleX(207)
-	        .titleY(130)
-	        .titleLineHeight(68)
-	        .titleStyle({
-	            'font-size': '68px',
-	            fill: '#ffffff',
-	            'font-weight': 600,
-	            opacity: 0.9,
-	            'font-family': 'MetricWeb,sans-serif',
-	        })
-	        .subtitleX(207)
-	        .subtitleY(200)
-	        .subtitleLineHeight(48)
-	        .subtitleStyle({
-	            'font-size': '48px',
-	            fill: '#ffffff',
-	            'font-weight': 400,
-	            opacity: 0.7,
-	            'font-family': 'MetricWeb,sans-serif',
-	        })
-	        .sourceX(207)
-	        .sourcePlotYOffset(60)
-	        .sourceLineHeight(38)
-	        .sourceStyle({
-	            'font-size': '36px',
-	            fill: '#ffffff',
-	            'font-weight': 400,
-	            opacity: 0.5,
-	            'font-family': 'MetricWeb,sans-serif',
-	        });
-
-	    if (configObject !== undefined) f.attrs(configObject);
-	    return f;
+	  var f = chartFrame().autoPosition(true).backgroundColour('#212121').containerClass('ft-videographic').width(1920).height(1080).watermark('').margin({
+	    left: 207,
+	    right: 207,
+	    bottom: 210,
+	    top: 233
+	  }).rem(48).titleX(207).titleY(130).titleLineHeight(68).titleStyle({
+	    'font-size': '68px',
+	    fill: '#ffffff',
+	    'font-weight': 600,
+	    opacity: 0.9,
+	    'font-family': 'MetricWeb,sans-serif'
+	  }).subtitleX(207).subtitleY(200).subtitleLineHeight(48).subtitleStyle({
+	    'font-size': '48px',
+	    fill: '#ffffff',
+	    'font-weight': 400,
+	    opacity: 0.7,
+	    'font-family': 'MetricWeb,sans-serif'
+	  }).sourceX(207).sourcePlotYOffset(60).sourceLineHeight(38).sourceStyle({
+	    'font-size': '36px',
+	    fill: '#ffffff',
+	    'font-weight': 400,
+	    opacity: 0.5,
+	    'font-family': 'MetricWeb,sans-serif'
+	  });
+	  if (configObject !== undefined) f.attrs(configObject);
+	  return f;
 	}
 
 	exports.frame = chartFrame;
