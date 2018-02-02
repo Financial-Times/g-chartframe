@@ -34,6 +34,7 @@ function socialFrame(configObject) {
         })
         .sourceX(40)
         .sourceLineHeight(22)
+        .sourcePlotYOffset(66)
         .sourceStyle({
             'font-size': '20px',
             fill: '#8e9095',

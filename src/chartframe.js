@@ -20,7 +20,7 @@ function chartFrame(configObject) {
     let subtitle = 'some supporting information, units perhaps';
     let subtitleLineHeight = 20;
     let subtitleStyle = {};
-    let source = 'Source: research|FT Graphic Tom Pearson';
+    let source = 'Source: research';
     let sourceLineHeight = 16;
     let sourcePlotYOffset = 46;
     let sourceStyle = {};

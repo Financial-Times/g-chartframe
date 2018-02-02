@@ -1377,7 +1377,7 @@
 	  var subtitle = 'some supporting information, units perhaps';
 	  var subtitleLineHeight = 20;
 	  var subtitleStyle = {};
-	  var source = 'Source: research|FT Graphic Tom Pearson';
+	  var source = 'Source: research';
 	  var sourceLineHeight = 16;
 	  var sourcePlotYOffset = 46;
 	  var sourceStyle = {};
@@ -2074,7 +2074,7 @@
 	    fill: '#8e9095',
 	    'font-weight': 400,
 	    'font-family': 'MetricWeb,sans-serif'
-	  }).sourceX(40).sourceLineHeight(22).sourceStyle({
+	  }).sourceX(40).sourceLineHeight(22).sourcePlotYOffset(66).sourceStyle({
 	    'font-size': '20px',
 	    fill: '#8e9095',
 	    'font-weight': 400,
