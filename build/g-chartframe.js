@@ -2085,7 +2085,7 @@
 	}
 
 	function videoFrame(configObject) {
-	  var f = chartFrame().autoPosition(true).backgroundColour('#212121').containerClass('ft-videographic').width(1920).height(1080).watermark('').margin({
+	  var f = chartFrame().autoPosition(true).backgroundColour('#262a33').containerClass('ft-videographic').width(1920).height(1080).watermark('').margin({
 	    left: 207,
 	    right: 207,
 	    bottom: 210,
