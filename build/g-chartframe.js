@@ -1978,6 +1978,7 @@
 	    '.annotations-holder line',
 	    '.annotations-holder text',
 	    '.line path',
+	    '.highlights rects',
 	];
 
 	function savePNG(svg, scaleFactor) {
