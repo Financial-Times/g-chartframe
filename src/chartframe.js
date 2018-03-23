@@ -132,14 +132,14 @@ function chartFrame(configObject) {
                     .data(title.split('|'))
                     .enter()
                     .append('tspan')
-                    .html(d => d)
+                    .text(d => d)
                     .attr('y', (d, i) => (titlePosition.y + (i * titleLineHeight)))
                     .attr('x', titlePosition.x)
                     .call(attributeStyle, titleStyle);
             });
 
         p.selectAll('text.chart-title tspan')
-            .html(d => d)
+            .text(d => d)
             .transition(transition)
             .attr('y', (d, i) => (titlePosition.y + (i * titleLineHeight)))
             .attr('x', titlePosition.x)
@@ -158,7 +158,7 @@ function chartFrame(configObject) {
                     .data(subtitle.split('|'))
                     .enter()
                     .append('tspan')
-                    .html(d => d)
+                    .text(d => d)
                     .attr('id', `${containerClass}subtitle`)
                     .attr('y', (d, i) => {
                         if (titleLineCount > 1) {
@@ -172,7 +172,7 @@ function chartFrame(configObject) {
             });
 
         p.selectAll('text.chart-subtitle tspan')
-            .html(d => d)
+            .text(d => d)
             .transition(transition)
             .attr('y', (d, i) => {
                 if (titleLineCount > 1) {
@@ -195,7 +195,7 @@ function chartFrame(configObject) {
                     .data(source.split('|'))
                     .enter()
                     .append('tspan')
-                    .html(d => d)
+                    .text(d => d)
                     .attr('id', `${containerClass}source`)
                     .attr('y', (d, i) => {
                         if (sourcePosition.y) {
@@ -208,7 +208,7 @@ function chartFrame(configObject) {
             });
 
         p.selectAll('text.chart-source tspan')
-            .html(d => d)
+            .text(d => d)
             .transition(transition)
             .attr('y', (d, i) => {
                 if (sourcePosition.y) {
@@ -228,7 +228,7 @@ function chartFrame(configObject) {
                 .append('text')
                 .attr('class', 'chart-copyright')
                 .append('tspan')
-                .html(d => d)
+                .text(d => d)
                 .attr('x', sourcePosition.x)
                 .attr('y', () => {
                     if (sourceLineCount > 1) {
@@ -250,19 +250,21 @@ function chartFrame(configObject) {
         }
 
         // watermark
+        // @TODO find way to remove the Selection.html calls for better JSDom usage.
+        if (p.node().ownerDocument.doctype.name !== 'svg') {
+            p.selectAll('g.chart-watermark')
+                .data([0])
+                .enter()
+                .append('g')
+                .attr('class', 'chart-watermark')
+                .html(watermarkMarkup)
+                .attr('transform', `translate(${graphicWidth - watermarkSize - watermarkOffset},${graphicHeight - watermarkSize - watermarkOffset}) scale(${watermarkSize / 100}) `);
 
-        p.selectAll('g.chart-watermark')
-            .data([0])
-            .enter()
-            .append('g')
-            .attr('class', 'chart-watermark')
-            .html(watermarkMarkup)
-            .attr('transform', `translate(${graphicWidth - watermarkSize - watermarkOffset},${graphicHeight - watermarkSize - watermarkOffset}) scale(${watermarkSize / 100}) `);
-
-        p.selectAll('g.chart-watermark')
-            .html(watermarkMarkup)
-            .transition()
-            .attr('transform', `translate(${graphicWidth - watermarkSize - watermarkOffset},${graphicHeight - watermarkSize - watermarkOffset}) scale(${watermarkSize / 100}) `);
+            p.selectAll('g.chart-watermark')
+                .html(watermarkMarkup)
+                .transition()
+                .attr('transform', `translate(${graphicWidth - watermarkSize - watermarkOffset},${graphicHeight - watermarkSize - watermarkOffset}) scale(${watermarkSize / 100}) `);
+        }
 
         // plot area (where you put the chart itself)
         p.selectAll('g.chart-plot')
@@ -278,7 +280,7 @@ function chartFrame(configObject) {
             .duration(0)
             .attr('transform', `translate(${margin.left},${margin.top})`);
 
-        if (showDownloadPngButtons) {
+        if (showDownloadPngButtons && p.node().ownerDocument.doctype.name !== 'svg') {
             let parent;
             if (p.node().nodeName.toLowerCase() === 'svg') {
                 parent = d3.select(p.node().parentNode);
