@@ -25,7 +25,7 @@ function socialFrame(configObject) {
         })
         .subtitleX(40)
         .subtitleY(112)
-        .subtitleLineHeight(26)
+        .subtitleLineHeight(28)
         .subtitleStyle({
             'font-size': '24px',
             fill: '#8e9095',
@@ -33,7 +33,7 @@ function socialFrame(configObject) {
             'font-family': 'MetricWeb,sans-serif',
         })
         .sourceX(40)
-        .sourceLineHeight(22)
+        .sourceLineHeight(20)
         .sourcePlotYOffset(66)
         .sourceStyle({
             'font-size': '20px',
