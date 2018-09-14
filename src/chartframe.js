@@ -370,6 +370,8 @@ function chartFrame(configObject) {
         return frame;
     };
 
+    frame.container = () => container;
+
     frame.containerClass = (x) => {
         if (x === undefined) return containerClass;
         containerClass = x;
@@ -393,8 +395,8 @@ function chartFrame(configObject) {
             return {
                 width: multiples.width,
                 height: multiples.height,
-                plotWidth: graphicWidth - (margin.left + margin.right),
-                plotHeight: graphicHeight - (margin.top + margin.bottom),
+                parentWidth: graphicWidth - (margin.left + margin.right),
+                parentHeight: graphicHeight - (margin.top + margin.bottom),
             };
         }
 
@@ -442,7 +444,6 @@ function chartFrame(configObject) {
     };
 
     frame.plot = () => plot;
-    frame.container = () => container;
 
     frame.plotAdjuster = (x) => {
         if (x === undefined) return plotAdjuster;
