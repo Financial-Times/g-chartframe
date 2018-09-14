@@ -442,6 +442,7 @@ function chartFrame(configObject) {
     };
 
     frame.plot = () => plot;
+    frame.container = () => container;
 
     frame.plotAdjuster = (x) => {
         if (x === undefined) return plotAdjuster;
