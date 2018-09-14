@@ -4,6 +4,7 @@ import * as d3 from 'd3-selection';
 function chartFrame(configObject) {
     let autoPosition = false;
     let backgroundColour;
+    let container; // When using small multiples, this is the parent; equal to `plot` when not
     let containerClass = 'g-chartframe';
     let copyright = '© FT';
     let copyrightStyle = false;
@@ -34,6 +35,7 @@ function chartFrame(configObject) {
     let watermarkWidth = 124;
     let watermarkHeight = 10;
     let units = 'px';
+    let multiples = false;
 
     const margin = {
         top: 100,
@@ -282,7 +284,38 @@ function chartFrame(configObject) {
             .attr('class', 'chart-plot')
             .attr('transform', `translate(${margin.left},${margin.top})`);
 
-        plot = p.selectAll('g.chart-plot');
+        if (multiples) {
+            container = p.selectAll('g.chart-plot');
+
+            if (multiples.width && multiples.height) { // Calculate layout if not supplied
+                multiples.rows = Math.floor(graphicHeight / multiples.height);
+                multiples.columns = Math.floor(graphicWidth / multiples.width);
+            }
+
+            if (multiples.rows && multiples.columns) {
+                // If small multiple dimensions not supplied, calculate
+                if (!multiples.width && multiples.height) {
+                    multiples.width = ((graphicWidth - (margin.left + margin.right)) / multiples.columns) - rem;
+                    multiples.height = ((graphicHeight - (margin.top + margin.bottom)) / multiples.rows) - (rem * 3.5);
+                }
+
+                plot = container
+                    .selectAll('g.small-multiple')
+                    .data(Array(multiples.rows * multiples.columns).fill(null))
+                    .enter()
+                    .append('g')
+                    .attr('class', 'small-multiple')
+                    .attr('transform', (d, i) => {
+                        const yPos = Number(Math.floor(i / multiples.columns) * (multiples.height + (rem * 4.5)));
+                        const xPos = i % multiples.columns;
+
+                        return `translate(${((multiples.width + rem) * xPos) + rem},${yPos})`;
+                    });
+            }
+        } else {
+            plot = p.selectAll('g.chart-plot');
+            container = plot;
+        }
 
         plot.transition(transition)
             .duration(0)
@@ -355,10 +388,21 @@ function chartFrame(configObject) {
         return frame;
     };
 
-    frame.dimension = () => ({
-        width: graphicWidth - (margin.left + margin.right),
-        height: graphicHeight - (margin.top + margin.bottom),
-    });
+    frame.dimension = () => {
+        if (multiples && multiples.width && multiples.height) {
+            return {
+                width: multiples.width,
+                height: multiples.height,
+                plotWidth: graphicWidth - (margin.left + margin.right),
+                plotHeight: graphicHeight - (margin.top + margin.bottom),
+            };
+        }
+
+        return {
+            width: graphicWidth - (margin.left + margin.right),
+            height: graphicHeight - (margin.top + margin.bottom),
+        };
+    };
 
     frame.extend = (key, value) => {
         custom[key] = value;
@@ -616,6 +660,15 @@ function chartFrame(configObject) {
             }
         });
         return frame;
+    };
+
+    frame.multiples = (newMultiples) => {
+        if (newMultiples !== undefined) {
+            multiples = newMultiples;
+            return frame;
+        }
+
+        return multiples;
     };
 
     if (configObject !== undefined) {
