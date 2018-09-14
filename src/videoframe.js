@@ -1,4 +1,4 @@
-import frame from './chartframe';
+import frame from './chartframe.js';
 
 function videoFrame(configObject) {
     const f = frame()

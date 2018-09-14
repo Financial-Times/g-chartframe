@@ -1,4 +1,4 @@
-import frame from './chartframe';
+import frame from './chartframe.js';
 
 function webFrameM(configObject) {
     const f = frame()

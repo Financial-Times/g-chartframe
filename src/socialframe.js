@@ -1,5 +1,5 @@
-import frame from './chartframe';
-import watermarkPath from './watermarks';
+import frame from './chartframe.js';
+import watermarkPath from './watermarks.js';
 
 function socialFrame(configObject) {
     const f = frame()
