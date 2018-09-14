@@ -294,8 +294,11 @@ function chartFrame(configObject) {
 
             if (multiples.rows && multiples.columns) {
                 // If small multiple dimensions not supplied, calculate
-                if (!multiples.width && multiples.height) {
+                if (!multiples.width) {
                     multiples.width = ((graphicWidth - (margin.left + margin.right)) / multiples.columns) - rem;
+                }
+
+                if (!multiples.height) {
                     multiples.height = ((graphicHeight - (margin.top + margin.bottom)) / multiples.rows) - (rem * 3.5);
                 }
 
