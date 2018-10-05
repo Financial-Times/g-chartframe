@@ -1,6 +1,6 @@
 {
   "name": "g-chartframe",
-  "version": "5.1.13",
+  "version": "0.0.0",
   "description": "FT styled frames for D3 graphics",
   "license": "ISC",
   "jsnext:main": "index.js",
@@ -43,6 +43,7 @@
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.8.0",
     "jsdom": "^11.4.0",
+    "npm-prepublish": "^1.2.3",
     "nyc": "^11.3.0",
     "rollup": "0.25",
     "rollup-plugin-babel": "^4.0.0-beta.0",

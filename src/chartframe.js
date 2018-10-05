@@ -129,107 +129,115 @@ function chartFrame(configObject) {
                 .attr('stroke', goalposts);
         }
 
+        const titleLineCount = title ? title.split('|').length : 0;
+        const subtitleLineCount = subtitle ? subtitle.split('|').length : 0;
+        const sourceLineCount = source ? source.split('|').length : 0;
+
         // title
-        const titleLineCount = title.split('|').length;
-        p.selectAll('text.chart-title')
-            .data([title])
-            .enter()
-            .append('text')
-            .attr('class', 'chart-title')
-            .attr('id', `${containerClass}title`)
-            .call((titleText) => {
-                titleText.selectAll('tspan')
-                    .data(title.split('|'))
-                    .enter()
-                    .append('tspan')
-                    .html(d => d)
-                    .attr('y', (d, i) => (titlePosition.y + (i * titleLineHeight)))
-                    .attr('x', titlePosition.x)
-                    .call(attributeStyle, titleStyle);
-            });
+        if (title) {
+            p.selectAll('text.chart-title')
+                .data([title])
+                .enter()
+                .append('text')
+                .attr('class', 'chart-title')
+                .attr('id', `${containerClass}title`)
+                .call((titleText) => {
+                    titleText.selectAll('tspan')
+                        .data(title.split('|'))
+                        .enter()
+                        .append('tspan')
+                        .html(d => d)
+                        .attr('y', (d, i) => (titlePosition.y + (i * titleLineHeight)))
+                        .attr('x', titlePosition.x)
+                        .call(attributeStyle, titleStyle);
+                });
 
-        p.selectAll('text.chart-title tspan')
-            .html(d => d)
-            .transition(transition)
-            .attr('y', (d, i) => (titlePosition.y + (i * titleLineHeight)))
-            .attr('x', titlePosition.x)
-            .call(attributeStyle, titleStyle);
+            p.selectAll('text.chart-title tspan')
+                .html(d => d)
+                .transition(transition)
+                .attr('y', (d, i) => (titlePosition.y + (i * titleLineHeight)))
+                .attr('x', titlePosition.x)
+                .call(attributeStyle, titleStyle);
+        }
 
-        const subtitleLineCount = subtitle.split('|').length;
-        // subtitle
-        p.selectAll('text.chart-subtitle')
-            .data([subtitle])
-            .enter()
-            .append('text')
-            .attr('id', `${containerClass}subtitle`)
-            .attr('class', 'chart-subtitle')
-            .call((subtitleText) => {
-                subtitleText.selectAll('tspan')
-                    .data(subtitle.split('|'))
-                    .enter()
-                    .append('tspan')
-                    .html(d => d)
-                    .attr('id', `${containerClass}subtitle`)
-                    .attr('y', (d, i) => {
-                        if (titleLineCount > 1) {
-                            return (titlePosition.y + (titleLineCount * titleLineHeight) + (subtitleLineHeight * i));
-                        }
-                        return (subtitlePosition.y + (i * subtitleLineHeight));
-                    })
+        if (subtitle) {
+            // subtitle
+            p.selectAll('text.chart-subtitle')
+                .data([subtitle])
+                .enter()
+                .append('text')
+                .attr('id', `${containerClass}subtitle`)
+                .attr('class', 'chart-subtitle')
+                .call((subtitleText) => {
+                    subtitleText.selectAll('tspan')
+                        .data(subtitle.split('|'))
+                        .enter()
+                        .append('tspan')
+                        .html(d => d)
+                        .attr('id', `${containerClass}subtitle`)
+                        .attr('y', (d, i) => {
+                            if (titleLineCount > 1) {
+                                return (titlePosition.y + (titleLineCount * titleLineHeight) + (subtitleLineHeight * i));
+                            }
+                            return (subtitlePosition.y + (i * subtitleLineHeight));
+                        })
 
-                    .attr('x', subtitlePosition.x)
-                    .call(attributeStyle, subtitleStyle);
-            });
+                        .attr('x', subtitlePosition.x)
+                        .call(attributeStyle, subtitleStyle);
+                });
 
-        p.selectAll('text.chart-subtitle tspan')
-            .html(d => d)
-            .transition(transition)
-            .attr('y', (d, i) => {
-                if (titleLineCount > 1) {
-                    return (titlePosition.y + (titleLineCount * titleLineHeight) + (subtitleLineHeight * i));
-                }
-                return (subtitlePosition.y + (i * subtitleLineHeight));
-            })
-            .attr('x', subtitlePosition.x)
-            .call(attributeStyle, subtitleStyle);
+            p.selectAll('text.chart-subtitle tspan')
+                .html(d => d)
+                .transition(transition)
+                .attr('y', (d, i) => {
+                    if (titleLineCount > 1) {
+                        return (titlePosition.y + (titleLineCount * titleLineHeight) + (subtitleLineHeight * i));
+                    }
+                    return (subtitlePosition.y + (i * subtitleLineHeight));
+                })
+                .attr('x', subtitlePosition.x)
+                .call(attributeStyle, subtitleStyle);
+        }
 
-        // source
-        p.selectAll('text.chart-source')
-            .data([source])
-            .enter()
-            .append('text')
-            .attr('class', 'chart-source')
-            .attr('id', `${containerClass}source`)
-            .call((sourceText) => {
-                sourceText.selectAll('tspan')
-                    .data(source.split('|'))
-                    .enter()
-                    .append('tspan')
-                    .html(d => d)
-                    .attr('id', `${containerClass}source`)
-                    .attr('y', (d, i) => {
-                        if (sourcePosition.y) {
-                            return (sourcePosition.y + (i * sourceLineHeight));
-                        }
-                        return ((graphicHeight - (margin.bottom - sourcePlotYOffset) + sourceLineHeight * 1.5) + ((i) * sourceLineHeight)); // eslint-disable-line
-                    })
-                    .attr('x', subtitlePosition.x)
-                    .call(attributeStyle, subtitleStyle);
-            });
+        if (source) {
+            // source
+            p.selectAll('text.chart-source')
+                .data([source])
+                .enter()
+                .append('text')
+                .attr('class', 'chart-source')
+                .attr('id', `${containerClass}source`)
+                .call((sourceText) => {
+                    sourceText.selectAll('tspan')
+                        .data(source.split('|'))
+                        .enter()
+                        .append('tspan')
+                        .html(d => d)
+                        .attr('id', `${containerClass}source`)
+                        .attr('y', (d, i) => {
+                            if (sourcePosition.y) {
+                                return (sourcePosition.y + (i * sourceLineHeight));
+                            }
+                            return ((graphicHeight - (margin.bottom - sourcePlotYOffset) + sourceLineHeight * 1.5) + ((i) * sourceLineHeight)); // eslint-disable-line
+                        })
+                        .attr('x', subtitlePosition.x)
+                        .call(attributeStyle, subtitleStyle);
+                });
 
-        p.selectAll('text.chart-source tspan')
-            .html(d => d)
-            .transition(transition)
-            .attr('y', (d, i) => {
-                if (sourcePosition.y) {
-                    return (sourcePosition.y + (i * sourceLineHeight));
-                }
-                return ((graphicHeight - (margin.bottom - sourcePlotYOffset) + sourceLineHeight * 1.5) + ((i) * sourceLineHeight)); // eslint-disable-line
-            })
-            .attr('x', sourcePosition.x)
-            .call(attributeStyle, sourceStyle);
+            p.selectAll('text.chart-source tspan')
+                .html(d => d)
+                .transition(transition)
+                .attr('y', (d, i) => {
+                    if (sourcePosition.y) {
+                        return (sourcePosition.y + (i * sourceLineHeight));
+                    }
+                    return ((graphicHeight - (margin.bottom - sourcePlotYOffset) + sourceLineHeight * 1.5) + ((i) * sourceLineHeight)); // eslint-disable-line
+                })
+                .attr('x', sourcePosition.x)
+                .call(attributeStyle, sourceStyle);
+        }
 
-        const sourceLineCount = source.split('|').length;
+
         // copyright
         if (copyrightStyle) {
             p.selectAll('text.chart-copyright')
