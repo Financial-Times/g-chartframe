@@ -1457,66 +1457,75 @@
 	      p.selectAll('path.chart-goalposts').transition(transition).attr('d', function (d) {
 	        return d;
 	      }).attr('stroke-width', 0.3).attr('fill', 'none').attr('stroke', goalposts);
-	    } // title
+	    }
 
+	    var titleLineCount = title ? title.split('|').length : 0;
+	    var subtitleLineCount = subtitle ? subtitle.split('|').length : 0;
+	    var sourceLineCount = source ? source.split('|').length : 0; // title
 
-	    var titleLineCount = title.split('|').length;
-	    p.selectAll('text.chart-title').data([title]).enter().append('text').attr('class', 'chart-title').attr('id', "".concat(containerClass, "title")).call(function (titleText) {
-	      titleText.selectAll('tspan').data(title.split('|')).enter().append('tspan').html(function (d) {
+	    if (title) {
+	      p.selectAll('text.chart-title').data([title]).enter().append('text').attr('class', 'chart-title').attr('id', "".concat(containerClass, "title")).call(function (titleText) {
+	        titleText.selectAll('tspan').data(title.split('|')).enter().append('tspan').html(function (d) {
+	          return d;
+	        }).attr('y', function (d, i) {
+	          return titlePosition.y + i * titleLineHeight;
+	        }).attr('x', titlePosition.x).call(attributeStyle, titleStyle);
+	      });
+	      p.selectAll('text.chart-title tspan').html(function (d) {
 	        return d;
-	      }).attr('y', function (d, i) {
+	      }).transition(transition).attr('y', function (d, i) {
 	        return titlePosition.y + i * titleLineHeight;
 	      }).attr('x', titlePosition.x).call(attributeStyle, titleStyle);
-	    });
-	    p.selectAll('text.chart-title tspan').html(function (d) {
-	      return d;
-	    }).transition(transition).attr('y', function (d, i) {
-	      return titlePosition.y + i * titleLineHeight;
-	    }).attr('x', titlePosition.x).call(attributeStyle, titleStyle);
-	    var subtitleLineCount = subtitle.split('|').length; // subtitle
+	    }
 
-	    p.selectAll('text.chart-subtitle').data([subtitle]).enter().append('text').attr('id', "".concat(containerClass, "subtitle")).attr('class', 'chart-subtitle').call(function (subtitleText) {
-	      subtitleText.selectAll('tspan').data(subtitle.split('|')).enter().append('tspan').html(function (d) {
+	    if (subtitle) {
+	      // subtitle
+	      p.selectAll('text.chart-subtitle').data([subtitle]).enter().append('text').attr('id', "".concat(containerClass, "subtitle")).attr('class', 'chart-subtitle').call(function (subtitleText) {
+	        subtitleText.selectAll('tspan').data(subtitle.split('|')).enter().append('tspan').html(function (d) {
+	          return d;
+	        }).attr('id', "".concat(containerClass, "subtitle")).attr('y', function (d, i) {
+	          if (titleLineCount > 1) {
+	            return titlePosition.y + titleLineCount * titleLineHeight + subtitleLineHeight * i;
+	          }
+
+	          return subtitlePosition.y + i * subtitleLineHeight;
+	        }).attr('x', subtitlePosition.x).call(attributeStyle, subtitleStyle);
+	      });
+	      p.selectAll('text.chart-subtitle tspan').html(function (d) {
 	        return d;
-	      }).attr('id', "".concat(containerClass, "subtitle")).attr('y', function (d, i) {
+	      }).transition(transition).attr('y', function (d, i) {
 	        if (titleLineCount > 1) {
 	          return titlePosition.y + titleLineCount * titleLineHeight + subtitleLineHeight * i;
 	        }
 
 	        return subtitlePosition.y + i * subtitleLineHeight;
 	      }).attr('x', subtitlePosition.x).call(attributeStyle, subtitleStyle);
-	    });
-	    p.selectAll('text.chart-subtitle tspan').html(function (d) {
-	      return d;
-	    }).transition(transition).attr('y', function (d, i) {
-	      if (titleLineCount > 1) {
-	        return titlePosition.y + titleLineCount * titleLineHeight + subtitleLineHeight * i;
-	      }
+	    }
 
-	      return subtitlePosition.y + i * subtitleLineHeight;
-	    }).attr('x', subtitlePosition.x).call(attributeStyle, subtitleStyle); // source
+	    if (source) {
+	      // source
+	      p.selectAll('text.chart-source').data([source]).enter().append('text').attr('class', 'chart-source').attr('id', "".concat(containerClass, "source")).call(function (sourceText) {
+	        sourceText.selectAll('tspan').data(source.split('|')).enter().append('tspan').html(function (d) {
+	          return d;
+	        }).attr('id', "".concat(containerClass, "source")).attr('y', function (d, i) {
+	          if (sourcePosition.y) {
+	            return sourcePosition.y + i * sourceLineHeight;
+	          }
 
-	    p.selectAll('text.chart-source').data([source]).enter().append('text').attr('class', 'chart-source').attr('id', "".concat(containerClass, "source")).call(function (sourceText) {
-	      sourceText.selectAll('tspan').data(source.split('|')).enter().append('tspan').html(function (d) {
+	          return graphicHeight - (margin.bottom - sourcePlotYOffset) + sourceLineHeight * 1.5 + i * sourceLineHeight; // eslint-disable-line
+	        }).attr('x', subtitlePosition.x).call(attributeStyle, subtitleStyle);
+	      });
+	      p.selectAll('text.chart-source tspan').html(function (d) {
 	        return d;
-	      }).attr('id', "".concat(containerClass, "source")).attr('y', function (d, i) {
+	      }).transition(transition).attr('y', function (d, i) {
 	        if (sourcePosition.y) {
 	          return sourcePosition.y + i * sourceLineHeight;
 	        }
 
 	        return graphicHeight - (margin.bottom - sourcePlotYOffset) + sourceLineHeight * 1.5 + i * sourceLineHeight; // eslint-disable-line
-	      }).attr('x', subtitlePosition.x).call(attributeStyle, subtitleStyle);
-	    });
-	    p.selectAll('text.chart-source tspan').html(function (d) {
-	      return d;
-	    }).transition(transition).attr('y', function (d, i) {
-	      if (sourcePosition.y) {
-	        return sourcePosition.y + i * sourceLineHeight;
-	      }
+	      }).attr('x', sourcePosition.x).call(attributeStyle, sourceStyle);
+	    } // copyright
 
-	      return graphicHeight - (margin.bottom - sourcePlotYOffset) + sourceLineHeight * 1.5 + i * sourceLineHeight; // eslint-disable-line
-	    }).attr('x', sourcePosition.x).call(attributeStyle, sourceStyle);
-	    var sourceLineCount = source.split('|').length; // copyright
 
 	    if (copyrightStyle) {
 	      p.selectAll('text.chart-copyright').data([copyright]).enter().append('text').attr('class', 'chart-copyright').append('tspan').html(function (d) {
