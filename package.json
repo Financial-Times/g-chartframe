@@ -20,7 +20,7 @@
     "build": "mkdir -p build && rollup -c && npm run minify",
     "minify": "uglifyjs --compress --minify -- build/g-chartframe.js > build/g-chartframe.min.js",
     "test": "NODE_ENV=test nyc tape test/*.js",
-    "prepublishOnly": "npm run build",
+    "prepare": "npm run build",
     "report-coverage": "nyc report --reporter=lcov && codecov"
   },
   "homepage": "https://github.com/Financial-Times/g-chartframe/",
