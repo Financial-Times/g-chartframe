@@ -89,7 +89,6 @@ tape('chartframe adds a11y stuff', (test) => {
 
     const dom = new JSDOM(fs.readFileSync('test/scaffold.html'));
     const svg = dom.window.document.querySelector('svg');
-
     d3.select(svg).call(defaultFrame);
 
     test.equal(defaultFrame.title(), false);
@@ -110,11 +109,17 @@ tape('chartframe adds a11y stuff', (test) => {
     );
     test.equal(
         svg.getAttribute('aria-labelledby'),
-        'g-chartframe__chart-a11y-title',
+        'g-chartframe__chart-a11y-title g-chartframe__chart-a11y-desc',
+    );
+    test.equal(svg.getAttribute('role'), 'img');
+    test.equal(
+        svg.querySelector('.chart-plot').getAttribute('role'),
+        'presentation',
     );
     test.equal(
-        svg.getAttribute('aria-describedby'),
-        'g-chartframe__chart-a11y-desc',
+        svg.querySelector('.chart-watermark').getAttribute('role'),
+        'presentation',
     );
+
     test.end();
 });

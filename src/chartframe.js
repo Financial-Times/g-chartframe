@@ -4,6 +4,7 @@ import * as d3 from 'd3-selection';
 function chartFrame(configObject) {
     let autoPosition = false;
     let a11yDesc = 'A graphic by the Financial Times';
+    let a11yPlotPresentation = true;
     let a11yTitle = 'A chart';
     let backgroundColour;
     let containerClass = 'g-chartframe';
@@ -69,6 +70,9 @@ function chartFrame(configObject) {
             'font-family',
             'MetricWeb,sans-serif',
         );
+
+        p.attr('role', 'img');
+
         if (p.node().nodeName.toLowerCase() === 'svg') {
             p.transition(transition)
                 .attr('width', graphicWidth)
@@ -93,8 +97,8 @@ function chartFrame(configObject) {
                     .text(a11yDesc)
                     .attr('id', `${containerClass}__chart-a11y-desc`);
                 p.attr(
-                    'aria-describedby',
-                    `${containerClass}__chart-a11y-desc`,
+                    'aria-labelledby',
+                    `${p.attr('aria-labelledby') ? `${p.attr('aria-labelledby')} ` : ''}${containerClass}__chart-a11y-desc`,
                 );
             }
         }
@@ -105,6 +109,7 @@ function chartFrame(configObject) {
                 .data([backgroundColour])
                 .enter()
                 .append('rect')
+                .attr('role', 'presentation')
                 .attr('id', 'chart-background')
                 .attr('class', 'chart-background');
 
@@ -343,6 +348,7 @@ function chartFrame(configObject) {
             .append('g')
             .attr('class', 'chart-watermark')
             .html(watermarkMarkup)
+            .attr('role', 'presentation')
             .attr(
                 'transform',
                 `translate(${graphicWidth -
@@ -365,18 +371,13 @@ function chartFrame(configObject) {
             );
 
         // plot area (where you put the chart itself)
-        p.selectAll('g.chart-plot')
-            .data([0])
-            .enter()
-            .append('g')
+        plot = p.append('g')
             .attr('class', 'chart-plot')
             .attr('transform', `translate(${margin.left},${margin.top})`);
 
-        plot = p.selectAll('g.chart-plot');
-
-        plot.transition(transition)
-            .duration(0)
-            .attr('transform', `translate(${margin.left},${margin.top})`);
+        if (a11yPlotPresentation) {
+            plot.attr('role', 'presentation');
+        }
 
         if (showDownloadPngButtons) {
             let parent;
@@ -422,6 +423,12 @@ function chartFrame(configObject) {
     frame.a11yDesc = (x) => {
         if (x === undefined) return a11yDesc;
         a11yDesc = x;
+        return frame;
+    };
+
+    frame.a11yPlotPresentation = (x) => {
+        if (x === undefined) return a11yPlotPresentation;
+        a11yPlotPresentation = x;
         return frame;
     };
 
@@ -688,6 +695,7 @@ function chartFrame(configObject) {
                 {},
                 {
                     a11yDesc,
+                    a11yPlotPresentation,
                     a11yTitle,
                     autoPosition,
                     // axisAlign, // @FIX This is undef?
