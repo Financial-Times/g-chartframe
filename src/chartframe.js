@@ -46,8 +46,12 @@ function chartFrame(configObject) {
     const titlePosition = { x: 1, y: 30 };
     const transition = 0.2;
     const convertFrom = {
-        mm(x) { return (x * 2.83464480558843); },
-        px(x) { return x; },
+        mm(x) {
+            return x * 2.83464480558843;
+        },
+        px(x) {
+            return x;
+        },
     };
     const custom = {};
 
@@ -59,20 +63,22 @@ function chartFrame(configObject) {
 
     function frame(p) {
         // overall graphic properties
-        p.attr('class', containerClass)
-            .attr('font-family', 'MetricWeb,sans-serif');
+        p.attr('class', containerClass).attr(
+            'font-family',
+            'MetricWeb,sans-serif',
+        );
         if (p.node().nodeName.toLowerCase() === 'svg') {
             p.transition(transition)
                 .attr('width', graphicWidth)
                 .attr('height', graphicHeight)
-                .attr('viewBox', ['0 0', graphicWidth, graphicHeight].join(' '));
+                .attr(
+                    'viewBox',
+                    ['0 0', graphicWidth, graphicHeight].join(' '),
+                );
 
-            p.selectAll('title')
-                .data([title])
-                .enter()
-                .append('title');
-
-            p.selectAll('title').text(title);
+            if (title) {
+                p.append('title').text(title);
+            }
         }
 
         // background
@@ -142,12 +148,16 @@ function chartFrame(configObject) {
                 .attr('class', 'chart-title')
                 .attr('id', `${containerClass}title`)
                 .call((titleText) => {
-                    titleText.selectAll('tspan')
+                    titleText
+                        .selectAll('tspan')
                         .data(title.split('|'))
                         .enter()
                         .append('tspan')
                         .html(d => d)
-                        .attr('y', (d, i) => (titlePosition.y + (i * titleLineHeight)))
+                        .attr(
+                            'y',
+                            (d, i) => titlePosition.y + i * titleLineHeight,
+                        )
                         .attr('x', titlePosition.x)
                         .call(attributeStyle, titleStyle);
                 });
@@ -155,7 +165,7 @@ function chartFrame(configObject) {
             p.selectAll('text.chart-title tspan')
                 .html(d => d)
                 .transition(transition)
-                .attr('y', (d, i) => (titlePosition.y + (i * titleLineHeight)))
+                .attr('y', (d, i) => titlePosition.y + i * titleLineHeight)
                 .attr('x', titlePosition.x)
                 .call(attributeStyle, titleStyle);
         }
@@ -169,7 +179,8 @@ function chartFrame(configObject) {
                 .attr('id', `${containerClass}subtitle`)
                 .attr('class', 'chart-subtitle')
                 .call((subtitleText) => {
-                    subtitleText.selectAll('tspan')
+                    subtitleText
+                        .selectAll('tspan')
                         .data(subtitle.split('|'))
                         .enter()
                         .append('tspan')
@@ -177,9 +188,13 @@ function chartFrame(configObject) {
                         .attr('id', `${containerClass}subtitle`)
                         .attr('y', (d, i) => {
                             if (titleLineCount > 1) {
-                                return (titlePosition.y + (titleLineCount * titleLineHeight) + (subtitleLineHeight * i));
+                                return (
+                                    titlePosition.y +
+                                    titleLineCount * titleLineHeight +
+                                    subtitleLineHeight * i
+                                );
                             }
-                            return (subtitlePosition.y + (i * subtitleLineHeight));
+                            return subtitlePosition.y + i * subtitleLineHeight;
                         })
 
                         .attr('x', subtitlePosition.x)
@@ -191,9 +206,13 @@ function chartFrame(configObject) {
                 .transition(transition)
                 .attr('y', (d, i) => {
                     if (titleLineCount > 1) {
-                        return (titlePosition.y + (titleLineCount * titleLineHeight) + (subtitleLineHeight * i));
+                        return (
+                            titlePosition.y +
+                            titleLineCount * titleLineHeight +
+                            subtitleLineHeight * i
+                        );
                     }
-                    return (subtitlePosition.y + (i * subtitleLineHeight));
+                    return subtitlePosition.y + i * subtitleLineHeight;
                 })
                 .attr('x', subtitlePosition.x)
                 .call(attributeStyle, subtitleStyle);
@@ -208,7 +227,8 @@ function chartFrame(configObject) {
                 .attr('class', 'chart-source')
                 .attr('id', `${containerClass}source`)
                 .call((sourceText) => {
-                    sourceText.selectAll('tspan')
+                    sourceText
+                        .selectAll('tspan')
                         .data(source.split('|'))
                         .enter()
                         .append('tspan')
@@ -216,9 +236,14 @@ function chartFrame(configObject) {
                         .attr('id', `${containerClass}source`)
                         .attr('y', (d, i) => {
                             if (sourcePosition.y) {
-                                return (sourcePosition.y + (i * sourceLineHeight));
+                                return sourcePosition.y + i * sourceLineHeight;
                             }
-                            return ((graphicHeight - (margin.bottom - sourcePlotYOffset) + sourceLineHeight * 1.5) + ((i) * sourceLineHeight)); // eslint-disable-line
+                            return (
+                                graphicHeight -
+                                (margin.bottom - sourcePlotYOffset) +
+                                sourceLineHeight * 1.5 +
+                                i * sourceLineHeight
+                            ); // eslint-disable-line
                         })
                         .attr('x', subtitlePosition.x)
                         .call(attributeStyle, subtitleStyle);
@@ -229,14 +254,18 @@ function chartFrame(configObject) {
                 .transition(transition)
                 .attr('y', (d, i) => {
                     if (sourcePosition.y) {
-                        return (sourcePosition.y + (i * sourceLineHeight));
+                        return sourcePosition.y + i * sourceLineHeight;
                     }
-                    return ((graphicHeight - (margin.bottom - sourcePlotYOffset) + sourceLineHeight * 1.5) + ((i) * sourceLineHeight)); // eslint-disable-line
+                    return (
+                        graphicHeight -
+                        (margin.bottom - sourcePlotYOffset) +
+                        sourceLineHeight * 1.5 +
+                        i * sourceLineHeight
+                    ); // eslint-disable-line
                 })
                 .attr('x', sourcePosition.x)
                 .call(attributeStyle, sourceStyle);
         }
-
 
         // copyright
         if (copyrightStyle) {
@@ -250,21 +279,42 @@ function chartFrame(configObject) {
                 .attr('x', sourcePosition.x)
                 .attr('y', () => {
                     if (sourceLineCount > 1) {
-                        return (graphicHeight - (margin.bottom - sourcePlotYOffset) + (sourceLineHeight * 1.125) + (sourceLineCount * sourceLineHeight * 1.2)); // eslint-disable-line
+                        return (
+                            graphicHeight -
+                            (margin.bottom - sourcePlotYOffset) +
+                            sourceLineHeight * 1.125 +
+                            sourceLineCount * sourceLineHeight * 1.2
+                        ); // eslint-disable-line
                     }
-                    return (graphicHeight - (margin.bottom - sourcePlotYOffset) + (sourceLineHeight * 2.5)); // eslint-disable-line
+                    return (
+                        graphicHeight -
+                        (margin.bottom - sourcePlotYOffset) +
+                        sourceLineHeight * 2.5
+                    ); // eslint-disable-line
                 })
-
 
                 .call(attributeStyle, copyrightStyle);
         }
 
-
         // TODO figure out a way to improve this autoPosition stuff, needs ot be configurable so we don't have to reference specific classes
-        if (autoPosition && (containerClass === 'ft-printgraphic' || containerClass === 'ft-socialgraphic' || containerClass === 'ft-videographic')) {
-            margin.top = (titlePosition.y + (titleLineCount * titleLineHeight) + (subtitleLineCount * subtitleLineHeight) + (rem / 3));
+        if (
+            autoPosition &&
+            (containerClass === 'ft-printgraphic' ||
+                containerClass === 'ft-socialgraphic' ||
+                containerClass === 'ft-videographic')
+        ) {
+            margin.top =
+                titlePosition.y +
+                titleLineCount * titleLineHeight +
+                subtitleLineCount * subtitleLineHeight +
+                rem / 3;
         } else if (autoPosition) {
-            margin.top = (titlePosition.y + (titleLineCount * titleLineHeight) + (subtitleLineCount * subtitleLineHeight) + 28 - plotAdjuster); // eslint-disable-line
+            margin.top =
+                titlePosition.y +
+                titleLineCount * titleLineHeight +
+                subtitleLineCount * subtitleLineHeight +
+                28 -
+                plotAdjuster; // eslint-disable-line
         }
 
         // watermark
@@ -275,12 +325,26 @@ function chartFrame(configObject) {
             .append('g')
             .attr('class', 'chart-watermark')
             .html(watermarkMarkup)
-            .attr('transform', `translate(${graphicWidth - watermarkWidth - watermarkOffsetX},${graphicHeight - watermarkHeight - watermarkOffsetY}) scale(1) `);
+            .attr(
+                'transform',
+                `translate(${graphicWidth -
+                    watermarkWidth -
+                    watermarkOffsetX},${graphicHeight -
+                    watermarkHeight -
+                    watermarkOffsetY}) scale(1) `,
+            );
 
         p.selectAll('g.chart-watermark')
             .html(watermarkMarkup)
             .transition()
-            .attr('transform', `translate(${graphicWidth - watermarkWidth - watermarkOffsetX},${graphicHeight - watermarkHeight - watermarkOffsetY}) scale(1) `);
+            .attr(
+                'transform',
+                `translate(${graphicWidth -
+                    watermarkWidth -
+                    watermarkOffsetX},${graphicHeight -
+                    watermarkHeight -
+                    watermarkOffsetY}) scale(1) `,
+            );
 
         // plot area (where you put the chart itself)
         p.selectAll('g.chart-plot')
@@ -306,15 +370,19 @@ function chartFrame(configObject) {
 
             // Prevent this from being rendered twice
             if (parent.selectAll('.button-holder').size() === 0) {
-                const holder = parent.append('div').attr('class', 'button-holder');
-                holder.append('button')
+                const holder = parent
+                    .append('div')
+                    .attr('class', 'button-holder');
+                holder
+                    .append('button')
                     .attr('class', 'save-png-button save-png-button__1x')
                     .text('Save as .png')
                     .style('float', 'left')
                     .style('opacity', 0.6)
                     .on('click', () => savePNG(p, 1));
 
-                holder.append('button')
+                holder
+                    .append('button')
                     .attr('class', 'save-png-button save-png-button__2x')
                     .style('float', 'left')
                     .style('opacity', 0.6)
@@ -323,7 +391,6 @@ function chartFrame(configObject) {
             }
         }
     }
-
 
     // Setters and getters
 
@@ -580,41 +647,45 @@ function chartFrame(configObject) {
 
     frame.attrs = (x) => {
         if (x === undefined) {
-            return Object.assign({}, {
-                autoPosition,
-                // axisAlign, // @FIX This is undef?
-                containerClass,
-                copyright,
-                copyrightStyle,
-                blackbar,
-                goalposts,
-                graphicHeight,
-                graphicWidth,
-                margin,
-                plot,
-                plotAdjuster,
-                rem,
-                subtitle,
-                subtitleLineHeight,
-                subtitlePosition,
-                subtitleStyle,
-                source,
-                sourceLineHeight,
-                sourcePosition,
-                sourceStyle,
-                title,
-                titleLineHeight,
-                titlePosition,
-                titleStyle,
-                watermarkLocation,
-                watermarkMarkup,
-                watermarkOffsetX,
-                watermarkOffsetY,
-                watermarkHeight,
-                watermarkWidth,
-                whitebar,
-                units,
-            }, custom);
+            return Object.assign(
+                {},
+                {
+                    autoPosition,
+                    // axisAlign, // @FIX This is undef?
+                    containerClass,
+                    copyright,
+                    copyrightStyle,
+                    blackbar,
+                    goalposts,
+                    graphicHeight,
+                    graphicWidth,
+                    margin,
+                    plot,
+                    plotAdjuster,
+                    rem,
+                    subtitle,
+                    subtitleLineHeight,
+                    subtitlePosition,
+                    subtitleStyle,
+                    source,
+                    sourceLineHeight,
+                    sourcePosition,
+                    sourceStyle,
+                    title,
+                    titleLineHeight,
+                    titlePosition,
+                    titleStyle,
+                    watermarkLocation,
+                    watermarkMarkup,
+                    watermarkOffsetX,
+                    watermarkOffsetY,
+                    watermarkHeight,
+                    watermarkWidth,
+                    whitebar,
+                    units,
+                },
+                custom,
+            );
         }
 
         Object.keys(x).forEach((setterName) => {
@@ -635,7 +706,10 @@ function chartFrame(configObject) {
 
 function isFunction(functionToCheck) {
     const getType = {};
-    return functionToCheck && getType.toString.call(functionToCheck) === '[object Function]';
+    return (
+        functionToCheck &&
+        getType.toString.call(functionToCheck) === '[object Function]'
+    );
 }
 
 const classes = [
@@ -667,20 +741,27 @@ const classes = [
 ];
 
 function savePNG(svg, scaleFactor) {
-    svg.selectAll(classes.join(', '))
-        .each(function inlineProps() {
-            const element = this;
-            const computedStyle = getComputedStyle(element, null);
+    svg.selectAll(classes.join(', ')).each(function inlineProps() {
+        const element = this;
+        const computedStyle = getComputedStyle(element, null);
 
-            // loop through and compute inline svg styles
-            for (let i = 0; i < computedStyle.length; i += 1) {
-                const property = computedStyle.item(i);
-                const value = computedStyle.getPropertyValue(property);
-                element.style[property] = value;
-            }
-        });
+        // loop through and compute inline svg styles
+        for (let i = 0; i < computedStyle.length; i += 1) {
+            const property = computedStyle.item(i);
+            const value = computedStyle.getPropertyValue(property);
+            element.style[property] = value;
+        }
+    });
 
-    saveSvgAsPng(svg.node(), `${svg.select('title').text().replace(/\s/g, '-').toLowerCase()}.png`, { scale: scaleFactor });
+    saveSvgAsPng(
+        svg.node(),
+        `${svg
+            .select('title')
+            .text()
+            .replace(/\s/g, '-')
+            .toLowerCase()}.png`,
+        { scale: scaleFactor },
+    );
 }
 
 export default chartFrame;
