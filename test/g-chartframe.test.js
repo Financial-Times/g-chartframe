@@ -68,6 +68,7 @@ tape("chartframe doesn't add a title element if set to false", (test) => {
     const { JSDOM } = jsdom;
     const defaultFrame = chartFrame.frame({
         title: false,
+        a11yTitle: false,
     });
     const dom = new JSDOM(fs.readFileSync('test/scaffold.html'));
     const svg = dom.window.document.querySelector('svg');
@@ -75,5 +76,45 @@ tape("chartframe doesn't add a title element if set to false", (test) => {
 
     test.equal(defaultFrame.title(), false);
     test.equal(svg.querySelectorAll('title').length, 0);
+    test.end();
+});
+
+tape('chartframe adds a11y stuff', (test) => {
+    const { JSDOM } = jsdom;
+    const defaultFrame = chartFrame.frame({
+        title: false,
+        a11yTitle: 'This is an accessible title',
+        a11yDesc: 'This is an extended a11y description',
+    });
+
+    const dom = new JSDOM(fs.readFileSync('test/scaffold.html'));
+    const svg = dom.window.document.querySelector('svg');
+
+    d3.select(svg).call(defaultFrame);
+
+    test.equal(defaultFrame.title(), false);
+    test.deepEqual(defaultFrame.a11y(), {
+        title: 'This is an accessible title',
+        desc: 'This is an extended a11y description',
+    });
+    test.equal(defaultFrame.a11yDesc(), 'This is an extended a11y description');
+    test.equal(defaultFrame.a11yTitle(), 'This is an accessible title');
+    test.equal(svg.querySelectorAll('title').length, 1);
+    test.equal(
+        svg.querySelector('title').textContent.trim(), // Sometimes textContent includes whitespace
+        'This is an accessible title',
+    );
+    test.equal(
+        svg.querySelector('desc').textContent.trim(), // Sometimes textContent includes whitespace
+        'This is an extended a11y description',
+    );
+    test.equal(
+        svg.getAttribute('aria-labelledby'),
+        'g-chartframe__chart-a11y-title',
+    );
+    test.equal(
+        svg.getAttribute('aria-describedby'),
+        'g-chartframe__chart-a11y-desc',
+    );
     test.end();
 });

@@ -3,6 +3,8 @@ import * as d3 from 'd3-selection';
 
 function chartFrame(configObject) {
     let autoPosition = false;
+    let a11yDesc = 'A graphic by the Financial Times';
+    let a11yTitle = 'A chart';
     let backgroundColour;
     let containerClass = 'g-chartframe';
     let copyright = '© FT';
@@ -76,8 +78,24 @@ function chartFrame(configObject) {
                     ['0 0', graphicWidth, graphicHeight].join(' '),
                 );
 
-            if (title) {
-                p.append('title').text(title);
+            if (a11yTitle !== false || title !== false) {
+                p.append('title')
+                    .text(a11yTitle || title)
+                    .attr('id', `${containerClass}__chart-a11y-title`);
+                p.attr(
+                    'aria-labelledby',
+                    `${containerClass}__chart-a11y-title`,
+                );
+            }
+
+            if (a11yDesc !== false) {
+                p.append('desc')
+                    .text(a11yDesc)
+                    .attr('id', `${containerClass}__chart-a11y-desc`);
+                p.attr(
+                    'aria-describedby',
+                    `${containerClass}__chart-a11y-desc`,
+                );
             }
         }
 
@@ -393,6 +411,25 @@ function chartFrame(configObject) {
     }
 
     // Setters and getters
+    frame.a11y = ({ title: newTitle, desc: newDesc } = {}) => {
+        if (newTitle !== undefined) a11yTitle = newTitle;
+        if (newDesc !== undefined) a11yDesc = newDesc;
+        if (newTitle === undefined && newDesc === undefined) return { title: a11yTitle, desc: a11yDesc };
+
+        return frame;
+    };
+
+    frame.a11yDesc = (x) => {
+        if (x === undefined) return a11yDesc;
+        a11yDesc = x;
+        return frame;
+    };
+
+    frame.a11yTitle = (x) => {
+        if (x === undefined) return a11yTitle;
+        a11yTitle = x;
+        return frame;
+    };
 
     frame.autoPosition = (x) => {
         if (x === undefined) return autoPosition;
@@ -650,6 +687,8 @@ function chartFrame(configObject) {
             return Object.assign(
                 {},
                 {
+                    a11yDesc,
+                    a11yTitle,
                     autoPosition,
                     // axisAlign, // @FIX This is undef?
                     containerClass,
