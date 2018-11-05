@@ -266,7 +266,7 @@ function chartFrame(configObject) {
                                 (margin.bottom - sourcePlotYOffset) +
                                 sourceLineHeight * 1.5 +
                                 i * sourceLineHeight
-                            ); // eslint-disable-line
+                            );
                         })
                         .attr('x', subtitlePosition.x)
                         .call(attributeStyle, subtitleStyle);
@@ -284,7 +284,7 @@ function chartFrame(configObject) {
                         (margin.bottom - sourcePlotYOffset) +
                         sourceLineHeight * 1.5 +
                         i * sourceLineHeight
-                    ); // eslint-disable-line
+                    );
                 })
                 .attr('x', sourcePosition.x)
                 .call(attributeStyle, sourceStyle);
@@ -307,13 +307,13 @@ function chartFrame(configObject) {
                             (margin.bottom - sourcePlotYOffset) +
                             sourceLineHeight * 1.125 +
                             sourceLineCount * sourceLineHeight * 1.2
-                        ); // eslint-disable-line
+                        );
                     }
                     return (
                         graphicHeight -
                         (margin.bottom - sourcePlotYOffset) +
                         sourceLineHeight * 2.5
-                    ); // eslint-disable-line
+                    );
                 })
 
                 .call(attributeStyle, copyrightStyle);
@@ -337,7 +337,7 @@ function chartFrame(configObject) {
                 titleLineCount * titleLineHeight +
                 subtitleLineCount * subtitleLineHeight +
                 28 -
-                plotAdjuster; // eslint-disable-line
+                plotAdjuster;
         }
 
         // watermark
