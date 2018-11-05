@@ -1357,6 +1357,8 @@
 
 	function chartFrame(configObject) {
 	  var autoPosition = false;
+	  var a11yDesc = 'A graphic by the Financial Times';
+	  var a11yTitle = 'A chart';
 	  var backgroundColour;
 	  var containerClass = 'g-chartframe';
 	  var copyright = '© FT';
@@ -1431,8 +1433,16 @@
 
 	    if (p.node().nodeName.toLowerCase() === 'svg') {
 	      p.transition(transition).attr('width', graphicWidth).attr('height', graphicHeight).attr('viewBox', ['0 0', graphicWidth, graphicHeight].join(' '));
-	      p.selectAll('title').data([title]).enter().append('title');
-	      p.selectAll('title').text(title);
+
+	      if (a11yTitle !== false || title !== false) {
+	        p.append('title').text(a11yTitle || title).attr('id', "".concat(containerClass, "__chart-a11y-title"));
+	        p.attr('aria-labelledby', "".concat(containerClass, "__chart-a11y-title"));
+	      }
+
+	      if (a11yDesc !== false) {
+	        p.append('desc').text(a11yDesc).attr('id', "".concat(containerClass, "__chart-a11y-desc"));
+	        p.attr('aria-describedby', "".concat(containerClass, "__chart-a11y-desc"));
+	      }
 	    } // background
 
 
@@ -1576,6 +1586,32 @@
 	    }
 	  } // Setters and getters
 
+
+	  frame.a11y = function () {
+	    var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+	        newTitle = _ref.title,
+	        newDesc = _ref.desc;
+
+	    if (newTitle !== undefined) a11yTitle = newTitle;
+	    if (newDesc !== undefined) a11yDesc = newDesc;
+	    if (newTitle === undefined && newDesc === undefined) return {
+	      title: a11yTitle,
+	      desc: a11yDesc
+	    };
+	    return frame;
+	  };
+
+	  frame.a11yDesc = function (x) {
+	    if (x === undefined) return a11yDesc;
+	    a11yDesc = x;
+	    return frame;
+	  };
+
+	  frame.a11yTitle = function (x) {
+	    if (x === undefined) return a11yTitle;
+	    a11yTitle = x;
+	    return frame;
+	  };
 
 	  frame.autoPosition = function (x) {
 	    if (x === undefined) return autoPosition;
@@ -1835,6 +1871,8 @@
 	  frame.attrs = function (x) {
 	    if (x === undefined) {
 	      return Object.assign({}, {
+	        a11yDesc: a11yDesc,
+	        a11yTitle: a11yTitle,
 	        autoPosition: autoPosition,
 	        // axisAlign, // @FIX This is undef?
 	        containerClass: containerClass,

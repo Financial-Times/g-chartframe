@@ -6,7 +6,10 @@ import jsdom from 'jsdom';
 import * as chartFrame from '../index';
 
 tape('chartFrame defaults', (test) => {
-    test.equal(chartFrame.frame().title(), 'Title: A description of the charts purpose');
+    test.equal(
+        chartFrame.frame().title(),
+        'Title: A description of the charts purpose',
+    );
     test.end();
 });
 
@@ -16,7 +19,10 @@ tape('chartFrame works outside browser', (test) => {
     const dom = new JSDOM(fs.readFileSync('test/scaffold.html'));
     const chartContainer = d3.select(dom.window.document.querySelector('svg'));
     chartContainer.call(defaultFrame);
-    test.equal(chartContainer.select('.chart-title').text(), 'Title: A description of the charts purpose');
+    test.equal(
+        chartContainer.select('.chart-title').text(),
+        'Title: A description of the charts purpose',
+    );
     test.end();
 });
 
@@ -55,5 +61,65 @@ tape('chartFrame "Save PNG" buttons can be disabled', (test) => {
     chartContainer.call(defaultFrame);
 
     test.equal(dom.window.document.querySelectorAll('button').length, 0);
+    test.end();
+});
+
+tape("chartframe doesn't add a title element if set to false", (test) => {
+    const { JSDOM } = jsdom;
+    const defaultFrame = chartFrame.frame({
+        title: false,
+        a11yTitle: false,
+    });
+    const dom = new JSDOM(fs.readFileSync('test/scaffold.html'));
+    const svg = dom.window.document.querySelector('svg');
+    d3.select(svg).call(defaultFrame);
+
+    test.equal(defaultFrame.title(), false);
+    test.equal(svg.querySelectorAll('title').length, 0);
+    test.end();
+});
+
+tape('chartframe adds a11y stuff', (test) => {
+    const { JSDOM } = jsdom;
+    const defaultFrame = chartFrame.frame({
+        title: false,
+        a11yTitle: 'This is an accessible title',
+        a11yDesc: 'This is an extended a11y description',
+    });
+
+    const dom = new JSDOM(fs.readFileSync('test/scaffold.html'));
+    const svg = dom.window.document.querySelector('svg');
+    d3.select(svg).call(defaultFrame);
+
+    test.equal(defaultFrame.title(), false);
+    test.deepEqual(defaultFrame.a11y(), {
+        title: 'This is an accessible title',
+        desc: 'This is an extended a11y description',
+    });
+    test.equal(defaultFrame.a11yDesc(), 'This is an extended a11y description');
+    test.equal(defaultFrame.a11yTitle(), 'This is an accessible title');
+    test.equal(svg.querySelectorAll('title').length, 1);
+    test.equal(
+        svg.querySelector('title').textContent.trim(), // Sometimes textContent includes whitespace
+        'This is an accessible title',
+    );
+    test.equal(
+        svg.querySelector('desc').textContent.trim(), // Sometimes textContent includes whitespace
+        'This is an extended a11y description',
+    );
+    test.equal(
+        svg.getAttribute('aria-labelledby'),
+        'g-chartframe__chart-a11y-title g-chartframe__chart-a11y-desc',
+    );
+    test.equal(svg.getAttribute('role'), 'img');
+    test.equal(
+        svg.querySelector('.chart-plot').getAttribute('role'),
+        'presentation',
+    );
+    test.equal(
+        svg.querySelector('.chart-watermark').getAttribute('role'),
+        'presentation',
+    );
+
     test.end();
 });
