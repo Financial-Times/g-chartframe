@@ -1431,8 +1431,10 @@
 
 	    if (p.node().nodeName.toLowerCase() === 'svg') {
 	      p.transition(transition).attr('width', graphicWidth).attr('height', graphicHeight).attr('viewBox', ['0 0', graphicWidth, graphicHeight].join(' '));
-	      p.selectAll('title').data([title]).enter().append('title');
-	      p.selectAll('title').text(title);
+
+	      if (title) {
+	        p.append('title').text(title);
+	      }
 	    } // background
 
 
