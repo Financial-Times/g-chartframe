@@ -98,7 +98,11 @@ function chartFrame(configObject) {
                     .attr('id', `${containerClass}__chart-a11y-desc`);
                 p.attr(
                     'aria-labelledby',
-                    `${p.attr('aria-labelledby') ? `${p.attr('aria-labelledby')} ` : ''}${containerClass}__chart-a11y-desc`,
+                    `${
+                        p.attr('aria-labelledby')
+                            ? `${p.attr('aria-labelledby')} `
+                            : ''
+                    }${containerClass}__chart-a11y-desc`,
                 );
             }
         }
@@ -371,8 +375,18 @@ function chartFrame(configObject) {
             );
 
         // plot area (where you put the chart itself)
-        plot = p.append('g')
+        p.selectAll('g.chart-plot')
+            .data([0])
+            .enter()
+            .append('g')
             .attr('class', 'chart-plot')
+            .attr('transform', `translate(${margin.left},${margin.top})`);
+
+        plot = p.selectAll('g.chart-plot');
+
+        // This line makes me cry inside. @TODO fix
+        plot.transition(transition)
+            .duration(0)
             .attr('transform', `translate(${margin.left},${margin.top})`);
 
         if (a11yPlotPresentation) {
@@ -415,7 +429,9 @@ function chartFrame(configObject) {
     frame.a11y = ({ title: newTitle, desc: newDesc } = {}) => {
         if (newTitle !== undefined) a11yTitle = newTitle;
         if (newDesc !== undefined) a11yDesc = newDesc;
-        if (newTitle === undefined && newDesc === undefined) return { title: a11yTitle, desc: a11yDesc };
+        if (newTitle === undefined && newDesc === undefined) {
+            return { title: a11yTitle, desc: a11yDesc };
+        }
 
         return frame;
     };
