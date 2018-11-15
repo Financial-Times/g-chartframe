@@ -375,12 +375,22 @@ function chartFrame(configObject) {
             );
 
         // plot area (where you put the chart itself)
-        p.selectAll('g.chart-plot')
-            .data([0])
-            .enter()
-            .append('g')
-            .attr('class', 'chart-plot')
-            .attr('transform', `translate(${margin.left},${margin.top})`);
+        if (a11yPlotPresentation) {
+            p.selectAll('g.chart-plot')
+                .data([0])
+                .enter()
+                .append('g')
+                .attr('class', 'chart-plot')
+                .attr('role', 'presentation') // include this extra role if a11yPlotPresentation
+                .attr('transform', `translate(${margin.left},${margin.top})`);
+        } else {
+            p.selectAll('g.chart-plot')
+                .data([0])
+                .enter()
+                .append('g')
+                .attr('class', 'chart-plot')
+                .attr('transform', `translate(${margin.left},${margin.top})`);
+        }
 
         plot = p.selectAll('g.chart-plot');
 
@@ -388,10 +398,6 @@ function chartFrame(configObject) {
         plot.transition(transition)
             .duration(0)
             .attr('transform', `translate(${margin.left},${margin.top})`);
-
-        if (a11yPlotPresentation) {
-            plot.attr('role', 'presentation');
-        }
 
         if (showDownloadPngButtons) {
             let parent;

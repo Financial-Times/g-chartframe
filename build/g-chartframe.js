@@ -1357,6 +1357,9 @@
 
 	function chartFrame(configObject) {
 	  var autoPosition = false;
+	  var a11yDesc = 'A graphic by the Financial Times';
+	  var a11yPlotPresentation = true;
+	  var a11yTitle = 'A chart';
 	  var backgroundColour;
 	  var containerClass = 'g-chartframe';
 	  var copyright = '© FT';
@@ -1428,16 +1431,25 @@
 	  function frame(p) {
 	    // overall graphic properties
 	    p.attr('class', containerClass).attr('font-family', 'MetricWeb,sans-serif');
+	    p.attr('role', 'img');
 
 	    if (p.node().nodeName.toLowerCase() === 'svg') {
 	      p.transition(transition).attr('width', graphicWidth).attr('height', graphicHeight).attr('viewBox', ['0 0', graphicWidth, graphicHeight].join(' '));
-	      p.selectAll('title').data([title]).enter().append('title');
-	      p.selectAll('title').text(title);
+
+	      if (a11yTitle !== false || title !== false) {
+	        p.append('title').text(a11yTitle || title).attr('id', "".concat(containerClass, "__chart-a11y-title"));
+	        p.attr('aria-labelledby', "".concat(containerClass, "__chart-a11y-title"));
+	      }
+
+	      if (a11yDesc !== false) {
+	        p.append('desc').text(a11yDesc).attr('id', "".concat(containerClass, "__chart-a11y-desc"));
+	        p.attr('aria-labelledby', "".concat(p.attr('aria-labelledby') ? "".concat(p.attr('aria-labelledby'), " ") : '').concat(containerClass, "__chart-a11y-desc"));
+	      }
 	    } // background
 
 
 	    if (backgroundColour !== undefined) {
-	      p.selectAll('rect.chart-background').data([backgroundColour]).enter().append('rect').attr('id', 'chart-background').attr('class', 'chart-background');
+	      p.selectAll('rect.chart-background').data([backgroundColour]).enter().append('rect').attr('role', 'presentation').attr('id', 'chart-background').attr('class', 'chart-background');
 	      p.selectAll('rect.chart-background').transition(transition).attr('x', 0).attr('y', 0).attr('width', graphicWidth).attr('height', graphicHeight).attr('fill', backgroundColour);
 	    } // 'blackbar' (the short black bar above web graphics)
 
@@ -1512,7 +1524,7 @@
 	            return sourcePosition.y + i * sourceLineHeight;
 	          }
 
-	          return graphicHeight - (margin.bottom - sourcePlotYOffset) + sourceLineHeight * 1.5 + i * sourceLineHeight; // eslint-disable-line
+	          return graphicHeight - (margin.bottom - sourcePlotYOffset) + sourceLineHeight * 1.5 + i * sourceLineHeight;
 	        }).attr('x', subtitlePosition.x).call(attributeStyle, subtitleStyle);
 	      });
 	      p.selectAll('text.chart-source tspan').html(function (d) {
@@ -1522,7 +1534,7 @@
 	          return sourcePosition.y + i * sourceLineHeight;
 	        }
 
-	        return graphicHeight - (margin.bottom - sourcePlotYOffset) + sourceLineHeight * 1.5 + i * sourceLineHeight; // eslint-disable-line
+	        return graphicHeight - (margin.bottom - sourcePlotYOffset) + sourceLineHeight * 1.5 + i * sourceLineHeight;
 	      }).attr('x', sourcePosition.x).call(attributeStyle, sourceStyle);
 	    } // copyright
 
@@ -1532,10 +1544,10 @@
 	        return d;
 	      }).attr('x', sourcePosition.x).attr('y', function () {
 	        if (sourceLineCount > 1) {
-	          return graphicHeight - (margin.bottom - sourcePlotYOffset) + sourceLineHeight * 1.125 + sourceLineCount * sourceLineHeight * 1.2; // eslint-disable-line
+	          return graphicHeight - (margin.bottom - sourcePlotYOffset) + sourceLineHeight * 1.125 + sourceLineCount * sourceLineHeight * 1.2;
 	        }
 
-	        return graphicHeight - (margin.bottom - sourcePlotYOffset) + sourceLineHeight * 2.5; // eslint-disable-line
+	        return graphicHeight - (margin.bottom - sourcePlotYOffset) + sourceLineHeight * 2.5;
 	      }).call(attributeStyle, copyrightStyle);
 	    } // TODO figure out a way to improve this autoPosition stuff, needs ot be configurable so we don't have to reference specific classes
 
@@ -1543,15 +1555,22 @@
 	    if (autoPosition && (containerClass === 'ft-printgraphic' || containerClass === 'ft-socialgraphic' || containerClass === 'ft-videographic')) {
 	      margin.top = titlePosition.y + titleLineCount * titleLineHeight + subtitleLineCount * subtitleLineHeight + rem / 3;
 	    } else if (autoPosition) {
-	      margin.top = titlePosition.y + titleLineCount * titleLineHeight + subtitleLineCount * subtitleLineHeight + 28 - plotAdjuster; // eslint-disable-line
+	      margin.top = titlePosition.y + titleLineCount * titleLineHeight + subtitleLineCount * subtitleLineHeight + 28 - plotAdjuster;
 	    } // watermark
 
 
-	    p.selectAll('g.chart-watermark').data([0]).enter().append('g').attr('class', 'chart-watermark').html(watermarkMarkup).attr('transform', "translate(".concat(graphicWidth - watermarkWidth - watermarkOffsetX, ",").concat(graphicHeight - watermarkHeight - watermarkOffsetY, ") scale(1) "));
+	    p.selectAll('g.chart-watermark').data([0]).enter().append('g').attr('class', 'chart-watermark').html(watermarkMarkup).attr('role', 'presentation').attr('transform', "translate(".concat(graphicWidth - watermarkWidth - watermarkOffsetX, ",").concat(graphicHeight - watermarkHeight - watermarkOffsetY, ") scale(1) "));
 	    p.selectAll('g.chart-watermark').html(watermarkMarkup).transition().attr('transform', "translate(".concat(graphicWidth - watermarkWidth - watermarkOffsetX, ",").concat(graphicHeight - watermarkHeight - watermarkOffsetY, ") scale(1) ")); // plot area (where you put the chart itself)
 
-	    p.selectAll('g.chart-plot').data([0]).enter().append('g').attr('class', 'chart-plot').attr('transform', "translate(".concat(margin.left, ",").concat(margin.top, ")"));
-	    plot = p.selectAll('g.chart-plot');
+	    if (a11yPlotPresentation) {
+	      p.selectAll('g.chart-plot').data([0]).enter().append('g').attr('class', 'chart-plot').attr('role', 'presentation') // include this extra role if a11yPlotPresentation
+	      .attr('transform', "translate(".concat(margin.left, ",").concat(margin.top, ")"));
+	    } else {
+	      p.selectAll('g.chart-plot').data([0]).enter().append('g').attr('class', 'chart-plot').attr('transform', "translate(".concat(margin.left, ",").concat(margin.top, ")"));
+	    }
+
+	    plot = p.selectAll('g.chart-plot'); // I have no idea why this insanity even works. @TODO remove with extreme prejudice. -ae
+
 	    plot.transition(transition).duration(0).attr('transform', "translate(".concat(margin.left, ",").concat(margin.top, ")"));
 
 	    if (showDownloadPngButtons) {
@@ -1576,6 +1595,42 @@
 	    }
 	  } // Setters and getters
 
+
+	  frame.a11y = function () {
+	    var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+	        newTitle = _ref.title,
+	        newDesc = _ref.desc;
+
+	    if (newTitle !== undefined) a11yTitle = newTitle;
+	    if (newDesc !== undefined) a11yDesc = newDesc;
+
+	    if (newTitle === undefined && newDesc === undefined) {
+	      return {
+	        title: a11yTitle,
+	        desc: a11yDesc
+	      };
+	    }
+
+	    return frame;
+	  };
+
+	  frame.a11yDesc = function (x) {
+	    if (x === undefined) return a11yDesc;
+	    a11yDesc = x;
+	    return frame;
+	  };
+
+	  frame.a11yPlotPresentation = function (x) {
+	    if (x === undefined) return a11yPlotPresentation;
+	    a11yPlotPresentation = x;
+	    return frame;
+	  };
+
+	  frame.a11yTitle = function (x) {
+	    if (x === undefined) return a11yTitle;
+	    a11yTitle = x;
+	    return frame;
+	  };
 
 	  frame.autoPosition = function (x) {
 	    if (x === undefined) return autoPosition;
@@ -1835,6 +1890,9 @@
 	  frame.attrs = function (x) {
 	    if (x === undefined) {
 	      return Object.assign({}, {
+	        a11yDesc: a11yDesc,
+	        a11yPlotPresentation: a11yPlotPresentation,
+	        a11yTitle: a11yTitle,
 	        autoPosition: autoPosition,
 	        // axisAlign, // @FIX This is undef?
 	        containerClass: containerClass,
