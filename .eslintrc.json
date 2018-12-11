@@ -3,6 +3,7 @@
   "parserOptions": {
     "sourceType": "module"
   },
+  "root": true,
   "rules": {
     "no-param-reassign": [0],
     "no-use-before-define": ["error", { "functions": false }],
@@ -15,6 +16,7 @@
     "no-mixed-operators": 0
   },
   "env": {
-    "browser": true
+    "browser": true,
+    "jest": true
   }
 }

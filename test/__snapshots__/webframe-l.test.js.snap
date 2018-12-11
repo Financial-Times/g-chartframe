@@ -1,0 +1,101 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`webframe-l renders as expected with defaults 1`] = `
+<svg
+  aria-labelledby="ft-webgraphic-l__chart-a11y-title ft-webgraphic-l__chart-a11y-desc"
+  class="ft-webgraphic-l"
+  font-family="MetricWeb,sans-serif"
+  role="img"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <title
+    id="ft-webgraphic-l__chart-a11y-title"
+  >
+    A chart
+  </title>
+  <desc
+    id="ft-webgraphic-l__chart-a11y-desc"
+  >
+    A graphic by the Financial Times
+  </desc>
+  <rect
+    class="chart-background"
+    id="chart-background"
+    role="presentation"
+  />
+  <rect
+    height="4"
+    style="fill: #000;"
+    width="60"
+  />
+  <text
+    class="chart-title"
+    id="ft-webgraphic-ltitle"
+  >
+    <tspan
+      fill="#000"
+      font-family="MetricWeb,sans-serif"
+      font-size="28"
+      font-weight="400"
+      x="1"
+      y="32"
+    >
+      Title: A description of the charts purpose
+    </tspan>
+  </text>
+  <text
+    class="chart-subtitle"
+    id="ft-webgraphic-lsubtitle"
+  >
+    <tspan
+      fill="#66605C"
+      font-family="MetricWeb,sans-serif"
+      font-size="18"
+      id="ft-webgraphic-lsubtitle"
+      x="1"
+      y="64"
+    >
+      some supporting information, units perhaps
+    </tspan>
+  </text>
+  <text
+    class="chart-source"
+    id="ft-webgraphic-lsource"
+  >
+    <tspan
+      fill="#66605C"
+      font-family="MetricWeb,sans-serif"
+      font-size="18"
+      id="ft-webgraphic-lsource"
+      x="1"
+      y="663"
+    >
+      Source: research
+    </tspan>
+  </text>
+  <text
+    class="chart-copyright"
+  >
+    <tspan
+      fill="#66605C"
+      font-family="MetricWeb,sans-serif"
+      font-size="16px"
+      font-style="italic"
+      x="1"
+      y="679"
+    >
+      © FT
+    </tspan>
+  </text>
+  <g
+    class="chart-watermark"
+    role="presentation"
+    transform="translate(1016,690) scale(1) "
+  />
+  <g
+    class="chart-plot"
+    role="presentation"
+    transform="translate(20,104)"
+  />
+</svg>
+`;

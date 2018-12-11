@@ -1,0 +1,90 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`webframe-s renders as expected with defaults 1`] = `
+<svg
+  aria-labelledby="ft-printgraphic__chart-a11y-title ft-printgraphic__chart-a11y-desc"
+  class="ft-printgraphic"
+  font-family="MetricWeb,sans-serif"
+  role="img"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <title
+    id="ft-printgraphic__chart-a11y-title"
+  >
+    A chart
+  </title>
+  <desc
+    id="ft-printgraphic__chart-a11y-desc"
+  >
+    A graphic by the Financial Times
+  </desc>
+  <rect
+    class="chart-background"
+    id="chart-background"
+    role="presentation"
+  />
+  <path
+    class="chart-goalposts"
+  />
+  <path
+    class="chart-goalposts"
+  />
+  <text
+    class="chart-title"
+    id="ft-printgraphictitle"
+  >
+    <tspan
+      fill="#000000"
+      font-family="MetricWeb,sans-serif"
+      font-size="12px"
+      font-weight="600"
+      x="7"
+      y="15"
+    >
+      Title: A description of the charts purpose
+    </tspan>
+  </text>
+  <text
+    class="chart-subtitle"
+    id="ft-printgraphicsubtitle"
+  >
+    <tspan
+      fill="#000000"
+      font-family="MetricWeb,sans-serif"
+      font-size="9.6px"
+      font-weight="400"
+      id="ft-printgraphicsubtitle"
+      x="7"
+      y="27"
+    >
+      some supporting information, units perhaps
+    </tspan>
+  </text>
+  <text
+    class="chart-source"
+    id="ft-printgraphicsource"
+  >
+    <tspan
+      fill="#000000"
+      font-family="MetricWeb,sans-serif"
+      font-size="9.6px"
+      font-weight="400"
+      id="ft-printgraphicsource"
+      x="7"
+      y="187.75584678001326"
+    >
+      Source: research
+    </tspan>
+  </text>
+  <g
+    class="chart-watermark"
+    role="presentation"
+    transform="translate(154.1888794273013,182.75584678001326) scale(1) "
+  />
+  <g
+    class="chart-plot"
+    role="presentation"
+    transform="translate(15,41.2)"
+  />
+</svg>
+`;
