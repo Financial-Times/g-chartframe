@@ -2,15 +2,15 @@ import * as fs from 'fs';
 import * as d3 from 'd3-selection';
 import 'd3-transition';
 import jsdom from 'jsdom';
-import * as chartFrame from '../index';
+import frame from '../src/chartframe';
 
 test('chartFrame defaults', () => {
-    expect(chartFrame.frame().title()).toBe('Title: A description of the charts purpose');
+    expect(frame().title()).toBe('Title: A description of the charts purpose');
 });
 
 test('chartFrame works outside browser', () => {
     const { JSDOM } = jsdom;
-    const defaultFrame = chartFrame.frame();
+    const defaultFrame = frame();
     const dom = new JSDOM(fs.readFileSync('test/scaffold.html'));
     const chartContainer = d3.select(dom.window.document.querySelector('svg'));
     chartContainer.call(defaultFrame);
@@ -18,7 +18,7 @@ test('chartFrame works outside browser', () => {
 });
 
 test('chartFrame can be extended', () => {
-    const defaultFrame = chartFrame.frame();
+    const defaultFrame = frame();
     defaultFrame.extend('llama', 'duck');
 
     // expect getter
@@ -34,7 +34,7 @@ test('chartFrame can be extended', () => {
 
 test('chartFrame can have "Save PNG" buttons', () => {
     const { JSDOM } = jsdom;
-    const defaultFrame = chartFrame.frame(); // enabled by default
+    const defaultFrame = frame(); // enabled by default
     const dom = new JSDOM(fs.readFileSync('test/scaffold.html'));
     const chartContainer = d3.select(dom.window.document.querySelector('svg'));
     chartContainer.call(defaultFrame);
@@ -44,7 +44,7 @@ test('chartFrame can have "Save PNG" buttons', () => {
 
 test('chartFrame "Save PNG" buttons can be disabled', () => {
     const { JSDOM } = jsdom;
-    const defaultFrame = chartFrame.frame().showDownloadPngButtons(false);
+    const defaultFrame = frame().showDownloadPngButtons(false);
     const dom = new JSDOM(fs.readFileSync('test/scaffold.html'));
     const chartContainer = d3.select(dom.window.document.querySelector('svg'));
     chartContainer.call(defaultFrame);
@@ -54,7 +54,7 @@ test('chartFrame "Save PNG" buttons can be disabled', () => {
 
 test("chartframe doesn't add a title element if set to false", () => {
     const { JSDOM } = jsdom;
-    const defaultFrame = chartFrame.frame({
+    const defaultFrame = frame({
         title: false,
         a11yTitle: false,
     });
@@ -68,7 +68,7 @@ test("chartframe doesn't add a title element if set to false", () => {
 
 test('chartframe adds a11y stuff', () => {
     const { JSDOM } = jsdom;
-    const defaultFrame = chartFrame.frame({
+    const defaultFrame = frame({
         title: false,
         a11yTitle: 'This is an accessible title',
         a11yDesc: 'This is an extended a11y description',

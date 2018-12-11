@@ -19,16 +19,16 @@
     "watch": "watch 'npm run build' ./src",
     "build": "mkdir -p build && rollup -c && npm run minify",
     "minify": "uglifyjs --compress --minify -- build/g-chartframe.js > build/g-chartframe.min.js",
-    "test": "NODE_ENV=test nyc jest",
+    "test": "jest --coverage",
     "prepare": "npm run build",
     "report-coverage": "nyc report --reporter=lcov && codecov"
   },
   "homepage": "https://github.com/Financial-Times/g-chartframe/",
   "contributors": [
-    "Tom Pearson <tom.g.pearson@gmail.com>",
     "Ændrew Rininsland <aendrew@aendrew.com> (https://www.aendrew.com)",
-    "Steve Bernard",
     "Bob Haslett",
+    "Steve Bernard",
+    "Tom Pearson",
     "Anna Leach"
   ],
   "devDependencies": {
@@ -37,7 +37,6 @@
     "@babel/register": "^7.0.0",
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^23.6.0",
-    "babel-plugin-istanbul": "^4.1.5",
     "codecov": "^3.0.0",
     "d3-transition": "^1.1.0",
     "eslint": "^4.11.0",
@@ -46,7 +45,6 @@
     "jest": "^23.6.0",
     "jsdom": "^11.4.0",
     "npm-prepublish": "^1.2.3",
-    "nyc": "^11.3.0",
     "prettier-eslint": "^8.8.2",
     "rollup": "0.25",
     "rollup-plugin-babel": "^4.0.0-beta.0",
@@ -63,12 +61,5 @@
     "presets": [
       "@babel/env"
     ]
-  },
-  "nyc": {
-    "require": [
-      "@babel/register"
-    ],
-    "sourceMap": false,
-    "instrument": false
   }
 }

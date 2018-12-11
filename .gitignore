@@ -1,5 +1,6 @@
 node_modules/
 .nyc_output/
 bundle.js
-
+coverage
 npm-debug.log
+build
