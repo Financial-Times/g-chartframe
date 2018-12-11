@@ -1,70 +1,58 @@
 import * as fs from 'fs';
 import * as d3 from 'd3-selection';
 import 'd3-transition';
-import tape from 'tape';
 import jsdom from 'jsdom';
 import * as chartFrame from '../index';
 
-tape('chartFrame defaults', (test) => {
-    test.equal(
-        chartFrame.frame().title(),
-        'Title: A description of the charts purpose',
-    );
-    test.end();
+test('chartFrame defaults', () => {
+    expect(chartFrame.frame().title()).toBe('Title: A description of the charts purpose');
 });
 
-tape('chartFrame works outside browser', (test) => {
+test('chartFrame works outside browser', () => {
     const { JSDOM } = jsdom;
     const defaultFrame = chartFrame.frame();
     const dom = new JSDOM(fs.readFileSync('test/scaffold.html'));
     const chartContainer = d3.select(dom.window.document.querySelector('svg'));
     chartContainer.call(defaultFrame);
-    test.equal(
-        chartContainer.select('.chart-title').text(),
-        'Title: A description of the charts purpose',
-    );
-    test.end();
+    expect(chartContainer.select('.chart-title').text()).toBe('Title: A description of the charts purpose');
 });
 
-tape('chartFrame can be extended', (test) => {
+test('chartFrame can be extended', () => {
     const defaultFrame = chartFrame.frame();
     defaultFrame.extend('llama', 'duck');
 
-    // Test getter
-    test.equal(defaultFrame.llama(), 'duck');
+    // expect getter
+    expect(defaultFrame.llama()).toBe('duck');
 
-    // Test setter
+    // expect setter
     defaultFrame.llama('quack');
-    test.equal(defaultFrame.llama(), 'quack');
+    expect(defaultFrame.llama()).toBe('quack');
 
-    // Test attrs
-    test.equal(defaultFrame.attrs().llama, 'quack');
-    test.end();
+    // expect attrs
+    expect(defaultFrame.attrs().llama).toBe('quack');
 });
 
-tape('chartFrame can have "Save PNG" buttons', (test) => {
+test('chartFrame can have "Save PNG" buttons', () => {
     const { JSDOM } = jsdom;
     const defaultFrame = chartFrame.frame(); // enabled by default
     const dom = new JSDOM(fs.readFileSync('test/scaffold.html'));
     const chartContainer = d3.select(dom.window.document.querySelector('svg'));
     chartContainer.call(defaultFrame);
 
-    test.equal(dom.window.document.querySelectorAll('button').length, 2);
-    test.end();
+    expect(dom.window.document.querySelectorAll('button').length).toBe(2);
 });
 
-tape('chartFrame "Save PNG" buttons can be disabled', (test) => {
+test('chartFrame "Save PNG" buttons can be disabled', () => {
     const { JSDOM } = jsdom;
     const defaultFrame = chartFrame.frame().showDownloadPngButtons(false);
     const dom = new JSDOM(fs.readFileSync('test/scaffold.html'));
     const chartContainer = d3.select(dom.window.document.querySelector('svg'));
     chartContainer.call(defaultFrame);
 
-    test.equal(dom.window.document.querySelectorAll('button').length, 0);
-    test.end();
+    expect(dom.window.document.querySelectorAll('button').length).toBe(0);
 });
 
-tape("chartframe doesn't add a title element if set to false", (test) => {
+test("chartframe doesn't add a title element if set to false", () => {
     const { JSDOM } = jsdom;
     const defaultFrame = chartFrame.frame({
         title: false,
@@ -74,12 +62,11 @@ tape("chartframe doesn't add a title element if set to false", (test) => {
     const svg = dom.window.document.querySelector('svg');
     d3.select(svg).call(defaultFrame);
 
-    test.equal(defaultFrame.title(), false);
-    test.equal(svg.querySelectorAll('title').length, 0);
-    test.end();
+    expect(defaultFrame.title()).toBe(false);
+    expect(svg.querySelectorAll('title').length).toBe(0);
 });
 
-tape('chartframe adds a11y stuff', (test) => {
+test('chartframe adds a11y stuff', () => {
     const { JSDOM } = jsdom;
     const defaultFrame = chartFrame.frame({
         title: false,
@@ -91,35 +78,18 @@ tape('chartframe adds a11y stuff', (test) => {
     const svg = dom.window.document.querySelector('svg');
     d3.select(svg).call(defaultFrame);
 
-    test.equal(defaultFrame.title(), false);
-    test.deepEqual(defaultFrame.a11y(), {
+    expect(defaultFrame.title()).toBe(false);
+    expect(defaultFrame.a11y()).toEqual({
         title: 'This is an accessible title',
         desc: 'This is an extended a11y description',
     });
-    test.equal(defaultFrame.a11yDesc(), 'This is an extended a11y description');
-    test.equal(defaultFrame.a11yTitle(), 'This is an accessible title');
-    test.equal(svg.querySelectorAll('title').length, 1);
-    test.equal(
-        svg.querySelector('title').textContent.trim(), // Sometimes textContent includes whitespace
-        'This is an accessible title',
-    );
-    test.equal(
-        svg.querySelector('desc').textContent.trim(), // Sometimes textContent includes whitespace
-        'This is an extended a11y description',
-    );
-    test.equal(
-        svg.getAttribute('aria-labelledby'),
-        'g-chartframe__chart-a11y-title g-chartframe__chart-a11y-desc',
-    );
-    test.equal(svg.getAttribute('role'), 'img');
-    test.equal(
-        svg.querySelector('.chart-plot').getAttribute('role'),
-        'presentation',
-    );
-    test.equal(
-        svg.querySelector('.chart-watermark').getAttribute('role'),
-        'presentation',
-    );
-
-    test.end();
+    expect(defaultFrame.a11yDesc()).toBe('This is an extended a11y description');
+    expect(defaultFrame.a11yTitle()).toBe('This is an accessible title');
+    expect(svg.querySelectorAll('title').length).toBe(1);
+    expect(svg.querySelector('title').textContent.trim()).toBe('This is an accessible title');
+    expect(svg.querySelector('desc').textContent.trim()).toBe('This is an extended a11y description');
+    expect(svg.getAttribute('aria-labelledby')).toBe('g-chartframe__chart-a11y-title g-chartframe__chart-a11y-desc');
+    expect(svg.getAttribute('role')).toBe('img');
+    expect(svg.querySelector('.chart-plot').getAttribute('role')).toBe('presentation');
+    expect(svg.querySelector('.chart-watermark').getAttribute('role')).toBe('presentation');
 });
