@@ -285,56 +285,34 @@ function chartFrame(configObject) {
                 plotAdjuster;
         }
 
-        // watermark
-
-        p.selectAll('g.chart-watermark')
-            .data([0])
-            .enter()
-            .append('g')
-            .attr('class', 'chart-watermark')
-            .html(watermarkMarkup)
-            .attr('role', 'presentation')
-            .attr(
-                'transform',
-                `translate(${graphicWidth -
+        // watermark; @TODO remove existence check (#62)
+        if (watermarkMarkup && !p.selectAll('g.chart-watermark').size()) {
+            p.append('g')
+                .attr('class', 'chart-watermark')
+                .html(watermarkMarkup)
+                .attr('role', 'presentation')
+                .attr(
+                    'transform',
+                    `translate(${graphicWidth -
                     watermarkWidth -
                     watermarkOffsetX},${graphicHeight -
                     watermarkHeight -
                     watermarkOffsetY}) scale(1) `,
-            );
-
-        p.selectAll('g.chart-watermark')
-            .html(watermarkMarkup)
-            .attr(
-                'transform',
-                `translate(${graphicWidth -
-                    watermarkWidth -
-                    watermarkOffsetX},${graphicHeight -
-                    watermarkHeight -
-                    watermarkOffsetY}) scale(1) `,
-            );
-
-        // plot area (where you put the chart itself)
-        if (a11yPlotPresentation) {
-            p.selectAll('g.chart-plot')
-                .data([0])
-                .enter()
-                .append('g')
-                .attr('class', 'chart-plot')
-                .attr('role', 'presentation') // include this extra role if a11yPlotPresentation
-                .attr('transform', `translate(${margin.left},${margin.top})`);
-        } else {
-            p.selectAll('g.chart-plot')
-                .data([0])
-                .enter()
-                .append('g')
-                .attr('class', 'chart-plot')
-                .attr('transform', `translate(${margin.left},${margin.top})`);
+                );
         }
 
-        plot = p.selectAll('g.chart-plot');
+        // plot area (where you put the chart itself)
+        if (!p.selectAll('g.chart-plot').size()) {
+            plot = p.append('g').attr('class', 'chart-plot');
+        } else {
+            plot = p.select('g.chart-plot');
+        }
 
         plot.attr('transform', `translate(${margin.left},${margin.top})`);
+
+        if (a11yPlotPresentation) {
+            plot.attr('role', 'presentation'); // include this extra role if a11yPlotPresentation
+        }
 
         if (showDownloadPngButtons) {
             let parent;
@@ -344,11 +322,12 @@ function chartFrame(configObject) {
                 parent = d3.select(p.node());
             }
 
-            // Prevent this from being rendered twice
-            if (parent.selectAll('.button-holder').size() === 0) {
+            // Prevent this from being rendered twice; @TODO remove check (#62)
+            if (!parent.selectAll('.button-holder').size()) {
                 const holder = parent
                     .append('div')
                     .attr('class', 'button-holder');
+
                 holder
                     .append('button')
                     .attr('class', 'save-png-button save-png-button__1x')

@@ -97,11 +97,6 @@ exports[`webframe-s renders as expected with defaults 1`] = `
     </tspan>
   </text>
   <g
-    class="chart-watermark"
-    role="presentation"
-    transform="translate(136,390) scale(1) "
-  />
-  <g
     class="chart-plot"
     role="presentation"
     transform="translate(15,104)"

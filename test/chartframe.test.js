@@ -71,6 +71,7 @@ test('chartframe adds a11y stuff', () => {
         title: false,
         a11yTitle: 'This is an accessible title',
         a11yDesc: 'This is an extended a11y description',
+        watermark: '<text>Holla</text>',
     });
 
     const dom = new JSDOM(fs.readFileSync('test/scaffold.html'));

@@ -79,11 +79,6 @@ exports[`videoframe renders as expected with defaults 1`] = `
     </tspan>
   </text>
   <g
-    class="chart-watermark"
-    role="presentation"
-    transform="translate(1756,1070) scale(1) "
-  />
-  <g
     class="chart-plot"
     role="presentation"
     transform="translate(207,262)"
