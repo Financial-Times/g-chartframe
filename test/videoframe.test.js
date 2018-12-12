@@ -1,6 +1,5 @@
 import * as fs from 'fs';
 import * as d3 from 'd3-selection';
-import 'd3-transition';
 import jsdom from 'jsdom';
 import videoframe from '../src/videoframe';
 

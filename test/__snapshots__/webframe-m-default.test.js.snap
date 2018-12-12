@@ -5,7 +5,10 @@ exports[`webframe-m-default renders as expected with defaults 1`] = `
   aria-labelledby="ft-webgraphic-m-default__chart-a11y-title ft-webgraphic-m-default__chart-a11y-desc"
   class="ft-webgraphic-m-default"
   font-family="MetricWeb,sans-serif"
+  height="500"
   role="img"
+  viewBox="0 0 700 500"
+  width="700"
   xmlns="http://www.w3.org/2000/svg"
 >
   <title

@@ -21,7 +21,7 @@
     "minify": "uglifyjs --compress --minify -- build/g-chartframe.js > build/g-chartframe.min.js",
     "test": "jest --coverage",
     "prepare": "npm run build",
-    "report-coverage": "nyc report --reporter=lcov && codecov"
+    "report-coverage": "codecov"
   },
   "homepage": "https://github.com/Financial-Times/g-chartframe/",
   "contributors": [
@@ -47,7 +47,7 @@
     "npm-prepublish": "^1.2.3",
     "prettier-eslint": "^8.8.2",
     "rollup": "0.25",
-    "rollup-plugin-babel": "^4.0.0-beta.0",
+    "rollup-plugin-babel": "^4.1.0",
     "rollup-plugin-commonjs": "^8.2.6",
     "rollup-plugin-node-resolve": "^3.0.0",
     "uglify-es": "^3.1.10",

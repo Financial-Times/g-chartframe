@@ -5,7 +5,10 @@ exports[`videoframe renders as expected with defaults 1`] = `
   aria-labelledby="ft-videographic__chart-a11y-title ft-videographic__chart-a11y-desc"
   class="ft-videographic"
   font-family="MetricWeb,sans-serif"
+  height="1080"
   role="img"
+  viewBox="0 0 1920 1080"
+  width="1920"
   xmlns="http://www.w3.org/2000/svg"
 >
   <title

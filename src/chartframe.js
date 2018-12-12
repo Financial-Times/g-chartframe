@@ -74,8 +74,7 @@ function chartFrame(configObject) {
         p.attr('role', 'img');
 
         if (p.node().nodeName.toLowerCase() === 'svg') {
-            p.transition(transition)
-                .attr('width', graphicWidth)
+            p.attr('width', graphicWidth)
                 .attr('height', graphicHeight)
                 .attr(
                     'viewBox',
@@ -118,7 +117,6 @@ function chartFrame(configObject) {
                 .attr('class', 'chart-background');
 
             p.selectAll('rect.chart-background')
-                .transition(transition)
                 .attr('x', 0)
                 .attr('y', 0)
                 .attr('width', graphicWidth)
@@ -155,7 +153,6 @@ function chartFrame(configObject) {
                 .attr('class', 'chart-goalposts');
 
             p.selectAll('path.chart-goalposts')
-                .transition(transition)
                 .attr('d', d => d)
                 .attr('stroke-width', 0.3)
                 .attr('fill', 'none')
@@ -191,7 +188,6 @@ function chartFrame(configObject) {
 
             p.selectAll('text.chart-title tspan')
                 .html(d => d)
-                .transition(transition)
                 .attr('y', (d, i) => titlePosition.y + i * titleLineHeight)
                 .attr('x', titlePosition.x)
                 .call(attributeStyle, titleStyle);
@@ -230,7 +226,6 @@ function chartFrame(configObject) {
 
             p.selectAll('text.chart-subtitle tspan')
                 .html(d => d)
-                .transition(transition)
                 .attr('y', (d, i) => {
                     if (titleLineCount > 1) {
                         return (
@@ -278,7 +273,6 @@ function chartFrame(configObject) {
 
             p.selectAll('text.chart-source tspan')
                 .html(d => d)
-                .transition(transition)
                 .attr('y', (d, i) => {
                     if (sourcePosition.y) {
                         return sourcePosition.y + i * sourceLineHeight;
@@ -364,7 +358,6 @@ function chartFrame(configObject) {
 
         p.selectAll('g.chart-watermark')
             .html(watermarkMarkup)
-            .transition()
             .attr(
                 'transform',
                 `translate(${graphicWidth -
@@ -394,10 +387,7 @@ function chartFrame(configObject) {
 
         plot = p.selectAll('g.chart-plot');
 
-        // I have no idea why this insanity even works. @TODO remove with extreme prejudice. -ae
-        plot.transition(transition)
-            .duration(0)
-            .attr('transform', `translate(${margin.left},${margin.top})`);
+        plot.attr('transform', `translate(${margin.left},${margin.top})`);
 
         if (showDownloadPngButtons) {
             let parent;
@@ -720,7 +710,6 @@ function chartFrame(configObject) {
                     a11yPlotPresentation,
                     a11yTitle,
                     autoPosition,
-                    // axisAlign, // @FIX This is undef?
                     containerClass,
                     copyright,
                     copyrightStyle,

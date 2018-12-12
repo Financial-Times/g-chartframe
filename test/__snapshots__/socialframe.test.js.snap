@@ -5,7 +5,10 @@ exports[`socialframe renders as expected with defaults 1`] = `
   aria-labelledby="ft-socialgraphic__chart-a11y-title ft-socialgraphic__chart-a11y-desc"
   class="ft-socialgraphic"
   font-family="MetricWeb,sans-serif"
+  height="612"
   role="img"
+  viewBox="0 0 612 612"
+  width="612"
   xmlns="http://www.w3.org/2000/svg"
 >
   <title
