@@ -3,7 +3,7 @@ import frame from './chartframe';
 function videoFrame(configObject) {
     const f = frame()
         .autoPosition(true)
-        .backgroundColour('#262a33')
+        .backgroundColor('#262a33')
         .containerClass('ft-videographic')
         .width(1920)
         .height(1080)

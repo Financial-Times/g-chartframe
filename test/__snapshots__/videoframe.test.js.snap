@@ -23,8 +23,13 @@ exports[`videoframe renders as expected with defaults 1`] = `
   </desc>
   <rect
     class="chart-background"
+    fill="#262a33"
+    height="1080"
     id="chart-background"
     role="presentation"
+    width="1920"
+    x="0"
+    y="0"
   />
   <text
     class="chart-title"

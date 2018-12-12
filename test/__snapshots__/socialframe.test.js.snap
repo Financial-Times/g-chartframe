@@ -23,10 +23,16 @@ exports[`socialframe renders as expected with defaults 1`] = `
   </desc>
   <rect
     class="chart-background"
+    fill="#262a33"
+    height="612"
     id="chart-background"
     role="presentation"
+    width="612"
+    x="0"
+    y="0"
   />
   <rect
+    class="white-bar"
     height="4"
     style="fill: #fff;"
     transform="translate(40,40)"

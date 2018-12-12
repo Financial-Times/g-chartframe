@@ -4,7 +4,7 @@ function webFrameL(configObject) {
     const f = frame()
         .autoPosition(true)
         .containerClass('ft-webgraphic-l')
-        .backgroundColour('#FFF1E0')
+        .backgroundColor('#FFF1E0')
         .width(1180)
         .height(700)
         .blackbar('#000')

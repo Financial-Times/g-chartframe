@@ -6,7 +6,7 @@ function chartFrame(configObject) {
     let a11yDesc = 'A graphic by the Financial Times';
     let a11yPlotPresentation = true;
     let a11yTitle = 'A chart';
-    let backgroundColour;
+    let backgroundColor;
     let containerClass = 'g-chartframe';
     let copyright = '© FT';
     let copyrightStyle = false;
@@ -47,7 +47,6 @@ function chartFrame(configObject) {
     const subtitlePosition = { x: 1, y: 67 };
     const sourcePosition = { x: 1 };
     const titlePosition = { x: 1, y: 30 };
-    const transition = 0.2;
     const convertFrom = {
         mm(x) {
             return x * 2.83464480558843;
@@ -107,53 +106,50 @@ function chartFrame(configObject) {
         }
 
         // background
-        if (backgroundColour !== undefined) {
-            p.selectAll('rect.chart-background')
-                .data([backgroundColour])
-                .enter()
-                .append('rect')
+        if (
+            backgroundColor !== undefined &&
+            !p.select('#chart-background').size()
+        ) {
+            // @TODO remove second guard; see #62.
+            p.append('rect')
                 .attr('role', 'presentation')
                 .attr('id', 'chart-background')
-                .attr('class', 'chart-background');
-
-            p.selectAll('rect.chart-background')
+                .attr('class', 'chart-background')
                 .attr('x', 0)
                 .attr('y', 0)
                 .attr('width', graphicWidth)
                 .attr('height', graphicHeight)
-                .attr('fill', backgroundColour);
+                .attr('fill', backgroundColor);
         }
 
-        // 'blackbar' (the short black bar above web graphics)
-        if (blackbar) {
+        // 'blackbar' (the short black bar above web graphics) @TODO remove second guard; see #62.
+        if (blackbar && !p.selectAll('rect.black-bar').size()) {
             p.append('rect')
+                .attr('class', 'black-bar')
                 .attr('width', 60)
                 .attr('height', 4)
                 .style('fill', blackbar);
         }
-        if (whitebar) {
+
+        if (whitebar && !p.selectAll('rect.white-bar').size()) {
             p.append('rect')
+                .attr('class', 'white-bar')
                 .attr('width', 60)
                 .attr('height', 4)
                 .style('fill', whitebar)
                 .attr('transform', `translate(${margin.left},${margin.left})`);
         }
 
-        // 'goalposts' (the bit at the top and the bottom of print charts)
-        if (goalposts) {
+        // 'goalposts' (the bit at the top and the bottom of print charts) @TODO remove second guard; see #62.
+        if (goalposts && !p.selectAll('path.chart-goalposts').size()) {
             const goalpostPaths = [
                 `M 0, ${graphicHeight} L ${graphicWidth}, ${graphicHeight}`,
                 `M 0, 15 L 0, 0 L ${graphicWidth}, 0 L ${graphicWidth}, 15`,
             ];
 
-            p.selectAll('path.chart-goalposts')
-                .data(goalpostPaths)
-                .enter()
-                .append('path')
-                .attr('class', 'chart-goalposts');
-
-            p.selectAll('path.chart-goalposts')
-                .attr('d', d => d)
+            p.append('path')
+                .attr('class', 'chart-goalposts')
+                .attr('d', goalpostPaths)
                 .attr('stroke-width', 0.3)
                 .attr('fill', 'none')
                 .attr('stroke', goalposts);
@@ -163,12 +159,9 @@ function chartFrame(configObject) {
         const subtitleLineCount = subtitle ? subtitle.split('|').length : 0;
         const sourceLineCount = source ? source.split('|').length : 0;
 
-        // title
-        if (title) {
-            p.selectAll('text.chart-title')
-                .data([title])
-                .enter()
-                .append('text')
+        // title; @TODO remove existence guard see #62
+        if (title && !p.select('text.chart-title').size()) {
+            p.append('text')
                 .attr('class', 'chart-title')
                 .attr('id', `${containerClass}title`)
                 .call((titleText) => {
@@ -185,20 +178,12 @@ function chartFrame(configObject) {
                         .attr('x', titlePosition.x)
                         .call(attributeStyle, titleStyle);
                 });
-
-            p.selectAll('text.chart-title tspan')
-                .html(d => d)
-                .attr('y', (d, i) => titlePosition.y + i * titleLineHeight)
-                .attr('x', titlePosition.x)
-                .call(attributeStyle, titleStyle);
         }
 
-        if (subtitle) {
+        // @TODO remove existence guard see #62
+        if (subtitle && !p.select('text.chart-subtitle').size()) {
             // subtitle
-            p.selectAll('text.chart-subtitle')
-                .data([subtitle])
-                .enter()
-                .append('text')
+            p.append('text')
                 .attr('id', `${containerClass}subtitle`)
                 .attr('class', 'chart-subtitle')
                 .call((subtitleText) => {
@@ -223,29 +208,11 @@ function chartFrame(configObject) {
                         .attr('x', subtitlePosition.x)
                         .call(attributeStyle, subtitleStyle);
                 });
-
-            p.selectAll('text.chart-subtitle tspan')
-                .html(d => d)
-                .attr('y', (d, i) => {
-                    if (titleLineCount > 1) {
-                        return (
-                            titlePosition.y +
-                            titleLineCount * titleLineHeight +
-                            subtitleLineHeight * i
-                        );
-                    }
-                    return subtitlePosition.y + i * subtitleLineHeight;
-                })
-                .attr('x', subtitlePosition.x)
-                .call(attributeStyle, subtitleStyle);
         }
 
-        if (source) {
-            // source
-            p.selectAll('text.chart-source')
-                .data([source])
-                .enter()
-                .append('text')
+        // source; @TODO remove second existence check see #62
+        if (source && !p.selectAll('text.chart-source').size()) {
+            p.append('text')
                 .attr('class', 'chart-source')
                 .attr('id', `${containerClass}source`)
                 .call((sourceText) => {
@@ -270,33 +237,14 @@ function chartFrame(configObject) {
                         .attr('x', subtitlePosition.x)
                         .call(attributeStyle, subtitleStyle);
                 });
-
-            p.selectAll('text.chart-source tspan')
-                .html(d => d)
-                .attr('y', (d, i) => {
-                    if (sourcePosition.y) {
-                        return sourcePosition.y + i * sourceLineHeight;
-                    }
-                    return (
-                        graphicHeight -
-                        (margin.bottom - sourcePlotYOffset) +
-                        sourceLineHeight * 1.5 +
-                        i * sourceLineHeight
-                    );
-                })
-                .attr('x', sourcePosition.x)
-                .call(attributeStyle, sourceStyle);
         }
 
         // copyright
-        if (copyrightStyle) {
-            p.selectAll('text.chart-copyright')
-                .data([copyright])
-                .enter()
-                .append('text')
+        if (copyrightStyle && !p.selectAll('text.chart-copyright').size()) {
+            p.append('text')
                 .attr('class', 'chart-copyright')
                 .append('tspan')
-                .html(d => d)
+                .html(copyright)
                 .attr('x', sourcePosition.x)
                 .attr('y', () => {
                     if (sourceLineCount > 1) {
@@ -313,7 +261,6 @@ function chartFrame(configObject) {
                         sourceLineHeight * 2.5
                     );
                 })
-
                 .call(attributeStyle, copyrightStyle);
         }
 
@@ -456,9 +403,9 @@ function chartFrame(configObject) {
         return frame;
     };
 
-    frame.backgroundColour = (x) => {
-        if (x === undefined) return backgroundColour;
-        backgroundColour = x;
+    frame.backgroundColor = (x) => {
+        if (x === undefined) return backgroundColor;
+        backgroundColor = x;
         return frame;
     };
 

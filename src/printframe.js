@@ -4,7 +4,7 @@ function printFrame(configObject) {
     const f = frame()
         .containerClass('ft-printgraphic')
         .autoPosition(true)
-        .backgroundColour('#FFF')
+        .backgroundColor('#FFF')
         .goalposts('#000')
         .units('mm')
         .width(112.25) // these are after the units are set so they are converted from mm to px

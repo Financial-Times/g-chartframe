@@ -23,10 +23,16 @@ exports[`webframe-m renders as expected with defaults 1`] = `
   </desc>
   <rect
     class="chart-background"
+    fill="#FFF1E0"
+    height="500"
     id="chart-background"
     role="presentation"
+    width="700"
+    x="0"
+    y="0"
   />
   <rect
+    class="black-bar"
     height="4"
     style="fill: #000;"
     width="60"

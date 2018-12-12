@@ -23,14 +23,20 @@ exports[`webframe-s renders as expected with defaults 1`] = `
   </desc>
   <rect
     class="chart-background"
+    fill="#FFF"
+    height="192.75584678001326"
     id="chart-background"
     role="presentation"
+    width="318.1888794273013"
+    x="0"
+    y="0"
   />
   <path
     class="chart-goalposts"
-  />
-  <path
-    class="chart-goalposts"
+    d="M 0, 192.75584678001326 L 318.1888794273013, 192.75584678001326,M 0, 15 L 0, 0 L 318.1888794273013, 0 L 318.1888794273013, 15"
+    fill="none"
+    stroke="#000"
+    stroke-width="0.3"
   />
   <text
     class="chart-title"
