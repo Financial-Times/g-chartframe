@@ -76,7 +76,7 @@ exports[`socialframe renders as expected with defaults 1`] = `
     <tspan
       fill="#8e9095"
       font-family="MetricWeb,sans-serif"
-      font-size="24px"
+      font-size="20px"
       font-weight="400"
       id="ft-socialgraphicsource"
       x="40"

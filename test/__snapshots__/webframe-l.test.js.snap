@@ -74,7 +74,7 @@ exports[`webframe-l renders as expected with defaults 1`] = `
     <tspan
       fill="#66605C"
       font-family="MetricWeb,sans-serif"
-      font-size="18"
+      font-size="16px"
       id="ft-webgraphic-lsource"
       x="1"
       y="663"

@@ -234,8 +234,8 @@ function chartFrame(configObject) {
                                 i * sourceLineHeight
                             );
                         })
-                        .attr('x', subtitlePosition.x)
-                        .call(attributeStyle, subtitleStyle);
+                        .attr('x', sourcePosition.x)
+                        .call(attributeStyle, sourceStyle);
                 });
         }
 
@@ -294,10 +294,10 @@ function chartFrame(configObject) {
                 .attr(
                     'transform',
                     `translate(${graphicWidth -
-                    watermarkWidth -
-                    watermarkOffsetX},${graphicHeight -
-                    watermarkHeight -
-                    watermarkOffsetY}) scale(1) `,
+                        watermarkWidth -
+                        watermarkOffsetX},${graphicHeight -
+                        watermarkHeight -
+                        watermarkOffsetY}) scale(1) `,
                 );
         }
 

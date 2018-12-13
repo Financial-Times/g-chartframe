@@ -76,7 +76,7 @@ exports[`webframe-s renders as expected with defaults 1`] = `
     <tspan
       fill="#000000"
       font-family="MetricWeb,sans-serif"
-      font-size="9.6px"
+      font-size="7.2px"
       font-weight="400"
       id="ft-printgraphicsource"
       x="7"
