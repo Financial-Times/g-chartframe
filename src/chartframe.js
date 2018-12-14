@@ -388,6 +388,12 @@ function chartFrame(configObject) {
         return frame;
     };
 
+    frame.backgroundColour = (...args) => {
+        console.error('gChartframe.backgroundColour() is deprecated and will be removed next version.');
+        console.error('Please use gChartframe.backgroundColor() instead.');
+        return frame.backgroundColor(...args);
+    };
+
     frame.blackbar = (x) => {
         if (x === undefined) return blackbar;
         blackbar = x;
