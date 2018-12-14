@@ -199,7 +199,7 @@ function chartFrame(configObject) {
                         .data(subtitle.split('|'))
                         .enter()
                         .append('tspan')
-                        .html(d => d)
+                        .text(d => d)
                         .attr('id', `${containerClass}subtitle`)
                         .attr('y', (d, i) => {
                             if (titleLineCount > 1) {
@@ -229,7 +229,7 @@ function chartFrame(configObject) {
                         .data(source.split('|'))
                         .enter()
                         .append('tspan')
-                        .html(d => d)
+                        .text(d => d)
                         .attr('id', `${containerClass}source`)
                         .attr('y', (d, i) => {
                             /* istanbul ignore next I don't know how to test this. */
@@ -296,7 +296,11 @@ function chartFrame(configObject) {
         }
 
         // watermark; @TODO remove existence check (#62)
-        if (watermarkMarkup && !p.selectAll('g.chart-watermark').size()) {
+        if (
+            watermarkMarkup &&
+            !p.selectAll('g.chart-watermark').size() &&
+            p.node().ownerDocument.doctype.name !== 'svg'
+        ) {
             p.append('g')
                 .attr('class', 'chart-watermark')
                 .html(watermarkMarkup) // This needs to be .text() to work in pure SVG context
