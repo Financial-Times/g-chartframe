@@ -11,3 +11,9 @@ test('videoframe renders as expected with defaults', () => {
     chartContainer.call(defaultFrame);
     expect(chartContainer.node()).toMatchSnapshot();
 });
+
+test('videoframe with constructor options', () => {
+    const frame = videoframe({ title: 'videoframe' });
+
+    expect(frame.title()).toBe('videoframe');
+});

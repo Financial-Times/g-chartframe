@@ -1,0 +1,85 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`frame works with multiline title/subtitle/source 1`] = `
+<svg
+  aria-labelledby="g-chartframe__chart-a11y-title g-chartframe__chart-a11y-desc"
+  class="g-chartframe"
+  font-family="MetricWeb,sans-serif"
+  height="400"
+  role="img"
+  viewBox="0 0 500 400"
+  width="500"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <title
+    id="g-chartframe__chart-a11y-title"
+  >
+    A chart
+  </title>
+  <desc
+    id="g-chartframe__chart-a11y-desc"
+  >
+    A graphic by the Financial Times
+  </desc>
+  <text
+    class="chart-title"
+    id="g-chartframetitle"
+  >
+    <tspan
+      x="1"
+      y="30"
+    >
+      Multiline
+    </tspan>
+    <tspan
+      x="1"
+      y="62"
+    >
+      Title
+    </tspan>
+  </text>
+  <text
+    class="chart-subtitle"
+    id="g-chartframesubtitle"
+  >
+    <tspan
+      id="g-chartframesubtitle"
+      x="1"
+      y="94"
+    >
+      Multiline
+    </tspan>
+    <tspan
+      id="g-chartframesubtitle"
+      x="1"
+      y="114"
+    >
+      Subtitle
+    </tspan>
+  </text>
+  <text
+    class="chart-source"
+    id="g-chartframesource"
+  >
+    <tspan
+      id="g-chartframesource"
+      x="1"
+      y="450"
+    >
+      Multiline
+    </tspan>
+    <tspan
+      id="g-chartframesource"
+      x="1"
+      y="466"
+    >
+      Source
+    </tspan>
+  </text>
+  <g
+    class="chart-plot"
+    role="presentation"
+    transform="translate(1,100)"
+  />
+</svg>
+`;

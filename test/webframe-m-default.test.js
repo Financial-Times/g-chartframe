@@ -11,3 +11,9 @@ test('webframe-m-default renders as expected with defaults', () => {
     chartContainer.call(defaultFrame);
     expect(chartContainer.node()).toMatchSnapshot();
 });
+
+test('webframeMDefault with constructor options', () => {
+    const frame = webframeMDefault({ title: 'webframeMDefault' });
+
+    expect(frame.title()).toBe('webframeMDefault');
+});

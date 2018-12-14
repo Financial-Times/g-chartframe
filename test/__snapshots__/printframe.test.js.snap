@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`webframe-s renders as expected with defaults 1`] = `
+exports[`printframe renders as expected with defaults 1`] = `
 <svg
   aria-labelledby="ft-printgraphic__chart-a11y-title ft-printgraphic__chart-a11y-desc"
   class="ft-printgraphic"

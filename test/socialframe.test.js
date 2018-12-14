@@ -11,3 +11,9 @@ test('socialframe renders as expected with defaults', () => {
     chartContainer.call(defaultFrame);
     expect(chartContainer.node()).toMatchSnapshot();
 });
+
+test('socialframe with constructor options', () => {
+    const frame = socialframe({ title: 'socialframe' });
+
+    expect(frame.title()).toBe('socialframe');
+});
