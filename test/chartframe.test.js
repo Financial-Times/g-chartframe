@@ -21,6 +21,20 @@ test('chartFrame works outside browser', () => {
     expect(chartContainer.select('.chart-title').text()).toBe('Title: A description of the charts purpose');
 });
 
+test('chartFrame works outside browser in a pure SVG context', () => {
+    const { JSDOM } = jsdom;
+    const defaultFrame = frame();
+    const dom = new JSDOM(
+        '<?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="700" height="500" viewBox="0 0 700 500"></svg>',
+        {
+            contentType: 'image/svg+xml',
+        },
+    );
+    const chartContainer = d3.select(dom.window.document.querySelector('svg'));
+    chartContainer.call(defaultFrame);
+    expect(chartContainer.select('.chart-title').text()).toBe('Title: A description of the charts purpose');
+});
+
 test('chartFrame can be extended', () => {
     const defaultFrame = frame();
     defaultFrame.extend('llama', 'duck');
