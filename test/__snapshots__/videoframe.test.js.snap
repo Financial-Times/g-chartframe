@@ -1,0 +1,87 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`videoframe renders as expected with defaults 1`] = `
+<svg
+  aria-labelledby="ft-videographic__chart-a11y-title ft-videographic__chart-a11y-desc"
+  class="ft-videographic"
+  font-family="MetricWeb,sans-serif"
+  height="1080"
+  role="img"
+  viewBox="0 0 1920 1080"
+  width="1920"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <title
+    id="ft-videographic__chart-a11y-title"
+  >
+    A chart
+  </title>
+  <desc
+    id="ft-videographic__chart-a11y-desc"
+  >
+    A graphic by the Financial Times
+  </desc>
+  <rect
+    class="chart-background"
+    fill="#262a33"
+    height="1080"
+    id="chart-background"
+    role="presentation"
+    width="1920"
+    x="0"
+    y="0"
+  />
+  <text
+    class="chart-title"
+    id="ft-videographictitle"
+  >
+    <tspan
+      fill="#ffffff"
+      font-family="MetricWeb,sans-serif"
+      font-size="72px"
+      font-weight="400"
+      x="207"
+      y="130"
+    >
+      Title: A description of the charts purpose
+    </tspan>
+  </text>
+  <text
+    class="chart-subtitle"
+    id="ft-videographicsubtitle"
+  >
+    <tspan
+      fill="#8e9095"
+      font-family="MetricWeb,sans-serif"
+      font-size="48px"
+      font-weight="400"
+      id="ft-videographicsubtitle"
+      x="207"
+      y="200"
+    >
+      some supporting information, units perhaps
+    </tspan>
+  </text>
+  <text
+    class="chart-source"
+    id="ft-videographicsource"
+  >
+    <tspan
+      fill="#8e9095"
+      font-family="MetricWeb,sans-serif"
+      font-size="36px"
+      font-weight="400"
+      id="ft-videographicsource"
+      x="207"
+      y="987"
+    >
+      Source: research
+    </tspan>
+  </text>
+  <g
+    class="chart-plot"
+    role="presentation"
+    transform="translate(207,262)"
+  />
+</svg>
+`;

@@ -4,7 +4,7 @@ function webFrameMDefault(configObject) {
     const f = frame()
         .autoPosition(true)
         .containerClass('ft-webgraphic-m-default')
-        .backgroundColour('#FFF1E0')
+        .backgroundColor('#FFF1E0')
         .blackbar('#000')
         .width(700)
         .height(500)

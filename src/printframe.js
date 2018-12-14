@@ -1,17 +1,15 @@
 import frame from './chartframe';
-import watermarkPath from './watermarks';
 
 function printFrame(configObject) {
     const f = frame()
         .containerClass('ft-printgraphic')
         .autoPosition(true)
-        .backgroundColour('#FFF')
+        .backgroundColor('#FFF')
         .goalposts('#000')
         .units('mm')
         .width(112.25) // these are after the units are set so they are converted from mm to px
         .height(68)
         .margin({ top: 40, left: 15, bottom: 35, right: 7 })
-        .watermark(watermarkPath.dark)
         .rem(9.6)
         .titleStyle({
             'font-size': '12px',
@@ -39,8 +37,7 @@ function printFrame(configObject) {
         })
         .sourceX(7)
         .sourcePlotYOffset(18)
-        .sourceLineHeight(8)
-        .watermark('');
+        .sourceLineHeight(8);
 
     if (configObject !== undefined) f.attrs(configObject);
     return f;

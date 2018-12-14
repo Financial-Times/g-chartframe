@@ -1,0 +1,105 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`webframe-s renders as expected with defaults 1`] = `
+<svg
+  aria-labelledby="ft-webgraphic-s__chart-a11y-title ft-webgraphic-s__chart-a11y-desc"
+  class="ft-webgraphic-s"
+  font-family="MetricWeb,sans-serif"
+  height="400"
+  role="img"
+  viewBox="0 0 300 400"
+  width="300"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <title
+    id="ft-webgraphic-s__chart-a11y-title"
+  >
+    A chart
+  </title>
+  <desc
+    id="ft-webgraphic-s__chart-a11y-desc"
+  >
+    A graphic by the Financial Times
+  </desc>
+  <rect
+    class="chart-background"
+    fill="#FFF1E0"
+    height="400"
+    id="chart-background"
+    role="presentation"
+    width="300"
+    x="0"
+    y="0"
+  />
+  <rect
+    class="black-bar"
+    height="4"
+    style="fill: #000;"
+    width="60"
+  />
+  <text
+    class="chart-title"
+    id="ft-webgraphic-stitle"
+  >
+    <tspan
+      fill="#000"
+      font-family="MetricWeb,sans-serif"
+      font-size="20"
+      font-weight="400"
+      x="1"
+      y="32"
+    >
+      Title: A description of the charts purpose
+    </tspan>
+  </text>
+  <text
+    class="chart-subtitle"
+    id="ft-webgraphic-ssubtitle"
+  >
+    <tspan
+      fill="#66605C"
+      font-family="MetricWeb,sans-serif"
+      font-size="18"
+      id="ft-webgraphic-ssubtitle"
+      x="1"
+      y="64"
+    >
+      some supporting information, units perhaps
+    </tspan>
+  </text>
+  <text
+    class="chart-source"
+    id="ft-webgraphic-ssource"
+  >
+    <tspan
+      fill="#66605C"
+      font-family="MetricWeb,sans-serif"
+      font-size="12px"
+      id="ft-webgraphic-ssource"
+      x="1"
+      y="366"
+    >
+      Source: research
+    </tspan>
+  </text>
+  <text
+    class="chart-copyright"
+  >
+    <tspan
+      fill="#66605C"
+      font-family="MetricWeb,sans-serif"
+      font-size="12px"
+      font-style="italic"
+      x="1"
+      y="378"
+    >
+      © FT
+    </tspan>
+  </text>
+  <g
+    class="chart-plot"
+    role="presentation"
+    transform="translate(15,104)"
+  />
+</svg>
+`;

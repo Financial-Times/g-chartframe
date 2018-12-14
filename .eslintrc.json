@@ -3,6 +3,7 @@
   "parserOptions": {
     "sourceType": "module"
   },
+  "root": true,
   "rules": {
     "no-param-reassign": [0],
     "no-use-before-define": ["error", { "functions": false }],
@@ -11,9 +12,11 @@
     "import/extensions": [0],
     "import/no-unresolved": [0],
     "import/no-extraneous-dependencies": [0],
-    "indent": ["error", 4]
+    "indent": ["error", 4],
+    "no-mixed-operators": 0
   },
   "env": {
-    "browser": true
+    "browser": true,
+    "jest": true
   }
 }

@@ -4,7 +4,7 @@ function webFrameS(configObject) {
     const f = frame()
         .autoPosition(true)
         .containerClass('ft-webgraphic-s')
-        .backgroundColour('#FFF1E0')
+        .backgroundColor('#FFF1E0')
         .blackbar('#000')
         .width(300)
         // .watermark(watermarkPathDark)

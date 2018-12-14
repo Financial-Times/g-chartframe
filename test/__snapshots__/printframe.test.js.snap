@@ -1,0 +1,94 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`printframe renders as expected with defaults 1`] = `
+<svg
+  aria-labelledby="ft-printgraphic__chart-a11y-title ft-printgraphic__chart-a11y-desc"
+  class="ft-printgraphic"
+  font-family="MetricWeb,sans-serif"
+  height="192.75584678001326"
+  role="img"
+  viewBox="0 0 318.1888794273013 192.75584678001326"
+  width="318.1888794273013"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <title
+    id="ft-printgraphic__chart-a11y-title"
+  >
+    A chart
+  </title>
+  <desc
+    id="ft-printgraphic__chart-a11y-desc"
+  >
+    A graphic by the Financial Times
+  </desc>
+  <rect
+    class="chart-background"
+    fill="#FFF"
+    height="192.75584678001326"
+    id="chart-background"
+    role="presentation"
+    width="318.1888794273013"
+    x="0"
+    y="0"
+  />
+  <path
+    class="chart-goalposts"
+    d="M 0, 192.75584678001326 L 318.1888794273013, 192.75584678001326,M 0, 15 L 0, 0 L 318.1888794273013, 0 L 318.1888794273013, 15"
+    fill="none"
+    stroke="#000"
+    stroke-width="0.3"
+  />
+  <text
+    class="chart-title"
+    id="ft-printgraphictitle"
+  >
+    <tspan
+      fill="#000000"
+      font-family="MetricWeb,sans-serif"
+      font-size="12px"
+      font-weight="600"
+      x="7"
+      y="15"
+    >
+      Title: A description of the charts purpose
+    </tspan>
+  </text>
+  <text
+    class="chart-subtitle"
+    id="ft-printgraphicsubtitle"
+  >
+    <tspan
+      fill="#000000"
+      font-family="MetricWeb,sans-serif"
+      font-size="9.6px"
+      font-weight="400"
+      id="ft-printgraphicsubtitle"
+      x="7"
+      y="27"
+    >
+      some supporting information, units perhaps
+    </tspan>
+  </text>
+  <text
+    class="chart-source"
+    id="ft-printgraphicsource"
+  >
+    <tspan
+      fill="#000000"
+      font-family="MetricWeb,sans-serif"
+      font-size="7.2px"
+      font-weight="400"
+      id="ft-printgraphicsource"
+      x="7"
+      y="187.75584678001326"
+    >
+      Source: research
+    </tspan>
+  </text>
+  <g
+    class="chart-plot"
+    role="presentation"
+    transform="translate(15,41.2)"
+  />
+</svg>
+`;

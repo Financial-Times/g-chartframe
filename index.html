@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Chart frame for D3</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" href="https://www.ft.com/__origami/service/build/v2/bundles/css?modules=o-fonts@^2.2.0" />
+	<style type="text/css">
+		body{font-family:sans-serif;}
+		h1{
+			font-size: xx-large;
+		}
+		figcaption{
+			background-color: #000;
+			color: #FFF;
+			padding: 3px;
+			margin-bottom: 20px;
+			display: block;
+			width: 50%;
+		}
+	</style>
+	<script src="//d3js.org/d3.v4.min.js" charset="utf-8"></script>
+	<script type="text/javascript" src="build/g-chartframe.js"  charset="utf-8"></script>
+
+<style type="text/css">
+</style>
+</head>
+<body>
+<article>
+	<h1>g-chartframe: FT styled frames for D3 graphics</h1>
+	<a href="https://github.com/ft-interactive/g-chartframe">Code and documentation on GitHub</a>
+	<hr>
+		<figure class="web-s-example">
+			<figcaption>Web small example</figcaption>
+			<svg width="550" height="500"></svg>
+		</figure>
+
+		<figure class="web-m-example">
+			<figcaption>Web medium example</figcaption>
+			<svg width="550" height="500"></svg>
+		</figure>
+
+		<figure class="web-l-example">
+			<figcaption>Web large example</figcaption>
+			<svg width="550" height="500"></svg>
+		</figure>
+
+		<figure class="web-m-default-example">
+			<figcaption>Web medium non-responsive example</figcaption>
+			<svg width="550" height="500"></svg>
+		</figure>
+
+		<figure class="print-example">
+			<figcaption>Print example</figcaption>
+			<svg></svg>
+		</figure>
+
+		<figure class="social-example">
+			<figcaption>Social example</figcaption>
+			<svg></svg>
+		</figure>
+
+		<figure class="video-example">
+			<figcaption>Video example</figcaption>
+			<svg></svg>
+		</figure>
+
+	<hr>
+	<section>
+		Tom Pearson &ndash; Feb 2017
+	</section>
+</article>
+
+</body>
+
+<script type="text/javascript">
+
+// console.log('gChartframe ' + gChartframe.version);
+
+//first, create and configure the frames...
+
+var webframeS = gChartframe.webFrameS()
+	.title('Web customise <i>the</i> title')
+	.source('Note: use the <a href="https://en.wikipedia.org/wiki/Vertical_bar">&ldquo;vertical bar&rdquo;</a> (aka &ldquo;pipe&rdquo;) character|to add linebreaks.'); //add a `|` character to insert a line break
+
+var webframeM = gChartframe.webFrameM()
+	.title('Web customise <i>the</i> title')
+	.source('Note: use the <a href="https://en.wikipedia.org/wiki/Vertical_bar">&ldquo;vertical bar&rdquo;</a> (aka &ldquo;pipe&rdquo;) character|to add linebreaks.'); //add a `|` character to insert a line break
+
+var webframeL = gChartframe.webFrameL()
+	.title('Web customise <i>the</i> title')
+	.source('Note: use the <a href="https://en.wikipedia.org/wiki/Vertical_bar">&ldquo;vertical bar&rdquo;</a> (aka &ldquo;pipe&rdquo;) character|to add linebreaks.'); //add a `|` character to insert a line break
+
+var webframeMDefault = gChartframe.webFrameMDefault()
+	.title('Web customise <i>the</i> title')
+	.source('Note: use the <a href="https://en.wikipedia.org/wiki/Vertical_bar">&ldquo;vertical bar&rdquo;</a> (aka &ldquo;pipe&rdquo;) character|to add linebreaks.'); //add a `|` character to insert a line break
+
+var printframe = gChartframe.printFrame()
+	.title('A print frame')
+	.subtitle('allows for width and height specified in mm'); //note! print frame allows you to specify width and height in mm which will be converted to 'px'
+
+var socialframe = gChartframe.socialFrame()
+	.title('Social customise the title')
+	.subtitle('typically shorter subtitle');
+
+var videoframe = gChartframe.videoFrame();
+
+d3.select('.web-s-example svg')
+	.call(webframeS);
+
+d3.select('.web-m-example svg')
+	.call(webframeM);
+
+d3.select('.web-l-example svg')
+	.call(webframeL);
+
+d3.select('.web-m-default-example svg')
+	.call(webframeMDefault);
+
+d3.select('.print-example svg')
+	.call(printframe);
+
+d3.select('.social-example svg')
+	.call(socialframe);
+
+d3.select('.video-example svg')
+	.call(videoframe);
+
+// then add the visualisations to the plot area (in this case some place-holder rectangles)
+
+printframe.plot()
+	.append('rect') //a rectangle to illustrate the plot area
+	.attr('width',printframe.dimension().width)
+	.attr('height',printframe.dimension().height)
+	.attr('fill','#000')
+	.attr('fill-opacity',0.2);
+
+webframeS.plot()
+	.append('rect') //a rectangle to illustrate the plot area
+	.attr('width',webframeS.dimension().width)
+	.attr('height',webframeS.dimension().height)
+	.attr('fill','#000')
+	.attr('fill-opacity',0.2);
+
+webframeM.plot()
+	.append('rect') //a rectangle to illustrate the plot area
+	.attr('width',webframeM.dimension().width)
+	.attr('height',webframeM.dimension().height)
+	.attr('fill','#000')
+	.attr('fill-opacity',0.2);
+
+webframeL.plot()
+	.append('rect') //a rectangle to illustrate the plot area
+	.attr('width',webframeL.dimension().width)
+	.attr('height',webframeL.dimension().height)
+	.attr('fill','#000')
+	.attr('fill-opacity',0.2);
+
+webframeMDefault.plot()
+	.append('rect') //a rectangle to illustrate the plot area
+	.attr('width',webframeMDefault.dimension().width)
+	.attr('height',webframeMDefault.dimension().height)
+	.attr('fill','#000')
+	.attr('fill-opacity',0.2);
+
+socialframe.plot()
+	.append('rect') //a rectangle to illustratet he plot area
+	.attr('width',socialframe.dimension().width)
+	.attr('height',socialframe.dimension().height)
+	.attr('fill','#FFF')
+	.attr('fill-opacity',0.2);
+
+videoframe.plot()
+	.append('rect') //a rectangle to illustratet he plot area
+	.attr('width',videoframe.dimension().width)
+	.attr('height',videoframe.dimension().height)
+	.attr('fill','#FFF')
+	.attr('fill-opacity',0.2);
+
+
+</script>
+</html>
