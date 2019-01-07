@@ -42,7 +42,7 @@
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.8.0",
     "jest": "^23.6.0",
-    "jsdom": "^11.4.0",
+    "jsdom": "^11.6.0",
     "npm-prepublish": "^1.2.3",
     "prettier-eslint": "^8.8.2",
     "rollup": "0.25",

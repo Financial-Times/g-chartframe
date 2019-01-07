@@ -176,7 +176,7 @@ function chartFrame(configObject) {
                         .data(title.split('|'))
                         .enter()
                         .append('tspan')
-                        .html(d => d)
+                        .text(d => d)
                         .attr(
                             'y',
                             (d, i) => titlePosition.y + i * titleLineHeight,
@@ -199,7 +199,7 @@ function chartFrame(configObject) {
                         .data(subtitle.split('|'))
                         .enter()
                         .append('tspan')
-                        .html(d => d)
+                        .text(d => d)
                         .attr('id', `${containerClass}subtitle`)
                         .attr('y', (d, i) => {
                             if (titleLineCount > 1) {
@@ -229,7 +229,7 @@ function chartFrame(configObject) {
                         .data(source.split('|'))
                         .enter()
                         .append('tspan')
-                        .html(d => d)
+                        .text(d => d)
                         .attr('id', `${containerClass}source`)
                         .attr('y', (d, i) => {
                             /* istanbul ignore next I don't know how to test this. */
@@ -253,7 +253,7 @@ function chartFrame(configObject) {
             p.append('text')
                 .attr('class', 'chart-copyright')
                 .append('tspan')
-                .html(copyright)
+                .text(copyright)
                 .attr('x', sourcePosition.x)
                 .attr('y', () => {
                     /* istanbul ignore next I don't know how to test this. */
@@ -296,10 +296,14 @@ function chartFrame(configObject) {
         }
 
         // watermark; @TODO remove existence check (#62)
-        if (watermarkMarkup && !p.selectAll('g.chart-watermark').size()) {
+        if (
+            watermarkMarkup &&
+            !p.selectAll('g.chart-watermark').size() &&
+            p.node().ownerDocument.doctype.name !== 'svg'
+        ) {
             p.append('g')
                 .attr('class', 'chart-watermark')
-                .html(watermarkMarkup)
+                .html(watermarkMarkup) // This needs to be .text() to work in pure SVG context
                 .attr('role', 'presentation')
                 .attr(
                     'transform',
@@ -327,7 +331,10 @@ function chartFrame(configObject) {
         }
 
         /* istanbul ignore next */
-        if (showDownloadPngButtons) {
+        if (
+            showDownloadPngButtons &&
+            p.node().ownerDocument.doctype.name !== 'svg'
+        ) {
             let parent;
             if (p.node().nodeName.toLowerCase() === 'svg') {
                 parent = d3.select(p.node().parentNode);
