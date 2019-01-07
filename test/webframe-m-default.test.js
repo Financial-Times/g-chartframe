@@ -1,6 +1,5 @@
 import * as fs from 'fs';
 import * as d3 from 'd3-selection';
-import 'd3-transition';
 import jsdom from 'jsdom';
 import webframeMDefault from '../src/webframe-m-default';
 
@@ -11,4 +10,10 @@ test('webframe-m-default renders as expected with defaults', () => {
     const chartContainer = d3.select(dom.window.document.querySelector('svg'));
     chartContainer.call(defaultFrame);
     expect(chartContainer.node()).toMatchSnapshot();
+});
+
+test('webframeMDefault with constructor options', () => {
+    const frame = webframeMDefault({ title: 'webframeMDefault' });
+
+    expect(frame.title()).toBe('webframeMDefault');
 });

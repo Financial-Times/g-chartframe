@@ -5,7 +5,10 @@ exports[`webframe-m-default renders as expected with defaults 1`] = `
   aria-labelledby="ft-webgraphic-m-default__chart-a11y-title ft-webgraphic-m-default__chart-a11y-desc"
   class="ft-webgraphic-m-default"
   font-family="MetricWeb,sans-serif"
+  height="500"
   role="img"
+  viewBox="0 0 700 500"
+  width="700"
   xmlns="http://www.w3.org/2000/svg"
 >
   <title
@@ -20,10 +23,16 @@ exports[`webframe-m-default renders as expected with defaults 1`] = `
   </desc>
   <rect
     class="chart-background"
+    fill="#FFF1E0"
+    height="500"
     id="chart-background"
     role="presentation"
+    width="700"
+    x="0"
+    y="0"
   />
   <rect
+    class="black-bar"
     height="4"
     style="fill: #000;"
     width="60"
@@ -65,7 +74,7 @@ exports[`webframe-m-default renders as expected with defaults 1`] = `
     <tspan
       fill="#66605C"
       font-family="MetricWeb,sans-serif"
-      font-size="24"
+      font-size="16px"
       id="ft-webgraphic-m-defaultsource"
       x="1"
       y="446"
@@ -87,11 +96,6 @@ exports[`webframe-m-default renders as expected with defaults 1`] = `
       © FT
     </tspan>
   </text>
-  <g
-    class="chart-watermark"
-    role="presentation"
-    transform="translate(536,490) scale(1) "
-  />
   <g
     class="chart-plot"
     role="presentation"

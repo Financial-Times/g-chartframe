@@ -5,7 +5,10 @@ exports[`videoframe renders as expected with defaults 1`] = `
   aria-labelledby="ft-videographic__chart-a11y-title ft-videographic__chart-a11y-desc"
   class="ft-videographic"
   font-family="MetricWeb,sans-serif"
+  height="1080"
   role="img"
+  viewBox="0 0 1920 1080"
+  width="1920"
   xmlns="http://www.w3.org/2000/svg"
 >
   <title
@@ -20,8 +23,13 @@ exports[`videoframe renders as expected with defaults 1`] = `
   </desc>
   <rect
     class="chart-background"
+    fill="#262a33"
+    height="1080"
     id="chart-background"
     role="presentation"
+    width="1920"
+    x="0"
+    y="0"
   />
   <text
     class="chart-title"
@@ -61,7 +69,7 @@ exports[`videoframe renders as expected with defaults 1`] = `
     <tspan
       fill="#8e9095"
       font-family="MetricWeb,sans-serif"
-      font-size="48px"
+      font-size="36px"
       font-weight="400"
       id="ft-videographicsource"
       x="207"
@@ -70,11 +78,6 @@ exports[`videoframe renders as expected with defaults 1`] = `
       Source: research
     </tspan>
   </text>
-  <g
-    class="chart-watermark"
-    role="presentation"
-    transform="translate(1756,1070) scale(1) "
-  />
   <g
     class="chart-plot"
     role="presentation"

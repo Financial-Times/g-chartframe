@@ -5,7 +5,7 @@ function socialFrame(configObject) {
     const f = frame()
         .autoPosition(true)
         .containerClass('ft-socialgraphic')
-        .backgroundColour('#262a33')
+        .backgroundColor('#262a33')
         .whitebar('#fff')
         .width(612)
         .height(612)

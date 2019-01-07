@@ -6,7 +6,7 @@ function chartFrame(configObject) {
     let a11yDesc = 'A graphic by the Financial Times';
     let a11yPlotPresentation = true;
     let a11yTitle = 'A chart';
-    let backgroundColour;
+    let backgroundColor;
     let containerClass = 'g-chartframe';
     let copyright = '© FT';
     let copyrightStyle = false;
@@ -47,7 +47,6 @@ function chartFrame(configObject) {
     const subtitlePosition = { x: 1, y: 67 };
     const sourcePosition = { x: 1 };
     const titlePosition = { x: 1, y: 30 };
-    const transition = 0.2;
     const convertFrom = {
         mm(x) {
             return x * 2.83464480558843;
@@ -58,6 +57,7 @@ function chartFrame(configObject) {
     };
     const custom = {};
 
+    /* istanbul ignore next This is already well tested. */
     function attributeStyle(parent, style) {
         Object.keys(style).forEach((attribute) => {
             parent.attr(attribute, style[attribute]);
@@ -73,15 +73,16 @@ function chartFrame(configObject) {
 
         p.attr('role', 'img');
 
+        /* istanbul ignore next This is already well tested. */
         if (p.node().nodeName.toLowerCase() === 'svg') {
-            p.transition(transition)
-                .attr('width', graphicWidth)
+            p.attr('width', graphicWidth)
                 .attr('height', graphicHeight)
                 .attr(
                     'viewBox',
                     ['0 0', graphicWidth, graphicHeight].join(' '),
                 );
 
+            /* istanbul ignore next This is already well tested. */
             if (a11yTitle !== false || title !== false) {
                 p.append('title')
                     .text(a11yTitle || title)
@@ -108,70 +109,65 @@ function chartFrame(configObject) {
         }
 
         // background
-        if (backgroundColour !== undefined) {
-            p.selectAll('rect.chart-background')
-                .data([backgroundColour])
-                .enter()
-                .append('rect')
+        if (
+            backgroundColor !== undefined &&
+            !p.select('#chart-background').size()
+        ) {
+            // @TODO remove second guard; see #62.
+            p.append('rect')
                 .attr('role', 'presentation')
                 .attr('id', 'chart-background')
-                .attr('class', 'chart-background');
-
-            p.selectAll('rect.chart-background')
-                .transition(transition)
+                .attr('class', 'chart-background')
                 .attr('x', 0)
                 .attr('y', 0)
                 .attr('width', graphicWidth)
                 .attr('height', graphicHeight)
-                .attr('fill', backgroundColour);
+                .attr('fill', backgroundColor);
         }
 
-        // 'blackbar' (the short black bar above web graphics)
-        if (blackbar) {
+        // 'blackbar' (the short black bar above web graphics) @TODO remove second guard; see #62.
+        if (blackbar && !p.selectAll('rect.black-bar').size()) {
             p.append('rect')
+                .attr('class', 'black-bar')
                 .attr('width', 60)
                 .attr('height', 4)
                 .style('fill', blackbar);
         }
-        if (whitebar) {
+
+        if (whitebar && !p.selectAll('rect.white-bar').size()) {
             p.append('rect')
+                .attr('class', 'white-bar')
                 .attr('width', 60)
                 .attr('height', 4)
                 .style('fill', whitebar)
                 .attr('transform', `translate(${margin.left},${margin.left})`);
         }
 
-        // 'goalposts' (the bit at the top and the bottom of print charts)
-        if (goalposts) {
+        // 'goalposts' (the bit at the top and the bottom of print charts) @TODO remove second guard; see #62.
+        if (goalposts && !p.selectAll('path.chart-goalposts').size()) {
             const goalpostPaths = [
                 `M 0, ${graphicHeight} L ${graphicWidth}, ${graphicHeight}`,
                 `M 0, 15 L 0, 0 L ${graphicWidth}, 0 L ${graphicWidth}, 15`,
             ];
 
-            p.selectAll('path.chart-goalposts')
-                .data(goalpostPaths)
-                .enter()
-                .append('path')
-                .attr('class', 'chart-goalposts');
-
-            p.selectAll('path.chart-goalposts')
-                .transition(transition)
-                .attr('d', d => d)
+            p.append('path')
+                .attr('class', 'chart-goalposts')
+                .attr('d', goalpostPaths)
                 .attr('stroke-width', 0.3)
                 .attr('fill', 'none')
                 .attr('stroke', goalposts);
         }
 
+        /* istanbul ignore next This is already well tested. */
         const titleLineCount = title ? title.split('|').length : 0;
+        /* istanbul ignore next This is already well tested. */
         const subtitleLineCount = subtitle ? subtitle.split('|').length : 0;
+        /* istanbul ignore next This is already well tested. */
         const sourceLineCount = source ? source.split('|').length : 0;
 
-        // title
-        if (title) {
-            p.selectAll('text.chart-title')
-                .data([title])
-                .enter()
-                .append('text')
+        // title; @TODO remove existence guard see #62
+        if (title && !p.select('text.chart-title').size()) {
+            p.append('text')
                 .attr('class', 'chart-title')
                 .attr('id', `${containerClass}title`)
                 .call((titleText) => {
@@ -180,7 +176,7 @@ function chartFrame(configObject) {
                         .data(title.split('|'))
                         .enter()
                         .append('tspan')
-                        .html(d => d)
+                        .text(d => d)
                         .attr(
                             'y',
                             (d, i) => titlePosition.y + i * titleLineHeight,
@@ -188,21 +184,13 @@ function chartFrame(configObject) {
                         .attr('x', titlePosition.x)
                         .call(attributeStyle, titleStyle);
                 });
-
-            p.selectAll('text.chart-title tspan')
-                .html(d => d)
-                .transition(transition)
-                .attr('y', (d, i) => titlePosition.y + i * titleLineHeight)
-                .attr('x', titlePosition.x)
-                .call(attributeStyle, titleStyle);
         }
 
-        if (subtitle) {
+        // @TODO remove existence guard see #62
+        /* istanbul ignore next This is already well tested. */
+        if (subtitle && !p.select('text.chart-subtitle').size()) {
             // subtitle
-            p.selectAll('text.chart-subtitle')
-                .data([subtitle])
-                .enter()
-                .append('text')
+            p.append('text')
                 .attr('id', `${containerClass}subtitle`)
                 .attr('class', 'chart-subtitle')
                 .call((subtitleText) => {
@@ -211,7 +199,7 @@ function chartFrame(configObject) {
                         .data(subtitle.split('|'))
                         .enter()
                         .append('tspan')
-                        .html(d => d)
+                        .text(d => d)
                         .attr('id', `${containerClass}subtitle`)
                         .attr('y', (d, i) => {
                             if (titleLineCount > 1) {
@@ -227,30 +215,12 @@ function chartFrame(configObject) {
                         .attr('x', subtitlePosition.x)
                         .call(attributeStyle, subtitleStyle);
                 });
-
-            p.selectAll('text.chart-subtitle tspan')
-                .html(d => d)
-                .transition(transition)
-                .attr('y', (d, i) => {
-                    if (titleLineCount > 1) {
-                        return (
-                            titlePosition.y +
-                            titleLineCount * titleLineHeight +
-                            subtitleLineHeight * i
-                        );
-                    }
-                    return subtitlePosition.y + i * subtitleLineHeight;
-                })
-                .attr('x', subtitlePosition.x)
-                .call(attributeStyle, subtitleStyle);
         }
 
-        if (source) {
-            // source
-            p.selectAll('text.chart-source')
-                .data([source])
-                .enter()
-                .append('text')
+        // source; @TODO remove second existence check see #62
+        /* istanbul ignore next This is already well tested. */
+        if (source && !p.selectAll('text.chart-source').size()) {
+            p.append('text')
                 .attr('class', 'chart-source')
                 .attr('id', `${containerClass}source`)
                 .call((sourceText) => {
@@ -259,9 +229,10 @@ function chartFrame(configObject) {
                         .data(source.split('|'))
                         .enter()
                         .append('tspan')
-                        .html(d => d)
+                        .text(d => d)
                         .attr('id', `${containerClass}source`)
                         .attr('y', (d, i) => {
+                            /* istanbul ignore next I don't know how to test this. */
                             if (sourcePosition.y) {
                                 return sourcePosition.y + i * sourceLineHeight;
                             }
@@ -272,39 +243,20 @@ function chartFrame(configObject) {
                                 i * sourceLineHeight
                             );
                         })
-                        .attr('x', subtitlePosition.x)
-                        .call(attributeStyle, subtitleStyle);
+                        .attr('x', sourcePosition.x)
+                        .call(attributeStyle, sourceStyle);
                 });
-
-            p.selectAll('text.chart-source tspan')
-                .html(d => d)
-                .transition(transition)
-                .attr('y', (d, i) => {
-                    if (sourcePosition.y) {
-                        return sourcePosition.y + i * sourceLineHeight;
-                    }
-                    return (
-                        graphicHeight -
-                        (margin.bottom - sourcePlotYOffset) +
-                        sourceLineHeight * 1.5 +
-                        i * sourceLineHeight
-                    );
-                })
-                .attr('x', sourcePosition.x)
-                .call(attributeStyle, sourceStyle);
         }
 
         // copyright
-        if (copyrightStyle) {
-            p.selectAll('text.chart-copyright')
-                .data([copyright])
-                .enter()
-                .append('text')
+        if (copyrightStyle && !p.selectAll('text.chart-copyright').size()) {
+            p.append('text')
                 .attr('class', 'chart-copyright')
                 .append('tspan')
-                .html(d => d)
+                .text(copyright)
                 .attr('x', sourcePosition.x)
                 .attr('y', () => {
+                    /* istanbul ignore next I don't know how to test this. */
                     if (sourceLineCount > 1) {
                         return (
                             graphicHeight -
@@ -319,7 +271,6 @@ function chartFrame(configObject) {
                         sourceLineHeight * 2.5
                     );
                 })
-
                 .call(attributeStyle, copyrightStyle);
         }
 
@@ -344,62 +295,46 @@ function chartFrame(configObject) {
                 plotAdjuster;
         }
 
-        // watermark
-
-        p.selectAll('g.chart-watermark')
-            .data([0])
-            .enter()
-            .append('g')
-            .attr('class', 'chart-watermark')
-            .html(watermarkMarkup)
-            .attr('role', 'presentation')
-            .attr(
-                'transform',
-                `translate(${graphicWidth -
-                    watermarkWidth -
-                    watermarkOffsetX},${graphicHeight -
-                    watermarkHeight -
-                    watermarkOffsetY}) scale(1) `,
-            );
-
-        p.selectAll('g.chart-watermark')
-            .html(watermarkMarkup)
-            .transition()
-            .attr(
-                'transform',
-                `translate(${graphicWidth -
-                    watermarkWidth -
-                    watermarkOffsetX},${graphicHeight -
-                    watermarkHeight -
-                    watermarkOffsetY}) scale(1) `,
-            );
-
-        // plot area (where you put the chart itself)
-        if (a11yPlotPresentation) {
-            p.selectAll('g.chart-plot')
-                .data([0])
-                .enter()
-                .append('g')
-                .attr('class', 'chart-plot')
-                .attr('role', 'presentation') // include this extra role if a11yPlotPresentation
-                .attr('transform', `translate(${margin.left},${margin.top})`);
-        } else {
-            p.selectAll('g.chart-plot')
-                .data([0])
-                .enter()
-                .append('g')
-                .attr('class', 'chart-plot')
-                .attr('transform', `translate(${margin.left},${margin.top})`);
+        // watermark; @TODO remove existence check (#62)
+        if (
+            watermarkMarkup &&
+            !p.selectAll('g.chart-watermark').size() &&
+            p.node().ownerDocument.doctype.name !== 'svg'
+        ) {
+            p.append('g')
+                .attr('class', 'chart-watermark')
+                .html(watermarkMarkup) // This needs to be .text() to work in pure SVG context
+                .attr('role', 'presentation')
+                .attr(
+                    'transform',
+                    `translate(${graphicWidth -
+                        watermarkWidth -
+                        watermarkOffsetX},${graphicHeight -
+                        watermarkHeight -
+                        watermarkOffsetY}) scale(1) `,
+                );
         }
 
-        plot = p.selectAll('g.chart-plot');
+        // plot area (where you put the chart itself)
+        /* istanbul ignore next I don't know how to test this. */
+        if (!p.selectAll('g.chart-plot').size()) {
+            plot = p.append('g').attr('class', 'chart-plot');
+        } else {
+            plot = p.select('g.chart-plot');
+        }
 
-        // I have no idea why this insanity even works. @TODO remove with extreme prejudice. -ae
-        plot.transition(transition)
-            .duration(0)
-            .attr('transform', `translate(${margin.left},${margin.top})`);
+        plot.attr('transform', `translate(${margin.left},${margin.top})`);
 
-        if (showDownloadPngButtons) {
+        /* istanbul ignore next This is already well tested. */
+        if (a11yPlotPresentation) {
+            plot.attr('role', 'presentation'); // include this extra role if a11yPlotPresentation
+        }
+
+        /* istanbul ignore next */
+        if (
+            showDownloadPngButtons &&
+            p.node().ownerDocument.doctype.name !== 'svg'
+        ) {
             let parent;
             if (p.node().nodeName.toLowerCase() === 'svg') {
                 parent = d3.select(p.node().parentNode);
@@ -407,11 +342,12 @@ function chartFrame(configObject) {
                 parent = d3.select(p.node());
             }
 
-            // Prevent this from being rendered twice
-            if (parent.selectAll('.button-holder').size() === 0) {
+            // Prevent this from being rendered twice; @TODO remove check (#62)
+            if (!parent.selectAll('.button-holder').size()) {
                 const holder = parent
                     .append('div')
                     .attr('class', 'button-holder');
+
                 holder
                     .append('button')
                     .attr('class', 'save-png-button save-png-button__1x')
@@ -466,10 +402,16 @@ function chartFrame(configObject) {
         return frame;
     };
 
-    frame.backgroundColour = (x) => {
-        if (x === undefined) return backgroundColour;
-        backgroundColour = x;
+    frame.backgroundColor = (x) => {
+        if (x === undefined) return backgroundColor;
+        backgroundColor = x;
         return frame;
+    };
+
+    frame.backgroundColour = (...args) => {
+        console.error('gChartframe.backgroundColour() is deprecated and will be removed next version.');
+        console.error('Please use gChartframe.backgroundColor() instead.');
+        return frame.backgroundColor(...args);
     };
 
     frame.blackbar = (x) => {
@@ -720,11 +662,11 @@ function chartFrame(configObject) {
                     a11yPlotPresentation,
                     a11yTitle,
                     autoPosition,
-                    // axisAlign, // @FIX This is undef?
                     containerClass,
                     copyright,
                     copyrightStyle,
                     blackbar,
+                    backgroundColor,
                     goalposts,
                     graphicHeight,
                     graphicWidth,
@@ -759,6 +701,7 @@ function chartFrame(configObject) {
 
         Object.keys(x).forEach((setterName) => {
             const value = x[setterName];
+            /* istanbul ignore next I don't know why this won't cover. */
             if (isFunction(frame[setterName])) {
                 frame[setterName](value);
             }
@@ -809,6 +752,7 @@ const classes = [
     '.highlights rects',
 ];
 
+/* istanbul ignore next */
 function savePNG(svg, scaleFactor) {
     svg.selectAll(classes.join(', ')).each(function inlineProps() {
         const element = this;
