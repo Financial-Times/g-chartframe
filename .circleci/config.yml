@@ -62,7 +62,7 @@ jobs:
           command: echo "//registry.npmjs.org/:_authToken=${NPM_AUTH_TOKEN}" > ${HOME}/.npmrc
       - run:
           name: Publish npm package
-          command: ./node_modules/.bin/npm-prepublish --verbose && npm publish --access public
+          command: ./node_modules/.bin/npm-prepublish --verbose && npm publish --access public --unsafe-perm
 
 workflows:
   version: 2
