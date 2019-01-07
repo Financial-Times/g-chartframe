@@ -7,7 +7,6 @@ function videoFrame(configObject) {
         .containerClass('ft-videographic')
         .width(1920)
         .height(1080)
-        .watermark('')
         .margin({ left: 207, right: 207, bottom: 210, top: 233 })
         .rem(48)
         .titleX(207)

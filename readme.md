@@ -101,7 +101,7 @@ This get the frame to try and automatically comput its top margin. _Not really r
 
 <a id="frame-backgroundColor" href="#frame-backgroundColor">#</a>frame.**backgroundColor(_string_)**
 
-Set the background colour of the frame. For the single argument you can use the same css color naming schemes that you use in HTML, whether that's color names (that is red), rgb values (that is rgb(255,0,0)), hex values, rgba values, etc. If no argument is specified returns the current value.
+Set the background color of the frame. For the single argument you can use the same css color naming schemes that you use in HTML, whether that's color names (that is red), rgb values (that is rgb(255,0,0)), hex values, rgba values, etc. If no argument is specified returns the current value.
 
 ```js
 myFrame.backgroundColor('#00FF00');
