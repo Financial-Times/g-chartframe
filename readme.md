@@ -4,7 +4,7 @@ For making the boring but necessary stuff on D3 charts in as painless a fashion 
 
 ## Installation
 
-If you use NPM, `npm install g-chartframe`. Otherwise, download the [latest release](https://github.com/ft-interactive/g-chartframe/releases/latest). Or you could include it stright in your page via unpkg (or equiv) https://unpkg.com/g-chartframe@0.3.0/build/g-chartframe.js 
+If you use NPM, `npm install g-chartframe`. Otherwise, download the [latest release](https://github.com/ft-interactive/g-chartframe/releases/latest). Or you could include it stright in your page via unpkg (or equiv) https://unpkg.com/g-chartframe@0.3.0/build/g-chartframe.js
 
 ## Use
 
@@ -38,7 +38,7 @@ d3.select('.custom-chart-container')
 	.call(myFrame);
 ```
 
-You may also set frame properties en-masse via the `attrs` function. Though note: if you're relying on setting units you should do so before calling `attrs` as you can't guarantee in which order the setters will be called. 
+You may also set frame properties en-masse via the `attrs` function. Though note: if you're relying on setting units you should do so before calling `attrs` as you can't guarantee in which order the setters will be called.
 
 ```js
 myFrame.attrs({
@@ -62,7 +62,7 @@ const myFrame = gChartframe.frame();
 
 _configuration_ is an optional parameter which sets the initial properties of the frame via the setter functions as defined below.
 
-e.g. 
+e.g.
 ```js
 const config = {
   title:'The fastest cars in the world',
@@ -71,7 +71,7 @@ const config = {
 }
 
 const myFrame = gChartframe.frame(config);
-``` 
+```
 
 Most of the time you won't want to use this though but instead use one of the pre configured chartframe factories...
 ```js
@@ -230,7 +230,7 @@ Set the units in which the Height and Width are set. At the moment the only usef
 
 The user can supply arbitrary SVG markup as a string. THis will be used as the watermark for the graphic. If no argument is specified returns the current value.
 
-<a id="frame-watermarkLocation" href="#frame-watermarkLocation">#</a>frame.**watermarkLocation(_[href]_)** 
+<a id="frame-watermarkLocation" href="#frame-watermarkLocation">#</a>frame.**watermarkLocation(_[href]_)**
 
 The user can set a URL for a watermark SVG to be used.
 
@@ -245,4 +245,8 @@ If no argument is specified returns the current value.
 
 --
 
-Copyright (c) 2015, 2016, 2017 Financial Times
+# Licence
+
+This software is published by the Financial Times under the [MIT licence](https://opensource.org/licenses/MIT).
+
+Please note the MIT licence only covers the software, and does not cover any FT content or branding incorporated into the software or made available using the software. FT content is copyright © The Financial Times Limited, and FT and 'Financial Times' are trademarks of The Financial Times Limited, all rights reserved. For more information about republishing FT content, please contact our [republishing department](https://ft.com/republishing).
