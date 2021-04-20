@@ -54,7 +54,7 @@
   },
   "dependencies": {
     "d3-selection": "^1.1.0",
-    "save-svg-as-png": "^1.2.0"
+    "save-svg-as-png": "^1.4.17"
   },
   "babel": {
     "presets": [
