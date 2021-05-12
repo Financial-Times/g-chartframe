@@ -1,4 +1,4 @@
-# g-chartframe [![codecov](https://codecov.io/gh/financial-times/g-chartframe/branch/master/graph/badge.svg)](https://codecov.io/gh/financial-times/g-chartframe)
+# g-chartframe
 
 For making the boring but necessary stuff on D3 charts in as painless a fashion as possible.
 
@@ -25,28 +25,30 @@ webframe.plot()
 ```
 
 Configure your own frame...
-```js
-const myFrame = gChartframe.frame()
-	.width(350)
-	.height(350)
-	.margin({top:20,left:20,bottom:20,right:20,})
-	.title('My totally custom title')
-	.subtitle('hello hello hello')
 
-d3.select('.custom-chart-container')
-	.append('svg')
-	.call(myFrame);
+```js
+const myFrame = gChartframe
+  .frame()
+  .width(350)
+  .height(350)
+  .margin({ top: 20, left: 20, bottom: 20, right: 20 })
+  .title("My totally custom title")
+  .subtitle("hello hello hello");
+
+d3.select(".custom-chart-container")
+  .append("svg")
+  .call(myFrame);
 ```
 
 You may also set frame properties en-masse via the `attrs` function. Though note: if you're relying on setting units you should do so before calling `attrs` as you can't guarantee in which order the setters will be called.
 
 ```js
 myFrame.attrs({
-  title:'A different title',
-  subtitle:'A different subtitle',
-  width:600,
+  title: "A different title",
+  subtitle: "A different subtitle",
+  width: 600,
   ...etc
-})
+});
 ```
 
 ## API Reference
@@ -56,6 +58,7 @@ myFrame.attrs({
 <a id="frame-factory" href="#frame-factory">#</a>**frame(_[configuration]_)**
 
 Make a new chart frame drawer:
+
 ```js
 const myFrame = gChartframe.frame();
 ```
@@ -63,32 +66,41 @@ const myFrame = gChartframe.frame();
 _configuration_ is an optional parameter which sets the initial properties of the frame via the setter functions as defined below.
 
 e.g.
+
 ```js
 const config = {
-  title:'The fastest cars in the world',
-  subtitle:'acceleration m/s<sup>2</sup>',
-  source:'Guiness book of records',
-}
+  title: "The fastest cars in the world",
+  subtitle: "acceleration m/s<sup>2</sup>",
+  source: "Guiness book of records"
+};
 
 const myFrame = gChartframe.frame(config);
 ```
 
 Most of the time you won't want to use this though but instead use one of the pre configured chartframe factories...
+
 ```js
 const myFrame = gChartframe.webFrame(config);
 ```
+
 or...
+
 ```js
 const myFrame = gChartframe.printFrame(config);
 ```
+
 or...
+
 ```js
 const myFrame = gChartframe.socialFrame(config);
 ```
+
 or...
+
 ```js
 const myFrame = gChartframe.videoFrame(config);
 ```
+
 these provide appropriate positioning, size and fonts for the specified use within the FT (web, print, social media or video)
 
 <a id="frame-attrs" href="#frame-attrs">#</a>frame.**attrs(_object_)**
@@ -104,7 +116,7 @@ This get the frame to try and automatically comput its top margin. _Not really r
 Set the background color of the frame. For the single argument you can use the same css color naming schemes that you use in HTML, whether that's color names (that is red), rgb values (that is rgb(255,0,0)), hex values, rgba values, etc. If no argument is specified returns the current value.
 
 ```js
-myFrame.backgroundColor('#00FF00');
+myFrame.backgroundColor("#00FF00");
 ```
 
 <a id="frame-containerClass" href="#frame-containerClass">#</a>frame.**containerClass(_string_)**
@@ -112,15 +124,17 @@ myFrame.backgroundColor('#00FF00');
 Set the class assigned to the containing SVG element. This allows you to select the frame later and to define CSS styles pertaining only to its contents. If no argument is specified returns the current value.
 
 ```js
-myFrame.containerClass('special-frame');
+myFrame.containerClass("special-frame");
 ```
+
 would allow you to target the frames contents in your CSS like this...
+
 ```css
-.special-frame line{
-	stroke-width:2;
-	stroke:#00FF00;
-	stroke-opacity:0.5;
-	fill:none;
+.special-frame line {
+  stroke-width: 2;
+  stroke: #00ff00;
+  stroke-opacity: 0.5;
+  fill: none;
 }
 ```
 
@@ -131,11 +145,9 @@ If no argument is specified returns the current value.
 
 ```js
 const dimension = myFrame.dimension(); // e.g. { width: 200 ,height: 550,}
-const horizontalScale = d3.linearScale()
-	.range([0, dimension.width]);
+const horizontalScale = d3.linearScale().range([0, dimension.width]);
 
-const verticalScale = d.lineaScale()
-	.range([dimension.height, 0]);
+const verticalScale = d.lineaScale().range([dimension.height, 0]);
 ```
 
 <a id="frame-height" href="#frame-height">#</a>frame.**height(_number_)**
@@ -168,8 +180,7 @@ plot.selectAll('rect')
 A string describes the source of the graphic's data, line breaks can be added with the `|` character. The property can also be used to add notes, credits etc. If no argument is specified returns the current value.
 
 ```js
-myFrame.source('Source:FT Research|Graphic: Pam Ampersand');
-
+myFrame.source("Source:FT Research|Graphic: Pam Ampersand");
 ```
 
 <a id="frame-sourceLineHeight" href="#frame-sourceLineHeight">#</a>frame.**sourceLineHeight(_[number]_)**
@@ -236,10 +247,8 @@ The user can set a URL for a watermark SVG to be used.
 
 <a id="frame-width" href="#frame-width">#</a>frame.**width(_[number]_)**
 
-
 Set the height for the frames container (typically be an SVG).
 If no argument is specified returns the current value.
-
 
 👉 _Note_: If the chart frame is being called on an SVG element the width, height and title functions will re-write those properties of the parent SVG. If you don't want this to happen you can avoid it by calling the function on a group element instead.
 
