@@ -2,14 +2,13 @@ version: 2
 references:
   default_container_config: &default_container_config
     docker:
-      - image: node:8
+      - image: node:12
 
   attach_workspace: &attach_workspace
     attach_workspace:
       at: ~/project
 
-  npm_cache_key: &npm_cache_key
-    v1-dependency-npm-{{ checksum "package-lock.json" }}
+  npm_cache_key: &npm_cache_key v1-dependency-npm-{{ checksum "package-lock.json" }}
 
   restore_node_modules: &restore_node_modules
     restore_cache:
