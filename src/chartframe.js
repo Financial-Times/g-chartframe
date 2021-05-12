@@ -1,14 +1,14 @@
-import { saveSvgAsPng } from 'save-svg-as-png';
-import * as d3 from 'd3-selection';
+import { saveSvgAsPng } from "save-svg-as-png";
+import * as d3 from "d3-selection";
 
 function chartFrame(configObject) {
     let autoPosition = false;
-    let a11yDesc = 'A graphic by the Financial Times';
+    let a11yDesc = "A graphic by the Financial Times";
     let a11yPlotPresentation = true;
-    let a11yTitle = 'A chart';
+    let a11yTitle = "A chart";
     let backgroundColor;
-    let containerClass = 'g-chartframe';
-    let copyright = '© FT';
+    let containerClass = "g-chartframe";
+    let copyright = "© FT";
     let copyrightStyle = false;
     let goalposts = false; // goalpost is the bit at the top and bottom of pritn charts
     let blackbar = false; // blackbar the short black bar above web graphics
@@ -20,29 +20,29 @@ function chartFrame(configObject) {
     let plot;
     let plotAdjuster = 0;
     let rem = 18;
-    let subtitle = 'some supporting information, units perhaps';
+    let subtitle = "some supporting information, units perhaps";
     let subtitleLineHeight = 20;
     let subtitleStyle = {};
-    let source = 'Source: research';
+    let source = "Source: research";
     let sourceLineHeight = 16;
     let sourcePlotYOffset = 46;
     let sourceStyle = {};
-    let title = 'Title: A description of the charts purpose';
+    let title = "Title: A description of the charts purpose";
     let titleLineHeight = 32;
     let titleStyle = {};
-    let watermarkLocation = 'icons.svg#ft-logo';
-    let watermarkMarkup = '';
+    let watermarkLocation = "icons.svg#ft-logo";
+    let watermarkMarkup = "";
     let watermarkOffsetX = 40;
     let watermarkOffsetY = 0;
     let watermarkWidth = 124;
     let watermarkHeight = 10;
-    let units = 'px';
+    let units = "px";
 
     const margin = {
         top: 100,
         left: 1,
         bottom: 20,
-        right: 20,
+        right: 20
     };
     const subtitlePosition = { x: 1, y: 67 };
     const sourcePosition = { x: 1 };
@@ -53,57 +53,57 @@ function chartFrame(configObject) {
         },
         px(x) {
             return x;
-        },
+        }
     };
     const custom = {};
 
     /* istanbul ignore next This is already well tested. */
     function attributeStyle(parent, style) {
-        Object.keys(style).forEach((attribute) => {
+        Object.keys(style).forEach(attribute => {
             parent.attr(attribute, style[attribute]);
         });
     }
 
     function frame(p) {
         // overall graphic properties
-        p.attr('class', containerClass).attr(
-            'font-family',
-            'MetricWeb,sans-serif',
+        p.attr("class", containerClass).attr(
+            "font-family",
+            "MetricWeb,sans-serif"
         );
 
-        p.attr('role', 'img');
+        p.attr("role", "img");
 
         /* istanbul ignore next This is already well tested. */
-        if (p.node().nodeName.toLowerCase() === 'svg') {
-            p.attr('width', graphicWidth)
-                .attr('height', graphicHeight)
+        if (p.node().nodeName.toLowerCase() === "svg") {
+            p.attr("width", graphicWidth)
+                .attr("height", graphicHeight)
                 .attr(
-                    'viewBox',
-                    ['0 0', graphicWidth, graphicHeight].join(' '),
+                    "viewBox",
+                    ["0 0", graphicWidth, graphicHeight].join(" ")
                 );
 
             /* istanbul ignore next This is already well tested. */
             if (a11yTitle !== false || title !== false) {
-                p.append('title')
+                p.append("title")
                     .text(a11yTitle || title)
-                    .attr('id', `${containerClass}__chart-a11y-title`);
+                    .attr("id", `${containerClass}__chart-a11y-title`);
                 p.attr(
-                    'aria-labelledby',
-                    `${containerClass}__chart-a11y-title`,
+                    "aria-labelledby",
+                    `${containerClass}__chart-a11y-title`
                 );
             }
 
             if (a11yDesc !== false) {
-                p.append('desc')
+                p.append("desc")
                     .text(a11yDesc)
-                    .attr('id', `${containerClass}__chart-a11y-desc`);
+                    .attr("id", `${containerClass}__chart-a11y-desc`);
                 p.attr(
-                    'aria-labelledby',
+                    "aria-labelledby",
                     `${
-                        p.attr('aria-labelledby')
-                            ? `${p.attr('aria-labelledby')} `
-                            : ''
-                    }${containerClass}__chart-a11y-desc`,
+                        p.attr("aria-labelledby")
+                            ? `${p.attr("aria-labelledby")} `
+                            : ""
+                    }${containerClass}__chart-a11y-desc`
                 );
             }
         }
@@ -111,97 +111,97 @@ function chartFrame(configObject) {
         // background
         if (
             backgroundColor !== undefined &&
-            !p.select('#chart-background').size()
+            !p.select("#chart-background").size()
         ) {
             // @TODO remove second guard; see #62.
-            p.append('rect')
-                .attr('role', 'presentation')
-                .attr('id', 'chart-background')
-                .attr('class', 'chart-background')
-                .attr('x', 0)
-                .attr('y', 0)
-                .attr('width', graphicWidth)
-                .attr('height', graphicHeight)
-                .attr('fill', backgroundColor);
+            p.append("rect")
+                .attr("role", "presentation")
+                .attr("id", "chart-background")
+                .attr("class", "chart-background")
+                .attr("x", 0)
+                .attr("y", 0)
+                .attr("width", graphicWidth)
+                .attr("height", graphicHeight)
+                .attr("fill", backgroundColor);
         }
 
         // 'blackbar' (the short black bar above web graphics) @TODO remove second guard; see #62.
-        if (blackbar && !p.selectAll('rect.black-bar').size()) {
-            p.append('rect')
-                .attr('class', 'black-bar')
-                .attr('width', 60)
-                .attr('height', 4)
-                .style('fill', blackbar);
+        if (blackbar && !p.selectAll("rect.black-bar").size()) {
+            p.append("rect")
+                .attr("class", "black-bar")
+                .attr("width", 60)
+                .attr("height", 4)
+                .style("fill", blackbar);
         }
 
-        if (whitebar && !p.selectAll('rect.white-bar').size()) {
-            p.append('rect')
-                .attr('class', 'white-bar')
-                .attr('width', 60)
-                .attr('height', 4)
-                .style('fill', whitebar)
-                .attr('transform', `translate(${margin.left},${margin.left})`);
+        if (whitebar && !p.selectAll("rect.white-bar").size()) {
+            p.append("rect")
+                .attr("class", "white-bar")
+                .attr("width", 60)
+                .attr("height", 4)
+                .style("fill", whitebar)
+                .attr("transform", `translate(${margin.left},${margin.left})`);
         }
 
         // 'goalposts' (the bit at the top and the bottom of print charts) @TODO remove second guard; see #62.
-        if (goalposts && !p.selectAll('path.chart-goalposts').size()) {
+        if (goalposts && !p.selectAll("path.chart-goalposts").size()) {
             const goalpostPaths = [
                 `M 0, ${graphicHeight} L ${graphicWidth}, ${graphicHeight}`,
-                `M 0, 15 L 0, 0 L ${graphicWidth}, 0 L ${graphicWidth}, 15`,
+                `M 0, 15 L 0, 0 L ${graphicWidth}, 0 L ${graphicWidth}, 15`
             ];
 
-            p.append('path')
-                .attr('class', 'chart-goalposts')
-                .attr('d', goalpostPaths)
-                .attr('stroke-width', 0.3)
-                .attr('fill', 'none')
-                .attr('stroke', goalposts);
+            p.append("path")
+                .attr("class", "chart-goalposts")
+                .attr("d", goalpostPaths)
+                .attr("stroke-width", 0.3)
+                .attr("fill", "none")
+                .attr("stroke", goalposts);
         }
 
         /* istanbul ignore next This is already well tested. */
-        const titleLineCount = title ? title.split('|').length : 0;
+        const titleLineCount = title ? title.split("|").length : 0;
         /* istanbul ignore next This is already well tested. */
-        const subtitleLineCount = subtitle ? subtitle.split('|').length : 0;
+        const subtitleLineCount = subtitle ? subtitle.split("|").length : 0;
         /* istanbul ignore next This is already well tested. */
-        const sourceLineCount = source ? source.split('|').length : 0;
+        const sourceLineCount = source ? source.split("|").length : 0;
 
         // title; @TODO remove existence guard see #62
-        if (title && !p.select('text.chart-title').size()) {
-            p.append('text')
-                .attr('class', 'chart-title')
-                .attr('id', `${containerClass}title`)
-                .call((titleText) => {
+        if (title && !p.select("text.chart-title").size()) {
+            p.append("text")
+                .attr("class", "chart-title")
+                .attr("id", `${containerClass}title`)
+                .call(titleText => {
                     titleText
-                        .selectAll('tspan')
-                        .data(title.split('|'))
+                        .selectAll("tspan")
+                        .data(title.split("|"))
                         .enter()
-                        .append('tspan')
+                        .append("tspan")
                         .text(d => d)
                         .attr(
-                            'y',
-                            (d, i) => titlePosition.y + i * titleLineHeight,
+                            "y",
+                            (d, i) => titlePosition.y + i * titleLineHeight
                         )
-                        .attr('x', titlePosition.x)
+                        .attr("x", titlePosition.x)
                         .call(attributeStyle, titleStyle);
                 });
         }
 
         // @TODO remove existence guard see #62
         /* istanbul ignore next This is already well tested. */
-        if (subtitle && !p.select('text.chart-subtitle').size()) {
+        if (subtitle && !p.select("text.chart-subtitle").size()) {
             // subtitle
-            p.append('text')
-                .attr('id', `${containerClass}subtitle`)
-                .attr('class', 'chart-subtitle')
-                .call((subtitleText) => {
+            p.append("text")
+                .attr("id", `${containerClass}subtitle`)
+                .attr("class", "chart-subtitle")
+                .call(subtitleText => {
                     subtitleText
-                        .selectAll('tspan')
-                        .data(subtitle.split('|'))
+                        .selectAll("tspan")
+                        .data(subtitle.split("|"))
                         .enter()
-                        .append('tspan')
+                        .append("tspan")
                         .text(d => d)
-                        .attr('id', `${containerClass}subtitle`)
-                        .attr('y', (d, i) => {
+                        .attr("id", `${containerClass}subtitle`)
+                        .attr("y", (d, i) => {
                             if (titleLineCount > 1) {
                                 return (
                                     titlePosition.y +
@@ -212,26 +212,26 @@ function chartFrame(configObject) {
                             return subtitlePosition.y + i * subtitleLineHeight;
                         })
 
-                        .attr('x', subtitlePosition.x)
+                        .attr("x", subtitlePosition.x)
                         .call(attributeStyle, subtitleStyle);
                 });
         }
 
         // source; @TODO remove second existence check see #62
         /* istanbul ignore next This is already well tested. */
-        if (source && !p.selectAll('text.chart-source').size()) {
-            p.append('text')
-                .attr('class', 'chart-source')
-                .attr('id', `${containerClass}source`)
-                .call((sourceText) => {
+        if (source && !p.selectAll("text.chart-source").size()) {
+            p.append("text")
+                .attr("class", "chart-source")
+                .attr("id", `${containerClass}source`)
+                .call(sourceText => {
                     sourceText
-                        .selectAll('tspan')
-                        .data(source.split('|'))
+                        .selectAll("tspan")
+                        .data(source.split("|"))
                         .enter()
-                        .append('tspan')
+                        .append("tspan")
                         .text(d => d)
-                        .attr('id', `${containerClass}source`)
-                        .attr('y', (d, i) => {
+                        .attr("id", `${containerClass}source`)
+                        .attr("y", (d, i) => {
                             /* istanbul ignore next I don't know how to test this. */
                             if (sourcePosition.y) {
                                 return sourcePosition.y + i * sourceLineHeight;
@@ -243,19 +243,19 @@ function chartFrame(configObject) {
                                 i * sourceLineHeight
                             );
                         })
-                        .attr('x', sourcePosition.x)
+                        .attr("x", sourcePosition.x)
                         .call(attributeStyle, sourceStyle);
                 });
         }
 
         // copyright
-        if (copyrightStyle && !p.selectAll('text.chart-copyright').size()) {
-            p.append('text')
-                .attr('class', 'chart-copyright')
-                .append('tspan')
+        if (copyrightStyle && !p.selectAll("text.chart-copyright").size()) {
+            p.append("text")
+                .attr("class", "chart-copyright")
+                .append("tspan")
                 .text(copyright)
-                .attr('x', sourcePosition.x)
-                .attr('y', () => {
+                .attr("x", sourcePosition.x)
+                .attr("y", () => {
                     /* istanbul ignore next I don't know how to test this. */
                     if (sourceLineCount > 1) {
                         return (
@@ -277,9 +277,9 @@ function chartFrame(configObject) {
         // TODO figure out a way to improve this autoPosition stuff, needs ot be configurable so we don't have to reference specific classes
         if (
             autoPosition &&
-            (containerClass === 'ft-printgraphic' ||
-                containerClass === 'ft-socialgraphic' ||
-                containerClass === 'ft-videographic')
+            (containerClass === "ft-printgraphic" ||
+                containerClass === "ft-socialgraphic" ||
+                containerClass === "ft-videographic")
         ) {
             margin.top =
                 titlePosition.y +
@@ -298,71 +298,71 @@ function chartFrame(configObject) {
         // watermark; @TODO remove existence check (#62)
         if (
             watermarkMarkup &&
-            !p.selectAll('g.chart-watermark').size() &&
-            p.node().ownerDocument.doctype.name !== 'svg'
+            !p.selectAll("g.chart-watermark").size() &&
+            p.node().ownerDocument.doctype.name !== "svg"
         ) {
-            p.append('g')
-                .attr('class', 'chart-watermark')
+            p.append("g")
+                .attr("class", "chart-watermark")
                 .html(watermarkMarkup) // This needs to be .text() to work in pure SVG context
-                .attr('role', 'presentation')
+                .attr("role", "presentation")
                 .attr(
-                    'transform',
+                    "transform",
                     `translate(${graphicWidth -
                         watermarkWidth -
                         watermarkOffsetX},${graphicHeight -
                         watermarkHeight -
-                        watermarkOffsetY}) scale(1) `,
+                        watermarkOffsetY}) scale(1) `
                 );
         }
 
         // plot area (where you put the chart itself)
         /* istanbul ignore next I don't know how to test this. */
-        if (!p.selectAll('g.chart-plot').size()) {
-            plot = p.append('g').attr('class', 'chart-plot');
+        if (!p.selectAll("g.chart-plot").size()) {
+            plot = p.append("g").attr("class", "chart-plot");
         } else {
-            plot = p.select('g.chart-plot');
+            plot = p.select("g.chart-plot");
         }
 
-        plot.attr('transform', `translate(${margin.left},${margin.top})`);
+        plot.attr("transform", `translate(${margin.left},${margin.top})`);
 
         /* istanbul ignore next This is already well tested. */
         if (a11yPlotPresentation) {
-            plot.attr('role', 'presentation'); // include this extra role if a11yPlotPresentation
+            plot.attr("role", "presentation"); // include this extra role if a11yPlotPresentation
         }
 
         /* istanbul ignore next */
         if (
             showDownloadPngButtons &&
-            p.node().ownerDocument.doctype.name !== 'svg'
+            p.node().ownerDocument.doctype.name !== "svg"
         ) {
             let parent;
-            if (p.node().nodeName.toLowerCase() === 'svg') {
+            if (p.node().nodeName.toLowerCase() === "svg") {
                 parent = d3.select(p.node().parentNode);
             } else {
                 parent = d3.select(p.node());
             }
 
             // Prevent this from being rendered twice; @TODO remove check (#62)
-            if (!parent.selectAll('.button-holder').size()) {
+            if (!parent.selectAll(".button-holder").size()) {
                 const holder = parent
-                    .append('div')
-                    .attr('class', 'button-holder');
+                    .append("div")
+                    .attr("class", "button-holder");
 
                 holder
-                    .append('button')
-                    .attr('class', 'save-png-button save-png-button__1x')
-                    .text('Save as .png')
-                    .style('float', 'left')
-                    .style('opacity', 0.6)
-                    .on('click', () => savePNG(p, 1));
+                    .append("button")
+                    .attr("class", "save-png-button save-png-button__1x")
+                    .text("Save as .png")
+                    .style("float", "left")
+                    .style("opacity", 0.6)
+                    .on("click", () => savePNG(p, 1));
 
                 holder
-                    .append('button')
-                    .attr('class', 'save-png-button save-png-button__2x')
-                    .style('float', 'left')
-                    .style('opacity', 0.6)
-                    .text('Save as double size .png')
-                    .on('click', () => savePNG(p, 2));
+                    .append("button")
+                    .attr("class", "save-png-button save-png-button__2x")
+                    .style("float", "left")
+                    .style("opacity", 0.6)
+                    .text("Save as double size .png")
+                    .on("click", () => savePNG(p, 2));
             }
         }
     }
@@ -378,61 +378,63 @@ function chartFrame(configObject) {
         return frame;
     };
 
-    frame.a11yDesc = (x) => {
+    frame.a11yDesc = x => {
         if (x === undefined) return a11yDesc;
         a11yDesc = x;
         return frame;
     };
 
-    frame.a11yPlotPresentation = (x) => {
+    frame.a11yPlotPresentation = x => {
         if (x === undefined) return a11yPlotPresentation;
         a11yPlotPresentation = x;
         return frame;
     };
 
-    frame.a11yTitle = (x) => {
+    frame.a11yTitle = x => {
         if (x === undefined) return a11yTitle;
         a11yTitle = x;
         return frame;
     };
 
-    frame.autoPosition = (x) => {
+    frame.autoPosition = x => {
         if (x === undefined) return autoPosition;
         autoPosition = x;
         return frame;
     };
 
-    frame.backgroundColor = (x) => {
+    frame.backgroundColor = x => {
         if (x === undefined) return backgroundColor;
         backgroundColor = x;
         return frame;
     };
 
     frame.backgroundColour = (...args) => {
-        console.error('gChartframe.backgroundColour() is deprecated and will be removed next version.');
-        console.error('Please use gChartframe.backgroundColor() instead.');
+        console.error(
+            "gChartframe.backgroundColour() is deprecated and will be removed next version."
+        );
+        console.error("Please use gChartframe.backgroundColor() instead.");
         return frame.backgroundColor(...args);
     };
 
-    frame.blackbar = (x) => {
+    frame.blackbar = x => {
         if (x === undefined) return blackbar;
         blackbar = x;
         return frame;
     };
 
-    frame.containerClass = (x) => {
+    frame.containerClass = x => {
         if (x === undefined) return containerClass;
         containerClass = x;
         return frame;
     };
 
-    frame.copyright = (x) => {
+    frame.copyright = x => {
         if (x === undefined) return copyright;
         copyright = x;
         return frame;
     };
 
-    frame.copyrightStyle = (x) => {
+    frame.copyrightStyle = x => {
         if (x === undefined) return copyrightStyle;
         copyrightStyle = x;
         return frame;
@@ -440,12 +442,12 @@ function chartFrame(configObject) {
 
     frame.dimension = () => ({
         width: graphicWidth - (margin.left + margin.right),
-        height: graphicHeight - (margin.top + margin.bottom),
+        height: graphicHeight - (margin.top + margin.bottom)
     });
 
     frame.extend = (key, value) => {
         custom[key] = value;
-        frame[key] = (d) => {
+        frame[key] = d => {
             if (d === undefined) return custom[key];
             custom[key] = d;
             return frame;
@@ -454,27 +456,27 @@ function chartFrame(configObject) {
         return frame;
     };
 
-    frame.fullYear = (x) => {
+    frame.fullYear = x => {
         if (x === undefined) return fullYear;
         fullYear = x;
         return frame;
     };
 
-    frame.goalposts = (x) => {
+    frame.goalposts = x => {
         if (x === undefined) return goalposts;
         goalposts = x;
         return frame;
     };
 
-    frame.height = (x) => {
+    frame.height = x => {
         if (x === undefined) return graphicHeight;
         graphicHeight = convertFrom[units](x);
         return frame;
     };
 
-    frame.margin = (x) => {
+    frame.margin = x => {
         if (x === undefined) return margin;
-        Object.keys(x).forEach((k) => {
+        Object.keys(x).forEach(k => {
             margin[k] = x[k];
         });
         return frame;
@@ -482,178 +484,178 @@ function chartFrame(configObject) {
 
     frame.plot = () => plot;
 
-    frame.plotAdjuster = (x) => {
+    frame.plotAdjuster = x => {
         if (x === undefined) return plotAdjuster;
         plotAdjuster = x;
         return frame;
     };
 
-    frame.rem = (x) => {
+    frame.rem = x => {
         if (x === undefined) return rem;
         rem = x;
         return frame;
     };
 
-    frame.showDownloadPngButtons = (d) => {
-        if (typeof d === 'undefined') return showDownloadPngButtons;
+    frame.showDownloadPngButtons = d => {
+        if (typeof d === "undefined") return showDownloadPngButtons;
         showDownloadPngButtons = d;
 
         return frame;
     };
 
-    frame.source = (x) => {
+    frame.source = x => {
         if (x === undefined) return source;
         source = x;
         return frame;
     };
 
-    frame.sourceLineHeight = (x) => {
+    frame.sourceLineHeight = x => {
         if (x === undefined) return sourceLineHeight;
         sourceLineHeight = x;
         return frame;
     };
 
-    frame.sourcePlotYOffset = (x) => {
+    frame.sourcePlotYOffset = x => {
         if (x === undefined) return sourcePlotYOffset;
         sourcePlotYOffset = x;
         return frame;
     };
 
-    frame.sourceStyle = (x) => {
+    frame.sourceStyle = x => {
         if (x === undefined) return sourceStyle;
         sourceStyle = x;
         return frame;
     };
 
-    frame.sourceX = (x) => {
+    frame.sourceX = x => {
         if (x === undefined) return sourcePosition.x;
         sourcePosition.x = x;
         return frame;
     };
 
-    frame.sourceY = (x) => {
+    frame.sourceY = x => {
         if (x === undefined) return sourcePosition.y;
         sourcePosition.y = x;
         return frame;
     };
 
-    frame.subtitle = (x) => {
+    frame.subtitle = x => {
         if (x === undefined) return subtitle;
         subtitle = x;
         return frame;
     };
 
-    frame.subtitleLineHeight = (x) => {
+    frame.subtitleLineHeight = x => {
         if (x === undefined) return subtitleLineHeight;
         subtitleLineHeight = x;
         return frame;
     };
 
-    frame.subtitleStyle = (x) => {
+    frame.subtitleStyle = x => {
         if (x === undefined) return subtitleStyle;
         subtitleStyle = x;
         return frame;
     };
 
-    frame.subtitleX = (x) => {
+    frame.subtitleX = x => {
         if (x === undefined) return subtitlePosition.x;
         subtitlePosition.x = x;
         return frame;
     };
 
-    frame.subtitleY = (x) => {
+    frame.subtitleY = x => {
         if (x === undefined) return subtitlePosition.y;
         subtitlePosition.y = x;
         return frame;
     };
 
-    frame.title = (x) => {
+    frame.title = x => {
         if (x === undefined) return title;
         title = x;
         return frame;
     };
 
-    frame.titleStyle = (x) => {
+    frame.titleStyle = x => {
         if (x === undefined) return titleStyle;
         titleStyle = x;
         return frame;
     };
 
-    frame.titleLineHeight = (x) => {
+    frame.titleLineHeight = x => {
         if (x === undefined) return titleLineHeight;
         titleLineHeight = x;
         return frame;
     };
 
-    frame.titleX = (x) => {
+    frame.titleX = x => {
         if (x === undefined) return titlePosition.x;
         titlePosition.x = x;
         return frame;
     };
 
-    frame.titleY = (x) => {
+    frame.titleY = x => {
         if (x === undefined) return titlePosition.y;
         titlePosition.y = x;
         return frame;
     };
 
-    frame.units = (x) => {
+    frame.units = x => {
         if (x === undefined) return units;
         units = x;
         return frame;
     };
 
-    frame.watermark = (x) => {
+    frame.watermark = x => {
         if (x === undefined) return watermarkMarkup;
-        watermarkLocation = '';
+        watermarkLocation = "";
         watermarkMarkup = x;
         return frame;
     };
 
-    frame.watermarkOffsetY = (x) => {
+    frame.watermarkOffsetY = x => {
         if (x === undefined) return watermarkOffsetY;
         watermarkOffsetY = x;
         return frame;
     };
 
-    frame.watermarkOffsetX = (x) => {
+    frame.watermarkOffsetX = x => {
         if (x === undefined) return watermarkOffsetX;
         watermarkOffsetX = x;
         return frame;
     };
 
-    frame.watermarkLocation = (x) => {
+    frame.watermarkLocation = x => {
         if (x === undefined) return watermarkLocation;
-        watermarkMarkup = '';
+        watermarkMarkup = "";
         watermarkLocation = x;
         return frame;
     };
 
-    frame.watermarkWidth = (x) => {
+    frame.watermarkWidth = x => {
         if (x === undefined) return watermarkWidth;
         watermarkWidth = x;
         return frame;
     };
 
-    frame.watermarkHeight = (x) => {
+    frame.watermarkHeight = x => {
         if (x === undefined) return watermarkHeight;
         watermarkHeight = x;
         return frame;
     };
 
-    frame.whitebar = (x) => {
+    frame.whitebar = x => {
         if (x === undefined) return whitebar;
         whitebar = x;
         return frame;
     };
 
-    frame.width = (x) => {
+    frame.width = x => {
         if (!x) return graphicWidth;
         graphicWidth = convertFrom[units](x);
         return frame;
     };
 
-    frame.attrs = (x) => {
+    frame.attrs = x => {
         if (x === undefined) {
             return Object.assign(
                 {},
@@ -693,13 +695,13 @@ function chartFrame(configObject) {
                     watermarkHeight,
                     watermarkWidth,
                     whitebar,
-                    units,
+                    units
                 },
-                custom,
+                custom
             );
         }
 
-        Object.keys(x).forEach((setterName) => {
+        Object.keys(x).forEach(setterName => {
             const value = x[setterName];
             /* istanbul ignore next I don't know why this won't cover. */
             if (isFunction(frame[setterName])) {
@@ -720,41 +722,41 @@ function isFunction(functionToCheck) {
     const getType = {};
     return (
         functionToCheck &&
-        getType.toString.call(functionToCheck) === '[object Function]'
+        getType.toString.call(functionToCheck) === "[object Function]"
     );
 }
 
 const classes = [
-    '.annotation',
-    '.lines',
-    '.highlights',
-    '.axis path',
-    '.axis text',
-    '.axis line',
-    '.axis',
-    '.baseline',
-    '.baseline line',
-    '.legend',
-    '.legend text',
-    '.chart-goalposts',
-    '.chart-title',
-    '.chart-subtitle',
-    '.chart-source',
-    '.chart-copyright',
-    '.chart-watermark',
-    '.annotations-holder',
-    '.lines highlighlines',
-    '.highlights',
-    '.annotation',
-    '.annotations-holder line',
-    '.annotations-holder text',
-    '.line path',
-    '.highlights rects',
+    ".annotation",
+    ".lines",
+    ".highlights",
+    ".axis path",
+    ".axis text",
+    ".axis line",
+    ".axis",
+    ".baseline",
+    ".baseline line",
+    ".legend",
+    ".legend text",
+    ".chart-goalposts",
+    ".chart-title",
+    ".chart-subtitle",
+    ".chart-source",
+    ".chart-copyright",
+    ".chart-watermark",
+    ".annotations-holder",
+    ".lines highlighlines",
+    ".highlights",
+    ".annotation",
+    ".annotations-holder line",
+    ".annotations-holder text",
+    ".line path",
+    ".highlights rects"
 ];
 
 /* istanbul ignore next */
 function savePNG(svg, scaleFactor) {
-    svg.selectAll(classes.join(', ')).each(function inlineProps() {
+    svg.selectAll(classes.join(", ")).each(function inlineProps() {
         const element = this;
         const computedStyle = getComputedStyle(element, null);
 
@@ -769,11 +771,11 @@ function savePNG(svg, scaleFactor) {
     saveSvgAsPng(
         svg.node(),
         `${svg
-            .select('title')
+            .select("title")
             .text()
-            .replace(/\s/g, '-')
+            .replace(/\s/g, "-")
             .toLowerCase()}.png`,
-        { scale: scaleFactor },
+        { scale: scaleFactor }
     );
 }
 
