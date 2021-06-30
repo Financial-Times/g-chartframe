@@ -10,8 +10,10 @@ function webFrameMDefault(configObject) {
         .width(700)
         .height(500)
         .watermark(watermarkPath.regular)
-        .watermarkSize(80)
-        .watermarkOffset(-28)
+        .watermarkHeight(12)
+        .watermarkWidth(149)
+        .watermarkOffsetX(0)
+        .watermarkOffsetY(0)
         .margin({ bottom: 115, right: 5, left: 20 })
         .rem(20)
         .plotAdjuster(8)
@@ -25,7 +27,7 @@ function webFrameMDefault(configObject) {
         .titleLineHeight(28)
         .subtitleLineHeight(28)
         .subtitleStyle({
-            'font-size': '18px'
+            'font-size': '18px',
             'font-family': 'MetricWeb,sans-serif',
             fill: '#4d4845',
         })
@@ -36,12 +38,6 @@ function webFrameMDefault(configObject) {
             'font-size': '14px',
             'font-family': 'MetricWeb,sans-serif',
             fill: '#4d4845',
-        })
-        .copyrightStyle({
-            'font-size': '14px',
-            'font-style': 'italic',
-            'font-family': 'MetricWeb,sans-serif',
-            fill: '#66605C',
         });
 
     if (configObject !== undefined) f.attrs(configObject);

@@ -10,6 +10,8 @@ function socialFrame(configObject) {
         .width(612)
         .height(612)
         .watermark(watermarkPath.light)
+        .watermarkHeight(10)
+        .watermarkWidth(124)
         .watermarkOffsetX(40)
         .watermarkOffsetY(40)
         .margin({ left: 40, right: 40, bottom: 138, top: 140 })
