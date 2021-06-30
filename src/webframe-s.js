@@ -14,7 +14,7 @@ function webFrameS(configObject) {
         .rem(14)
         .plotAdjuster(0)
         .titleStyle({
-            'font-size': 20,
+            'font-size': '20px',
             'font-family': 'MetricWeb,sans-serif',
             'font-weight': 400,
             fill: '#000',
@@ -23,23 +23,17 @@ function webFrameS(configObject) {
         .titleLineHeight(24)
         .subtitleLineHeight(20)
         .subtitleStyle({
-            'font-size': 18,
+            'font-size': '18px',
             'font-family': 'MetricWeb,sans-serif',
-            fill: '#66605C',
+            fill: '#4d4845',
         })
         .subtitleY(64)
         .sourceLineHeight(12)
         .sourcePlotYOffset(38)
         .sourceStyle({
-            'font-size': '12px',
+            'font-size': '14px',
             'font-family': 'MetricWeb,sans-serif',
-            fill: '#66605C',
-        })
-        .copyrightStyle({
-            'font-size': '12px',
-            'font-style': 'italic',
-            'font-family': 'MetricWeb,sans-serif',
-            fill: '#66605C',
+            fill: '#4d4845',
         });
 
     if (configObject !== undefined) f.attrs(configObject);

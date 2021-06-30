@@ -16,7 +16,7 @@ function webFrameMDefault(configObject) {
         .plotAdjuster(8)
         .titleY(32)
         .titleStyle({
-            'font-size': 28,
+            'font-size': '24px',
             'font-family': 'MetricWeb,sans-serif',
             'font-weight': 400,
             fill: '#000',
@@ -24,17 +24,17 @@ function webFrameMDefault(configObject) {
         .titleLineHeight(28)
         .subtitleLineHeight(28)
         .subtitleStyle({
-            'font-size': 24,
+            'font-size': '18px'
             'font-family': 'MetricWeb,sans-serif',
-            fill: '#66605C',
+            fill: '#4d4845',
         })
         .subtitleY(68)
         .sourceLineHeight(18)
         .sourcePlotYOffset(34)
         .sourceStyle({
-            'font-size': '16px',
+            'font-size': '14px',
             'font-family': 'MetricWeb,sans-serif',
-            fill: '#66605C',
+            fill: '#4d4845',
         })
         .copyrightStyle({
             'font-size': '14px',
