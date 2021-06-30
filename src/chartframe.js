@@ -249,30 +249,30 @@ function chartFrame(configObject) {
         }
 
         // copyright
-        // if (copyrightStyle && !p.selectAll("text.chart-copyright").size()) {
-        //     p.append("text")
-        //         .attr("class", "chart-copyright")
-        //         .append("tspan")
-        //         .text(copyright)
-        //         .attr("x", sourcePosition.x)
-        //         .attr("y", () => {
-        //             /* istanbul ignore next I don't know how to test this. */
-        //             if (sourceLineCount > 1) {
-        //                 return (
-        //                     graphicHeight -
-        //                     (margin.bottom - sourcePlotYOffset) +
-        //                     sourceLineHeight * 1.125 +
-        //                     sourceLineCount * sourceLineHeight * 1.2
-        //                 );
-        //             }
-        //             return (
-        //                 graphicHeight -
-        //                 (margin.bottom - sourcePlotYOffset) +
-        //                 sourceLineHeight * 2.5
-        //             );
-        //         })
-        //         .call(attributeStyle, copyrightStyle);
-        // }
+        if (copyrightStyle && !p.selectAll("text.chart-copyright").size()) {
+            p.append("text")
+                .attr("class", "chart-copyright")
+                .append("tspan")
+                .text(copyright)
+                .attr("x", sourcePosition.x)
+                .attr("y", () => {
+                    /* istanbul ignore next I don't know how to test this. */
+                    if (sourceLineCount > 1) {
+                        return (
+                            graphicHeight -
+                            (margin.bottom - sourcePlotYOffset) +
+                            sourceLineHeight * 1.125 +
+                            sourceLineCount * sourceLineHeight * 1.2
+                        );
+                    }
+                    return (
+                        graphicHeight -
+                        (margin.bottom - sourcePlotYOffset) +
+                        sourceLineHeight * 2.5
+                    );
+                })
+                .call(attributeStyle, copyrightStyle);
+        }
 
         // TODO figure out a way to improve this autoPosition stuff, needs ot be configurable so we don't have to reference specific classes
         if (

@@ -1,4 +1,5 @@
 import frame from './chartframe';
+import watermarkPath from './watermarks';
 
 function webFrameS(configObject) {
     const f = frame()
@@ -7,9 +8,9 @@ function webFrameS(configObject) {
         .backgroundColor('#FFF1E0')
         .blackbar('#000')
         .width(300)
-        // .watermark(watermarkPathDark)
-        // .watermarkSize(80)
-        // .watermarkOffset(-28)
+        .watermark(watermarkPath.regular)
+        .watermarkSize(12)
+        .watermarkOffset(-28)
         .margin({ bottom: 90, right: 5, left: 15 })
         .rem(14)
         .plotAdjuster(0)
@@ -29,7 +30,7 @@ function webFrameS(configObject) {
         })
         .subtitleY(64)
         .sourceLineHeight(12)
-        .sourcePlotYOffset(38)
+        .sourcePlotYOffset(36)
         .sourceStyle({
             'font-size': '14px',
             'font-family': 'MetricWeb,sans-serif',
