@@ -301,7 +301,6 @@ function chartFrame(configObject) {
             !p.selectAll("g.chart-watermark").size() &&
             p.node().ownerDocument.doctype.name !== "svg"
         ) {
-            console.log(containerClass)
             let newWaterOffsetY
             if (containerClass === 'ft-socialgraphic') {
                 newWaterOffsetY = graphicWidth - watermarkWidth - watermarkOffsetX
