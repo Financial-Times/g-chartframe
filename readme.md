@@ -53,7 +53,7 @@ myFrame.attrs({
 
 ## API Reference
 
-![reference image indicating whcih properties refer to which bits of the chart frame](https://raw.githubusercontent.com/ft-interactive/g-chartframe/master/markup-frame.png)
+![reference image indicating whcih properties refer to which bits of the chart frame](https://raw.githubusercontent.com/ft-interactive/g-chartframe/main/markup-frame.png)
 
 <a id="frame-factory" href="#frame-factory">#</a>**frame(_[configuration]_)**
 
