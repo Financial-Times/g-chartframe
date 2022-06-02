@@ -301,19 +301,23 @@ function chartFrame(configObject) {
             !p.selectAll("g.chart-watermark").size() &&
             p.node().ownerDocument.doctype.name !== "svg"
         ) {
+            let newWaterOffsetY
+            if (containerClass === 'ft-socialgraphic') {
+                newWaterOffsetY = graphicWidth - watermarkWidth - watermarkOffsetX
+            }
+            else {newWaterOffsetY = watermarkOffsetX}
             p.append("g")
                 .attr("class", "chart-watermark")
                 .html(watermarkMarkup) // This needs to be .text() to work in pure SVG context
                 .attr("role", "presentation")
                 .attr(
                     "transform",
-                    `translate(${graphicWidth -
-                        watermarkWidth -
-                        watermarkOffsetX},${graphicHeight -
+                    `translate(${newWaterOffsetY},${graphicHeight -
                         watermarkHeight -
                         watermarkOffsetY}) scale(1) `
                 );
         }
+        // graphicWidth - watermarkWidth - watermarkOffsetX}
 
         // plot area (where you put the chart itself)
         /* istanbul ignore next I don't know how to test this. */

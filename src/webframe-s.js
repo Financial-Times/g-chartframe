@@ -1,4 +1,5 @@
 import frame from './chartframe';
+import watermarkPath from './watermarks';
 
 function webFrameS(configObject) {
     const f = frame()
@@ -7,14 +8,16 @@ function webFrameS(configObject) {
         .backgroundColor('#FFF1E0')
         .blackbar('#000')
         .width(300)
-        // .watermark(watermarkPathDark)
-        // .watermarkSize(80)
-        // .watermarkOffset(-28)
+        .watermark(watermarkPath.regular)
+        .watermarkHeight(12)
+        .watermarkWidth(149)
+        .watermarkOffsetX(0)
+        .watermarkOffsetY(0)
         .margin({ bottom: 90, right: 5, left: 15 })
         .rem(14)
         .plotAdjuster(0)
         .titleStyle({
-            'font-size': 20,
+            'font-size': '20px',
             'font-family': 'MetricWeb,sans-serif',
             'font-weight': 400,
             fill: '#000',
@@ -23,23 +26,17 @@ function webFrameS(configObject) {
         .titleLineHeight(24)
         .subtitleLineHeight(20)
         .subtitleStyle({
-            'font-size': 18,
+            'font-size': '18px',
             'font-family': 'MetricWeb,sans-serif',
-            fill: '#66605C',
+            fill: '#4d4845',
         })
         .subtitleY(64)
         .sourceLineHeight(12)
-        .sourcePlotYOffset(38)
+        .sourcePlotYOffset(36)
         .sourceStyle({
-            'font-size': '12px',
+            'font-size': '14px',
             'font-family': 'MetricWeb,sans-serif',
-            fill: '#66605C',
-        })
-        .copyrightStyle({
-            'font-size': '12px',
-            'font-style': 'italic',
-            'font-family': 'MetricWeb,sans-serif',
-            fill: '#66605C',
+            fill: '#4d4845',
         });
 
     if (configObject !== undefined) f.attrs(configObject);
