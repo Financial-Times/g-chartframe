@@ -3,4 +3,4 @@ node_modules/
 bundle.js
 coverage
 npm-debug.log
-build
+build.git/
